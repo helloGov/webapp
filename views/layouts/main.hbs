@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
 <script type="text/javascript">
     function initialize() {
@@ -9,9 +10,20 @@
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
             var place = autocomplete.getPlace();
             document.getElementById('city2').value = place.name;
-            document.getElementById('cityLat').value = place.geometry.location.lat();
-            document.getElementById('cityLng').value = place.geometry.location.lng();
-        });
+            latitude = place.geometry.location.lat();
+            longitude = place.geometry.location.lng();
+            data = {"latitude": latitude, "longitude": longitude};
+
+            $.ajax({
+              url: "/locateLegislator",
+              data: data,
+              success: function(result){
+                    result = {name: "nancy", phone:"phone"};
+                    alert(result);
+                },
+              dataType: "text/json"
+            });
+    })
     }
     google.maps.event.addDomListener(window, 'load', initialize); 
 </script>
