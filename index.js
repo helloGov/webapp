@@ -20,6 +20,17 @@ app.get('/', (request, response) => {
   })
 })
 
+app.get('/locateLegislator', (request, response) => {
+	latitude = request.latitude
+	longitude = request.longitude
+
+	
+  response.render('home', {
+    name: 'Wilson'
+  })
+})
+
+
 const locate = require("./legislators-locate.js");
 
 locate.locateTheLegislator();
