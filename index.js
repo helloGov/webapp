@@ -20,23 +20,8 @@ app.get('/', (request, response) => {
   })
 })
 
-require("./legislators-locate.js");
+const locate = require("./legislators-locate.js");
 
-///
-// var api = require("sunlight-congress-api");
-//
-// var success = function(data){
-// 	console.log(data);
-// }
-//
-// api.init("");
-//
-// var latitude = 37.766482999;
-// var longitude = -122.417305;
-//
-// api.legislatorsLocate().filter("latitude", latitude).filter("longitude", longitude).call(success);
-
-// api.votes().filter("year", "2012").call(success);
-///
+locate.locateTheLegislator();
 
 app.listen(port)
