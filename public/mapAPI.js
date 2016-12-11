@@ -19,26 +19,21 @@
           complete: function(result) {
                 var responseObject = JSON.parse(result.responseText);
 
-/*
+
                 var title = responseObject.title;
                 var firstName = responseObject.firstName;
                 var lastName = responseObject.lastName;
                 var party = responseObject.party;
-*/
-
-                var title = "hi"
-                var firstName = "Van";
-                var lastName = "Jones";
-                var party = "(D)";
-
+                var bioguideId = responseObject.bioguideId;
                 var officialTitleText = title + ". " + firstName + " " + lastName + " (" + party + ")";
 
 
                 console.log(officialTitleText);
                 
-                $('#firstName').innerHtml = firstName;
-                $('#lastName').innerHtml = firstName;
-                $('#content-wrapper').append(result);
+                $("#rep-img").attr("src", "https://theunitedstates.io/images/congress/450x550/"+ bioguideId + ".jpg");
+                $('#firstName').html(firstName);
+                $('#firstNameHeader').html(firstName);
+                $('#lastName').html(lastName);
                 $('#rep-container').show();
             },
           dataType: "application/json"
