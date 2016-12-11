@@ -10,7 +10,9 @@
     }
 
     function submitLocation() {
-        $('#form-container').hide()
+        $('#form-container').hide();
+        $('#not-found-container').hide();
+
         coordinates = {"latitude": $('#latitude').val(), "longitude": $('#longitude').val()};
         $.ajax({
           type: "POST",
@@ -39,6 +41,7 @@
 
                 } else {
 
+                  $('#form-container').show()
                   $('#not-found-container').show();
 
                 }
