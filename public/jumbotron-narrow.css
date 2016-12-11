@@ -7,6 +7,15 @@ body {
   height: 50px;
 }
 
+#cta-text {
+    color: #FDCC06;
+    font-weight: bold;
+    font-size: 19px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+
+
 #submit {
   width:90%;
   height: 50px;
