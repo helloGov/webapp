@@ -114,6 +114,10 @@ body {
   margin-top: 28px;
 }
 
+.congress-intro{
+  color: white;
+}
+
 .circle {
   border: 3px solid #FDCC06;
   border-radius: 50%;
