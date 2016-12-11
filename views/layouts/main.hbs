@@ -1,47 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
-<script type="text/javascript">
-    function initialize() {
-        var input = document.getElementById('searchTextField');
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            var place = autocomplete.getPlace();
-            document.getElementById('city2').value = place.name;
-            latitude = place.geometry.location.lat();
-            longitude = place.geometry.location.lng();
-            data = {"latitude": latitude, "longitude": longitude};
-
-            $.ajax({
-              type: "POST",
-              url: "/locateLegislator",
-              data: data,
-              complete: function(result) {
-										var responseObject = JSON.parse(result.responseText);
-
-										var title = responseObject.title;
-										var firstName = responseObject.firstName;
-										var lastName = responseObject.lastName;
-										var party = responseObject.party;
-
-										var officialTitleText = title + ". " + firstName + " " + lastName + " (" + party + ")";
-
-                    console.log(officialTitleText);
-                },
-              dataType: "application/json"
-            });
-    })
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-	</head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
+        <script type="text/javascript" src="/public/mapAPI.js"></script>
+    </head>
 	<body>
 		{{name}}
 		<input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />
-		<input  id="city2" name="city2" />
-		<input  id="cityLat" name="cityLat" />
-		<input  id="cityLng" name="cityLng" />
 	</body>
 </html>
