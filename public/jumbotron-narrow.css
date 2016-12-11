@@ -1,7 +1,7 @@
 /* Space out content a bit */
 body {
   padding-bottom: 20px;
-  background-color: rgb(60,165,178);
+  background-color: #35A5B3;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -13,7 +13,7 @@ body {
 }
 
 .navbar {
-  background-color: rgb(252,203,48);
+  background-color: #FDCC06;
 }
 
 /* Custom page header */
