@@ -12,6 +12,7 @@ function locateTheLegislator(latitude, longitude, response) {
     var lastName = representative.last_name;
     var telephoneNumber = representative.phone;
     var party = representative.party;
+    var bioguideId = representative.bioguide_id;
 
     legislator = {
       "representative": representative,
@@ -19,9 +20,10 @@ function locateTheLegislator(latitude, longitude, response) {
       "firstName": firstName,
       "lastName": lastName,
       "telephoneNumber": telephoneNumber,
-      "party": party
+      "party": party,
+      "bioguideId": bioguideId
     };
-    
+
     response.send(JSON.stringify(legislator));
   }
 
