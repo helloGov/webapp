@@ -7,7 +7,8 @@ function getRepresentative(legislators) {
       return legislator;
     }
   }
-  return null;
+  var firstLegislator = legislators[0];
+  return firstLegislator;
 }
 
 function locateTheLegislator(latitude, longitude, response) {
@@ -24,7 +25,7 @@ app.set('view engine', 'handlebars');
 
     var legislators = data.results;
     var representative = getRepresentative(legislators);
-    
+
     var title = representative.title;
     var firstName = representative.first_name;
     var lastName = representative.last_name;
