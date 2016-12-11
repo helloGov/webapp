@@ -8,7 +8,7 @@ body {
 }
 
 #cta-text {
-    color: #FDCC06;
+    color: white;
     font-weight: bold;
     font-size: 19px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -144,7 +144,7 @@ text-align: center;
 
 .verticalLine {
   border-right: thin dotted #FDCC06;
-  height: 90px;
+  height: 35px;
   width:1px;
 }
 
