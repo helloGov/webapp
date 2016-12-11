@@ -9,9 +9,9 @@
       })
     }
 
-    function submitLocation(){ 
-        $('#form-container').hide()  
-        coordinates = {"latitude": $('#latitude').val(), "longitude": $('#longitude').val()};  
+    function submitLocation() {
+        $('#form-container').hide()
+        coordinates = {"latitude": $('#latitude').val(), "longitude": $('#longitude').val()};
         $.ajax({
           type: "POST",
           url: "/locateLegislator",
@@ -26,15 +26,11 @@
                 var party = responseObject.party;
                 var bioguideId = responseObject.bioguideId;
                 var telephoneNumber = responseObject.telephoneNumber;
-                var officialTitleText = title + ". " + firstName + " " + lastName + " (" + party + ")";
+                var officialTitle = title + ". " + firstName + " " + lastName + " (" + party + ")";
 
-
-                console.log(officialTitleText);
-                
                 $("#rep-img").attr("src", "https://theunitedstates.io/images/congress/450x550/"+ bioguideId + ".jpg");
-                $('#firstName').html(firstName);
-                $('#firstNameHeader').html(firstName);
                 $('#lastName').html(lastName);
+                $('#officialTitle').html(officialTitle);
                 $('#call-btn').attr("href", "tel:" + telephoneNumber);
                 $('#rep-container').show();
             },
@@ -43,7 +39,6 @@
 
     }
     google.maps.event.addDomListener(window, 'load', initialize);
-    $("#submit")[0].addEventListener('click', function() { 
+    $("#submit")[0].addEventListener('click', function() {
                 submitLocation();
               });
-
