@@ -15,13 +15,14 @@
             data = {"latitude": latitude, "longitude": longitude};
 
             $.ajax({
+              type: "POST",
               url: "/locateLegislator",
               data: data,
               success: function(result){
-                    result = {name: "nancy", phone:"phone"};
-                    alert(result);
+                    res = {"name": "nancy", "phone":"phone"};
+                    console.log(res);
                 },
-              dataType: "text/json"
+              dataType: "application/json"
             });
     })
     }

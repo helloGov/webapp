@@ -1,8 +1,8 @@
 
 
-function locateTheLegislator() {
+function locateTheLegislator(latitude, longitude, response) {
   var api = require("sunlight-congress-api");
-
+  
   var success = function(data) {
     sunlightOutput = data;
 
@@ -13,6 +13,9 @@ function locateTheLegislator() {
     var telephoneNumber = representative.phone;
 
     console.log(title + ". " + firstName + " " + lastName + ": " + telephoneNumber);
+    
+    legislator = {"name": firstName, "phone": telephoneNumber};
+    response.send(JSON.stringify(legislator));
   }
 
   api.init("");

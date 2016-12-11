@@ -1,8 +1,12 @@
 const path = require('path')
 const express = require('express')
 const exphbs = require('express-handlebars')
+var bodyParser = require('body-parser');
+const locate = require("./legislators-locate.js");
 
 const app = express()
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 const port = 8080
 
 app.engine('.hbs', exphbs({
@@ -20,19 +24,15 @@ app.get('/', (request, response) => {
   })
 })
 
-app.get('/locateLegislator', (request, response) => {
-	latitude = request.latitude
-	longitude = request.longitude
+app.post('/locateLegislator', (request, response) => {
+	latitude = request.body.latitude;
+	longitude = request.body.longitude;
 
-	
-  response.render('home', {
-    name: 'Wilson'
-  })
+	response.setHeader('Content-Type', 'application/json')
+	locate.locateTheLegislator(latitude, longitude, response);
 })
 
 
-const locate = require("./legislators-locate.js");
 
-locate.locateTheLegislator();
 
 app.listen(port)
