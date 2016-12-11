@@ -4,6 +4,12 @@ body {
   background-color: #35A5B3;
 }
 
+input[type=button] {
+  width:90%;
+  background:#FDCC06;
+  color: #35A5B3;
+}
+
 #body{
   position: relative;
 }

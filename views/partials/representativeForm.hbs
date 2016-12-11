@@ -3,7 +3,7 @@
       <div class="text-center">
         <div class="congress-intro">
           <h5>YOUR CONGRESSPERSON IS</h5>
-          <h3><span id="firstNameHeader"></span> <span id="lastName"></span> <span id="party"/></h3>
+          <h3><span id="officialTitle"></span></h3>
           <img
             id="rep-img"
             class="img-responsive img-circle center-block"
@@ -14,7 +14,7 @@
       <div class="jumbotron">
         <div class="script">
           <p class="lead">
-            Hello Congressperson <span id="firstName"></span>, I'm a constituent calling to urge you to vote yes on House Resolution 2016 which removes gravity, <i>allowing us to fly.</i>
+            Hello Congressperson <span id="lastName"></span>, I'm a constituent calling to urge you to vote yes on House Resolution 2016 which removes gravity, <i>allowing us to fly.</i>
           </p>
         </div>
       </div>
@@ -28,7 +28,7 @@
         <input id="url"></input>
         <button id="share" data-clipboard-text="getShareableLink()">Share this thang</button>
       </p>
-      <script src="node_modules/clipboard/dist/clipboard.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.13/clipboard.min.js"></script>
       <script>
         const shareThang = document.getElementById("share");
         shareThang.setAttribute('data-clipboard-text', window.location.pathname);
@@ -50,4 +50,4 @@
       </footer>
     </div> <!-- /container -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <link href="ie10-viewport-bug-workaround.css" rel="stylesheet">

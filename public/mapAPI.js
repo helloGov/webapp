@@ -9,9 +9,9 @@
       })
     }
 
-    function submitLocation(){ 
-        $('#form-container').hide()  
-        coordinates = {"latitude": $('#latitude').val(), "longitude": $('#longitude').val()};  
+    function submitLocation() {
+        $('#form-container').hide()
+        coordinates = {"latitude": $('#latitude').val(), "longitude": $('#longitude').val()};
         $.ajax({
           type: "POST",
           url: "/locateLegislator",
@@ -19,32 +19,35 @@
           complete: function(result) {
                 var responseObject = JSON.parse(result.responseText);
 
+                var representativeFound = responseObject.representativeFound;
 
-                var title = responseObject.title;
-                var firstName = responseObject.firstName;
-                var lastName = responseObject.lastName;
-                var party = responseObject.party;
-                var bioguideId = responseObject.bioguideId;
-                var telephoneNumber = responseObject.telephoneNumber;
-                var officialTitleText = title + ". " + firstName + " " + lastName + " (" + party + ")";
+                if (representativeFound) {
 
+                  var title = responseObject.title;
+                  var firstName = responseObject.firstName;
+                  var lastName = responseObject.lastName;
+                  var party = responseObject.party;
+                  var bioguideId = responseObject.bioguideId;
+                  var telephoneNumber = responseObject.telephoneNumber;
+                  var officialTitle = title + ". " + firstName + " " + lastName + " (" + party + ")";
 
-                console.log(officialTitleText);
-                
-                $("#rep-img").attr("src", "https://theunitedstates.io/images/congress/450x550/"+ bioguideId + ".jpg");
-                $('#firstName').html(firstName);
-                $('#firstNameHeader').html(firstName);
-                $('#lastName').html(lastName);
-                $('#call-btn').attr("href", "tel:" + telephoneNumber);
-                $('#rep-container').show();
+                  $("#rep-img").attr("src", "https://theunitedstates.io/images/congress/450x550/"+ bioguideId + ".jpg");
+                  $('#lastName').html(lastName);
+                  $('#officialTitle').html(officialTitle);
+                  $('#call-btn').attr("href", "tel:" + telephoneNumber);
+                  $('#rep-container').show();
+
+                } else {
+
+                  $('#not-found-container').show();
+
+                }
             },
           dataType: "application/json"
         });
 
     }
     google.maps.event.addDomListener(window, 'load', initialize);
-    
-    $("#submit")[0].addEventListener('click', function() { 
+    $("#submit")[0].addEventListener('click', function() {
                 submitLocation();
               });
-
