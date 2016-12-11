@@ -48,6 +48,7 @@
 
     }
     google.maps.event.addDomListener(window, 'load', initialize);
-    $("#submit")[0].addEventListener('click', function() {
+    
+    $("#submit")[0].addEventListener('click', function() { 
                 submitLocation();
               });

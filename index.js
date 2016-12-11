@@ -24,19 +24,6 @@ app.set('view engine', '.hbs')
 app.set('views', path.join(__dirname, 'views'))
 
 
-app.get('/', (request, response) => {
-  response.render('home', {
-    name: 'Wilson'
-  })
-})
-
-app.get('/campaign', (request, response) => {
-  response.render('home', {
-    name: 'Taco',
-    layout: 'campaign'
-  })
-})
-
 app.post('/locateLegislator', (request, response) => {
 	latitude = request.body.latitude;
 	longitude = request.body.longitude;
@@ -45,6 +32,16 @@ app.post('/locateLegislator', (request, response) => {
 	locate.locateTheLegislator(latitude, longitude, response);
 })
 
+app.get('/createCampaign', (request, response) => {
+	response.render('create');
+
+})
+
+
+
+app.get('/home', (request, response) => {
+  response.render('home')
+})
 
 
 
