@@ -1,5 +1,15 @@
 
 
+function getRepresentative(legislators) {
+  for (var legislatorIndex = 0; legislatorIndex < legislators.length; legislatorIndex++) {
+    var legislator = legislators[legislatorIndex];
+    if (legislator.title == "Rep") {
+      return legislator;
+    }
+  }
+  return null;
+}
+
 function locateTheLegislator(latitude, longitude, response) {
   var api = require("sunlight-congress-api");
   var exphbs = require('express-handlebars');
@@ -11,9 +21,10 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
   var success = function(data) {
-    sunlightOutput = data;
 
-    var representative = data.results[0];
+    var legislators = data.results;
+    var representative = getRepresentative(legislators);
+    
     var title = representative.title;
     var firstName = representative.first_name;
     var lastName = representative.last_name;
