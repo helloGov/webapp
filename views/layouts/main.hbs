@@ -1,4 +1,4 @@
-```<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -11,7 +11,7 @@
     <link rel="icon" href="../../favicon.ico">
     <title>Narrow Jumbotron Template for Bootstrap</title>
     <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -29,62 +29,10 @@
     <![endif]-->
   </head>
   <body>    
-  {{name}}
-    <input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />
     <nav class='navbar text-center'>
       <h3>HelloGov</h3>
     </nav>
-    <div class="container">
-      <div class="text-center">
-        <div class="congress-intro">
-          <h5>YOUR CONGRESSPERSON IS</h5>
-          <h3>Paul Ryan (R)</h3>
-          <img
-            src="http://paulryan.house.gov/uploadedphotos/highresolution/3f3943d8-cea4-4f6b-96ac-3c25fd3ef24e.jpg" 
-            class="img-responsive img-circle center-block"
-            alt="Your Rep"
-            width="200"
-          />
-        </div>
-      <div class="jumbotron">
-        <div class="script">
-          <p class="lead">
-            Hello Congressman Ryan, I'm a constituent calling to urge you to vote yes on House Resolution 2016 which removes gravity, <i>allowing us to fly.</i>
-          </p>
-        </div>
-      </div>
-      <p>
-        <a class="btn btn-lg call-button center-block" href="tel:1-408-555-5555" role="button">
-          Call Your Rep!
-        </a>
-      </p>
-      <span>&#42;Please note, they may ask for your home address.  This is normal.</span>
-      <p class="lead">
-        <input id="url"></input>
-        <button id="share" data-clipboard-text="getShareableLink()">Share this thang</button>
-      </p>
-      <script src="node_modules/clipboard/dist/clipboard.min.js"></script>
-      <script>
-        const shareThang = document.getElementById("share");
-        shareThang.setAttribute('data-clipboard-text', window.location.pathname);
-        const clipboard = new Clipboard(shareThang);
-        const url = document.getElementById("url");
-        url.textContent = window.location.pathname;
-        clipboard.on('success', function(e) {
-            console.log(e);
-        });
-        clipboard.on('error', function(e) {
-            console.log(e);
-        });
-        function getShareableLink() {
-          return window.location.pathname;
-        }
-      </script>
-      <footer class="footer">
-        <p>&copy; 2016 Company, Inc.</p>
-      </footer>
-    </div> <!-- /container -->
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    {{> addressForm}}
+    {{> representativeForm}}
   </body>
-</html>`
+</html>

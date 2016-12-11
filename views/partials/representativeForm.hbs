@@ -1,0 +1,53 @@
+
+    <div class="container">
+      <div class="text-center">
+        <div class="congress-intro">
+          <h5>YOUR CONGRESSPERSON IS</h5>
+          <h3>Paul Ryan (R)</h3>
+          <img
+            src="http://paulryan.house.gov/uploadedphotos/highresolution/3f3943d8-cea4-4f6b-96ac-3c25fd3ef24e.jpg" 
+            class="img-responsive img-circle center-block"
+            alt="Your Rep"
+            width="200"
+          />
+        </div>
+      <div class="jumbotron">
+        <div class="script">
+          <p class="lead">
+            Hello Congressman Ryan, I'm a constituent calling to urge you to vote yes on House Resolution 2016 which removes gravity, <i>allowing us to fly.</i>
+          </p>
+        </div>
+      </div>
+      <p>
+        <a class="btn btn-lg call-button center-block" href="tel:1-408-555-5555" role="button">
+          Call Your Rep!
+        </a>
+      </p>
+      <span>&#42;Please note, they may ask for your home address.  This is normal.</span>
+      <p class="lead">
+        <input id="url"></input>
+        <button id="share" data-clipboard-text="getShareableLink()">Share this thang</button>
+      </p>
+      <script src="node_modules/clipboard/dist/clipboard.min.js"></script>
+      <script>
+        const shareThang = document.getElementById("share");
+        shareThang.setAttribute('data-clipboard-text', window.location.pathname);
+        const clipboard = new Clipboard(shareThang);
+        const url = document.getElementById("url");
+        url.textContent = window.location.pathname;
+        clipboard.on('success', function(e) {
+            console.log(e);
+        });
+        clipboard.on('error', function(e) {
+            console.log(e);
+        });
+        function getShareableLink() {
+          return window.location.pathname;
+        }
+      </script>
+      <footer class="footer">
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+    </div> <!-- /container -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>

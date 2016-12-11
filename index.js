@@ -9,6 +9,9 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 const port = 8080
 
+hbs = require('hbs');
+
+hbs.registerPartials(__dirname + '/views/partials')
 
 app.use(express.static('public'));
 
