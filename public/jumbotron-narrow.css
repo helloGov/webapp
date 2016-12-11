@@ -38,6 +38,10 @@ body {
   border-top: 1px solid #e5e5e5;
 }
 
+.campaign-circles {
+  margin-top: 60px;
+}
+
 /* Customize container */
 @media (min-width: 768px) {
   .container {
@@ -110,7 +114,6 @@ text-align: center;
   border-right: thin dotted #FDCC06;
   height: 90px;
   width:1px;
-  padding-left: 59px;
 }
 
 
