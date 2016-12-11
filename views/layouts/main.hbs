@@ -18,22 +18,30 @@
               type: "POST",
               url: "/locateLegislator",
               data: data,
-              success: function(result){
-                    res = {"name": "nancy", "phone":"phone"};
-                    console.log(res);
+              complete: function(result) {
+										var responseObject = JSON.parse(result.responseText);
+
+										var title = responseObject.title;
+										var firstName = responseObject.firstName;
+										var lastName = responseObject.lastName;
+										var party = responseObject.party;
+
+										var officialTitleText = title + ". " + firstName + " " + lastName + " (" + party + ")";
+
+                    console.log(officialTitleText);
                 },
               dataType: "application/json"
             });
     })
     }
-    google.maps.event.addDomListener(window, 'load', initialize); 
+    google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 	</head>
 	<body>
 		{{name}}
-		<input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />  
+		<input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />
 		<input  id="city2" name="city2" />
 		<input  id="cityLat" name="cityLat" />
-		<input  id="cityLng" name="cityLng" />  
+		<input  id="cityLng" name="cityLng" />
 	</body>
 </html>

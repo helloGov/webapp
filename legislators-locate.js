@@ -2,7 +2,7 @@
 
 function locateTheLegislator(latitude, longitude, response) {
   var api = require("sunlight-congress-api");
-  
+
   var success = function(data) {
     sunlightOutput = data;
 
@@ -11,17 +11,21 @@ function locateTheLegislator(latitude, longitude, response) {
     var firstName = representative.first_name;
     var lastName = representative.last_name;
     var telephoneNumber = representative.phone;
+    var party = representative.party;
 
-    console.log(title + ". " + firstName + " " + lastName + ": " + telephoneNumber);
+    legislator = {
+      "representative": representative,
+      "title": title,
+      "firstName": firstName,
+      "lastName": lastName,
+      "telephoneNumber": telephoneNumber,
+      "party": party
+    };
     
-    legislator = {"name": firstName, "phone": telephoneNumber};
     response.send(JSON.stringify(legislator));
   }
 
   api.init("");
-
-  var latitude = 37.766482999;
-  var longitude = -122.417305;
 
   api.legislatorsLocate().filter("latitude", latitude).filter("longitude", longitude).call(success);
 }
