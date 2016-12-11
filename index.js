@@ -9,6 +9,9 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 const port = 8080
 
+
+app.use(express.static('public'));
+
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs',

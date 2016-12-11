@@ -1,12 +1,90 @@
-<!DOCTYPE html>
-<html>
-	<head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
-        <script type="text/javascript" src="/public/mapAPI.js"></script>
-    </head>
-	<body>
-		{{name}}
-		<input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />
-	</body>
-</html>
+```<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Narrow Jumbotron Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="jumbotron-narrow.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" type="text/javascript"></script>
+    <script type="text/javascript" src="/mapAPI.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>    
+  {{name}}
+    <input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />
+    <nav class='navbar text-center'>
+      <h3>HelloGov</h3>
+    </nav>
+    <div class="container">
+      <div class="text-center">
+        <div class="congress-intro">
+          <h5>YOUR CONGRESSPERSON IS</h5>
+          <h3>Paul Ryan (R)</h3>
+          <img
+            src="http://paulryan.house.gov/uploadedphotos/highresolution/3f3943d8-cea4-4f6b-96ac-3c25fd3ef24e.jpg" 
+            class="img-responsive img-circle center-block"
+            alt="Your Rep"
+            width="200"
+          />
+        </div>
+      <div class="jumbotron">
+        <div class="script">
+          <p class="lead">
+            Hello Congressman Ryan, I'm a constituent calling to urge you to vote yes on House Resolution 2016 which removes gravity, <i>allowing us to fly.</i>
+          </p>
+        </div>
+      </div>
+      <p>
+        <a class="btn btn-lg call-button center-block" href="tel:1-408-555-5555" role="button">
+          Call Your Rep!
+        </a>
+      </p>
+      <span>&#42;Please note, they may ask for your home address.  This is normal.</span>
+      <p class="lead">
+        <input id="url"></input>
+        <button id="share" data-clipboard-text="getShareableLink()">Share this thang</button>
+      </p>
+      <script src="node_modules/clipboard/dist/clipboard.min.js"></script>
+      <script>
+        const shareThang = document.getElementById("share");
+        shareThang.setAttribute('data-clipboard-text', window.location.pathname);
+        const clipboard = new Clipboard(shareThang);
+        const url = document.getElementById("url");
+        url.textContent = window.location.pathname;
+        clipboard.on('success', function(e) {
+            console.log(e);
+        });
+        clipboard.on('error', function(e) {
+            console.log(e);
+        });
+        function getShareableLink() {
+          return window.location.pathname;
+        }
+      </script>
+      <footer class="footer">
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+    </div> <!-- /container -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>`
