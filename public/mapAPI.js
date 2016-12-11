@@ -30,11 +30,14 @@
                 console.log(officialTitleText);
                 */
                 $('#content-wrapper').append(result);
+                $('#rep-container').show();
             },
           dataType: "application/json"
         });
 
     }
     google.maps.event.addDomListener(window, 'load', initialize);
-    $("#submit").onclick = submitLocation;
+    $("#submit")[0].addEventListener('click', function() { 
+                submitLocation();
+              });
 

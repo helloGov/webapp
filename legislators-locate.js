@@ -3,6 +3,12 @@
 function locateTheLegislator(latitude, longitude, response) {
   var api = require("sunlight-congress-api");
   var exphbs = require('express-handlebars');
+const express = require('express')
+  var hbs = exphbs.create({ /* config */ });
+  app = express()
+// Register `hbs.engine` with the Express app.
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
   var success = function(data) {
     sunlightOutput = data;
@@ -15,25 +21,34 @@ function locateTheLegislator(latitude, longitude, response) {
     var party = representative.party;
     var bioguideId = representative.bioguide_id;
 
-    legislator = {
-      "representative": representative,
+    temp = hbs.getTemplate('partials/representativeForm', {
+      title: representative.title,
+      firstName: representative.firstName,
+      lastName: representative.lastName,
+      telephoneNumber: representative.telephoneNumber,
+      party: representative.party,
+      bioguideId: representative.bioguideId }
+      );
+    response.render(temp);
+    /*
+    response.render('partials/representativeForm', {
       "title": title,
       "firstName": firstName,
       "lastName": lastName,
       "telephoneNumber": telephoneNumber,
       "party": party,
-      "bioguideId": bioguideId
-    };
-
-    response.render('representativeForm', {
-      representative: representative,
-      title: title,
-      firstName: firstName,
-      lastName: lastName,
-      telephoneNumber: telephoneNumber,
-      party: party,
-      bioguideId: bioguideId }
+      "bioguideId": bioguideId }
     );
+    */
+/*
+    response.render('partials/representativeForm', {
+      title: representative.title,
+      firstName: representative.firstName,
+      lastName: representative.lastName,
+      telephoneNumber: representative.telephoneNumber,
+      party: representative.party,
+      bioguideId: representative.bioguideId }
+    ); */
   }
 
   api.init("");
