@@ -114,6 +114,10 @@ body {
   margin-top: 28px;
 }
 
+.congress-intro{
+  color: white;
+}
+
 .circle {
   border: 3px solid #FDCC06;
   border-radius: 50%;
@@ -135,7 +139,7 @@ text-align: center;
   font-size: 20px;
   color: #FFFFFF;
   line-height: 30px;
-  padding-top: 45px;
+  padding-top: 30px;
 }
 
 .circle.filled {
