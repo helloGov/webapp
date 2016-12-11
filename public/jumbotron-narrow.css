@@ -1,9 +1,12 @@
 /* Space out content a bit */
 body {
   padding-bottom: 20px;
-  background-color: rgb(60,165,178);
+  background-color: #35A5B3;
 }
 
+#body{
+  position: relative;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -13,7 +16,7 @@ body {
 }
 
 .navbar {
-  background-color: rgb(252,203,48);
+  background-color: #FDCC06;
 }
 
 /* Custom page header */
@@ -74,6 +77,42 @@ body {
 .marketing p + h4 {
   margin-top: 28px;
 }
+
+.circle {
+  border: 3px solid #FDCC06;
+  border-radius: 50%;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+  opacity: 0.8;
+
+  -webkit-box-shadow: 0 0 1px 0px rgb( 255, 255, 255);
+  box-shadow: 0 0 1px 0px rgb( 255, 255, 255);
+  width: 150px;
+  height: 150px;
+  z-index: 86;
+text-align: center;
+  -webkit-transition: background-color .5s ease-in-out;
+  -moz-transition: background-color .5s ease-in-out;
+  -o-transition: background-color .5s ease-in-out;
+  -ms-transition: background-color .5s ease-in-out;
+  transition: background-color .5s ease-in-out;
+  font-size: 20px;
+  color: #FFFFFF;
+  line-height: 30px;
+  padding-top: 45px;
+}
+
+.circle.filled {
+  background-color: #666666;
+}
+
+.verticalLine {
+  border-right: thin dotted #FDCC06;
+  height: 90px;
+  width:1px;
+  padding-left: 59px;
+}
+
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
