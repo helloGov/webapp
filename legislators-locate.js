@@ -1,6 +1,10 @@
 
 
 function getRepresentative(legislators) {
+  if (legislators.length == 0) {
+    return null;
+  }
+
   for (var legislatorIndex = 0; legislatorIndex < legislators.length; legislatorIndex++) {
     var legislator = legislators[legislatorIndex];
     if (legislator.title == "Rep") {
@@ -22,26 +26,24 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
   var success = function(data) {
+    var responseObject = {};
 
     var legislators = data.results;
     var representative = getRepresentative(legislators);
 
-    var title = representative.title;
-    var firstName = representative.first_name;
-    var lastName = representative.last_name;
-    var telephoneNumber = representative.phone;
-    var party = representative.party;
-    var bioguideId = representative.bioguide_id;
+    var representativeFound = (representative != null);
+    responseObject.representativeFound = representativeFound;
 
-   legislator = {
-      "title": title,
-      "firstName": firstName,
-      "lastName": lastName,
-      "telephoneNumber": telephoneNumber,
-      "party": party,
-      "bioguideId": bioguideId
-    };
-    response.send(JSON.stringify(legislator));
+    if (representativeFound) {
+      responseObject.title = representative.title;
+      responseObject.firstName = representative.first_name;
+      responseObject.lastName = representative.last_name;
+      responseObject.telephoneNumber = representative.phone;
+      responseObject.party = representative.party;
+      responseObject.bioguideId = representative.bioguide_id;
+    }
+
+    response.send(JSON.stringify(responseObject));
   }
 
   api.init("");
