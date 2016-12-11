@@ -31,9 +31,8 @@ app.get('/', (request, response) => {
 })
 
 app.get('/campaign', (request, response) => {
-  response.render('home', {
-    name: 'Taco',
-    layout: 'campaign'
+  response.render('campaign', {
+    name: 'Taco'
   })
 })
 
