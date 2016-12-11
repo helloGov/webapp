@@ -36,6 +36,13 @@ app.get('/campaign', (request, response) => {
   })
 })
 
+
+app.get('/analytics', (request, response) => {
+  response.render('analytics', {
+    name: 'Taco'
+  })
+})
+
 app.post('/locateLegislator', (request, response) => {
 	latitude = request.body.latitude;
 	longitude = request.body.longitude;
