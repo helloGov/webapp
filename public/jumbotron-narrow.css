@@ -48,6 +48,19 @@ input[type=button] {
   margin-top: 60px;
 }
 
+.user-input {
+  width: 100%;
+}
+
+.spacing-block {
+  margin-bottom: 25px;
+}
+
+.image-page {
+  width: 100%;
+  margin-top: -75px;
+}
+
 /* Customize container */
 @media (min-width: 768px) {
   .container {
