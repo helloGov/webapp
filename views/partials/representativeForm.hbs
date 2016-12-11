@@ -23,28 +23,52 @@
           Call Your Rep!
         </a>
       </p>
-      <span>&#42;Please note, they may ask for your home address.  This is normal.</span>
-      <p class="lead">
-        <input id="url"></input>
-        <button id="share" data-clipboard-text="getShareableLink()">Share this thang</button>
+
+      <p class="text-left">
+        &#42;Please note, they may ask for your home address. This is normal.
       </p>
+
+      <div style="margin-bottom:25px;">
+        <a onclick="shareLinkClicked()" id="shareLink">
+          <img src="/HelloGOV_link_share.png" style="width: 100px;" />
+        </a>
+        <div class="hide" id="copyConfirmation">
+          <h4>Link copied to clipboard:
+            <p id="link" data-clipboard-text="test-link"></p>
+          </h4>
+        </div>
+      </div>
+
       <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.13/clipboard.min.js"></script>
       <script>
-        const shareThang = document.getElementById("share");
-        shareThang.setAttribute('data-clipboard-text', window.location.pathname);
-        const clipboard = new Clipboard(shareThang);
-        const url = document.getElementById("url");
-        url.textContent = window.location.pathname;
+        const shareURL = window.location.pathname;
+        const clipboard = new Clipboard('#shareLink', {
+            text: function(trigger) {
+                return shareURL;
+            }
+        });
+
         clipboard.on('success', function(e) {
             console.log(e);
         });
         clipboard.on('error', function(e) {
             console.log(e);
         });
-        function getShareableLink() {
-          return window.location.pathname;
+
+        function shareLinkClicked() {
+          // get URL to share
+
+          // show text saying the url is copied
+          const shareConfirmation = document.getElementById("copyConfirmation");
+          shareConfirmation.className = ""; // reset class name to remove 'hide'
+
+          // use the link element to save to clipboard
+          const link = document.getElementById("link");
+          link.textContent = shareURL;
+          link.setAttribute('data-clipboard-text', shareURL);
         }
       </script>
+
       <footer class="footer">
         <p>&copy; 2016 HelloGov</p>
       </footer>
