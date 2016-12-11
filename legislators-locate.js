@@ -21,34 +21,15 @@ app.set('view engine', 'handlebars');
     var party = representative.party;
     var bioguideId = representative.bioguide_id;
 
-    temp = hbs.getTemplate('partials/representativeForm', {
-      title: representative.title,
-      firstName: representative.firstName,
-      lastName: representative.lastName,
-      telephoneNumber: representative.telephoneNumber,
-      party: representative.party,
-      bioguideId: representative.bioguideId }
-      );
-    response.render(temp);
-    /*
-    response.render('partials/representativeForm', {
+   legislator = {
       "title": title,
       "firstName": firstName,
       "lastName": lastName,
       "telephoneNumber": telephoneNumber,
       "party": party,
-      "bioguideId": bioguideId }
-    );
-    */
-/*
-    response.render('partials/representativeForm', {
-      title: representative.title,
-      firstName: representative.firstName,
-      lastName: representative.lastName,
-      telephoneNumber: representative.telephoneNumber,
-      party: representative.party,
-      bioguideId: representative.bioguideId }
-    ); */
+      "bioguideId": bioguideId
+    };
+    response.send(JSON.stringify(legislator));
   }
 
   api.init("");
