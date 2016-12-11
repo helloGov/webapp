@@ -25,6 +25,7 @@
                 var lastName = responseObject.lastName;
                 var party = responseObject.party;
                 var bioguideId = responseObject.bioguideId;
+                var telephoneNumber = responseObject.telephoneNumber;
                 var officialTitleText = title + ". " + firstName + " " + lastName + " (" + party + ")";
 
 
@@ -34,6 +35,7 @@
                 $('#firstName').html(firstName);
                 $('#firstNameHeader').html(firstName);
                 $('#lastName').html(lastName);
+                $('#call-btn').attr("href", "tel:" + telephoneNumber);
                 $('#rep-container').show();
             },
           dataType: "application/json"
