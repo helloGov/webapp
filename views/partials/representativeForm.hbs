@@ -28,7 +28,7 @@
         <input id="url"></input>
         <button id="share" data-clipboard-text="getShareableLink()">Share this thang</button>
       </p>
-      <script src="node_modules/clipboard/dist/clipboard.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.13/clipboard.min.js"></script>
       <script>
         const shareThang = document.getElementById("share");
         shareThang.setAttribute('data-clipboard-text', window.location.pathname);
@@ -50,4 +50,4 @@
       </footer>
     </div> <!-- /container -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <link href="ie10-viewport-bug-workaround.css" rel="stylesheet">
