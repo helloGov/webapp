@@ -30,6 +30,13 @@ app.get('/', (request, response) => {
   })
 })
 
+app.get('/campaign', (request, response) => {
+  response.render('home', {
+    name: 'Taco',
+    layout: 'campaign'
+  })
+})
+
 app.post('/locateLegislator', (request, response) => {
 	latitude = request.body.latitude;
 	longitude = request.body.longitude;
