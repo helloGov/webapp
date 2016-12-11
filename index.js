@@ -24,6 +24,18 @@ app.set('view engine', '.hbs')
 app.set('views', path.join(__dirname, 'views'))
 
 
+app.get('/', (request, response) => {
+  response.render('home', {
+    name: 'Wilson'
+  })
+})
+
+app.get('/campaign', (request, response) => {
+  response.render('campaign', {
+    name: 'Taco'
+  })
+})
+
 app.post('/locateLegislator', (request, response) => {
 	latitude = request.body.latitude;
 	longitude = request.body.longitude;
