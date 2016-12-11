@@ -3,9 +3,13 @@ body {
   padding-bottom: 20px;
   background-color: #35A5B3;
 }
+#searchTextField{
+  height: 50px;
+}
 
-input[type=button] {
+#submit {
   width:90%;
+  height: 50px;
   background:#FDCC06;
   color: #35A5B3;
 }
