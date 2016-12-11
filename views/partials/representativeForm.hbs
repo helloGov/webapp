@@ -1,9 +1,9 @@
 
-    <div style="display:none" class="container">
+    <div id="rep-container" style="display:none" class="container">
       <div class="text-center">
         <div class="congress-intro">
           <h5>YOUR CONGRESSPERSON IS</h5>
-          <h3>Paul Ryan (R)</h3>
+          <h3>{{firstName}} {{lastName}} {{party}}</h3>
           <img
             src="http://paulryan.house.gov/uploadedphotos/highresolution/3f3943d8-cea4-4f6b-96ac-3c25fd3ef24e.jpg" 
             class="img-responsive img-circle center-block"
@@ -14,12 +14,12 @@
       <div class="jumbotron">
         <div class="script">
           <p class="lead">
-            Hello Congressman Ryan, I'm a constituent calling to urge you to vote yes on House Resolution 2016 which removes gravity, <i>allowing us to fly.</i>
+            Hello Congressperson {{firstName}}, I'm a constituent calling to urge you to vote yes on House Resolution 2016 which removes gravity, <i>allowing us to fly.</i>
           </p>
         </div>
       </div>
       <p>
-        <a class="btn btn-lg call-button center-block" href="tel:1-408-555-5555" role="button">
+        <a class="btn btn-lg call-button center-block" href="tel:{{telephoneNumber}}" role="button">
           Call Your Rep!
         </a>
       </p>

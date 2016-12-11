@@ -2,6 +2,7 @@
 
 function locateTheLegislator(latitude, longitude, response) {
   var api = require("sunlight-congress-api");
+  var exphbs = require('express-handlebars');
 
   var success = function(data) {
     sunlightOutput = data;
@@ -24,7 +25,15 @@ function locateTheLegislator(latitude, longitude, response) {
       "bioguideId": bioguideId
     };
 
-    response.send(JSON.stringify(legislator));
+    response.render('representativeForm', {
+      representative: representative,
+      title: title,
+      firstName: firstName,
+      lastName: lastName,
+      telephoneNumber: telephoneNumber,
+      party: party,
+      bioguideId: bioguideId }
+    );
   }
 
   api.init("");
