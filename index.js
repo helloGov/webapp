@@ -14,6 +14,7 @@ hbs = require('hbs');
 hbs.registerPartials(__dirname + '/views/partials')
 
 app.use(express.static('public'));
+app.use(favicon(path.join(__dirname,'public','favicon.ico')));
 
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
