@@ -1,44 +1,35 @@
 
+//TODO: How do we reuse the express object we created in app/index.js 
 var express = require('express');
 var router = express.Router();
 var locate = require('../middleware/legislators-locate.js');
-console.log("initializing router");
 
 router.get('/', function(request, response) {
 	console.log("getting /");
-	response.render('home', {
-    	name: 'Wilson'
-  		});
+	response.render('home');
 	});
 
 router.get('/analytics', (request, response) => {
-  response.render('analytics', {
-    name: 'Taco'
-  });
+  response.render('analytics');
 });
 
-router.post('/locateLegislator', (request, response) => {
-    latitude = request.body.latitude;
-    longitude = request.body.longitude;
+router.get('/locateLegislator', (request, response) => {
+    //TODO: construct our request to /locateLegislator such that we can use an expressier 
+    // way of accessing params. request.params['latitude'] is better
+    latitude = request.query.latitude;
+    longitude = request.query.longitude;
 
     response.setHeader('Content-Type', 'application/json')
     locate.locateTheLegislator(latitude, longitude, response);
 });
 
-router.get('/createCampaign', (request, response) => {
-    response.render('create');
-
-});
-
-
-
 router.get('/home', (request, response) => {
-  response.render('home')
+  response.send('home')
 });
 
+require('./userViews.js')(router);
 
 module.exports = router;
 
-//require('./userViews')(router);
 
 

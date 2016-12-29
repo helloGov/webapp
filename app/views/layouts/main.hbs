@@ -41,9 +41,23 @@
         </div>
       </div>
     </nav>
-      {{{body}}}
+      <div id="content-wrapper">
+        {{{body}}}
+      </div>
   </body>
   <footer>
-    <script type="text/javascript" src="/js/mapAPI.js"></script>
+    <script type="text/javascript" src="/js/mapAPI.js"></script>    
+    <script src="/js/handlebars.runtime.min.js"></script>
+    <script>
+        (function () {
+            var revive    = Handlebars.template,
+                templates = Handlebars.templates = Handlebars.templates || {};
+
+          {{#templates}}
+            templates['{{{name}}}'] = revive({{{template}}});
+          {{/templates}}
+        }());
+    </script>
+
   </footer>
 </html>
