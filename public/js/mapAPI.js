@@ -15,37 +15,17 @@
 
         coordinates = {"latitude": $('#latitude').val(), "longitude": $('#longitude').val()};
         $.ajax({
-          type: "POST",
+          type: "GET",
           url: "/locateLegislator",
           data: coordinates,
           complete: function(result) {
                 var responseObject = JSON.parse(result.responseText);
-
                 var representativeFound = responseObject.representativeFound;
-
-                if (representativeFound) {
-
-                  var title = responseObject.title;
-                  var firstName = responseObject.firstName;
-                  var lastName = responseObject.lastName;
-                  var party = responseObject.party;
-                  var bioguideId = responseObject.bioguideId;
-                  var telephoneNumber = responseObject.telephoneNumber;
-                  var officialTitle = title + ". " + firstName + " " + lastName + " (" + party + ")";
-
-                  $("#rep-img").attr("src", "https://theunitedstates.io/images/congress/450x550/"+ bioguideId + ".jpg");
-                  $('#lastName').html(lastName);
-                  $('#officialTitle').html(officialTitle);
-                  $('#call-btn').attr("href", "tel:" + telephoneNumber);
-                  $('#rep-container').show();
-
-                } else {
-
-                  $('#form-container').show()
-                  $('#not-found-container').show();
-
-                }
-            },
+                representativeDiv = document.createElement('div');
+                representativeDiv.innerHTML = responseObject.representativeDiv;
+                document.body.appendChild(representativeDiv);
+                $('#rep-container').show();
+              },
           dataType: "application/json"
         });
 
