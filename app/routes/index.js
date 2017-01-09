@@ -9,10 +9,6 @@ router.get('/', function(request, response) {
 	response.render('home');
 	});
 
-router.get('/analytics', (request, response) => {
-  response.render('analytics');
-});
-
 router.get('/locateLegislator', (request, response) => {
     //TODO: construct our request to /locateLegislator such that we can use an expressier 
     // way of accessing params. request.params['latitude'] is better
@@ -28,6 +24,9 @@ router.get('/home', (request, response) => {
 });
 
 require('./userViews.js')(router);
+require('./influencer.js')(router);
+require('./analytics.js')(router);
+require('./campaign.js')(router);
 
 module.exports = router;
 
