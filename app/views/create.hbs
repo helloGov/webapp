@@ -1,3 +1,15 @@
-    <div id="content-wrapper">
-	    <img src="/images/HelloGOV_Influencer_create_campaign.png" class="image-page" />
-    </div>
+<div ng-controller="campaignController">
+  <div id="campaign-form" class="row">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
+          <form>
+              <div class="form-group">
+                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your title here" ng-model="formData.title">
+                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your script here" ng-model="formData.script">
+                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your thank you text here" ng-model="formData.thank_you">
+                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your learn more URL here" ng-model="formData.learn_more">
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg" ng-click="createCampaign()">Add</button>
+          </form>
+      </div>
+  </div>
+</div>
