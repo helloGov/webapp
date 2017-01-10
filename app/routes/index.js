@@ -28,6 +28,7 @@ router.get('/home', (request, response) => {
 });
 
 require('./userViews.js')(router);
+require('./influencer.js')(router);
 
 module.exports = router;
 

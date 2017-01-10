@@ -16,6 +16,7 @@
     "handlebars": "^4.0.6",
     "hbs": "^4.0.1",
     "install": "^0.8.2",
+    "mongoose": "^4.7.6",
     "npm": "^4.0.3",
     "serve-favicon": "^2.3.2",
     "start": "^4.0.2",
