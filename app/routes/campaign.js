@@ -3,9 +3,21 @@
 
 module.exports = function (router) {
     router.post('/campaign/create', (request, response) => {
-    	console.log(request.body);
     	campaignController.saveCampaign(request.body);
-    	response.send("home");
+	});
+
+    router.get('/campaignList', (request, response) => {
+    	campaignsPromise = campaignController.findAllCampaigns(request.body)
+    		console.log("testing")
+    	campaignsPromise.then( function(result) {
+    		//console.log(result);
+    		response.send(result);
+    	});
+	});
+
+    router.get('/campaigns', (request, response) => {
+    	response.render('campaigns');
+
 	});
 };
 

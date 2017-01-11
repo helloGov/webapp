@@ -1,7 +1,6 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema
 
-
 var InfluencerSchema = new Schema({
 	username: { type: String, required: true, index: { unique: true }, trim: true },
 	email: { type: String, trim: true },

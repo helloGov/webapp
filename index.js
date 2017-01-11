@@ -33,12 +33,17 @@ app.engine('.hbs', exphbs({
   extname: '.hbs',
   layoutsDir: path.join(__dirname, '/app/views/layouts'), 
   partialsDir: [path.join(__dirname, '/app/views/partials'),
-  				path.join(__dirname, '/app/views/shared')]
+  				path.join(__dirname, '/app/views/shared')], 
+  helpers:{
+  	'angular-js': function(options) {
+    return options.fn();
+	}
+  }
 })); 
 
 app.set('views', path.join(__dirname, '/app/views'));
 app.set('view engine', '.hbs');
-require('./app/models/influencer')
+require('./app/models')
 var routes = require('./app/routes');
 app.use('/', routes);
 
