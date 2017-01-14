@@ -10,8 +10,9 @@ const exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var mongoose = require('mongoose');
+var secrets = require('./secrets')
 
-mongoose.connect("127.0.0.1:27017");
+mongoose.connect(`mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.IP}:${secrets.port}/${secrets.db}`);
 mongoose.connection.on('error', function (err) {
     console.log('Mongo connection error', err.message);
 });
