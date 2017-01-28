@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema
+	Schema = mongoose.Schema,
+	passportLocalMongoose = require('passport-local-mongoose');
 
-var InfluencerSchema = new Schema({
+var Influencer = new Schema({
 	username: { type: String, required: true, index: { unique: true }, trim: true },
 	email: { type: String, trim: true },
 	bio: {type: String, trim: true},
@@ -11,4 +12,5 @@ var InfluencerSchema = new Schema({
 	timestamp: {type: Date, default: Date.now}
 });
 
-mongoose.model('Influencer', InfluencerSchema);
+Influencer.plugin(passportLocalMongoose);
+module.exports = mongoose.model('Influencer', Influencer);

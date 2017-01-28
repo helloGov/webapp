@@ -1,0 +1,14 @@
+<div ng-controller="userController">
+  <div id="signup-form" class="row">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
+          <form>
+              <div class="form-group">
+                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your username here" ng-model="loginDetails.username">
+                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your password here" ng-model="loginDetails.password">
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg" ng-click="login()">Add</button>
+          </form>
+      </div>
+      <div id="login-message"></div>
+  </div>
+</div>
