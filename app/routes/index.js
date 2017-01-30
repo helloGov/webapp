@@ -5,7 +5,6 @@ var router = express.Router();
 var locate = require('../middleware/legislators-locate.js');
 
 router.get('/', function(request, response) {
-	console.log("getting /");
 	response.render('home');
 	});
 
@@ -27,6 +26,7 @@ require('./userViews.js')(router);
 require('./influencer.js')(router);
 require('./analytics.js')(router);
 require('./campaign.js')(router);
+require('./user.js')(router);
 
 module.exports = router;
 

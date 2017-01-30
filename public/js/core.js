@@ -26,3 +26,33 @@ helloGov.controller('campaignController', function ($scope, $http, $window) {
     };
 });
 
+helloGov.controller('userController', function ($scope, $http, $window) {
+    $scope.loginDetails = {};
+    $scope.signupDetails = {};
+
+    $scope.signUp = function() {
+        $http.post('/user/signup', $scope.signupDetails)
+            .then(function(data) {
+                $scope.signUpDetails = {};
+                $scope.session = data;
+                $window.location.href = '/';
+                console.log(data);
+            })
+            .catch(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
+
+    $scope.login = function() {
+        $http.post('/user/login', $scope.loginDetails)
+            .then(function(data) {
+                $scope.loginDetails = {};
+                $scope.session = data;
+                $window.location.href = '/';
+                console.log(data);
+            })
+            .catch(function(data) {
+                $('#login-message').html("Login failed");
+            });
+    };
+});
