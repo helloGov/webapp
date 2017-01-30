@@ -9,10 +9,10 @@ body {
 }
 
 #cta-text {
-    color: white;
-    font-weight: bold;
-    font-size: 19px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: white;
+  font-weight: bold;
+  font-size: 19px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #submit {
@@ -25,6 +25,7 @@ body {
 #body{
   position: relative;
 }
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -112,7 +113,7 @@ body {
   border-bottom: 1px solid #e5e5e5;
   background-color: white;
   color: rgb(60,165,178);
-} 
+}
 .jumbotron .btn {
   padding: 14px 24px;
   font-size: 21px;
@@ -146,13 +147,12 @@ body {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
   filter: alpha(opacity=60);
   opacity: 0.8;
-
   -webkit-box-shadow: 0 0 1px 0px rgb( 255, 255, 255);
   box-shadow: 0 0 1px 0px rgb( 255, 255, 255);
   width: 150px;
   height: 150px;
   z-index: 86;
-text-align: center;
+  text-align: center;
   -webkit-transition: background-color .5s ease-in-out;
   -moz-transition: background-color .5s ease-in-out;
   -o-transition: background-color .5s ease-in-out;
