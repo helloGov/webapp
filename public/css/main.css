@@ -1,8 +1,12 @@
 /* Space out content a bit */
 body {
   padding-bottom: 20px;
+}
+body .standard{
   background-color: #35A5B3;
-
+}
+body .white-form{
+  background-color: white;
 }
 #searchTextField{
   height: 50px;

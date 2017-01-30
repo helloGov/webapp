@@ -25,7 +25,7 @@
     <script src="/js/angular.min.js"></script>
     <script src="/js/core.js"></script>
   </head>
-  <body class="{{{body_class}}}">
+  <body {{#if body-class}} class="{{body-class}}" {{else}} class="standard" {{/if}}>
     <nav id="nav" class='navbar text-center'>
       <div class="row" style="padding-top: 15px; color: #35A5B3;height:50px">
         <div class="col-xs-2"  >
