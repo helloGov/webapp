@@ -16,6 +16,17 @@ module.exports = function (router) {
     	response.render('login');
     });
 
+    router.post('/user/fb_login', (request, response) => {
+        console.log(`got user_details: ${JSON.stringify(request.body)}`);
+        passport.authenticate('local')(request, response, function () {
+            response.redirect('/');
+        });
+    });
+
+    router.get('/user/fb_login', (request, response) => {
+        response.render('login');
+    });
+
     router.post('/user/signup', influencerController.addInfluencer);
 
     router.get('/user/signup', (request, response) => {
