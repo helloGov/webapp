@@ -14,6 +14,10 @@ module.exports = function (router) {
     	});
 	});
 
+    router.get('/campaign', (request, response) => {
+        response.render('campaign');
+    });
+
     router.get('/campaigns', (request, response) => {
     	response.render('campaigns');
 	});

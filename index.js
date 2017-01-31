@@ -15,8 +15,9 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var secrets = require('./secrets')
 
-mongoose.connect("127.0.0.1:27017/helloGov");
+mongoose.connect(`mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.IP}:${secrets.port}/${secrets.db}`);
 mongoose.connection.on('error', function (err) {
     console.log('Mongo connection error', err.message);
 });
