@@ -35,10 +35,10 @@ app.use(express.static('public'));
 app.use(favicon(path.join(__dirname,'public','favicon.ico')));
 
 var sessionStore = new MongoStore({
-  url: `${secrets.IP}:${secrets.port}/${secrets.db}`,
+  url: `mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.IP}:${secrets.port}/${secrets.db}`,
   touchAfter: 0
 })
-app.use(cookieParser(secrets.sessionSecret));
+app.use(cookieParser(secrets.session_secret));
 app.use(session({
     secret: secrets.session_secret,
     store: sessionStore,
@@ -68,6 +68,7 @@ var routes = require('./app/routes');
 
 var Influencer = require('./app/models/influencer');
 passport.use(new LocalStrategy(Influencer.authenticate()));
+
 passport.serializeUser(Influencer.serializeUser());
 passport.deserializeUser(Influencer.deserializeUser());
 
