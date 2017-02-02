@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="helloGov">
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <meta charset="utf-8">
@@ -10,24 +10,22 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <title>helloGov</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="/css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDM2H_5tEaB4OM1Dr2iR893KmwczVNXExs&sensor=false&libraries=places" type="text/javascript"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/core.js"></script>
   </head>
-  <body>    
+  <body class="{{{body_class}}}">
     <nav id="nav" class='navbar text-center'>
       <div class="row" style="padding-top: 15px; color: #35A5B3;height:50px">
         <div class="col-xs-2"  >
@@ -37,11 +35,11 @@
           <img src="/images/logo.png" style="height:90%"/>
         </div>
         <div class="col-xs-3 col-md-3" style="height:100%">
-          <img src="/profile.png" style="height:90%"/>
+          <img src="/images/profile.png" style="height:90%"/>
         </div>
       </div>
     </nav>
-      <div id="content-wrapper">
+      <div class="content-wrapper">
         {{{body}}}
       </div>
   </body>

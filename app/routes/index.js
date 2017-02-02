@@ -5,13 +5,8 @@ var router = express.Router();
 var locate = require('../middleware/legislators-locate.js');
 
 router.get('/', function(request, response) {
-	console.log("getting /");
 	response.render('home');
 	});
-
-router.get('/analytics', (request, response) => {
-  response.render('analytics');
-});
 
 router.get('/locateLegislator', (request, response) => {
     //TODO: construct our request to /locateLegislator such that we can use an expressier 
@@ -28,6 +23,10 @@ router.get('/home', (request, response) => {
 });
 
 require('./userViews.js')(router);
+require('./influencer.js')(router);
+require('./analytics.js')(router);
+require('./campaign.js')(router);
+require('./user.js')(router);
 
 module.exports = router;
 
