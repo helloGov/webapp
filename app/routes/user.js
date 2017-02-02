@@ -3,13 +3,11 @@ var influencerController = require("../middleware/influencer");
 var Influencer = require("../models/influencer.js")
 var passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy;
-
-var FACEBOOK_APP_ID = '1255039427879300';
-var FACEBOOK_APP_SECRET = 'fbc227cbaa110a791aaf235538470f8e';
+var secrets = require('../../secrets')
 
 passport.use(new FacebookStrategy({
-            clientID: FACEBOOK_APP_ID,
-            clientSecret: FACEBOOK_APP_SECRET,
+            clientID: secrets.fb_app_id,
+            clientSecret: secrets.fb_app_secret,
             callbackURL: "http://localhost:8080/auth/facebook/callback"
         },
         function(accessToken, refreshToken, profile, cb) {
@@ -48,10 +46,10 @@ module.exports = function (router) {
     	response.render('login');
     });
 
-    router.get('/user',
+    router.get('/fb_user_test',
       function(req, res) {
         console.log(req.user);
-        res.render('user_test', { user: req.user });
+        res.render('fb_user_test', { user: req.user });
       });
 
     // Redirect the user to Facebook for authentication.  When complete,
@@ -67,7 +65,7 @@ module.exports = function (router) {
         passport.authenticate('facebook', { failureRedirect: '/user/login' }),
         function(req, res) {
           console.log(`got user_details: ${JSON.stringify(req.body)}`);
-          res.redirect('/user');
+          res.redirect('/fb_user_test');
         });
 
     router.post('/user/signup', influencerController.addInfluencer);
