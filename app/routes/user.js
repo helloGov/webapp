@@ -1,30 +1,10 @@
-
-var influencerController = require("../middleware/influencer");
+var influencerController = require("../middleware/influencer")
 var Influencer = require("../models/influencer.js")
-var passport = require('passport'),
-    FacebookStrategy = require('passport-facebook').Strategy;
-var secrets = require('../../secrets')
+var passport = require('passport')
+var FacebookStrategy = require('passport-facebook').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
+var auth = require("../middleware/authentication.js")
 
-passport.use(new FacebookStrategy({
-            clientID: secrets.fb_app_id,
-            clientSecret: secrets.fb_app_secret,
-            callbackURL: "http://localhost:8080/auth/facebook/callback"
-        },
-        function(accessToken, refreshToken, profile, cb) {
-            return cb(null, profile);
-        }
-    )
-);
-
-// Configure Passport authenticated session persistence.
-//
-// In order to restore authentication state across HTTP requests, Passport needs
-// to serialize users into and deserialize users out of the session.  In a
-// production-quality application, this would typically be as simple as
-// supplying the user ID when serializing, and querying the user record by ID
-// from the database when deserializing.  However, due to the fact that this
-// example does not have a database, the complete Facebook profile is serialized
-// and deserialized.
 passport.serializeUser(function(user, cb) {
   cb(null, user);
 });
