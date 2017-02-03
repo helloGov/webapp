@@ -4,7 +4,7 @@
  */
 
 var mongoose = require("mongoose"),
- 	Influencer = mongoose.model('Influencer');
+ 	Influencer = mongoose.model('Influencer'),
     passport = require('passport');
 
 var influencerController = {};
