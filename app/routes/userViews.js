@@ -1,4 +1,3 @@
-
 module.exports = function (router) {
 
     router.get('/createCampaign', (request, response) => {
@@ -7,6 +6,5 @@ module.exports = function (router) {
 		console.log('Signed Cookies: ', request.signedCookies);
         response.render('create');
     });
-
 };
 

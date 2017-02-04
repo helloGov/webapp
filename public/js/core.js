@@ -12,7 +12,9 @@ helloGov.controller('campaignController', function ($scope, $http, $window) {
         console.log('Error: ' + data);
     });
 
-    $scope.createCampaign = function() {
+    $scope.createCampaign = function(publishFlag) {
+        $scope.formData.publish = publishFlag;
+        console.log($scope.formData);
         $http.post('/campaign/create', $scope.formData)
             .then(function(data) {
                 $scope.formData = {};
