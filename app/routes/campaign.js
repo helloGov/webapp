@@ -21,5 +21,9 @@ module.exports = function (router) {
     router.get('/campaigns', (request, response) => {
     	response.render('campaigns');
 	});
-};
 
+  router.get('/campaignSuccess', (request, response) => {
+    response.render('campaignSuccess');
+  });
+
+};
