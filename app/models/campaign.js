@@ -1,7 +1,9 @@
 var mongoose = require('mongoose'),
+    shortid = require('shortid'),
 	Schema = mongoose.Schema
 
 var CampaignSchema = new Schema({
+    _id: { type: String, 'default': shortid.generate },
 	title: { type: String, required: true, index: { unique: true }, trim: true },
 	script: { type: String, trim: true },
 	thank_you: {type: String, trim: true},

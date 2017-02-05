@@ -23,8 +23,10 @@
     "npm": "^4.0.3",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "passport-facebook": "^2.1.1",
     "passport-local-mongoose": "^4.0.0",
     "serve-favicon": "^2.3.2",
+    "shortid": "^2.2.6",
     "start": "^4.0.2",
     "sunlight-congress-api": "^0.3.1"
   }
