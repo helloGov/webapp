@@ -9,9 +9,9 @@ var mongoose = require("mongoose"),
 
 var campaignController = {};
 
-campaignController.findCampaign = function (requestJson) {
-    campaign = Campaign.findOne({"fake_id":1});
-    console.log(campaign);
+campaignController.findCampaign = function (shortid) {
+    var findStr = {_id : shortid};
+    campaign = Campaign.find(findStr);
     return campaign;
 }
 

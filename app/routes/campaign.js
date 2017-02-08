@@ -15,7 +15,14 @@ module.exports = function (router) {
 	});
 
     router.get('/campaign', (request, response) => {
-        response.render('campaign');
+        response.render('campaignDemo');
+    });
+
+    router.get('/campaign/:shortid', (request, response) => {
+        campaignPromise = campaignController.findCampaign(request.params.shortid);
+        campaignPromise.then( function(result) {
+            response.render('campaign',{campData: result[0]});
+        });
     });
 
     router.get('/campaigns', (request, response) => {
