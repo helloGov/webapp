@@ -1,5 +1,33 @@
 // public/js/core.js
-var helloGov = angular.module('helloGov', []);
+var helloGov = angular.module('helloGov', ['ngMapAutocomplete']).config(function($interpolateProvider){
+        $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+});
+
+helloGov.controller('visitorController', function ($scope, $http, $window) {
+
+    $scope.locResult = '';
+    $scope.locOptions = null;
+    $scope.locDetails = '';
+
+    $scope.update = function() {
+        coordinates = {"latitude": $scope.locDetails.geometry.location.lat(),
+                        "longitude": $scope.locDetails.geometry.location.lng()};
+
+        $http.get('/locateLegislator', {params: coordinates})
+        .then(function(result) {
+            $scope.repInfo = result.data.representativeInfo;
+
+            $scope.addrForm = false;
+            $scope.repForm = true;
+        })
+        .catch(function(data) {
+            console.log(data);
+        });
+    }
+
+    $scope.addrForm = true;
+    $scope.repForm = false;
+});
 
 helloGov.controller('campaignController', function ($scope, $http, $window) {
     $scope.formData = {};
@@ -24,7 +52,8 @@ helloGov.controller('campaignController', function ($scope, $http, $window) {
             })
             .catch(function(data) {
                 console.log('Error: ' + data);
-            });
+            }
+        );
     };
 });
 
