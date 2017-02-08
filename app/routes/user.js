@@ -3,15 +3,7 @@ var Influencer = require("../models/influencer.js")
 var passport = require('passport')
 var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
-var auth = require("../middleware/authentication.js")
-
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
-});
-
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
-});
+var auth = require("../middleware/authentication.js");
 
 module.exports = function (router) {
 

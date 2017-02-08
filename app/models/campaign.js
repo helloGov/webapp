@@ -9,7 +9,7 @@ var CampaignSchema = new Schema({
 	thank_you: {type: String, trim: true},
 	learn_more: {type: String, trim: true},
     publish: {type: Boolean, trim: true},
-//	influencer: {type: String, trim: false},
+    influencer: {type: String, trim: false}
 //	image: {type: String, trim:false},
 //	timestamp: {type: Date, default: Date.now}
 });

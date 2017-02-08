@@ -10,20 +10,24 @@ var mongoose = require("mongoose"),
 var campaignController = {};
 
 
-campaignController.findCampaign =  function (requestJson){
+campaignController.findCampaign =  function (request){
  	campaign = Campaign.findOne({"fake_id":1});
  	console.log(campaign);
  	return campaign;
  }
 
-campaignController.findAllCampaigns =  function (requestJson){
+campaignController.findAllCampaigns =  function (request){
  	campaign = Campaign.find();
- 	//console.log(campaign);
  	return campaign;
  }
 
-campaignController.saveCampaign = function (requestJson){
- 	campaign = new Campaign(requestJson);
+campaignController.saveCampaign = function (request){
+ 	campaign = new Campaign({title: request.title,
+							script: { type: String, trim: true },
+							thank_you: request.thank_you,
+							learn_more: request.learn_more,
+    						publish: request.publish,
+    						influencer: request.user });
  	campaign.save(function(error){console.log(error);});
  	return true;
  }
