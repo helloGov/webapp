@@ -1,13 +1,19 @@
+<link href="/css/login.css" rel="stylesheet">
+
 <div ng-controller="userController">
-  <div id="signup-form" class="row">
-      <div class="col-sm-8 col-sm-offset-2 text-center">
+  <div class="container">
+      <div class="row text-center">
+
+          <!-- TODO: Find an image to go here so it doesn't look so bland -->
+
           <form>
               <div class="form-group">
                   <input type="text" class="form-control input-lg text-center" placeholder="Enter your username here" ng-model="signupDetails.username">
                   <input type="text" class="form-control input-lg text-center" placeholder="Enter your password here" ng-model="signupDetails.password">
               </div>
-              <button type="submit" class="btn btn-primary btn-lg" ng-click="signUp()">Add</button>
+              <button type="submit" ng-click="signUp()"><h3>Sign Up</h3></button>
           </form>
+          
       </div>
   </div>
 </div>

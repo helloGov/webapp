@@ -1,16 +1,21 @@
+<link href="/css/login.css" rel="stylesheet">
+
 <div ng-controller="userController">
-  <div id="signup-form" class="row">
-      <div class="col-sm-8 col-sm-offset-2 text-center">
+  <div class="container">
+      <div class="row text-center">
+
+          <!-- TODO: Find an image to go here so it doesn't look so bland -->
+
           <form>
               <div class="form-group">
                   <input type="text" class="form-control input-lg text-center" placeholder="Enter your username here" ng-model="loginDetails.username">
                   <input type="text" class="form-control input-lg text-center" placeholder="Enter your password here" ng-model="loginDetails.password">
               </div>
-              <button type="submit" class="btn btn-primary btn-lg" ng-click="login()">Add</button>
+              <button type="submit" ng-click="login()"><h3>Log In</h3></button>
           </form>
-      </div>
-      <div id="login-message"></div>
-  </div>
-  <div class="text-center input-lg"><a href="/auth/facebook">Login with Facebook</a></div>
-</div>
+          <div id="login-message"></div>
+          <a href="/auth/facebook"><img src="/images/fb_login.png"></a>
 
+      </div>
+  </div>
+</div>
