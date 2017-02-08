@@ -15,7 +15,6 @@ router.get('/locateLegislator', (request, response) => {
     latitude = request.query.latitude;
     longitude = request.query.longitude;
 
-
     campaignController.findLegislator(latitude, longitude, response);
 });
 

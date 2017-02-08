@@ -4,7 +4,8 @@
  */
 
 var mongoose = require("mongoose"),
- 	Campaign = mongoose.model('Campaign');
+ 	Campaign = mongoose.model('Campaign'),
+    sunlight = require("sunlight-congress-api");
 
 var campaignController = {};
 
@@ -27,9 +28,6 @@ campaignController.saveCampaign = function (requestJson) {
 }
 
 campaignController.findLegislator = function (latitude, longitude, response) {
-    var sunlight = require("sunlight-congress-api");
-    var exphbs = require('express-handlebars');
-    var hbs = exphbs.create({ /* config */ });
 
     var getRepresentative = function(legislators) {
         if (legislators.length == 0) {
