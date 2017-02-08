@@ -25,14 +25,19 @@ function locateTheLegislator(latitude, longitude, response) {
     var representative = getRepresentative(legislators);
     var representativeFound = (representative != null);
 
+    responseObject = {representativeFound: representativeFound,
+                      representativeInfo: representative};
+
+    console.log(representative)
+
     if (representativeFound) {
       var templatePromise = hbs.getTemplate('app/views/shared/representativeForm.hbs');
     } else {
       var templatePromise = hbs.getTemplate('app/views/shared/representativeNotFoundMessage.hbs');
     }
     templatePromise.then( function(template) {
-      responseObject = {representativeFound: representativeFound, 
-                        representativeDiv: template(representative)};              
+      responseObject = {representativeFound: representativeFound,
+                        representativeDiv: template(representative)};
       response.send(JSON.stringify(responseObject));
     });
   }

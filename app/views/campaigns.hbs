@@ -1,12 +1,11 @@
-{{{{angular-js}}}}
 <div ng-controller="campaignController">
 	<br>
 	<div ng-repeat="campaign in campaigns">
-		{{campaign.title }}
-		{{campaign.script}}
-		{{campaign.learn_more}}
-		{{campaign.thank_you}}
+        {[{campaign._id }]}
+		{[{campaign.title }]}
+		{[{campaign.script}]}
+		{[{campaign.learn_more}]}
+		{[{campaign.thank_you}]}
 	</div>
 	<br>
 </div>
-{{{{/angular-js}}}}
