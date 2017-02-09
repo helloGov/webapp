@@ -3,8 +3,8 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema
 
 var CampaignSchema = new Schema({
-    _id: { type: String, 'default': shortid.generate },
-	title: { type: String, required: true, index: { unique: true }, trim: true },
+    _id: { type: String, index: { unique: true }, 'default': shortid.generate },
+	title: { type: String, required: true, trim: true },
 	script: { type: String, trim: true },
 	thank_you: {type: String, trim: true},
 	learn_more: {type: String, trim: true},

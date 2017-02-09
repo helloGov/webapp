@@ -13,7 +13,7 @@ module.exports = function (router) {
     });
 
     router.post('/campaign/create', (request, response) => {
-        campaignController.saveCampaign(request.body);
+        campaignController.saveCampaign(request);
     });
 
     router.get('/campaignList', (request, response) => {

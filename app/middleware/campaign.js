@@ -22,12 +22,12 @@ campaignController.findAllCampaigns =  function (request){
  }
 
 campaignController.saveCampaign = function (request){
- 	campaign = new Campaign({title: request.title,
-							script: { type: String, trim: true },
-							thank_you: request.thank_you,
-							learn_more: request.learn_more,
-    						publish: request.publish,
-    						influencer: request.user });
+ 	campaign = new Campaign({title: request.body.title,
+							script: request.body.script,
+							thank_you: request.body.thank_you,
+							learn_more: request.body.learn_more,
+    						publish: request.body.publish,
+    						influencer: request.user.id });
  	campaign.save(function(error){console.log(error);});
  	return true;
  }
