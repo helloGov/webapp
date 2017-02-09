@@ -10,9 +10,28 @@ module.exports = passport.use(new FacebookStrategy({
             callbackURL: "http://localhost:8080/auth/facebook/callback"
         },
         function(accessToken, refreshToken, profile, cb) {
-            return cb(null, profile);
-        }
-    )
+            Influencer.findOne({ oauthID: profile.id }, function(err, influencer) {
+              if(err) {
+                console.log(err);  // handle errors!
+              }
+              if (!err && influencer !== null) {
+                cb(null, influencer);
+              } else {
+                influencer = new Influencer({
+                  oauthID: profile.id,
+                  name: profile.displayName
+                });
+                influencer.save(function(err) {
+                  if(err) {
+                    console.log(err);  // handle errors!
+                  } else {
+                    console.log("saving user ...");
+                    cb(null, influencer);
+                  }
+                });
+              }
+            });
+        })
 );
 
 passport.use(new LocalStrategy(Influencer.authenticate()));

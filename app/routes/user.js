@@ -7,8 +7,13 @@ var auth = require("../middleware/authentication.js");
 
 module.exports = function (router) {
 
+    router.post('/user/signup', influencerController.addInfluencer);
+
+    router.get('/user/signup', (request, response) => {
+        response.render('signup');
+    });
+    
     router.post('/user/login', (request, response) => {
-    	console.log(`got user_details: ${JSON.stringify(request.body)}`);
     	passport.authenticate('local')(request, response, function () {
 	        response.redirect('/');
 	    });
@@ -40,11 +45,6 @@ module.exports = function (router) {
           res.redirect('/fb_user_test');
         });
 
-    router.post('/user/signup', influencerController.addInfluencer);
-
-    router.get('/user/signup', (request, response) => {
-    	response.render('signup');
-    });
 };
 
 
