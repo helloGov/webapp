@@ -15,10 +15,16 @@ helloGov.controller('visitorController', function ($scope, $http, $window) {
 
         $http.get('/locateLegislator', {params: coordinates})
         .then(function(result) {
+            $scope.repFound = result.data.representativeFound;
             $scope.repInfo = result.data.representativeInfo;
 
             $scope.addrForm = false;
-            $scope.repForm = true;
+            if($scope.repFound) {
+                $scope.repForm = true;
+            } else {
+                $scope.repNotFoundForm = true;
+            }
+
         })
         .catch(function(data) {
             console.log(data);
@@ -27,6 +33,7 @@ helloGov.controller('visitorController', function ($scope, $http, $window) {
 
     $scope.addrForm = true;
     $scope.repForm = false;
+    $scope.repNotFoundForm = false;
 });
 
 helloGov.controller('campaignController', function ($scope, $http, $window) {
