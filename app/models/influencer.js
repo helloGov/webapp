@@ -3,10 +3,10 @@ var mongoose = require('mongoose'),
 	passportLocalMongoose = require('passport-local-mongoose');
 
 var Influencer = new Schema({
-	username: { type: String, required: true, index: { unique: true }, trim: true },
+	name: { type: String, trim: true },
 	email: { type: String, trim: true },
 	bio: {type: String, trim: true},
-	loginName: {type: String, trim: true},
+	oauthID: {type: Number},
 	password: {type: String, trim: false},
 	image: {type: String, trim:false},
 	timestamp: {type: Date, default: Date.now}

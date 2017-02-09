@@ -22,7 +22,6 @@ router.get('/home', (request, response) => {
   response.send('home')
 });
 
-require('./userViews.js')(router);
 require('./influencer.js')(router);
 require('./analytics.js')(router);
 require('./campaign.js')(router);
