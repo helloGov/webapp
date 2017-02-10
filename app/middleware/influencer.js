@@ -39,7 +39,7 @@ influencerController.addInfluencer = function (request, response) {
         passport.authenticate('local')(request, response, function () {
             response.redirect('/');
             }, function() {
-                response.redirect('/user/login');
+                response.redirect('/login');
                 });
         }
     );

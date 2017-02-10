@@ -15,14 +15,18 @@ campaignController.findCampaign = function (shortid) {
     return campaign;
 }
 
-campaignController.findAllCampaigns = function (requestJson) {
+campaignController.findAllCampaigns = function (request) {
     campaign = Campaign.find();
-    //console.log(campaign);
     return campaign;
 }
 
-campaignController.saveCampaign = function (requestJson) {
-    campaign = new Campaign(requestJson);
+campaignController.saveCampaign = function (request){
+    campaign = new Campaign({title: request.body.title,
+        script: request.body.script,
+        thank_you: request.body.thank_you,
+        learn_more: request.body.learn_more,
+        publish: request.body.publish,
+        influencer: request.user.id });
     campaign.save(function(error){console.log(error);});
     return true;
 }

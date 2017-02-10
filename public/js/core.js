@@ -69,7 +69,7 @@ helloGov.controller('userController', function ($scope, $http, $window) {
     $scope.signupDetails = {};
 
     $scope.signUp = function() {
-        $http.post('/user/signup', $scope.signupDetails)
+        $http.post('/signup', $scope.signupDetails)
             .then(function(data) {
                 $scope.signUpDetails = {};
                 $scope.session = data;
@@ -82,7 +82,7 @@ helloGov.controller('userController', function ($scope, $http, $window) {
     };
 
     $scope.login = function() {
-        $http.post('/user/login', $scope.loginDetails)
+        $http.post('/login', $scope.loginDetails)
             .then(function(data) {
                 $scope.loginDetails = {};
                 $scope.session = data;

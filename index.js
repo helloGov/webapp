@@ -14,7 +14,11 @@ var secrets = require('./secrets');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
-var secrets = require('./secrets')
+var secrets = require('./secrets');
+var Models = require('./app/models');
+var Influencer = require('./app/models/influencer');
+
+var routes = require('./app/routes');
 
 mongoose.connect(`mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.IP}:${secrets.port}/${secrets.db}`);
 mongoose.connection.on('error', function (err) {
@@ -26,17 +30,19 @@ mongoose.connection.once('open', function callback () {
 
 
 var app = express();
+var sessionStore = new MongoStore({
+  url: `mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.IP}:${secrets.port}/${secrets.db}`,
+  touchAfter: 0
+})
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = 8080; //TODO  put in config
 
 app.use(express.static('public'));
 app.use(favicon(path.join(__dirname,'public','favicon.ico')));
-
-var sessionStore = new MongoStore({
-  url: `mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.IP}:${secrets.port}/${secrets.db}`,
-  touchAfter: 0
-})
+app.set('views', path.join(__dirname, '/app/views'));
+app.set('view engine', '.hbs');
 app.use(cookieParser(secrets.session_secret));
 app.use(session({
     secret: secrets.session_secret,
@@ -60,15 +66,17 @@ app.engine('.hbs', exphbs({
   }
 }));
 
-app.set('views', path.join(__dirname, '/app/views'));
-app.set('view engine', '.hbs');
-require('./app/models')
-var routes = require('./app/routes');
-
-var Influencer = require('./app/models/influencer');
-
-passport.serializeUser(Influencer.serializeUser());
-passport.deserializeUser(Influencer.deserializeUser());
+passport.serializeUser(function(influencer, done) {
+  console.log('serializeUser: ' + influencer._id);
+  done(null, influencer._id);
+});
+passport.deserializeUser(function(id, done) {
+  Influencer.findById(id, function(err, influencer){
+    console.log('deserializeUser: ' + JSON.stringify(influencer));
+      if(!err) done(null, influencer);
+      else done(err, null);
+    });
+});
 
 app.use('/', routes);
 

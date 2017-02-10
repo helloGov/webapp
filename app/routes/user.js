@@ -3,26 +3,23 @@ var Influencer = require("../models/influencer.js")
 var passport = require('passport')
 var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
-var auth = require("../middleware/authentication.js")
-
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
-});
-
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
-});
+var auth = require("../middleware/authentication.js");
 
 module.exports = function (router) {
 
-    router.post('/user/login', (request, response) => {
-    	console.log(`got user_details: ${JSON.stringify(request.body)}`);
+    router.post('/signup', influencerController.addInfluencer);
+
+    router.get('/signup', (request, response) => {
+        response.render('signup');
+    });
+
+    router.post('/login', (request, response) => {
     	passport.authenticate('local')(request, response, function () {
 	        response.redirect('/');
 	    });
     });
 
-    router.get('/user/login', (request, response) => {
+    router.get('/login', (request, response) => {
     	response.render('login');
     });
 
@@ -42,17 +39,11 @@ module.exports = function (router) {
     // access was granted, the user will be logged in.  Otherwise,
     // authentication has failed.
     router.get('/auth/facebook/callback',
-        passport.authenticate('facebook', { failureRedirect: '/user/login' }),
+        passport.authenticate('facebook', { failureRedirect: '/login' }),
         function(req, res) {
           console.log(`got user_details: ${JSON.stringify(req.body)}`);
           res.redirect('/fb_user_test');
         });
-
-    router.post('/user/signup', influencerController.addInfluencer);
-
-    router.get('/user/signup', (request, response) => {
-    	response.render('signup');
-    });
 };
 
 
