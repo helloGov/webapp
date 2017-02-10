@@ -5,15 +5,19 @@ module.exports = function (router) {
 
     router.get('/createCampaign', (request, response) => {
         console.log(`${JSON.stringify(request.user)}`);
-        if(request.user){
+        if(request.user) {
             response.render('create');
         } else {
-            response.status(301).render('unauthorized');
+            response.render('login');
         }
     });
 
     router.post('/campaign/create', (request, response) => {
-        campaignController.saveCampaign(request);
+        if(request.user) {
+            campaignController.saveCampaign(request);
+        } else {
+            response.status(301).render('unauthorized');
+        }
     });
 
     router.get('/campaignList', (request, response) => {
@@ -38,8 +42,8 @@ module.exports = function (router) {
     	response.render('campaigns');
     });
 
-      router.get('/campaignSuccess', (request, response) => {
+    router.get('/campaignSuccess', (request, response) => {
         response.render('campaignSuccess');
-      });
+    });
 
 };
