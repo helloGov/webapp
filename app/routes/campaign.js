@@ -20,12 +20,7 @@ module.exports = function (router) {
         }
     });
 
-    router.get('/campaignList', (request, response) => {
-        campaignsPromise = campaignController.findAllCampaigns(request.body);
-        campaignsPromise.then( function(result) {
-            response.send(result);
-        });
-    });
+    router.get('/campaignList', campaignController.findAllCampaigns);
 
     router.get('/campaign', (request, response) => {
         response.render('campaignDemo');

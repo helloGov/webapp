@@ -1,3 +1,4 @@
+
 var mongoose = require("mongoose"),
  	Campaign = mongoose.model('Campaign'),
     sunlight = require("sunlight-congress-api");
@@ -10,10 +11,16 @@ campaignController.findCampaign = function (shortid) {
     return campaign;
 }
 
-campaignController.findAllCampaigns = function (request) {
-    campaign = Campaign.find();
-    return campaign;
-}
+campaignController.findAllCampaigns = function (request, response) {
+  if (request.user) {
+    campaigns = Campaign.find({influencer: request.user.id});
+    campaigns.then(function(result){
+      response.send(result);
+    })
+  } else {
+    response.status(301).send({});
+  }
+};
 
 campaignController.saveCampaign = function (request){
     campaign = new Campaign({title: request.body.title,
