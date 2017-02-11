@@ -16,8 +16,8 @@ campaignController.findCampaign = function (shortid) {
 }
 
 campaignController.findAllCampaigns = function (request) {
-    campaign = Campaign.find();
-    return campaign;
+    campaigns = Campaign.find({influencer: request.user.id});
+    return campaigns;
 }
 
 campaignController.saveCampaign = function (request){

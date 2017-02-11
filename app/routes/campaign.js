@@ -17,7 +17,7 @@ module.exports = function (router) {
     });
 
     router.get('/campaignList', (request, response) => {
-        campaignsPromise = campaignController.findAllCampaigns(request.body);
+        campaignsPromise = campaignController.findAllCampaigns(request);
         campaignsPromise.then( function(result) {
             response.send(result);
         });
