@@ -36,7 +36,7 @@ module.exports = function (router) {
         passport.authenticate('facebook', { failureRedirect: '/login' }),
         function(req, res) {
           console.log(`got user_details: ${JSON.stringify(req.body)}`);
-          res.redirect('/fb_user_test');
+          res.redirect('/');
         });
 };
 
