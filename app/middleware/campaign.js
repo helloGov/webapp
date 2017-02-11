@@ -1,7 +1,3 @@
-/*
- *
- *
- */
 
 var mongoose = require("mongoose"),
  	Campaign = mongoose.model('Campaign'),
@@ -15,10 +11,16 @@ campaignController.findCampaign = function (shortid) {
     return campaign;
 }
 
-campaignController.findAllCampaigns = function (request) {
+campaignController.findAllCampaigns = function (request, response) {
+  if (request.user) {
     campaigns = Campaign.find({influencer: request.user.id});
-    return campaigns;
-}
+    campaigns.then(function(result){
+      response.send(result);
+    })
+  } else {
+    response.status(301).send({});
+  }
+};
 
 campaignController.saveCampaign = function (request){
     campaign = new Campaign({title: request.body.title,

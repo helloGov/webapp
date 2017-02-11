@@ -5,23 +5,22 @@ module.exports = function (router) {
 
     router.get('/createCampaign', (request, response) => {
         console.log(`${JSON.stringify(request.user)}`);
-        if(request.user){
+        if(request.user) {
             response.render('create');
+        } else {
+            response.render('login');
+        }
+    });
+
+    router.post('/campaign/create', (request, response) => {
+        if(request.user) {
+            campaignController.saveCampaign(request);
         } else {
             response.status(301).render('unauthorized');
         }
     });
 
-    router.post('/campaign/create', (request, response) => {
-        campaignController.saveCampaign(request);
-    });
-
-    router.get('/campaignList', (request, response) => {
-        campaignsPromise = campaignController.findAllCampaigns(request);
-        campaignsPromise.then( function(result) {
-            response.send(result);
-        });
-    });
+    router.get('/campaignList', campaignController.findAllCampaigns);
 
     router.get('/campaign', (request, response) => {
         response.render('campaignDemo');
@@ -38,8 +37,8 @@ module.exports = function (router) {
     	response.render('campaigns');
     });
 
-      router.get('/campaignSuccess', (request, response) => {
+    router.get('/campaignSuccess', (request, response) => {
         response.render('campaignSuccess');
-      });
+    });
 
 };
