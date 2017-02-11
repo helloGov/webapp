@@ -20,6 +20,11 @@ router.get('/home', (request, response) => {
     }
 });
 
+router.get('/logout', function(request, response){
+      request.logout();
+      response.redirect('/');
+});
+
 router.get('/locateLegislator', (request, response) => {
     //TODO: construct our request to /locateLegislator such that we can use an expressier
     // way of accessing params. request.params['latitude'] is better
