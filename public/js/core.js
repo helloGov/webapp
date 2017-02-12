@@ -41,7 +41,6 @@ helloGov.controller('campaignController', function ($scope, $http, $window) {
     $http.get('/campaignList', $scope.campaigns)
     .then(function(result) {
         $scope.campaigns = result.data;
-        console.log($scope.campaigns)
     })
     .catch(function(data) {
         console.log('Error: ' + data);
@@ -49,18 +48,17 @@ helloGov.controller('campaignController', function ($scope, $http, $window) {
 
     $scope.createCampaign = function(publishFlag) {
         $scope.formData.publish = publishFlag;
-        console.log($scope.formData);
-        $http.post('/campaign/create', $scope.formData)
-            .then(function(data) {
-                $scope.formData = {};
-                $scope.campaign = data;
-                $window.location.href = '/';
-                console.log(data);
-            })
-            .catch(function(data) {
-                console.log('Error: ' + data);
-            }
-        );
+        $http.post('/campaign/create', $scope.formData);
+        // I would like this to work but not sure how
+        //     .then(function(result) {
+        //         console.log(result.data);
+        //         $window.location.href = '/';
+        //     })
+        //     .catch(function(data) {
+        //         console.log('Error: ' + data);
+        //     }
+        // );
+        $window.location.href = '/campaigns';
     };
 });
 

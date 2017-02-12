@@ -8,7 +8,7 @@ router.get('/', function(request, response) {
     if(request.user){
         response.render('home');
     } else {
-        response.render('login');
+        response.redirect('/login');
     }
 });
 
@@ -16,7 +16,7 @@ router.get('/home', (request, response) => {
     if(request.user){
         response.render('home');
     } else {
-        response.render('login');
+        response.redirect('/login');
     }
 });
 
