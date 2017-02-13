@@ -11,6 +11,12 @@ campaignController.findCampaign = function (shortid) {
     return campaign;
 }
 
+campaignController.findCampaignByTitleAndUser = function (title,userid) {
+    var findStr = {title: title, influencer: userid};
+    campaign = Campaign.find(findStr);
+    return campaign;
+}
+
 campaignController.deleteCampaign = function (shortid,userid) {
     var findStr = {_id: shortid, influencer: userid};
     campaign = Campaign.find(findStr).remove().exec();
@@ -28,30 +34,33 @@ campaignController.findAllCampaigns = function (request, response) {
   }
 };
 
-campaignController.saveCampaign = function (request){
+campaignController.saveCampaign = function (request) {
     var findStr = {_id: request.body.shortid, influencer: request.user.id};
-    findCamp = Campaign.find(findStr);
-    findCamp.then(function(result) {
-        if(result.length > 0) {
-            console.log("Updating")
-            Campaign.update(findStr,{title: request.body.title,
-                script: request.body.script,
-                thank_you: request.body.thank_you,
-                learn_more: request.body.learn_more,
-                publish: request.body.publish,
-                influencer: request.user.id }).exec();
-        } else {
-            console.log("Creating new")
-            campaign = new Campaign({title: request.body.title,
-                script: request.body.script,
-                thank_you: request.body.thank_you,
-                learn_more: request.body.learn_more,
-                publish: request.body.publish,
-                influencer: request.user.id });
-            campaign.save(function(error){console.log(error);});
-        }
-    });
-    return true;
+    findCamp = Campaign.find(findStr).exec()
+        .then(function(result) {
+            if(result.length > 0) {
+                console.log("Updating")
+                promise = Campaign.update(findStr,{title: request.body.title,
+                    script: request.body.script,
+                    thank_you: request.body.thank_you,
+                    learn_more: request.body.learn_more,
+                    publish: request.body.publish,
+                    influencer: request.user.id });
+            } else {
+                console.log("Creating new")
+                campaign = new Campaign({title: request.body.title,
+                    script: request.body.script,
+                    thank_you: request.body.thank_you,
+                    learn_more: request.body.learn_more,
+                    publish: request.body.publish,
+                    influencer: request.user.id });
+                promise = campaign.save();
+            }
+
+            return promise;
+        });
+
+    return findCamp;
 }
 
 campaignController.findLegislator = function (latitude, longitude, response) {
