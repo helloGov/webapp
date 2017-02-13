@@ -60,17 +60,15 @@ module.exports = function (router) {
     });
 
     // campaign call page (available to all visitors)
-    router.get('/campaign/:shortid', (request, response) => {
+    router.get('/:shortid', (request, response) => {
         campaignPromise = campaignController.findCampaign(request.params.shortid);
         campaignPromise.then( function(result) {
             response.render('campaign',{campData: result[0]});
         });
     });
 
-
     // campaign success page (at the end of campaign creation)
     router.get('/campaignSuccess', (request, response) => {
         response.render('campaignSuccess');
     });
-
 };

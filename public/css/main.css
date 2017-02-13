@@ -138,6 +138,13 @@ body {
   margin-right: 45px;
 }
 
+.max-text {
+    text-align: left;
+    margin-left: 5px;
+    margin-top: -25px;
+    font-size: 12px;
+}
+
 /* Customize container */
 @media (min-width: 768px) {
   .container {
