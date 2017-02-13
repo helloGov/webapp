@@ -36,7 +36,7 @@ helloGov.controller('visitorController', function ($scope, $http, $window) {
     $scope.repNotFoundForm = false;
 });
 
-helloGov.controller('campaignController', function ($scope, $http, $window) {
+helloGov.controller('campaignController', function ($scope, $http, $window, $location) {
     $scope.formData = {};
     $http.get('/campaignList', $scope.campaigns)
     .then(function(result) {
@@ -48,6 +48,13 @@ helloGov.controller('campaignController', function ($scope, $http, $window) {
 
     $scope.createCampaign = function(publishFlag) {
         $scope.formData.publish = publishFlag;
+
+        // if on an edit page, then grab the shortid from URL
+        var urlSplit = $location.absUrl().split('/');
+        if(urlSplit.indexOf("edit") != -1) {
+            $scope.formData.shortid = urlSplit[4];
+        }
+
         $http.post('/campaign/create', $scope.formData);
         // I would like this to work but not sure how
         //     .then(function(result) {
@@ -60,6 +67,7 @@ helloGov.controller('campaignController', function ($scope, $http, $window) {
         // );
         $window.location.href = '/campaigns';
     };
+
 });
 
 helloGov.controller('userController', function ($scope, $http, $window) {

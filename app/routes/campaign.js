@@ -28,7 +28,7 @@ module.exports = function (router) {
             campaignPromise = campaignController.findCampaign(request.params.shortid,request.user.id);
             campaignPromise.then( function(result) {
                 console.log(result[0])
-                response.render('create',{campData: result[0], id: request.params.shortid});
+                response.render('create',{campData: result[0]});
             });
         } else {
             response.status(301).render('unauthorized');
