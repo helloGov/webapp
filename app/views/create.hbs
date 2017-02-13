@@ -25,39 +25,53 @@ body {
         <textarea
           class="form-control input-lg campaign-input"
           ng-model="formData.title"
+          ng-init="formData.title='{{campData.title}}'"
           rows=2
+          maxlength=140
         >
         </textarea>
+        <div class="max-text">Max 140 characters</div>
 
         <div class="prompt-title"><h4>SCRIPT</h4></div>
         <textarea
           class="form-control input-lg campaign-input"
           ng-model="formData.script"
+          ng-init="formData.script='{{campData.script}}'"
           rows=6
+          maxlength=1000
         >
         </textarea>
+        <div class="max-text">Max 1000 characters</div>
 
         <div class="prompt-title"><h4>THANK YOU MESSAGE</h4></div>
         <textarea
           class="form-control input-lg campaign-input"
           ng-model="formData.thank_you"
+          ng-init="formData.thank_you='{{campData.thank_you}}'"
           rows=4
+          maxlength=250
         >
         </textarea>
+        <div class="max-text">Max 250 characters</div>
+
         <div class="prompt-title"><h4>LEARN MORE URL</h4></div>
         <textarea
           class="form-control input-lg campaign-input"
           ng-model="formData.learn_more"
+          ng-init="formData.learn_more='{{campData.learn_more}}'"
           rows=2
+          maxlength=200
         >
         </textarea>
+        <div class="max-text">Max 200 characters</div>
+
         <button type="submit" class="btn primary-button btn-lg btn-block button-option" ng-click="createCampaign(true)">
           SUBMIT
         </button>
         <button type="button" class="btn secondary-button btn-lg btn-block button-option" ng-click="createCampaign(false)">
           SAVE AS DRAFT
         </button>
-        <button type="reset" class="btn tertiary-button btn-lg btn-block button-option">
+        <button type="reset" class="btn tertiary-button btn-lg btn-block button-option" onclick="window.location.href='/'">
           CANCEL
         </button>
       </div>

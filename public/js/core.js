@@ -36,12 +36,11 @@ helloGov.controller('visitorController', function ($scope, $http, $window) {
     $scope.repNotFoundForm = false;
 });
 
-helloGov.controller('campaignController', function ($scope, $http, $window) {
+helloGov.controller('campaignController', function ($scope, $http, $window, $location) {
     $scope.formData = {};
     $http.get('/campaignList', $scope.campaigns)
     .then(function(result) {
         $scope.campaigns = result.data;
-        console.log($scope.campaigns)
     })
     .catch(function(data) {
         console.log('Error: ' + data);
@@ -49,19 +48,26 @@ helloGov.controller('campaignController', function ($scope, $http, $window) {
 
     $scope.createCampaign = function(publishFlag) {
         $scope.formData.publish = publishFlag;
-        console.log($scope.formData);
-        $http.post('/campaign/create', $scope.formData)
-            .then(function(data) {
-                $scope.formData = {};
-                $scope.campaign = data;
-                $window.location.href = '/';
-                console.log(data);
-            })
-            .catch(function(data) {
-                console.log('Error: ' + data);
-            }
-        );
+
+        // if on an edit page, then grab the shortid from URL
+        var urlSplit = $location.absUrl().split('/');
+        if(urlSplit.indexOf("edit") != -1) {
+            $scope.formData.shortid = urlSplit[4];
+        }
+
+        $http.post('/campaign/create', $scope.formData);
+        // I would like this to work but not sure how
+        //     .then(function(result) {
+        //         console.log(result.data);
+        //         $window.location.href = '/';
+        //     })
+        //     .catch(function(data) {
+        //         console.log('Error: ' + data);
+        //     }
+        // );
+        $window.location.href = '/campaigns';
     };
+
 });
 
 helloGov.controller('userController', function ($scope, $http, $window) {
