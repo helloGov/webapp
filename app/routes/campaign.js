@@ -16,16 +16,31 @@ module.exports = function (router) {
     // save new campaign
     router.post('/campaign/create', (request, response) => {
         if(request.user) {
-            campaignController.saveCampaign(request);
+            campaignPromise = campaignController.saveCampaign(request, response);
+            val = campaignPromise.then(function() {
+                return campaignController.findCampaignByTitleAndUser(request.body.title, request.user.id);
+            })
+            .then(function(result) {
+                console.log(result[0]._id);
+                response.send(result[0]._id);
+                // response.render('campaignSuccess',{shortid: result[0]._id});
+                // response.redirect('/');
+                // response.render('campaignSuccess');
+            })
+            .catch(function(err) {console.log(err)});
+            // response.render('campaignSuccess');
         } else {
             response.status(301).render('unauthorized');
+            val = null;
         }
+
+        return val;
     });
 
     // edit campaign page
     router.get('/campaign/:shortid/edit', (request, response) => {
         if(request.user) {
-            campaignPromise = campaignController.findCampaign(request.params.shortid,request.user.id);
+            campaignPromise = campaignController.findCampaign(request.params.shortid);
             campaignPromise.then( function(result) {
                 console.log(result[0])
                 response.render('create',{campData: result[0]});
@@ -56,7 +71,13 @@ module.exports = function (router) {
     router.get('/campaignList', campaignController.findAllCampaigns);
 
     router.get('/campaign', (request, response) => {
+        console.log("Here!");
         response.render('campaignDemo');
+    });
+
+    // campaign success page (at the end of campaign creation)
+    router.get('/campaignSuccess', (request, response) => {
+        response.render('campaignSuccess');
     });
 
     // campaign call page (available to all visitors)
@@ -65,10 +86,5 @@ module.exports = function (router) {
         campaignPromise.then( function(result) {
             response.render('campaign',{campData: result[0]});
         });
-    });
-
-    // campaign success page (at the end of campaign creation)
-    router.get('/campaignSuccess', (request, response) => {
-        response.render('campaignSuccess');
     });
 };

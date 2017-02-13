@@ -55,20 +55,27 @@ helloGov.controller('campaignController', function ($scope, $http, $window, $loc
             $scope.formData.shortid = urlSplit[4];
         }
 
-        $http.post('/campaign/create', $scope.formData);
-        // I would like this to work but not sure how
-        //     .then(function(result) {
-        //         console.log(result.data);
-        //         $window.location.href = '/';
-        //     })
-        //     .catch(function(data) {
-        //         console.log('Error: ' + data);
-        //     }
-        // );
-        $window.location.href = '/campaigns';
+        $http.post('/campaign/create', $scope.formData)
+            .then(function(result) {
+                console.log(result.data);
+                $window.location.href = '/campaignSuccess?shortid='+result.data;
+            })
+            .catch(function(data) {
+                console.log('Error: ' + data);
+            }
+        );
     };
 
 });
+
+helloGov.controller('successController', function($scope, $location) {
+    $scope.formData = {};
+    var urlSplit = $location.absUrl().split('=');
+    console.log(urlSplit);
+    $scope.formData.shortid = urlSplit[1];
+    console.log($scope.formData.shortid);
+});
+
 
 helloGov.controller('userController', function ($scope, $http, $window) {
     $scope.loginDetails = {};
