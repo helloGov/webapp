@@ -20,7 +20,6 @@ campaignController.findCampaignByTitleAndUser = function (title,userid) {
 campaignController.deleteCampaign = function (shortid,userid) {
     var findStr = {_id: shortid, influencer: userid};
     campaign = Campaign.find(findStr).remove().exec();
-    console.log(campaign);
     return campaign;
 }
 
@@ -35,9 +34,8 @@ campaignController.findAllCampaigns = function (request, response) {
   }
 };
 
-campaignController.saveCampaign = function (request, response){
+campaignController.saveCampaign = function (request) {
     var findStr = {_id: request.body.shortid, influencer: request.user.id};
-    var shortid = "";
     findCamp = Campaign.find(findStr).exec()
         .then(function(result) {
             if(result.length > 0) {
@@ -56,22 +54,12 @@ campaignController.saveCampaign = function (request, response){
                     learn_more: request.body.learn_more,
                     publish: request.body.publish,
                     influencer: request.user.id });
-                // return campaign.save(function(error){console.log(error);});
                 promise = campaign.save();
-                // promise = campaign.save(function (err, product, numAffected) {
-                //     shortid = product._id;
-                //     return shortid;
-                // });
             }
 
             return promise;
         });
-        // .then(function() {
-        //     promise_find = Campaign.find(findStr).exec();
-        //     return promise_find;
-        // });
 
-    // return shortid;
     return findCamp;
 }
 

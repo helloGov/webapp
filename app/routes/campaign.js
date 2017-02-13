@@ -16,25 +16,17 @@ module.exports = function (router) {
     // save new campaign
     router.post('/campaign/create', (request, response) => {
         if(request.user) {
-            campaignPromise = campaignController.saveCampaign(request, response);
-            val = campaignPromise.then(function() {
+            campaignPromise = campaignController.saveCampaign(request);
+            campaignPromise.then(function() {
                 return campaignController.findCampaignByTitleAndUser(request.body.title, request.user.id);
             })
             .then(function(result) {
-                console.log(result[0]._id);
                 response.send(result[0]._id);
-                // response.render('campaignSuccess',{shortid: result[0]._id});
-                // response.redirect('/');
-                // response.render('campaignSuccess');
             })
             .catch(function(err) {console.log(err)});
-            // response.render('campaignSuccess');
         } else {
             response.status(301).render('unauthorized');
-            val = null;
         }
-
-        return val;
     });
 
     // edit campaign page

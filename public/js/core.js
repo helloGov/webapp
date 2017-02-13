@@ -69,11 +69,8 @@ helloGov.controller('campaignController', function ($scope, $http, $window, $loc
 });
 
 helloGov.controller('successController', function($scope, $location) {
-    $scope.formData = {};
     var urlSplit = $location.absUrl().split('=');
-    console.log(urlSplit);
-    $scope.formData.shortid = urlSplit[1];
-    console.log($scope.formData.shortid);
+    $scope.shortid = urlSplit[1];
 });
 
 
