@@ -20,7 +20,7 @@ var Influencer = require('./app/models/influencer');
 
 var routes = require('./app/routes');
 
-mongoose.connect(`mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.IP}:${secrets.port}/${secrets.db}`);
+mongoose.connect(`mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.db_IP}:${secrets.db_port}/${secrets.db}`);
 mongoose.connection.on('error', function (err) {
     console.log('Mongo connection error', err.message);
 });
@@ -31,13 +31,13 @@ mongoose.connection.once('open', function callback () {
 
 var app = express();
 var sessionStore = new MongoStore({
-  url: `mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.IP}:${secrets.port}/${secrets.db}`,
+  url: `mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.db_IP}:${secrets.db_port}/${secrets.db}`,
   touchAfter: 0
 })
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const port = 8080; //TODO  put in config
+const port = secrets.app_port;  
 
 app.use(express.static('public'));
 app.use(favicon(path.join(__dirname,'public','favicon.ico')));
