@@ -20,6 +20,7 @@ module.exports = passport.use(new FacebookStrategy({
                 influencer = new Influencer({
                   oauthID: profile.id,
                   name: profile.displayName
+                  ,image: "http://latimesblogs.latimes.com/.a/6a00d8341c630a53ef0120a5a4b288970c-600wi" //profile.image //TODO
                 });
                 influencer.save(function(err) {
                   if(err) {

@@ -4,24 +4,10 @@ var mongoose = require("mongoose"),
 
 var influencerController = {};
 
-influencerController.findInfluencer = function (userJson) {
+influencerController.findInfluencer = function (request) {
 
- 	influencer = Influencer.findOne({"fake_id":1});
- 	console.log(influencer);
+ 	influencer = Influencer.findOne({_id:request.user.id});
  	return influencer;
-}
-
-influencerController.saveInfluencer = function (userJson) {
- 	userJson = {username: "Josh Canaao",
-				email: "jc@hellogov.org",
-				bio: "asd",
-				loginName: "asd",
-				password: "asd",
-				image: "asd"
-	}
- 	influencer = new Influencer(userJson);
- 	influencer.save(function(error){console.log(error);});
- 	return true;
 }
 
 influencerController.addInfluencer = function (request, response) {

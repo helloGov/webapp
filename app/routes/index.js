@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var campaignController = require("../middleware/campaign");
+var influencerController = require("../middleware/influencer");
 
 router.get('/', function(request, response) {
     if(request.user){
@@ -14,7 +15,11 @@ router.get('/', function(request, response) {
 
 router.get('/home', (request, response) => {
     if(request.user){
-        response.render('home');
+        influencerPromise = influencerController.findInfluencer(request);
+        influencerPromise.then(function(result) {
+            console.log("rendering for influencer: " + JSON.stringify(result))
+            response.render('home', {influencer: result});
+        });
     } else {
         response.redirect('/login');
     }
