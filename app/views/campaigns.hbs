@@ -12,27 +12,21 @@
                 <div class="text-center">
                     <!-- TODO: Update analytics link when we have individual pages for each campaign -->
                     <a href="/analytics"><div class="option-button">
-                        <img src="/images/analytics_icon.svg" />
+                        <input type="image" src="/images/analytics_icon.svg" />
                         <p>Analytics</p>
                     </div></a>
-                    <!-- TODO: This should copy the link to the clipboard, not just to the campaign page. -->
-                    <!-- <a href="/{[{campaign._id}]}"><div class="option-button"> -->
-                    <!-- <div ngclipboard data-clipboard-text="https://www.hellogov.org/{[{campaign._id}]}"> -->
+                    <!-- TODO: This should give feedback, ideally like in the mockup -->
                     <div class="option-button">
-                        <input type="image" src="/images/pencil.jpg" ngclipboard data-clipboard-text="https://www.hellogov.org/{[{campaign._id}]}"/>
-                        <p>Copy to clipboard</p>
-                    </div>
-                    <div ngclipboard data-clipboard-text="TEST">
-                        <img src="/images/white_link_icon.jpg" />
+                        <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="https://www.hellogov.org/{[{campaign._id}]}" />
                         <p>Link</p>
                     </div>
-                    <!-- </div></a> -->
                     <a ng-href="/campaign/{[{campaign._id}]}/edit"><div class="option-button">
-                        <img src="/images/pencil.jpg" />
+                        <input type="image" src="/images/pencil.jpg" />
                         <p>Edit</p>
                     </div></a>
+                    <!-- TODO: Show a warning first like in the mockup -->
                     <a href="/campaign/{[{campaign._id}]}/delete"><div class="option-button">
-                        <img src="/images/white_delete_icon.jpg" />
+                        <input type="image" src="/images/white_delete_icon.jpg" />
                         <p>Delete</p>
                     </div></a>
                 </div>

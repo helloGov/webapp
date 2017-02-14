@@ -53,7 +53,7 @@ p {
     font-size: 10px;
 }
 
-.option-button img {
+.option-button input {
     height: 40px;
     display: block;
     margin: 5px auto;
