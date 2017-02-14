@@ -15,11 +15,14 @@
                         <img src="/images/analytics_icon.svg" />
                         <p>Analytics</p>
                     </div></a>
-                    <!-- TODO: This should copy the link to the clipboard. -->
-                    <a href="/{[{campaign._id}]}"><div class="option-button">
+                    <!-- TODO: This should copy the link to the clipboard, not just to the campaign page. -->
+                    <!-- <a href="/{[{campaign._id}]}"><div class="option-button"> -->
+                    <!-- <div ngclipboard data-clipboard-text="https://www.hellogov.org/{[{campaign._id}]}"> -->
+                    <div ngclipboard data-clipboard-text="TEST">
                         <img src="/images/white_link_icon.jpg" />
                         <p>Link</p>
-                    </div></a>
+                    </div>
+                    <!-- </div></a> -->
                     <a ng-href="/campaign/{[{campaign._id}]}/edit"><div class="option-button">
                         <img src="/images/pencil.jpg" />
                         <p>Edit</p>

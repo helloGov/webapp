@@ -1,5 +1,5 @@
 // public/js/core.js
-var helloGov = angular.module('helloGov', ['ngMapAutocomplete']).config(function($interpolateProvider){
+var helloGov = angular.module('helloGov', ['ngMapAutocomplete', 'ngclipboard']).config(function($interpolateProvider){
         $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
 
