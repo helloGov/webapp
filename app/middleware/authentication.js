@@ -7,7 +7,7 @@ var Influencer = require('../models/influencer');
 module.exports = passport.use(new FacebookStrategy({
             clientID: secrets.fb_app_id,
             clientSecret: secrets.fb_app_secret,
-            callbackURL: "http://localhost:8080/auth/facebook/callback"
+            callbackURL: secrets.fb_callback_url
         },
         function(accessToken, refreshToken, profile, cb) {
             Influencer.findOne({ oauthID: profile.id }, function(err, influencer) {
