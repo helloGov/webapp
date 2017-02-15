@@ -78,6 +78,10 @@ helloGov.controller('userController', function ($scope, $http, $window) {
     $scope.loginDetails = {};
     $scope.signupDetails = {};
 
+    $scope.createAcct = function() {
+        $window.location.href = '/signup';
+    }
+
     $scope.signUp = function() {
         $http.post('/signup', $scope.signupDetails)
             .then(function(data) {
