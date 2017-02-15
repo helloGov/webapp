@@ -16,8 +16,10 @@
 
     <h3 class="url-yellow">helloGOV.ORG/{[{shortid}]}</h3>
 
-    <button class="cta-button btn-yellow"><h3>Copy URL</h3></button>
-    <div class="cta-button btn-blue"><a href="#"><h3>Preview URL</h3></a></div>
+    <!-- TODO: This should give feedback so user knows link was copied, ideally like in the mockup -->
+    <button class="cta-button btn-yellow" ngclipboard data-clipboard-text="https://www.hellogov.org/{[{shortid}]}" /><h3>Copy URL</h3></button>
+    <!-- TODO: When we have actual preview page, use that URL instead -->
+    <div class="cta-button btn-blue"><a href="/{[{shortid}]}"><h3>Preview URL</h3></a></div>
     <div class="cta-button btn-blue"><a href="/campaigns"><h3>Go to campaigns</h3></a></div>
 
   </div>
