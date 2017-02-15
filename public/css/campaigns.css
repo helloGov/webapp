@@ -1,0 +1,60 @@
+.backround-blue {
+    background-color: #35A5B3;
+}
+
+.background-white {
+    background-color: #FFF;
+    height: 100%;
+    padding: 8px 0;
+    border: 2px solid #35A5B3;
+    margin: 0 auto;
+    width: auto;
+}
+
+.cta-button {
+    width: 90%;
+    height: auto;
+    margin: 0 auto 20px;
+    border: 0;
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+h3, h4, h5, p {
+    font-family: 'Raleway', sans-serif;
+    color: #35A5B3;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.cta-button h3 {
+    margin: 1em auto;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.btn-yellow {
+    background: #FDCC06;
+    color: #35A5B3;
+}
+
+.campaign-info {
+    max-width: 100vw;
+}
+
+.option-button {
+    display: inline-block;
+    width: 4em;
+    margin: 0 .5em;
+}
+
+p {
+    margin: 12px auto 0;
+    font-size: 10px;
+}
+
+.option-button input {
+    height: 40px;
+    display: block;
+    margin: 5px auto;
+}

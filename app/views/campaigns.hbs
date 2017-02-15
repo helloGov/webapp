@@ -1,11 +1,36 @@
-<div ng-controller="campaignController">
-	<br>
-	<div ng-repeat="campaign in campaigns">
-        {[{campaign._id }]}
-		{[{campaign.title }]}
-		{[{campaign.script}]}
-		{[{campaign.learn_more}]}
-		{[{campaign.thank_you}]}
-	</div>
-	<br>
+<link href="/css/campaigns.css" rel="stylesheet">
+
+<div class="background-blue text-center">
+    <button class="cta-button btn-yellow"><a href="/createCampaign"><h3>Create Campaign</h3></a></button>
+    <br>
+
+    <div ng-controller="campaignController" >
+    	<div ng-repeat="campaign in campaigns" class="background-white">
+            <div class="campaign-info">
+                <h5>{[{campaign.date}]}</h5>
+                <h4>{[{campaign.title}]}</h4>
+                <div class="text-center">
+                    <!-- TODO: Update analytics link when we have individual pages for each campaign -->
+                    <a href="/analytics"><div class="option-button">
+                        <input type="image" src="/images/analytics_icon.svg" />
+                        <p>Analytics</p>
+                    </div></a>
+                    <!-- TODO: This should give feedback, ideally like in the mockup -->
+                    <div class="option-button">
+                        <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="https://www.hellogov.org/{[{campaign._id}]}" />
+                        <p>Link</p>
+                    </div>
+                    <a ng-href="/campaign/{[{campaign._id}]}/edit"><div class="option-button">
+                        <input type="image" src="/images/pencil.jpg" />
+                        <p>Edit</p>
+                    </div></a>
+                    <!-- TODO: Show a warning first like in the mockup -->
+                    <a href="/campaign/{[{campaign._id}]}/delete"><div class="option-button">
+                        <input type="image" src="/images/white_delete_icon.jpg" />
+                        <p>Delete</p>
+                    </div></a>
+                </div>
+            </div>
+    	</div>
+    </div>
 </div>
