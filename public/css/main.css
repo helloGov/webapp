@@ -30,12 +30,36 @@ body {
 .header,
 .marketing,
 .footer {
-  padding-right: 15px;
-  padding-left: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .navbar {
-  background-color: #FDCC06;
+    background-color: #FDCC06;
+    position: relative;
+}
+
+.row {
+    color: #35A5B3;
+    height: 50px;
+}
+
+.glyphicon-menu-hamburger {
+    position: absolute;
+    left: 20px;
+    top: 18px;
+}
+
+.logo {
+    height: 90%;
+    margin-bottom: 5px;
+}
+
+.profile {
+    height: 90%;
+    position: absolute;
+    right: 11px;
+    top: 3px;
 }
 
 .sidenav {
