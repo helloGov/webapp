@@ -9,11 +9,12 @@
           <form>
               <div class="form-group">
                   <input type="text" class="form-control input-lg text-center" placeholder="Enter your username here" ng-model="loginDetails.username">
-                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your password here" ng-model="loginDetails.password">
+                  <input type="password" class="form-control input-lg text-center" placeholder="Enter your password here" ng-model="loginDetails.password">
               </div>
               <button type="submit" ng-click="login()"><h3>Log In</h3></button>
           </form>
           <div id="login-message"></div>
+          <button type="submit" ng-click="signUp()"><h3>Sign Up</h3></button>
           <a href="/auth/facebook"><img src="/images/fb_login.png"></a>
 
       </div>
