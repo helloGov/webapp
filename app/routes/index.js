@@ -4,15 +4,12 @@ var express = require('express');
 var router = express.Router();
 var campaignController = require("../middleware/campaign");
 var influencerController = require("../middleware/influencer");
-var httpProxy = require('http-proxy');
-var squareProxy = httpProxy.createProxyServer();
 
 router.get('/', function(request, response) {
     if(request.user){
         response.redirect('/home');
     } else {
-        squareProxy.web(request, response, {target: "http://www.espn.com/"});
-        //response.redirect('/login');
+        response.redirect('/login');
     }
 });
 
