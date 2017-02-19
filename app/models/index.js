@@ -1,2 +1,3 @@
-require('./influencer')
-require('./campaign')
+require('./influencer');
+require('./campaign');
+require('./event');

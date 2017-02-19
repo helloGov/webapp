@@ -1,3 +1,4 @@
+var eventController = require("../middleware/event.js");
 module.exports = function (router) {
     router.get('/analytics', (request, response) => {
         response.render('analytics',
@@ -5,4 +6,6 @@ module.exports = function (router) {
         	 pageViews: 200,
         	 });
     });
+
+    router.post('/event', eventController.logEvent);
 };

@@ -20,6 +20,7 @@
     "handlebars": "^4.0.6",
     "hbs": "^4.0.1",
     "install": "^0.8.2",
+    "ipware": "^1.0.0",
     "mongoose": "^4.7.6",
     "ng-map-autocomplete": "0.0.1",
     "ngclipboard": "^1.1.1",
