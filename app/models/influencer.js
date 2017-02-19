@@ -6,7 +6,7 @@ var Influencer = new Schema({
 	name: { type: String, trim: true },
 	email: { type: String, trim: true },
 	bio: {type: String, trim: true},
-	oauthID: {type: Number},
+	oauthID: {type: String},
 	password: {type: String, trim: false},
 	image: {type: String, trim:false},
 	timestamp: {type: Date, default: Date.now}
