@@ -1,6 +1,6 @@
 var mongoose = require("mongoose"),
  	Influencer = mongoose.model('Influencer'),
-    passport = require('passport'), 
+    passport = require('passport'),
     fs = require('fs'),
     request = require('request');
 
