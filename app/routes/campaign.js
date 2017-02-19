@@ -17,11 +17,8 @@ module.exports = function (router) {
     router.post('/campaign/create', (request, response) => {
         if(request.user) {
             campaignPromise = campaignController.saveCampaign(request);
-            campaignPromise.then(function() {
-                return campaignController.findCampaignByTitleAndUser(request.body.title, request.user.id);
-            })
-            .then(function(result) {
-                response.send(result[0]._id);
+            campaignPromise.then(function(campaign) {
+                response.send(campaign._id);
             })
             .catch(function(err) {console.log(err)});
         } else {
