@@ -6,10 +6,11 @@ var Influencer = require('../models/influencer');
 var fs = require('fs');
 var request = require('request');
 
-getFacebookPhoto = function(oauthID){
-  console.log("getFacebookPhoto: " + oauthID);
+getFacebookPhoto = function(influencer){
+  influencerID = influencer.id;
+  oauthID = influencer.oauthID;
   photoJsonUrl = `http://graph.facebook.com/v2.8/${oauthID}/picture?type=large&redirect=false`;
-  photoPath = `public/images/influencers/${oauthID}.jpg`;
+  photoPath = `public/images/influencers/${influencerID}.jpg`;
 
   request(photoJsonUrl, function(error, response, body){ 
     if (!error && response.statusCode == 200) {
@@ -41,18 +42,17 @@ module.exports = passport.use(new FacebookStrategy({
               if (!err && influencer !== null) {
                 cb(null, influencer);
               } else {
-                console.log("about to call getFacebookPhoto: " + profile.id);
-                getFacebookPhoto(profile.id);
                 influencer = new Influencer({
                   oauthID: profile.id,
                   name: profile.displayName
                   ,image: "" ///TODO -- using a placeholder for now
                 });
-                influencer.save(function(err) {
+                influencer.save(function(err, result) {
                   if(err) {
                     console.log(err);  // handle errors!
                   } else {
                     console.log("saving user ...");
+                    getFacebookPhoto(result);
                     cb(null, influencer);
                   }
                 });
