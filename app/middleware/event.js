@@ -1,16 +1,30 @@
 
 var mongoose = require("mongoose"),
     Event = mongoose.model('Event'),
-    getIP = require('ipware')().get_ip;
+    getIP = require('ipware')().get_ip,
+    uaParser = require('ua-parser');
 
 var eventController = {};
 
 eventController.logEvent = function (request, response) {
+    parsedRequest = uaParser.parse(request.headers['user-agent']);
     event = new Event({
         type: request.body.type,
         ip: getIP(request).clientIp,
         metadata: {
             campaign: request.body.campaign
+        },
+        user_agent: {
+            mobile: parsedRequest.isMobile, 
+            browser: {
+                name: parsedRequest.ua.family,
+                version: parsedRequest.ua.toVersionString()
+            },
+            os: {
+                name: parsedRequest.os.family,
+                version: parsedRequest.os.toVersionString()
+            },
+            device: parsedRequest.device.family
         }
     });
     if (request.user) event.user = request.user.id;
