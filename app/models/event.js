@@ -1,6 +1,5 @@
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema,
-	passportLocalMongoose = require('passport-local-mongoose');
+	Schema = mongoose.Schema;
 
 var Event = new Schema({
 	type: { type: String, trim: true },
@@ -31,5 +30,4 @@ var Event = new Schema({
 	timestamp: {type: Date, default: Date.now}
 });
 
-Event.plugin(passportLocalMongoose);
 module.exports = mongoose.model('Event', Event);
