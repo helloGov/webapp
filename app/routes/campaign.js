@@ -17,8 +17,11 @@ module.exports = function (router) {
     router.post('/campaign/create', (request, response) => {
         if(request.user) {
             campaignPromise = campaignController.saveCampaign(request);
-            campaignPromise.then(function(campaign) {
-                response.send(campaign._id);
+            campaignPromise.then(function() {
+                return campaignController.findCampaignByTitleAndUser(request.body.title, request.user.id);
+            })
+            .then(function(result) {
+                response.send(result[0]._id);
             })
             .catch(function(err) {console.log(err)});
         } else {
@@ -27,12 +30,17 @@ module.exports = function (router) {
     });
 
     // edit campaign page
-    router.get('/campaign/:shortid/edit', (request, response) => {
+    router.get('/:shortid/edit', (request, response) => {
         if(request.user) {
-            campaignPromise = campaignController.findCampaign(request.params.shortid);
-            campaignPromise.then( function(result) {
-                console.log(result[0])
-                response.render('create',{campData: result[0]});
+            campaignPromise = campaignController.findCampaignById(request.params.shortid);
+            campaignPromise.then(function(result) {
+                campaign = result[0];
+                console.log(campaign);
+                if(request.user.id==campaign.influencer) {
+                    response.render('create',{campData: campaign});
+                } else {
+                    response.status(301).render('unauthorized');
+                }
             });
         } else {
             response.status(301).render('unauthorized');
@@ -40,7 +48,7 @@ module.exports = function (router) {
     });
 
     // delete campaign endpoint
-    router.get('/campaign/:shortid/delete', (request, response) => {
+    router.get('/:shortid/delete', (request, response) => {
         if(request.user) {
             campaignPromise = campaignController.deleteCampaign(request.params.shortid,request.user.id);
             campaignPromise.then( function(result) {
@@ -57,10 +65,18 @@ module.exports = function (router) {
     });
 
     // fetch campaign list for a particular user
-    router.get('/campaignList', campaignController.findAllCampaigns);
+    router.get('/campaignList', (request, response) => {
+        if(request.user) {
+            campaignPromise = campaignController.findCampaignsByUser(request.user.id);
+            campaignPromise.then(function(result) {
+                response.send(result);
+            });
+        } else {
+            response.status(301).render('unauthorized');
+        }
+    });
 
     router.get('/campaign', (request, response) => {
-        console.log("Here!");
         response.render('campaignDemo');
     });
 
@@ -71,9 +87,14 @@ module.exports = function (router) {
 
     // campaign call page (available to all visitors)
     router.get('/:shortid', (request, response) => {
-        campaignPromise = campaignController.findCampaign(request.params.shortid);
+        campaignPromise = campaignController.findCampaignById(request.params.shortid);
         campaignPromise.then( function(result) {
-            response.render('campaign',{campData: result[0]});
+            campaign = result[0];
+            if(campaign.publish) {
+                response.render('campaign',{campData: campaign});
+            } else {
+                response.status(301).render('unauthorized');
+            }
         });
     });
 };

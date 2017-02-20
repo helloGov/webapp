@@ -5,33 +5,37 @@ var mongoose = require("mongoose"),
 
 var campaignController = {};
 
-campaignController.findCampaign = function (shortid) {
+// Find campaign by ID: uses shortid to find a specific campaign
+campaignController.findCampaignById = function (shortid) {
     var findStr = {_id: shortid};
     campaign = Campaign.find(findStr);
     return campaign;
 }
 
-campaignController.findCampaignByTitleAndUser = function (title,userid) {
+// Find campaign by title and user
+campaignController.findCampaignByTitleAndUser = function (title, userid) {
     var findStr = {title: title, influencer: userid};
     campaign = Campaign.find(findStr);
     return campaign;
 }
 
-campaignController.deleteCampaign = function (shortid,userid) {
-    var findStr = {_id: shortid, influencer: userid};
-    campaign = Campaign.find(findStr).remove().exec();
-    return campaign;
+// Finds all campaigns for a user
+campaignController.findCampaignsByUser = function (userid) {
+    var findStr = {influencer: userid};
+    campaigns = Campaign.find(findStr);
+    return campaigns;
 }
 
+// not used for now, but we probably want to create a page for this
 campaignController.findAllCampaigns = function (request, response) {
-  if (request.user) {
-    campaigns = Campaign.find({influencer: request.user.id});
-    campaigns.then(function(result){
-      response.send(result);
-    })
-  } else {
-    response.status(301).send({});
-  }
+    if (request.user) {
+        campaigns = Campaign.find({});
+        campaigns.then(function(result) {
+            response.send(result);
+        })
+    } else {
+        response.status(301).send({});
+    }
 };
 
 campaignController.saveCampaign = function (request) {
@@ -61,6 +65,12 @@ campaignController.saveCampaign = function (request) {
         });
 
     return findCamp;
+}
+
+campaignController.deleteCampaign = function (shortid, userid) {
+    var findStr = {_id: shortid, influencer: userid};
+    campaign = Campaign.find(findStr).remove().exec();
+    return campaign;
 }
 
 campaignController.findLegislator = function (latitude, longitude, response) {
