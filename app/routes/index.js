@@ -43,6 +43,10 @@ require('./influencer.js')(router);
 require('./analytics.js')(router);
 require('./campaign.js')(router);
 
+router.use(function timeLog (request, response, next) {
+  response.status(404).render('404');
+});
+
 module.exports = router;
 
 

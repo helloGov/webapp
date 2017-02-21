@@ -73,7 +73,11 @@ module.exports = function (router) {
     router.get('/:shortid', (request, response) => {
         campaignPromise = campaignController.findCampaign(request.params.shortid);
         campaignPromise.then( function(result) {
-            response.render('campaign',{campData: result[0]});
+            if(result.length > 0) {
+                response.render('campaign',{campData: result[0]});
+            } else {
+                response.status(404).render('404');
+            }
         });
     });
 };
