@@ -89,11 +89,11 @@ module.exports = function (router) {
     router.get('/:shortid', (request, response) => {
         campaignPromise = campaignController.findCampaignById(request.params.shortid);
         campaignPromise.then( function(result) {
-            campaign = result[0];
-            if(campaign.publish) {
-                response.render('campaign',{campData: campaign});
+
+            if(result.length > 0 && result[0].publish) {
+                response.render('campaign',{campData: result[0]});
             } else {
-                response.status(301).render('unauthorized');
+                response.status(404).render('404');
             }
         });
     });
