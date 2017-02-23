@@ -1,1 +1,91 @@
-<div ng-controller="visitorController" id="form-container" class="container">  <div class="text-center">    <ng-map center="[40.74, -74.18]"></ng-map>    <div class="campaign-circles" ng-show="addrForm" class="ng-hide">        <img            src="/images/shaun_king_circle.png"            class="img-responsive img-circle center-block"            alt="Your Rep"            width="200"          />        <div>            <div class="verticalLine center-block">            </div>          <div id="cta-text" class="circle center-block">            <div>                {{campData.title}}            </div>          </div>        </div>      <br>      <input id="searchTextField" type="text" style="width:90%" ng-map-autocomplete ng-model="locResult" options="locOptions" details="locDetails" /><br><br>      <input id="submit" type="button" ng-click="update()" value="Submit" />      <input id="latitude" type="hidden" />      <input id="longitude" type="hidden" />    <!-- end campaign-circles -->    </div>    <div id="rep-container" ng-show="repForm" class="ng-hide">      <div class="congress-intro">        <h5>YOUR CONGRESSPERSON IS</h5>        <h3><span id="officialTitle">{[{repInfo.title}]} {[{repInfo.first_name}]} {[{repInfo.last_name}]} ({[{repInfo.party}]})</span></h3>        <img          id="rep-img"          src="https://theunitedstates.io/images/congress/450x550/{[{repInfo.bioguide_id}]}.jpg"          class="img-responsive img-circle center-block"          alt="Your Rep"          width="200"        /><br>      </div>      <div class="jumbotron">        <div class="script">          <p class="lead">            {{campData.script}}          </p>        </div>      </div>      <p>      </p>      <a id="call-btn" class="btn btn-lg call-button center-block"  role="button"          href="tel:{[{repInfo.phone}]}">          Make the call now!      </a>      <p class="text-left">          &#42;Please note, they may ask for your home address. This is normal.      </p>      <div style="margin-bottom:25px;">        <a onclick="shareLinkClicked()" id="shareLink">          <img src="/images/HelloGOV_link_share.png" style="width: 100px;" />        </a>        <div class="hide" id="copyConfirmation">          <h4>Link copied to clipboard:            <p id="link" data-clipboard-text="test-link"></p>          </h4>        </div>      </div>    </div> <!-- /container -->    <div id="rep-container" ng-show="repNotFoundForm" class="ng-hide">      <div class="text-center">        <p class="lead">          We weren't able to find any elected officials who represent that address.  Please try again!        </p>      </div>    </div>  </div><footer class="footer">  <p>&copy; 2016 HelloGov</p></footer></div>
+<div ng-controller="visitorController" id="form-container" class="container">
+  <div class="text-center">
+
+    <ng-map center="[40.74, -74.18]"></ng-map>
+
+    <div class="campaign-circles" ng-show="addrForm" class="ng-hide">
+        <img
+            src="/images/shaun_king_circle.png"
+            class="img-responsive img-circle center-block"
+            alt="Your Rep"
+            width="200"
+          />
+        <div>
+            <div class="verticalLine center-block">
+            </div>
+          <div id="cta-text" class="circle center-block">
+            <div>
+                {{campData.title}}
+            </div>
+          </div>
+        </div>
+
+      <br>
+
+      <input id="searchTextField" type="text" style="width:90%" ng-map-autocomplete ng-model="locResult" options="locOptions" details="locDetails" /><br><br>
+      <input id="submit" type="button" ng-click="update()" value="Submit" />
+      <input id="latitude" type="hidden" />
+      <input id="longitude" type="hidden" />
+    <!-- end campaign-circles -->
+    </div>
+
+    <div id="rep-container" ng-show="repForm" class="ng-hide">
+      <div class="congress-intro">
+        <h5>YOUR CONGRESSPERSON IS</h5>
+        <h3><span id="officialTitle">{[{repInfo.title}]} {[{repInfo.first_name}]} {[{repInfo.last_name}]} ({[{repInfo.party}]})</span></h3>
+        <img
+          id="rep-img"
+          src="https://theunitedstates.io/images/congress/450x550/{[{repInfo.bioguide_id}]}.jpg"
+          class="img-responsive img-circle center-block"
+          alt="Your Rep"
+          width="200"
+        /><br>
+      </div>
+
+      <div class="jumbotron">
+        <div class="script">
+          <p class="lead">
+            {{campData.script}}
+          </p>
+        </div>
+      </div>
+
+      <p>
+      </p>
+
+      <a id="call-btn" class="btn btn-lg call-button center-block"  role="button"
+          href="tel:{[{repInfo.phone}]}"
+          ng-click="sendEvent">
+          Make the call now!
+      </a>
+
+      <p class="text-left">
+          &#42;Please note, they may ask for your home address. This is normal.
+      </p>
+
+      <div style="margin-bottom:25px;">
+        <a onclick="shareLinkClicked()" id="shareLink">
+          <img src="/images/HelloGOV_link_share.png" style="width: 100px;" />
+        </a>
+        <div class="hide" id="copyConfirmation">
+          <h4>Link copied to clipboard:
+            <p id="link" data-clipboard-text="test-link"></p>
+          </h4>
+        </div>
+      </div>
+    </div> <!-- /container -->
+
+    <div id="rep-container" ng-show="repNotFoundForm" class="ng-hide">
+      <div class="text-center">
+        <p class="lead">
+          We weren't able to find any elected officials who represent that address.  Please try again!
+        </p>
+      </div>
+    </div>
+
+  </div>
+<footer class="footer">
+  <p>&copy; 2016 HelloGov</p>
+</footer>
+</div>
+

@@ -3,12 +3,17 @@ var helloGov = angular.module('helloGov', ['ngMapAutocomplete', 'ngclipboard']).
         $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
 
-helloGov.controller('visitorController', function ($scope, $http, $window) {
-
+helloGov.controller('visitorController', function ($scope, $http, $window, $location) {
+    var urlSplit = $location.absUrl().split('/');
+    $scope.campaign = urlSplit.pop();
     $scope.locResult = '';
     $scope.locOptions = null;
     $scope.locDetails = '';
 
+    $scope.sendEvent = function(type){ 
+        $http.post('/event', {type: type, campaign: $scope.campaign});
+    }
+    $scope.sendEvent('visit');
     $scope.update = function() {
         coordinates = {"latitude": $scope.locDetails.geometry.location.lat(),
                         "longitude": $scope.locDetails.geometry.location.lng()};
@@ -108,3 +113,5 @@ helloGov.controller('userController', function ($scope, $http, $window) {
             });
     };
 });
+
+
