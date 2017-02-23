@@ -80,4 +80,16 @@ module.exports = function (router) {
             }
         });
     });
+
+    // campaign thank-you page (available to all visitors after completing call)
+    router.get('/:shortid/thank-you', (request, response) => {
+        campaignPromise = campaignController.findCampaign(request.params.shortid);
+        campaignPromise.then( function(result) {
+            if(result.length > 0) {
+                response.render('thankYou',{campData: result[0]});
+            } else {
+                response.status(404).render('404');
+            }
+        });
+    });
 };

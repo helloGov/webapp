@@ -10,7 +10,7 @@ helloGov.controller('visitorController', function ($scope, $http, $window, $loca
     $scope.locOptions = null;
     $scope.locDetails = '';
 
-    $scope.sendEvent = function(type){ 
+    $scope.sendEvent = function(type){
         $http.post('/event', {type: type, campaign: $scope.campaign});
     }
     $scope.sendEvent('visit');
@@ -113,5 +113,3 @@ helloGov.controller('userController', function ($scope, $http, $window) {
             });
     };
 });
-
-
