@@ -57,13 +57,17 @@ helloGov.controller('campaignController', function ($scope, $http, $window, $loc
         // if on an edit page, then grab the shortid from URL
         var urlSplit = $location.absUrl().split('/');
         if(urlSplit.indexOf("edit") != -1) {
-            $scope.formData.shortid = urlSplit[4];
+            $scope.formData.shortid = urlSplit[3];
         }
 
         $http.post('/campaign/create', $scope.formData)
             .then(function(result) {
                 console.log(result.data);
-                $window.location.href = '/campaignSuccess?shortid='+result.data;
+                if(publishFlag) {
+                    $window.location.href = '/campaignSuccess?shortid='+result.data;
+                } else {
+                    $window.location.href = '/campaigns';
+                }
             })
             .catch(function(data) {
                 console.log('Error: ' + data);

@@ -2,7 +2,7 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var secrets = require('../../secrets');
-var Influencer = require('../models/influencer'); 
+var Influencer = require('../models/influencer');
 var fs = require('fs');
 var request = require('request');
 
@@ -12,7 +12,7 @@ getFacebookPhoto = function(influencer){
   photoJsonUrl = `http://graph.facebook.com/v2.8/${oauthID}/picture?type=large&redirect=false`;
   photoPath = `public/images/influencers/${influencerID}.jpg`;
 
-  request(photoJsonUrl, function(error, response, body){ 
+  request(photoJsonUrl, function(error, response, body){
     if (!error && response.statusCode == 200) {
       photoJson = JSON.parse(body)
       photoUrl = photoJson.data.url;
@@ -26,7 +26,7 @@ getFacebookPhoto = function(influencer){
 
 }
 
-getFaceBookPhotoUrl = function(){ 
+getFaceBookPhotoUrl = function(){
 }
 
 module.exports = passport.use(new FacebookStrategy({

@@ -9,6 +9,7 @@
             <div class="campaign-info">
                 <h5>{[{campaign.date}]}</h5>
                 <h4>{[{campaign.title}]}</h4>
+                <h5 ng-if="!campaign.publish">DRAFT</h5>
                 <div class="text-center">
                     <!-- TODO: Update analytics link when we have individual pages for each campaign -->
                     <a href="/analytics"><div class="option-button">
@@ -20,12 +21,12 @@
                         <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="https://www.hellogov.org/{[{campaign._id}]}" />
                         <p>Link</p>
                     </div>
-                    <a ng-href="/campaign/{[{campaign._id}]}/edit"><div class="option-button">
+                    <a ng-href="/{[{campaign._id}]}/edit"><div class="option-button">
                         <input type="image" src="/images/pencil.jpg" />
                         <p>Edit</p>
                     </div></a>
                     <!-- TODO: Show a warning first like in the mockup -->
-                    <a href="/campaign/{[{campaign._id}]}/delete"><div class="option-button">
+                    <a href="/{[{campaign._id}]}/delete"><div class="option-button">
                         <input type="image" src="/images/white_delete_icon.jpg" />
                         <p>Delete</p>
                     </div></a>
