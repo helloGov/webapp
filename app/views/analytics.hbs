@@ -1,5 +1,41 @@
+<link href="/css/home.css" rel="stylesheet">
+
 <div ng-controller="analyticsController" class="container">
-Page views: {[{analytics.visit}]}<br>
-Calls: {[{analytics.call}]} <br>
-campaign: {[{campaign.title}]}  {[{campaign._id}]}
+
+    <div class="text-center">
+
+        <div class="top-section">
+            <p class="home-pg-text top-section">
+                <!-- Campaign Title -->
+                {[{campaign.title}]}
+            </p>
+        </div>
+        <div class="horizontal-line"></div>
+
+         <!--
+         Page views: {[{analytics.visit}]}
+         Calls: {[{analytics.call}]}
+         Campaign: {[{campaign.title}]}  {[{campaign._id}]}
+        -->
+
+        <div class="row">
+            <div class="circle large center-block">
+                <p class="home-pg-text">
+                    Page views: <br />
+                    <!-- {{visit}} -->
+                    {[{analytics.visit}]}
+                </p>
+            </div>
+           <div class="verticalLine center-block">
+           </div>
+           <div class="circle large center-block">
+                <p class="home-pg-text">
+                    Calls: <br />
+                    <!-- {{call}} -->
+                    {[{analytics.call}]}
+                </p>
+            </div>
+        </div>
+
+  </div>
 </div>
