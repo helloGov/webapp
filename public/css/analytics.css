@@ -1,6 +1,7 @@
-.horizontal-line {
+.analytics .horizontal-line {
   width: 100%;
   border-bottom: thin solid #FDCC06;
+  margin-bottom: 20px;
 }
 
 .circle.large {
@@ -10,9 +11,9 @@
   position: relative;
 }
 
-.top-section {
+.analytics .top-section {
   position: static;
-  margin: 20px auto;
+  margin: 0 auto 20px;
 }
 
 .home-pg-text {
@@ -32,18 +33,4 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.cta-button {
-  width:90%;
-  height: 50px;
-  background:#FDCC06;
-  color: #35A5B3;
-  text-transform: uppercase;
-  font-family: 'Raleway', sans-serif;
-  font-weight: bold;
-  margin: 0 auto 20px;
-  border: 0;
-  box-shadow: none;
-  border-radius: 0px;
 }

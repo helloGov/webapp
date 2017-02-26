@@ -65,12 +65,13 @@ eventController.getAnalytics = function(request, response){
         ], function(error, result){
                 if (error) {
                      console.log(error);
-                     response.render('error');  
+                     response.render('error');
+                } else {
+                    analyticsObject = eventController.createJsonObject(result);
+                    analyticsObject = eventController.validateAnalytics(analyticsObject);
+                    response.send(analyticsObject);
+                    // response.render('analytics', analyticsObject);
                 }
-                analyticsObject = eventController.createJsonObject(result);
-                analyticsObject = eventController.validateAnalytics(analyticsObject);
-                response.send(analyticsObject);
- //               response.render('analytics', analyticsObject);
         });
 }
 
