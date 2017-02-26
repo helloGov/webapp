@@ -1,0 +1,36 @@
+.analytics .horizontal-line {
+  width: 100%;
+  border-bottom: thin solid #FDCC06;
+  margin-bottom: 20px;
+}
+
+.circle.large {
+  width: 200px;
+  height: 200px;
+  padding-top: 0;
+  position: relative;
+}
+
+.analytics .top-section {
+  position: static;
+  margin: 0 auto 20px;
+}
+
+.home-pg-text {
+  color: white;
+  font-size: 19px;
+  font-family: 'Raleway', sans-serif;
+  text-transform: uppercase;
+}
+
+.top-section .home-pg-text {
+  position: relative;
+  margin: 0 auto;
+}
+
+.circle .home-pg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

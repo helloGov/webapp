@@ -1,5 +1,32 @@
-<div ng-controller="analyticsController" class="container">
-Page views: {[{analytics.visit}]}<br>
-Calls: {[{analytics.call}]} <br>
-campaign: {[{campaign.title}]}  {[{campaign._id}]}
+<link href="/css/analytics.css" rel="stylesheet">
+
+<div ng-controller="analyticsController" class="container analytics">
+
+    <div class="text-center">
+
+        <div class="top-section">
+            <p class="home-pg-text top-section">
+                {[{campaign.title}]}
+            </p>
+        </div>
+        <div class="horizontal-line"></div>
+
+        <div class="row">
+            <div class="circle large center-block">
+                <p class="home-pg-text">
+                    Page views: <br />
+                    {[{analytics.visit}]}
+                </p>
+            </div>
+           <div class="verticalLine center-block">
+           </div>
+           <div class="circle large center-block">
+                <p class="home-pg-text">
+                    Calls: <br />
+                    {[{analytics.call}]}
+                </p>
+            </div>
+        </div>
+
+  </div>
 </div>
