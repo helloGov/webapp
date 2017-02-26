@@ -99,6 +99,20 @@ module.exports = function (router) {
         });
     });
 
+    // API campaign call page (available to all visitors)
+    router.get('/api/campaign/:shortid', (request, response) => {
+        campaignPromise = campaignController.findCampaignById(request.params.shortid);
+        campaignPromise.then( function(result) {
+
+            if(result.length > 0 && result[0].publish) {
+                response.send(result[0]);
+            } else {
+                console.log(`Couldn't load campaign page for ${request.params.shortid}`);
+                response.status(404).send({});
+            }
+        });
+    });
+
     // campaign thank-you page (available to all visitors after completing call)
     router.get('/:shortid/thank-you', (request, response) => {
         campaignPromise = campaignController.findCampaign(request.params.shortid);

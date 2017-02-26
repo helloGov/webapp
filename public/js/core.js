@@ -121,7 +121,17 @@ helloGov.controller('userController', function ($scope, $http, $window) {
 helloGov.controller('analyticsController', function($scope, $http, $location) {
     var urlSplit = $location.absUrl().split('/');
     $scope.campaignId = urlSplit.pop();
-    $http.get(`/api/analytics/${$scope.campaignId}`, $scope.campaigns)
+
+    $http.get(`/api/campaign/${$scope.campaignId}`, $scope.campaign)
+    .then(function(result) {
+        console.log(`got analytics data: ${result.data}`);
+        $scope.campaign = result.data;
+    })
+    .catch(function(data) {
+        console.log(`Error:  ${JSON.stringify(data)}`);
+    });
+    
+    $http.get(`/api/analytics/${$scope.campaignId}`, $scope.analytics)
     .then(function(result) {
         console.log(`got analytics data: ${result.data}`);
         $scope.analytics = result.data;
