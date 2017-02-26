@@ -12,7 +12,7 @@
                 <h5 ng-if="!campaign.publish">DRAFT</h5>
                 <div class="text-center">
                     <!-- TODO: Update analytics link when we have individual pages for each campaign -->
-                    <a href="/analytics"><div class="option-button">
+                    <a href="/analytics/{[{campaign._id}]}"><div class="option-button">
                         <input type="image" src="/images/analytics_icon.svg" />
                         <p>Analytics</p>
                     </div></a>

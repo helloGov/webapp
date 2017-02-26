@@ -93,7 +93,22 @@ module.exports = function (router) {
             if(result.length > 0 && result[0].publish) {
                 response.render('campaign',{campData: result[0]});
             } else {
+                console.log(`Couldn't load campaign page for ${request.params.shortid}`);
                 response.status(404).render('404');
+            }
+        });
+    });
+
+    // API campaign call page (available to all visitors)
+    router.get('/api/campaign/:shortid', (request, response) => {
+        campaignPromise = campaignController.findCampaignById(request.params.shortid);
+        campaignPromise.then( function(result) {
+
+            if(result.length > 0 && result[0].publish) {
+                response.send(result[0]);
+            } else {
+                console.log(`Couldn't load campaign page for ${request.params.shortid}`);
+                response.status(404).send({});
             }
         });
     });
@@ -105,6 +120,7 @@ module.exports = function (router) {
             if(result.length > 0) {
                 response.render('thankYou',{campData: result[0]});
             } else {
+                console.log(`Couldn't find thank you page for ${request.params.shortid}`);
                 response.status(404).render('404');
             }
         });

@@ -1,2 +1,5 @@
-Page views: {{visit}}<br>
-Calls: {{call}}
+<div ng-controller="analyticsController" class="container">
+Page views: {[{analytics.visit}]}<br>
+Calls: {[{analytics.call}]} <br>
+campaign: {[{campaign.title}]}  {[{campaign._id}]}
+</div>

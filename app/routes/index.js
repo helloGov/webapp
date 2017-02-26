@@ -44,6 +44,7 @@ require('./analytics.js')(router);
 require('./campaign.js')(router);
 
 router.use(function timeLog (request, response, next) {
+  console.log(`Couldn't load any page`);
   response.status(404).render('404');
 });
 

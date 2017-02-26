@@ -6,6 +6,8 @@ var mongoose = require("mongoose"),
 
 var eventController = {};
 
+eventController.eventTypes = ['call', 'visit'];
+
 eventController.logEvent = function (request, response) {
     parsedRequest = uaParser.parse(request.headers['user-agent']);
     event = new Event({
@@ -35,6 +37,23 @@ eventController.logEvent = function (request, response) {
     response.send('OK');
 }
 
+eventController.validateAnalytics = function(analyticsObject){
+    eventController.eventTypes.forEach(function(eventType){
+        if (!analyticsObject[eventType]){
+            analyticsObject[eventType] = 0;
+        }
+    });
+    return analyticsObject;
+}
+
+eventController.createJsonObject = function(dbResult){
+    analyticsObject = {};
+    dbResult.map(function(element) {
+        analyticsObject[element._id] = element.count;
+    });
+    return analyticsObject;
+}
+
 eventController.getAnalytics = function(request, response){
     Event.aggregate([
         {$match:
@@ -44,12 +63,14 @@ eventController.getAnalytics = function(request, response){
             {_id:"$type", count: {$sum:1} }
         }
         ], function(error, result){
-                if (error) console.log(error);
-                analyticsObject = {};
-                result.map(function(element) {
-                    analyticsObject[element._id] = element.count;
-                });
-                response.render('analytics', analyticsObject);
+                if (error) {
+                     console.log(error);
+                     response.render('error');  
+                }
+                analyticsObject = eventController.createJsonObject(result);
+                analyticsObject = eventController.validateAnalytics(analyticsObject);
+                response.send(analyticsObject);
+ //               response.render('analytics', analyticsObject);
         });
 }
 
