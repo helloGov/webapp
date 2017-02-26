@@ -93,6 +93,7 @@ module.exports = function (router) {
             if(result.length > 0 && result[0].publish) {
                 response.render('campaign',{campData: result[0]});
             } else {
+                console.log(`Couldn't load campaign page for ${request.params.shortid}`);
                 response.status(404).render('404');
             }
         });
@@ -105,6 +106,7 @@ module.exports = function (router) {
             if(result.length > 0) {
                 response.render('thankYou',{campData: result[0]});
             } else {
+                console.log(`Couldn't find thank you page for ${request.params.shortid}`);
                 response.status(404).render('404');
             }
         });

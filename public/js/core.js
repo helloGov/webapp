@@ -117,3 +117,17 @@ helloGov.controller('userController', function ($scope, $http, $window) {
             });
     };
 });
+
+helloGov.controller('analyticsController', function($scope, $http, $location) {
+    var urlSplit = $location.absUrl().split('/');
+    $scope.campaignId = urlSplit.pop();
+    $http.get(`/api/analytics/${$scope.campaignId}`, $scope.campaigns)
+    .then(function(result) {
+        console.log(`got analytics data: ${result.data}`);
+        $scope.analytics = result.data;
+    })
+    .catch(function(data) {
+        console.log(`Error:  ${JSON.stringify(data)}`);
+    });
+});
+
