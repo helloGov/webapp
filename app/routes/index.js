@@ -25,6 +25,18 @@ router.get('/home', (request, response) => {
     }
 });
 
+router.get('/profile', (request, response) => {
+    if(request.user){
+        influencerPromise = influencerController.findInfluencer(request);
+        influencerPromise.then(function(result) {
+            console.log("rendering for influencer: " + JSON.stringify(result))
+            response.render('profile', {influencer: result});
+        });
+    } else {
+        response.redirect('/login');
+    }
+});
+
 router.get('/logout', function(request, response){
       request.logout();
       response.redirect('/');
@@ -49,6 +61,3 @@ router.use(function timeLog (request, response, next) {
 });
 
 module.exports = router;
-
-
-
