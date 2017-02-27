@@ -11,7 +11,7 @@ helloGov.controller('visitorController', function ($scope, $http, $window, $loca
     $scope.locDetails = '';
 
     $scope.sendEvent = function(type){
-        $http.post('/event', {type: type, campaign: $scope.campaign});
+        $http.post('/api/analytics/log', {type: type, campaign: $scope.campaign});
     }
     $scope.sendEvent('visit');
     $scope.update = function() {
