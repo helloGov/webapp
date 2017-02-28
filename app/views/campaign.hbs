@@ -4,21 +4,7 @@
     <ng-map center="[40.74, -74.18]"></ng-map>
 
     <div class="campaign-circles" ng-show="addrForm" class="ng-hide">
-        <img
-            src="/images/shaun_king_circle.png"
-            class="img-responsive img-circle center-block"
-            alt="Your Rep"
-            width="200"
-          />
-        <div>
-            <div class="verticalLine center-block">
-            </div>
-          <div id="cta-text" class="circle center-block">
-            <div>
-                {{campData.title}}
-            </div>
-          </div>
-        </div>
+      <h3 class="general-text">Enter the address where you vote to find the correct representative.<h3>
 
       <br>
 
@@ -81,7 +67,7 @@
 
     <div id="rep-container" ng-show="repNotFoundForm" class="ng-hide">
       <div class="text-center">
-        <p class="lead">
+        <p class="lead general-text">
           We weren't able to find any elected officials who represent that address.  Please try again!
         </p>
       </div>
