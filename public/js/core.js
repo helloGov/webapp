@@ -116,6 +116,19 @@ helloGov.controller('userController', function ($scope, $http, $window) {
                 $('#login-message').html("Login failed");
             });
     };
+
+    // For image upload
+    $scope.file_changed = function(element) {
+        $scope.$apply(function(scope) {
+            var photofile = element.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+            // handle onload here
+            };
+            reader.readAsDataURL(photofile);
+        });
+    };
+
 });
 
 helloGov.controller('analyticsController', function($scope, $http, $location) {
@@ -130,7 +143,7 @@ helloGov.controller('analyticsController', function($scope, $http, $location) {
     .catch(function(data) {
         console.log(`Error:  ${JSON.stringify(data)}`);
     });
-    
+
     $http.get(`/api/analytics/${$scope.campaignId}`, $scope.analytics)
     .then(function(result) {
         console.log(`got analytics data: ${result.data}`);
@@ -140,4 +153,3 @@ helloGov.controller('analyticsController', function($scope, $http, $location) {
         console.log(`Error:  ${JSON.stringify(data)}`);
     });
 });
-
