@@ -27,6 +27,11 @@ body {
   position: relative;
 }
 
+.general-text {
+    color: #FFF;
+    font-weight: bold;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
