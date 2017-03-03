@@ -7,7 +7,7 @@ module.exports = function (router) {
     router.get('/createCampaign', (request, response) => {
         console.log(`${JSON.stringify(request.user)}`);
         if(request.user) {
-            response.render('create');
+            response.render('create', {logged_in: true});
         } else {
             response.redirect('/login');
         }
@@ -25,7 +25,7 @@ module.exports = function (router) {
             })
             .catch(function(err) {console.log(err)});
         } else {
-            response.status(301).render('unauthorized');
+            response.status(301).render('unauthorized', {logged_in: false});
         }
     });
 
@@ -37,13 +37,13 @@ module.exports = function (router) {
                 campaign = result[0];
                 console.log(campaign);
                 if(request.user.id==campaign.influencer) {
-                    response.render('create',{campData: campaign});
+                    response.render('create',{campData: campaign, logged_in: true});
                 } else {
-                    response.status(301).render('unauthorized');
+                    response.status(301).render('unauthorized', {logged_in: true});
                 }
             });
         } else {
-            response.status(301).render('unauthorized');
+            response.status(301).render('unauthorized', {logged_in: false});
         }
     });
 
@@ -55,13 +55,13 @@ module.exports = function (router) {
                 response.redirect('/campaigns');
             });
         } else {
-            response.status(301).render('unauthorized');
+            response.status(301).render('unauthorized', {logged_in: false});
         }
     });
 
     // campaign list page
     router.get('/campaigns', (request, response) => {
-        response.render('campaigns');
+        response.render('campaigns', {logged_in: request.user != null});
     });
 
     // fetch campaign list for a particular user
@@ -72,17 +72,17 @@ module.exports = function (router) {
                 response.send(result);
             });
         } else {
-            response.status(301).render('unauthorized');
+            response.status(301).render('unauthorized', {logged_in: false});
         }
     });
 
     router.get('/campaign', (request, response) => {
-        response.render('campaignDemo');
+        response.render('campaignDemo', {logged_in: request.user != null});
     });
 
     // campaign success page (at the end of campaign creation)
     router.get('/campaignSuccess', (request, response) => {
-        response.render('campaignSuccess');
+        response.render('campaignSuccess', {logged_in: request.user != null});
     });
 
     // campaign call page (available to all visitors)
@@ -91,10 +91,10 @@ module.exports = function (router) {
         campaignPromise.then( function(result) {
 
             if(result.length > 0 && result[0].publish) {
-                response.render('campaign',{campData: result[0]});
+                response.render('campaign',{campData: result[0], logged_in: request.user != null});
             } else {
                 console.log(`Couldn't load campaign page for ${request.params.shortid}`);
-                response.status(404).render('404');
+                response.status(404).render('404', {logged_in: request.user != null});
             }
         });
     });
@@ -118,10 +118,10 @@ module.exports = function (router) {
         campaignPromise = campaignController.findCampaignById(request.params.shortid);
         campaignPromise.then( function(result) {
             if(result.length > 0) {
-                response.render('thankYou',{campData: result[0]});
+                response.render('thankYou',{campData: result[0], logged_in: request.user != null});
             } else {
                 console.log(`Couldn't find thank you page for ${request.params.shortid}`);
-                response.status(404).render('404');
+                response.status(404).render('404', {logged_in: request.user != null});
             }
         });
     });
