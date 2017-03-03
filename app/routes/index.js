@@ -18,7 +18,7 @@ router.get('/home', (request, response) => {
         influencerPromise = influencerController.findInfluencer(request);
         influencerPromise.then(function(result) {
             console.log("rendering for influencer: " + JSON.stringify(result))
-            response.render('home', {influencer: result});
+            response.render('home', {influencer: result, logged_in: true});
         });
     } else {
         response.redirect('/login');
@@ -30,7 +30,7 @@ router.get('/profile', (request, response) => {
         influencerPromise = influencerController.findInfluencer(request);
         influencerPromise.then(function(result) {
             console.log("rendering for influencer: " + JSON.stringify(result))
-            response.render('profile', {influencer: result});
+            response.render('profile', {influencer: result, logged_in: true});
         });
     } else {
         response.redirect('/login');
@@ -57,7 +57,7 @@ require('./campaign.js')(router);
 
 router.use(function timeLog (request, response, next) {
   console.log(`Couldn't load any page`);
-  response.status(404).render('404');
+  response.status(404).render('404', {logged_in: request.user != null});
 });
 
 module.exports = router;

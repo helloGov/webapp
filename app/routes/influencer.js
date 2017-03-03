@@ -10,7 +10,7 @@ module.exports = function (router) {
     router.post('/signup', influencerController.addInfluencer);
 
     router.get('/signup', (request, response) => {
-        response.render('signup');
+        response.render('signup', {logged_in: request.user != null});
     });
 
     router.post('/login', (request, response) => {
@@ -20,7 +20,7 @@ module.exports = function (router) {
     });
 
     router.get('/login', (request, response) => {
-        response.render('login');
+        response.render('login', {logged_in: request.user != null});
     });
 
     // Redirect the user to Facebook for authentication.  When complete,
