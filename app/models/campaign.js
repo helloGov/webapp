@@ -10,6 +10,14 @@ var CampaignSchema = new Schema({
   learn_more: {type: String, trim: true},
   publish: {type: Boolean, trim: true},
   influencer: {type: String, trim: false}
+},
+{
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
 });
 
-mongoose.model('Campaign', CampaignSchema);
+var Campaign = mongoose.model('Campaign', CampaignSchema);
+
+module.exports = Campaign;
