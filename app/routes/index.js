@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var campaignController = require("../middleware/campaign");
 var influencerController = require("../middleware/influencer");
+var apiRoutes = require('./api')
 
 router.get('/', function(request, response) {
     if(request.user){
@@ -54,6 +55,8 @@ router.get('/locateLegislator', (request, response) => {
 require('./influencer.js')(router);
 require('./analytics.js')(router);
 require('./campaign.js')(router);
+
+router.use('/api', apiRoutes);
 
 router.use(function timeLog (request, response, next) {
   console.log(`Couldn't load any page`);

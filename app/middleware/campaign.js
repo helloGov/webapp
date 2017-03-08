@@ -7,8 +7,7 @@ var campaignController = {};
 
 // Find campaign by ID: uses shortid to find a specific campaign
 campaignController.findCampaignById = function (shortid) {
-    var findStr = {_id: shortid};
-    campaign = Campaign.find(findStr);
+    var campaign = Campaign.findById(shortid);
     return campaign;
 }
 

@@ -3,7 +3,11 @@ var helloGov = angular.module('helloGov', ['ngMapAutocomplete', 'ngclipboard']).
         $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
 
-helloGov.controller('visitorController', function ($scope, $http, $window, $location) {
+helloGov.constant('constants', {
+    API_ROOT: '/api'
+});
+
+helloGov.controller('visitorController', function ($scope, $http, $window, $location, constants) {
     var urlSplit = $location.absUrl().split('/');
     $scope.campaign = urlSplit.pop();
     $scope.locResult = '';
@@ -11,7 +15,7 @@ helloGov.controller('visitorController', function ($scope, $http, $window, $loca
     $scope.locDetails = '';
 
     $scope.sendEvent = function(type){
-        $http.post('/api/analytics/log', {type: type, campaign: $scope.campaign});
+        $http.post(`${constants.API_ROOT}/events`, {type: type, campaign: $scope.campaign});
     }
     $scope.sendEvent('visit');
     $scope.update = function() {
@@ -41,9 +45,9 @@ helloGov.controller('visitorController', function ($scope, $http, $window, $loca
     $scope.repNotFoundForm = false;
 });
 
-helloGov.controller('campaignController', function ($scope, $http, $window, $location) {
+helloGov.controller('campaignController', function ($scope, $http, $window, $location, constants) {
     $scope.formData = {};
-    $http.get('/campaignList', $scope.campaigns)
+    $http.get(`${constants.API_ROOT}/campaigns`, $scope.campaigns)
     .then(function(result) {
         $scope.campaigns = result.data;
     })
@@ -60,7 +64,7 @@ helloGov.controller('campaignController', function ($scope, $http, $window, $loc
             $scope.formData.shortid = urlSplit[3];
         }
 
-        $http.post('/campaign/create', $scope.formData)
+        $http.post(`${constants.API_ROOT}/campaigns`, $scope.formData)
             .then(function(result) {
                 console.log(result.data);
                 if(publishFlag) {
@@ -131,11 +135,11 @@ helloGov.controller('userController', function ($scope, $http, $window) {
 
 });
 
-helloGov.controller('analyticsController', function($scope, $http, $location) {
+helloGov.controller('analyticsController', function($scope, $http, $location, constants) {
     var urlSplit = $location.absUrl().split('/');
     $scope.campaignId = urlSplit.pop();
 
-    $http.get(`/api/campaign/${$scope.campaignId}`, $scope.campaign)
+    $http.get(`${constants.API_ROOT}/campaigns/${$scope.campaignId}`, $scope.campaign)
     .then(function(result) {
         console.log(`got analytics data: ${result.data}`);
         $scope.campaign = result.data;
@@ -144,7 +148,7 @@ helloGov.controller('analyticsController', function($scope, $http, $location) {
         console.log(`Error:  ${JSON.stringify(data)}`);
     });
 
-    $http.get(`/api/analytics/${$scope.campaignId}`, $scope.analytics)
+    $http.get(`${constants.API_ROOT}/events?campaignId=${$scope.campaignId}`, $scope.analytics)
     .then(function(result) {
         console.log(`got analytics data: ${result.data}`);
         $scope.analytics = result.data;
