@@ -8,28 +8,28 @@ var campaignController = {};
 // Find campaign by ID: uses shortid to find a specific campaign
 campaignController.findCampaignById = function (shortid) {
     var findStr = {_id: shortid};
-    campaign = Campaign.find(findStr);
+    campaign = Campaign.find(findStr).exec();
     return campaign;
 }
 
 // Find campaign by title and user
 campaignController.findCampaignByTitleAndUser = function (title, userid) {
     var findStr = {title: title, influencer: userid};
-    campaign = Campaign.find(findStr);
+    campaign = Campaign.find(findStr).exec();
     return campaign;
 }
 
 // Finds all campaigns for a user
 campaignController.findCampaignsByUser = function (userid) {
     var findStr = {influencer: userid};
-    campaigns = Campaign.find(findStr);
+    campaigns = Campaign.find(findStr).exec();
     return campaigns;
 }
 
 // not used for now, but we probably want to create a page for this
 campaignController.findAllCampaigns = function (request, response) {
     if (request.user) {
-        campaigns = Campaign.find({});
+        campaigns = Campaign.find({}).exec();
         campaigns.then(function(result) {
             response.send(result);
         })
