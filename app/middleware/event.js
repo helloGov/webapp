@@ -17,7 +17,7 @@ eventController.logEvent = function (request, response) {
             campaign: request.body.campaign
         },
         user_agent: {
-            mobile: parsedRequest.isMobile, 
+            mobile: parsedRequest.isMobile,
             browser: {
                 name: parsedRequest.ua.family,
                 version: parsedRequest.ua.toVersionString()
@@ -57,7 +57,7 @@ eventController.createJsonObject = function(dbResult){
 eventController.getAnalytics = function(request, response){
     Event.aggregate([
         {$match:
-            {"metadata.campaign":request.params.campaign_id}
+            {"metadata.campaign":request.params.campaignId}
         },
         {$group:
             {_id:"$type", count: {$sum:1} }
