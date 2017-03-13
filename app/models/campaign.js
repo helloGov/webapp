@@ -18,6 +18,27 @@ var CampaignSchema = new Schema({
   }
 });
 
+// queries
+CampaignSchema.query.byTitleAndUser = function(title, influencerId) {
+    return Campaign.find({title: title, influencer: influencerId});
+};
+
+CampaignSchema.query.byUser = function(influencerId) {
+    return Campaign.find({influencer: influencerId});
+};
+
+// methods
+CampaignSchema.methods.delete = function(userId) {
+    return new Promise((resolve, reject) => {
+        if (this.influencer === userId) {
+            resolve(this.remove());
+        } else {
+            console.log('unauthorized delete');
+            reject('Cannot delete campaign belonging to other users.');
+        }
+    });
+};
+
 var Campaign = mongoose.model('Campaign', CampaignSchema);
 
 module.exports = Campaign;

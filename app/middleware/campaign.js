@@ -5,26 +5,6 @@ var mongoose = require("mongoose"),
 
 var campaignController = {};
 
-// Find campaign by ID: uses shortid to find a specific campaign
-campaignController.findCampaignById = function (shortid) {
-    var campaign = Campaign.findById(shortid);
-    return campaign;
-}
-
-// Find campaign by title and user
-campaignController.findCampaignByTitleAndUser = function (title, userid) {
-    var findStr = {title: title, influencer: userid};
-    campaign = Campaign.find(findStr);
-    return campaign;
-}
-
-// Finds all campaigns for a user
-campaignController.findCampaignsByUser = function (userid) {
-    var findStr = {influencer: userid};
-    campaigns = Campaign.find(findStr);
-    return campaigns;
-}
-
 // not used for now, but we probably want to create a page for this
 campaignController.findAllCampaigns = function (request, response) {
     if (request.user) {
@@ -64,12 +44,6 @@ campaignController.saveCampaign = function (request) {
         });
 
     return findCamp;
-}
-
-campaignController.deleteCampaign = function (shortid, userid) {
-    var findStr = {_id: shortid, influencer: userid};
-    campaign = Campaign.find(findStr).remove().exec();
-    return campaign;
 }
 
 campaignController.findLegislator = function (latitude, longitude, response) {
