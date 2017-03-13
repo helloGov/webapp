@@ -1,4 +1,5 @@
 const campaignController = require('../middleware/campaign');
+const Campaign = require('../models/campaign');
 
 module.exports = function (router) {
 
@@ -14,8 +15,8 @@ module.exports = function (router) {
 
     // edit campaign page
     router.get('/:shortid/edit', (request, response) => {
-        if(request.user) {
-            campaignController.findCampaignById(request.params.shortid)
+        if (request.user) {
+            Campaign.findById(request.params.shortid)
                 .then(function(campaign) {
                     console.log(campaign);
                     if(request.user.id == campaign.influencer) {
@@ -31,10 +32,20 @@ module.exports = function (router) {
 
     // delete campaign endpoint
     router.get('/:shortid/delete', (request, response) => {
-        if(request.user) {
-            campaignPromise = campaignController.deleteCampaign(request.params.shortid,request.user.id);
-            campaignPromise.then(function(result) {
-                response.redirect('/campaigns');
+        if (request.user) {
+            Campaign.findById(request.params.shortid)
+                .then(function(campaign) {
+                    if (!campaign) {
+                        response.status(404).render('404', {logged_in: true});
+                        return;
+                    }
+                    campaign.delete(request.user.id)
+                        .then(function(result) {
+                            response.redirect('/campaigns');
+                        })
+                        .catch(function(err) {
+                            response.status(301).render('unauthorized', {logged_in: true});
+                        })
             });
         } else {
             response.status(301).render('unauthorized', {logged_in: false});
@@ -57,8 +68,8 @@ module.exports = function (router) {
 
     // campaign call page (available to all visitors)
     router.get('/:shortid', (request, response) => {
-        campaignController.findCampaignById(request.params.shortid)
-            then(function(campaign) {
+        Campaign.findById(request.params.shortid)
+            .then(function(campaign) {
 
                 if (campaign.publish) {
                     response.render('campaign', {campData: campaign, logged_in: request.user != null});
@@ -71,7 +82,7 @@ module.exports = function (router) {
 
     // campaign thank-you page (available to all visitors after completing call)
     router.get('/:shortid/thank-you', (request, response) => {
-        campaignController.findCampaignById(request.params.shortid)
+        Campaign.findById(request.params.shortid)
             .then(function(campaign) {
                 if (campaign) {
                     response.render('thankYou', {campData: campaign, logged_in: request.user != null});

@@ -8,15 +8,15 @@ router.route('/campaigns')
 
 // create new campaign
 .post((request, response) => {
-    if(request.user) {
-        campaignPromise = campaignController.saveCampaign(request);
-        campaignPromise.then(function() {
-            return campaignController.findCampaignByTitleAndUser(request.body.title, request.user.id);
-        })
-        .then(function(result) {
-            response.send(result[0]._id);
-        })
-        .catch(function(err) {console.log(err)});
+    if (request.user) {
+        campaignController.saveCampaign(request)
+            .then(function() {
+                return Campaign.findByTitleAndUser(request.body.title, request.user.id);
+            })
+            .then(function(result) {
+                response.send(result[0]._id);
+            })
+            .catch(function(err) {console.log(err)});
     } else {
         response.status(301).render('unauthorized', {logged_in: false});
     }
@@ -24,11 +24,11 @@ router.route('/campaigns')
 
 // fetch campaign list for a particular user
 .get((request, response) => {
-    if(request.user) {
-        campaignPromise = campaignController.findCampaignsByUser(request.user.id);
-        campaignPromise.then(function(result) {
-            response.send(result);
-        });
+    if (request.user) {
+        Campaign.findByUser(request.user.id)
+            .then(function(result) {
+                response.send(result);
+            });
     } else {
         response.status(301).render('unauthorized', {logged_in: false});
     }
@@ -40,7 +40,7 @@ router.route('/campaigns/:campaignId')
 // fetch episode
 .get((request, response) => {
     // API campaign call page (available to all visitors)
-    campaignController.findCampaignById(request.params.campaignId)
+    Campaign.findById(request.params.campaignId)
         .then(function(campaign) {
             if (campaign.publish) {
                 response.json(campaign);
