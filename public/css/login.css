@@ -1,10 +1,4 @@
-input[type="text"], textarea[type="text"], input[type="file"]{
-    width: 90%;
-    margin: 0 auto 20px;
-    border-radius: 0;
-}
-
-input[type="password"] {
+input[type="text"], textarea[type="text"], input[type="file"], input[type="password"] {
     width: 90%;
     margin: 0 auto 20px;
     border-radius: 0;
