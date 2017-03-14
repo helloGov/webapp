@@ -88,11 +88,7 @@ body {
     font-weight: bold;
     color: #35A5B3;
     display: block;
-    transition: 0.3s
-}
-
-.sidenav a:hover, .offcanvas a:focus {
-    color: $f1f1f1;
+    transition: 0.3s;
 }
 
 .sidenav hr {
@@ -107,6 +103,11 @@ body {
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+}
+
+.content-wrapper {
+    max-width: 1000px;
+    margin: auto;
 }
 
 /* Custom page header */
@@ -143,29 +144,6 @@ body {
 .image-page {
   width: 100%;
   margin-top: -75px;
-}
-
-.campaign-form {
-  font-size: 16px;
-  background-color: white;
-  color: #35A5B3;
-  margin-left: 50px;
-  margin-right: 70px;
-  background-color: white;
-}
-
-.campaign-input {
-  color: #35A5B3;
-  border-color: #35A5B3;
-  margin-bottom: 30px;
-}
-
-.prompt-title {
-  border-bottom-style: dotted;
-  border-bottom-width: medium;
-  margin-bottom: 15px;
-  margin-left: 45px;
-  margin-right: 45px;
 }
 
 .max-text {
@@ -257,32 +235,37 @@ body {
 }
 
 .button-option {
-  margin-bottom: 20px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.btn {
+    color: #35A5B3;
+    font-weight: 500;
+    border-radius: 3px;
+}
+
+.btn:hover {
+    color: rgba(53, 165, 179, 0.6);
 }
 
 /* yellow background, blue text */
 .primary-button {
-  background-color: #f0ad4e;
-  border-color: #eea236;
-  color: #35A5B3;
+  background-color: #FCCB30;
 }
 
 /* solid blue border and text, white background */
 .secondary-button {
   background-color: white;
-  border-color: #34A5B3;
-  color: #34A5B3;
+  border: 2px solid #34A5B3;
 }
 
 /* dotted blue border and text, white background */
 .tertiary-button {
   background-color: white;
-  border-color: #34A5B3;
-  color: #34A5B3;
-  border-style: dotted;
-  border-width: medium;
+  border: 2px dotted #34A5B3;
 }
 
 /* Responsive: Portrait tablets and up */
