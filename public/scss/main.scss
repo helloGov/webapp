@@ -1,35 +1,13 @@
-/* Space out content a bit */
+html {
+    height: 100%;
+}
+
 body {
-  padding-bottom: 20px;
-  background-color: #35A5B3;
-  position: relative;
-}
-
-#searchTextField{
-  height: 50px;
-}
-
-#cta-text {
-  color: white;
-  font-weight: bold;
-  font-size: 19px;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-#submit {
-  width:90%;
-  height: 50px;
-  background:#FDCC06;
-  color: #35A5B3;
-}
-
-#body{
-  position: relative;
-}
-
-.general-text {
-    color: #FFF;
-    font-weight: bold;
+    padding-bottom: 20px;
+    background-color: $blue-light;
+    position: relative;
+    min-height: 100%;
+    font-family: 'Raleway', sans-serif;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -41,12 +19,12 @@ body {
 }
 
 .navbar {
-    background-color: #FDCC06;
-    position: relative;
+    background-color: $yellow;
+    border-radius: 0;
 }
 
 .row {
-    color: #35A5B3;
+    color: $blue-light;
     height: 50px;
 }
 
@@ -57,8 +35,8 @@ body {
 }
 
 .logo {
-    height: 90%;
-    margin-bottom: 5px;
+    height: 75%;
+    margin: 6px;
 }
 
 .profile {
@@ -84,17 +62,16 @@ body {
 .sidenav a {
     padding: 2px 2px 2px 32px;
     font-size: 18px;
-    font-family: 'Raleway', sans-serif;
     font-weight: bold;
-    color: #35A5B3;
+    color: $blue-light;
     display: block;
     transition: 0.3s;
 }
 
 .sidenav hr {
     height: 2px;
-    color: #35A5B3;
-    background-color: #35A5B3;
+    color: $blue-light;
+    background-color: $blue-light;
 }
 
 .sidenav .closebtn {
@@ -107,13 +84,15 @@ body {
 
 .content-wrapper {
     max-width: 1000px;
+    height: 100%;
+    position: relative;
     margin: auto;
 }
 
 /* Custom page header */
 .header {
   padding-bottom: 20px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid $gray-light;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
@@ -126,7 +105,7 @@ body {
 .footer {
   padding-top: 19px;
   color: #777;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid $gray-light;
 }
 
 .campaign-circles {
@@ -166,18 +145,13 @@ body {
 /* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid $gray-light;
   background-color: white;
   color: rgb(60,165,178);
 }
 .jumbotron .btn {
   padding: 14px 24px;
   font-size: 21px;
-}
-
-.call-button {
-  background-color: rgb(252,203,48);
-  color: rgb(60,165,178);
 }
 
 .capital-heading {
@@ -193,12 +167,8 @@ body {
   margin-top: 28px;
 }
 
-.congress-intro{
-  color: white;
-}
-
 .circle {
-  border: 3px solid #FDCC06;
+  border: 3px solid $yellow;
   border-radius: 50%;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
   filter: alpha(opacity=60);
@@ -215,57 +185,19 @@ body {
   -ms-transition: background-color .5s ease-in-out;
   transition: background-color .5s ease-in-out;
   font-size: 20px;
-  color: #FFFFFF;
+  color: $white;
   line-height: 30px;
   padding-top: 30px;
 }
 
-.circle.filled {
-  background-color: #666666;
-}
-
 .verticalLine {
-  border-right: thin dotted #FDCC06;
+  border-right: thin dotted $yellow;
   height: 35px;
   width:1px;
 }
 
-.main-icon {
-  margin-bottom: 25px;
-}
-
-.button-option {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-.btn {
-    color: #35A5B3;
-    font-weight: 500;
-    border-radius: 3px;
-}
-
-.btn:hover {
-    color: rgba(53, 165, 179, 0.6);
-}
-
-/* yellow background, blue text */
-.primary-button {
-  background-color: #FCCB30;
-}
-
-/* solid blue border and text, white background */
-.secondary-button {
-  background-color: white;
-  border: 2px solid #34A5B3;
-}
-
-/* dotted blue border and text, white background */
-.tertiary-button {
-  background-color: white;
-  border: 2px dotted #34A5B3;
+.reversed-text {
+    color: $white;
 }
 
 /* Responsive: Portrait tablets and up */

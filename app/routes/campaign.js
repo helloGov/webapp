@@ -57,10 +57,6 @@ module.exports = function (router) {
         response.render('campaigns', {logged_in: request.user != null});
     });
 
-    router.get('/campaign', (request, response) => {
-        response.render('campaignDemo', {logged_in: request.user != null});
-    });
-
     // campaign success page (at the end of campaign creation)
     router.get('/campaignSuccess', (request, response) => {
         response.render('campaignSuccess', {logged_in: request.user != null});

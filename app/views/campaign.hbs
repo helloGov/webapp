@@ -4,12 +4,12 @@
     <ng-map center="[40.74, -74.18]"></ng-map>
 
     <div class="campaign-circles" ng-show="addrForm" class="ng-hide">
-      <h3 class="general-text">Enter the address where you vote to find the correct representative.<h3>
+      <h3 class="reversed-text">Enter the address where you vote to find the correct representative.</h3>
 
       <br>
 
-      <input id="searchTextField" type="text" style="width:90%" ng-map-autocomplete ng-model="locResult" options="locOptions" details="locDetails" /><br><br>
-      <input id="submit" type="button" ng-click="update()" value="Submit" />
+      <input id="searchTextField" type="text" ng-map-autocomplete ng-model="locResult" options="locOptions" details="locDetails" class="form-control input-lg address-search" />
+      <button id="address-submit" type="button" ng-click="update()" class="btn primary-button">Submit</button>
       <input id="latitude" type="hidden" />
       <input id="longitude" type="hidden" />
     <!-- end campaign-circles -->
@@ -39,7 +39,7 @@
       <p>
       </p>
 
-      <a id="call-btn" class="btn btn-lg call-button center-block"  role="button"
+      <a id="call-btn" class="btn btn-lg call-button center-block primary-button"  role="button"
           href="tel:{[{repInfo.phone}]}"
           ng-click="sendEvent('call')">
           Make the call now!
@@ -48,7 +48,7 @@
 
       </br>
 
-      <a class="btn btn-lg call-button center-block"  role="button"
+      <a class="btn btn-lg call-button center-block primary-button"  role="button"
           href="/{{campData._id}}/thank-you">
           I'm done
       </a>
@@ -67,7 +67,7 @@
 
     <div id="rep-container" ng-show="repNotFoundForm" class="ng-hide">
       <div class="text-center">
-        <p class="lead general-text">
+        <p class="lead reversed-text">
           We weren't able to find any elected officials who represent that address.  Please try again!
         </p>
       </div>
