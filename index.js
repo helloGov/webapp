@@ -8,6 +8,7 @@ var express = require('express');
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
+var sassMiddleware = require('node-sass-middleware');
 var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var secrets = require('./secrets');
@@ -37,10 +38,23 @@ var sessionStore = new MongoStore({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const port = secrets.app_port;  
+const port = secrets.app_port;
 
+// static assets
+if (app.get('env') === 'development') {
+    app.use(
+        sassMiddleware({
+            src: path.join(__dirname, '/public/scss'),
+            dest: path.join(__dirname, '/public/build/css'),
+            debug: true,
+            prefix: '/build/css',
+            sourceMap: true
+        })
+    );
+}
 app.use(express.static('public'));
 app.use(favicon(path.join(__dirname,'public','favicon.ico')));
+
 app.set('views', path.join(__dirname, '/app/views'));
 app.set('view engine', '.hbs');
 app.use(cookieParser(secrets.session_secret));

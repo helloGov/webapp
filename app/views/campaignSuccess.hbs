@@ -1,5 +1,3 @@
-<link href="/css/campaignSuccess.css" rel="stylesheet">
-
 <div ng-controller="successController" class="container">
   <div class="text-center">
 
@@ -19,10 +17,10 @@
     <h3 class="url-yellow">heyaGOV.ORG/{[{shortid}]}</h3>
 
     <!-- TODO: This should give feedback so user knows link was copied, ideally like in the mockup -->
-    <button class="cta-button btn-yellow" ngclipboard data-clipboard-text="http://www.heyagov.org/{[{shortid}]}" /><h3>Copy URL</h3></button>
+    <button class="btn cta-button primary-button" ngclipboard data-clipboard-text="http://www.heyagov.org/{[{shortid}]}" />Copy URL</button>
     <!-- TODO: When we have actual preview page, use that URL instead -->
-    <a href="/{[{shortid}]}"><div class="cta-button btn-blue"><h3>Preview URL</h3></div></a>
-    <a href="/campaigns"><div class="cta-button btn-blue"><h3>Go to campaigns</h3></div></a>
+    <a href="/{[{shortid}]}"><div class="btn cta-button blue-button">Preview URL</div></a>
+    <a href="/campaigns"><div class="btn cta-button blue-button">Go to campaigns</div></a>
 
   </div>
 </div>

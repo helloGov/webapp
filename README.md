@@ -5,5 +5,7 @@ brew install node
 
 npm install
 
+sudo gem install sass
+
 npm start
 

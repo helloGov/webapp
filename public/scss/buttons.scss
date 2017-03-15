@@ -1,0 +1,59 @@
+.btn {
+    color: $blue-light;
+    font-weight: 600;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 1.4em;
+    padding: 0.9em 0;
+    width: 100%;
+}
+
+a:link.btn {
+    color: $blue-light;
+}
+
+.btn:hover, .btn:focus {
+    color: rgba(53, 165, 179, 0.6);
+}
+
+a:link.btn:hover {
+    color: rgba(53, 165, 179, 0.6);
+}
+
+/* yellow background, blue text */
+.primary-button {
+    background-color: $yellow;
+}
+
+/* solid blue border and text, white background */
+.secondary-button {
+    background-color: white;
+    border: 2px solid $blue-light;
+}
+
+/* dotted blue border and text, white background */
+.tertiary-button {
+    background-color: white;
+    border: 2px dotted $blue-light;
+}
+
+.cta-button {
+    margin: 0 auto 20px;
+}
+
+.blue-button {
+    background: $blue-light;
+    color: $yellow;
+    border: 4px solid $yellow;
+
+    &:hover {
+        color: $yellow;
+    }
+}
+
+.button-option {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}

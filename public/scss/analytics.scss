@@ -1,0 +1,17 @@
+.analytics .horizontal-line {
+  width: 100%;
+  border-bottom: thin solid $yellow;
+  margin-bottom: 20px;
+}
+
+.circle.large {
+  width: 200px;
+  height: 200px;
+  padding-top: 0;
+  position: relative;
+}
+
+.analytics .top-section {
+  position: static;
+  margin: 0 auto 20px;
+}

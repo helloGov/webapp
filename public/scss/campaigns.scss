@@ -1,0 +1,35 @@
+.campaign-info {
+    background-color: $white;
+    padding: 8px 0;
+    border: 2px solid $blue-light;
+    margin: 0 auto;
+    color: $blue-light;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    .campaign-date {
+        display: inline-block;
+        border-bottom: 1px solid $blue-light;
+        padding-bottom: 6px;
+    }
+
+    .option-button {
+        display: inline-block;
+        width: 4em;
+        margin: 0 .5em;
+        color: $blue-light;
+    }
+
+    p {
+        margin: 12px auto 0;
+        font-size: 10px;
+    }
+
+    .option-button input {
+        height: 40px;
+        display: block;
+        margin: 5px auto;
+    }
+}
+
+

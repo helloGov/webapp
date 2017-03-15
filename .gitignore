@@ -3,3 +3,7 @@ npm-debug.log
 secrets*.js
 .github-todos
 .vscode
+.sass-cache
+
+public/build/css/*
+!.gitkeep
