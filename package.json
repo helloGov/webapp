@@ -20,6 +20,7 @@
     "express-session": "^1.14.2",
     "handlebars": "^4.0.6",
     "hbs": "^4.0.1",
+    "http-proxy": "^1.16.2",
     "install": "^0.8.2",
     "ipware": "^1.0.0",
     "mongoose": "^4.7.6",
