@@ -87,7 +87,7 @@ helloGov.controller('successController', function($scope, $location) {
 });
 
 
-helloGov.controller('userController', function ($scope, $http, $window) {
+helloGov.controller('userController', function ($scope, $http, $location, $window) {
     $scope.loginDetails = {};
     $scope.signupDetails = {};
 
@@ -96,6 +96,10 @@ helloGov.controller('userController', function ($scope, $http, $window) {
     }
 
     $scope.signUp = function() {
+        var urlSplit = $location.absUrl().split('/');
+        $scope.signupDetails.signupLink = urlSplit.pop();
+        console.log($scope.signupDetails);
+
         $http.post('/signup', $scope.signupDetails)
             .then(function(data) {
                 $scope.signUpDetails = {};

@@ -9,7 +9,7 @@ var Influencer = new Schema({
 	oauthID: {type: String},
 	password: {type: String, trim: false},
 	image: {type: String, trim:false},
-	timestamp: {type: Date, default: Date.now}
+	timestamp: {type: Date, default: Date.now},
 });
 
 Influencer.plugin(passportLocalMongoose);

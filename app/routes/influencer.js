@@ -9,8 +9,12 @@ module.exports = function (router) {
 
     router.post('/signup', influencerController.addInfluencer);
 
-    router.get('/signup', (request, response) => {
-        response.render('signup', {logged_in: request.user != null});
+    router.get('/signup/:signupId', (request, response) => {
+        if (!request.user) {
+            response.render('signup', {logged_in: request.user != null});
+        } else {
+            response.status(301).render('unauthorized', {logged_in: false});
+        }
     });
 
     router.post('/login', (request, response) => {

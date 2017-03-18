@@ -1,5 +1,6 @@
 var mongoose = require("mongoose"),
  	Influencer = mongoose.model('Influencer'),
+    Signup = mongoose.model('Signup'),
     passport = require('passport'),
     fs = require('fs'),
     request = require('request');
@@ -13,21 +14,39 @@ influencerController.findInfluencer = function (request) {
 }
 
 influencerController.addInfluencer = function (request, response) {
+    // TODO(sagnik): remove this line to protect passwords (if displayed)
     console.log(`got user_details: ${JSON.stringify(request.body)}`);
-    Influencer.register(
-        new Influencer({ username : request.body.username }),
-        request.body.password, function(err, account) {
-            if (err) {
-                return response.render('signup');
+    var findStr = { email : request.body.email, signupLink : request.body.signupLink };
+    console.log(findStr);
+    Signup.find(findStr).exec()
+    .then(function(influencer) {
+        console.log(influencer);
+        if (Object.keys(influencer).length !== 0) {
+            Influencer.register(
+                new Influencer({ username : request.body.username, email : request.body.email }),
+                request.body.password, function(err, account) {
+                    if (err) {
+                        console.log("error! could not create new influencer, probably username already exists!")
+                    } else {
+                        console.log(`Signup success! User ${request.body.username}`)
+                        Signup.remove(findStr,function() {
+                            passport.authenticate('local')(request, response, function () {
+                                response.redirect('/');
+                            }, function() {
+                                response.redirect('/login');
+                            });
+                        });
+                    }
                 }
-
-            passport.authenticate('local')(request, response, function () {
-                response.redirect('/');
-                }, function() {
-                    response.redirect('/login');
-                    });
-            }
-    );
+            );
+        }
+        else {
+            console.log("Influencer not found in signup database! Influencer: "+request.body.email+" link: "+request.body.signupLink);
+        }
+    })
+    .catch(function(reason) {
+        console.log("Error! Could not find signup link: "+reason);
+    });
 }
 
 module.exports = influencerController;
