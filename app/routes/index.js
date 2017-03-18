@@ -5,50 +5,15 @@ var router = express.Router();
 var campaignController = require("../middleware/campaign");
 var influencerController = require("../middleware/influencer");
 var apiRoutes = require('./api')
-var httpProxy = require('http-proxy');
-var squareProxy = httpProxy.createProxyServer({
-//    xfwd: true
-//    changeOrigin: true
-});
-var expressSquareProxy = require('express-http-proxy');
 var secrets = require('../../secrets');
-var util = require('util');
-var url = require('url');
+var squareProxy = require('express-http-proxy');
 
-squareProxy.on('proxyReq', function(proxyReq, req, res, options) {
-  var urlObj = url.parse(req.url);
-  //console.log("request ua to us: " + JSON.stringify(req.headers['user-agent']));    
-  //console.log("request header to square proxy: " + JSON.stringify(proxyReq.headers));
-  //console.log("Using util.inspect on proxyReq: " + util.inspect(proxyReq));
-  //console.log("Using util.inspect on req: " + util.inspect(req));
-  proxyReq.setHeader('user-agent', JSON.stringify(req.headers['user-agent']));
-  proxyReq.setHeader('host', secrets.marketing_site_url);
-  proxyReq.setHeader('url', secrets.marketing_site_url);
-  //console.log("modified request header to square proxy: " + JSON.stringify(proxyReq.headers));
-});
-
-squareProxy.on('proxyRes', function(proxyRes, req, res) {
-  //console.log("req in proxyRes: " + JSON.stringify(req.headers));
-  //console.log("response to us: " + JSON.stringify(proxyRes.headers));    
-});
-
-router.get('/proxy', expressSquareProxy('http://hellogov.squarespace.com', {
-  forwardPath: function(req) {
-    console.log("forwardPath: " + require('url').parse(req.url).path);
-    return '';//require('url').parse(req.url).path;
-  }
-}));
 router.get('/', function(request, response, next) {
     if(request.user){
         response.redirect('/home');
     } else {
-        //debugger;
-        console.log("trying express proxy");
-        //proxyResponse = expressSquareProxy('http://hellogov.squarespace.com');
-        //proxyResponse(request, response, next);
-        //expressSquareProxy('http://hellogov.squarespace.com');
-        squareProxy.web(request, response, {target: secrets.marketing_site_url});
-        //response.redirect('/login');
+        proxyResponse = squareProxy(secrets.marketing_site_url);
+        proxyResponse(request, response, next);
     }
 });
 
