@@ -16,7 +16,7 @@ router.route('/campaigns')
             .then(function(result) {
                 response.send(result[0]._id);
             })
-            .catch(function(err) {console.log(err)});
+            .catch(function(err) { console.log(err); });
     } else {
         response.status(301).render('unauthorized', {logged_in: false});
     }
@@ -52,7 +52,7 @@ router.route('/campaigns/:campaignId')
         .catch(function(err) {
             console.log(`Couldn't load campaign page for ${request.params.campaignId}`);
             response.json(err);
-        })
+        });
 });
 
 module.exports = router;

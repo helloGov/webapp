@@ -1,12 +1,10 @@
-const campaignController = require('../middleware/campaign');
 const Campaign = require('../models/campaign');
 
-module.exports = function (router) {
-
+module.exports = function(router) {
     // create campaign page
     router.get('/createCampaign', (request, response) => {
         console.log(`${JSON.stringify(request.user)}`);
-        if(request.user) {
+        if (request.user) {
             response.render('create', {logged_in: true});
         } else {
             response.redirect('/login');
@@ -19,8 +17,8 @@ module.exports = function (router) {
             Campaign.findById(request.params.shortid)
                 .then(function(campaign) {
                     console.log(campaign);
-                    if(request.user.id == campaign.influencer) {
-                        response.render('create',{campData: campaign, logged_in: true});
+                    if (request.user.id === campaign.influencer) {
+                        response.render('create', {campData: campaign, logged_in: true});
                     } else {
                         response.status(301).render('unauthorized', {logged_in: true});
                     }
@@ -40,13 +38,13 @@ module.exports = function (router) {
                         return;
                     }
                     campaign.delete(request.user.id)
-                        .then(function(result) {
+                        .then(function() {
                             response.redirect('/campaigns');
                         })
-                        .catch(function(err) {
+                        .catch(function() {
                             response.status(301).render('unauthorized', {logged_in: true});
-                        })
-            });
+                        });
+                });
         } else {
             response.status(301).render('unauthorized', {logged_in: false});
         }
@@ -66,7 +64,6 @@ module.exports = function (router) {
     router.get('/:shortid', (request, response) => {
         Campaign.findById(request.params.shortid)
             .then(function(campaign) {
-
                 if (campaign.publish) {
                     response.render('campaign', {campData: campaign, logged_in: request.user != null});
                 } else {

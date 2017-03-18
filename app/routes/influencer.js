@@ -1,12 +1,11 @@
-var influencerController = require("../middleware/influencer")
-var Influencer = require("../models/influencer.js")
-var passport = require('passport')
-var FacebookStrategy = require('passport-facebook').Strategy;
-var LocalStrategy = require('passport-local').Strategy;
-var auth = require("../middleware/authentication.js");
+// TODO: remove this from here, but for now it's needed because requiring it
+// causes the auth middleware to be loaded
+require('../middleware/authentication.js');
 
-module.exports = function (router) {
+var influencerController = require('../middleware/influencer');
+var passport = require('passport');
 
+module.exports = function(router) {
     router.post('/signup', influencerController.addInfluencer);
 
     router.get('/signup/:signupId', (request, response) => {
@@ -18,7 +17,7 @@ module.exports = function (router) {
     });
 
     router.post('/login', (request, response) => {
-        passport.authenticate('local')(request, response, function () {
+        passport.authenticate('local')(request, response, function() {
             response.redirect('/');
         });
     });
@@ -39,8 +38,7 @@ module.exports = function (router) {
     router.get('/auth/facebook/callback',
         passport.authenticate('facebook', { failureRedirect: '/login' }),
         function(req, res) {
-          console.log(`got user_details: ${JSON.stringify(req.body)}`);
-          res.redirect('/');
+            console.log(`got user_details: ${JSON.stringify(req.body)}`);
+            res.redirect('/');
         });
 };
-
