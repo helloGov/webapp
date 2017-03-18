@@ -14,17 +14,14 @@ influencerController.findInfluencer = function (request) {
 }
 
 influencerController.addInfluencer = function (request, response) {
-    // TODO(sagnik): remove this line to protect passwords (if displayed)
-    console.log(`got user_details: ${JSON.stringify(request.body)}`);
     var findStr = { email : request.body.email, signupLink : request.body.signupLink };
-    console.log(findStr);
     Signup.find(findStr).exec()
     .then(function(influencer) {
-        console.log(influencer);
         if (Object.keys(influencer).length !== 0) {
             Influencer.register(
                 new Influencer({ username : request.body.username, email : request.body.email }),
-                request.body.password, function(err, account) {
+                request.body.password,
+                function(err, account) {
                     if (err) {
                         console.log("error! could not create new influencer, probably username already exists!")
                     } else {
