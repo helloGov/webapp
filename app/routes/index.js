@@ -52,6 +52,10 @@ router.get('/logout', function(request, response){
       response.redirect('/');
 });
 
+router.get('/error', function(request, response) {
+    response.render('error', {logged_in: false});
+});
+
 router.get('/locateLegislator', (request, response) => {
     //TODO: construct our request to /locateLegislator such that we can use an expressier
     // way of accessing params. request.params['latitude'] is better
@@ -68,7 +72,6 @@ require('./campaign.js')(router);
 router.use('/api', apiRoutes);
 
 router.use(function timeLog (request, response, next) {
-  console.log(`Couldn't load any page`);
   response.status(404).render('404', {logged_in: request.user != null});
 });
 

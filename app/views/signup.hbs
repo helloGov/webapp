@@ -6,12 +6,16 @@
 
           <form>
               <div class="form-group">
-                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your signup email here" ng-model="signupDetails.email">
+                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your signup email here (required)" ng-model="signupDetails.email">
+                  </br></br>
                   <input type="text" class="form-control input-lg text-center" placeholder="Enter your username here" ng-model="signupDetails.username">
                   <input type="password" class="form-control input-lg text-center" placeholder="Enter your password here" ng-model="signupDetails.password">
               </div>
               <button type="submit" ng-click="signUp()" class="btn primary-button">Sign Up</button>
-          </form>
+            </form>
+
+            <!-- <p class="home&#45;pg&#45;text top&#45;section">OR</p> -->
+            <!-- <a href="/auth/facebook"><img src="/images/fb_login.png"></a> -->
       </div>
   </div>
 </div>

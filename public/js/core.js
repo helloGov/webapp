@@ -98,17 +98,16 @@ helloGov.controller('userController', function ($scope, $http, $location, $windo
     $scope.signUp = function() {
         var urlSplit = $location.absUrl().split('/');
         $scope.signupDetails.signupLink = urlSplit.pop();
-        console.log($scope.signupDetails);
 
         $http.post('/signup', $scope.signupDetails)
             .then(function(data) {
                 $scope.signUpDetails = {};
                 $scope.session = data;
+                console.log(data)
                 $window.location.href = '/';
-                console.log(data);
             })
             .catch(function(data) {
-                console.log('Error: ' + data);
+                $('#login-message').html("Signup failed! Check your email and try again, or contact us at team@hellogov.org for assistance");
             });
     };
 
@@ -118,7 +117,6 @@ helloGov.controller('userController', function ($scope, $http, $location, $windo
                 $scope.loginDetails = {};
                 $scope.session = data;
                 $window.location.href = '/';
-                console.log(data);
             })
             .catch(function(data) {
                 $('#login-message').html("Login failed");
@@ -149,7 +147,6 @@ helloGov.controller('adminController', function($scope, $http, $location, consta
             $scope.newUserDetails = {};
             $scope.showSignupLink = true;
             $scope.signupLink = $location.host() + "/signup/" + data.data;
-            console.log($scope.signupLink)
         })
         .catch(function(data) {
             console.log('Error: ' + data);
