@@ -104,7 +104,11 @@ helloGov.controller('userController', function ($scope, $http, $location, $windo
                 $scope.signUpDetails = {};
                 $scope.session = data;
                 console.log(data)
-                $window.location.href = '/';
+                if(data.data.includes("Error")) {
+                    $window.location.href = '/error';
+                } else {
+                    $window.location.href = '/';
+                }
             })
             .catch(function(data) {
                 $('#login-message').html("Signup failed! Check your email and try again, or contact us at team@hellogov.org for assistance");

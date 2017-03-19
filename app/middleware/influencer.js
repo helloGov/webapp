@@ -32,7 +32,7 @@ influencerController.addInfluencer = function (request, response) {
                         console.log(`Signup success! User ${request.body.username}`)
                         Signup.remove(findStr,function() {
                             passport.authenticate('local')(request, response, function () {
-                                response.redirect('/error');
+                                response.end("Error! Could not authenticate");
                             }, function() {
                                 response.redirect('/login');
                             });
@@ -43,12 +43,12 @@ influencerController.addInfluencer = function (request, response) {
         }
         else {
             console.log("Influencer not found in signup database! Influencer: "+request.body.email+" link: "+request.body.signupLink);
-            response.redirect('/error');
+            response.end("Error! Influencer not found in signup database");
         }
     })
     .catch(function(reason) {
         console.log("Error! Could not find signup link: "+reason);
-        response.redirect('/error');
+        response.end("Error! Could not find signup link: "+reason);
     });
 }
 
