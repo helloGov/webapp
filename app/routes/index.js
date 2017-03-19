@@ -39,8 +39,8 @@ router.get('/profile', (request, response) => {
 });
 
 router.get('/admin', (request, response) => {
-    //TODO(shug): restrict access to users who are marked as admin
-    if(request.user) {
+    //only allow admin access if user has admin field
+    if(request.user && request.user.get("admin")) {
         response.render('admin', {logged_in: true});
     } else {
         response.redirect('/login');
