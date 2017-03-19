@@ -15,7 +15,7 @@ router.get('/', function(request, response) {
 });
 
 router.get('/home', (request, response) => {
-    if(request.user){
+    if(request.user) {
         influencerPromise = influencerController.findInfluencer(request);
         influencerPromise.then(function(result) {
             console.log("rendering for influencer: " + JSON.stringify(result))
@@ -27,12 +27,21 @@ router.get('/home', (request, response) => {
 });
 
 router.get('/profile', (request, response) => {
-    if(request.user){
+    if(request.user) {
         influencerPromise = influencerController.findInfluencer(request);
         influencerPromise.then(function(result) {
             console.log("rendering for influencer: " + JSON.stringify(result))
             response.render('profile', {influencer: result, logged_in: true});
         });
+    } else {
+        response.redirect('/login');
+    }
+});
+
+router.get('/admin', (request, response) => {
+    //TODO(shug): restrict access to users who are marked as admin
+    if(request.user) {
+        response.render('admin', {logged_in: true});
     } else {
         response.redirect('/login');
     }

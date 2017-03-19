@@ -1,4 +1,3 @@
-
 var mongoose = require("mongoose"),
  	Campaign = mongoose.model('Campaign'),
     sunlight = require("sunlight-congress-api");

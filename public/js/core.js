@@ -139,6 +139,26 @@ helloGov.controller('userController', function ($scope, $http, $location, $windo
 
 });
 
+helloGov.controller('adminController', function($scope, $http, $location, constants) {
+    $scope.loginDetails = {};
+    $scope.signupDetails = {};
+
+    $scope.createLink = function() {
+        $http.get(`${constants.API_ROOT}/createLink?email=${$scope.newUserDetails.email}`)
+        .then(function(data) {
+            $scope.newUserDetails = {};
+            $scope.showSignupLink = true;
+            $scope.signupLink = $location.host() + "/signup/" + data.data;
+            console.log($scope.signupLink)
+        })
+        .catch(function(data) {
+            console.log('Error: ' + data);
+        });
+    }
+
+    $scope.showSignupLink = false;
+});
+
 helloGov.controller('analyticsController', function($scope, $http, $location, constants) {
     var urlSplit = $location.absUrl().split('/');
     $scope.campaignId = urlSplit.pop();
