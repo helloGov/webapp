@@ -9,6 +9,7 @@ var Influencer = new Schema({
 	oauthID: {type: String},
 	password: {type: String, trim: false},
 	image: {type: String, trim:false},
+    admin: { type: Boolean, trim: true},
 	timestamp: {type: Date, default: Date.now},
 });
 

@@ -91,10 +91,6 @@ helloGov.controller('userController', function ($scope, $http, $location, $windo
     $scope.loginDetails = {};
     $scope.signupDetails = {};
 
-    $scope.createAcct = function() {
-        $window.location.href = '/signup';
-    }
-
     $scope.signUp = function() {
         var urlSplit = $location.absUrl().split('/');
         $scope.signupDetails.signupLink = urlSplit.pop();
@@ -148,7 +144,6 @@ helloGov.controller('adminController', function($scope, $http, $location, consta
     $scope.createLink = function() {
         $http.get(`${constants.API_ROOT}/createLink?email=${$scope.newUserDetails.email}`)
         .then(function(data) {
-            $scope.newUserDetails = {};
             $scope.showSignupLink = true;
             $scope.signupLink = $location.host() + "/signup/" + data.data;
         })

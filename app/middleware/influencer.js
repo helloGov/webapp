@@ -32,7 +32,7 @@ influencerController.addInfluencer = function (request, response) {
                         console.log(`Signup success! User ${request.body.username}`)
                         Signup.remove(findStr,function() {
                             passport.authenticate('local')(request, response, function () {
-                                response.end("Error! Could not authenticate");
+                                response.end("Doing nothing");
                             }, function() {
                                 response.redirect('/login');
                             });
