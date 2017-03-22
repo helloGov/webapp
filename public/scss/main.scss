@@ -7,7 +7,12 @@ body {
     background-color: $blue-light;
     position: relative;
     min-height: 100%;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Monteserrat', sans-serif;
+    color: $white;
+}
+
+h1, h2, h3, h4, h5, p {
+    font-family: 'Monteserrat', sans-serif;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
