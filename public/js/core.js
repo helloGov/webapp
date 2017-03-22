@@ -87,24 +87,27 @@ helloGov.controller('successController', function($scope, $location) {
 });
 
 
-helloGov.controller('userController', function ($scope, $http, $window) {
+helloGov.controller('userController', function ($scope, $http, $location, $window) {
     $scope.loginDetails = {};
     $scope.signupDetails = {};
 
-    $scope.createAcct = function() {
-        $window.location.href = '/signup';
-    }
-
     $scope.signUp = function() {
+        var urlSplit = $location.absUrl().split('/');
+        $scope.signupDetails.signupLink = urlSplit.pop();
+
         $http.post('/signup', $scope.signupDetails)
             .then(function(data) {
                 $scope.signUpDetails = {};
                 $scope.session = data;
-                $window.location.href = '/';
-                console.log(data);
+                console.log(data)
+                if(data.data.includes("Error")) {
+                    $window.location.href = '/error';
+                } else {
+                    $window.location.href = '/';
+                }
             })
             .catch(function(data) {
-                console.log('Error: ' + data);
+                $('#login-message').html("Signup failed! Check your email and try again, or contact us at team@hellogov.org for assistance");
             });
     };
 
@@ -114,7 +117,6 @@ helloGov.controller('userController', function ($scope, $http, $window) {
                 $scope.loginDetails = {};
                 $scope.session = data;
                 $window.location.href = '/';
-                console.log(data);
             })
             .catch(function(data) {
                 $('#login-message').html("Login failed");
@@ -133,6 +135,24 @@ helloGov.controller('userController', function ($scope, $http, $window) {
         });
     };
 
+});
+
+helloGov.controller('adminController', function($scope, $http, $location, constants) {
+    $scope.loginDetails = {};
+    $scope.signupDetails = {};
+
+    $scope.createLink = function() {
+        $http.get(`${constants.API_ROOT}/createLink?email=${$scope.newUserDetails.email}`)
+        .then(function(data) {
+            $scope.showSignupLink = true;
+            $scope.signupLink = $location.host() + "/signup/" + data.data;
+        })
+        .catch(function(data) {
+            console.log('Error: ' + data);
+        });
+    }
+
+    $scope.showSignupLink = false;
 });
 
 helloGov.controller('analyticsController', function($scope, $http, $location, constants) {

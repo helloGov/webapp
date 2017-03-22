@@ -1,0 +1,18 @@
+<div ng-controller="adminController">
+    <div class="container">
+        <div class="row text-center">
+
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control input-lg text-center" placeholder="New influencer email" ng-model="newUserDetails.email">
+                </div>
+
+                <button type="submit" ng-click="createLink()" class="btn primary-button cta-button">Generate Signup Link</button>
+
+                <h3 id="signupLink-container" class="url-yellow ng-hide" ng-show="showSignupLink">Signup link: {[{signupLink}]}</h3>
+            </form>
+
+
+        </div>
+    </div>
+</div>

@@ -18,7 +18,7 @@ router.get('/', function(request, response, next) {
 });
 
 router.get('/home', (request, response) => {
-    if(request.user){
+    if(request.user) {
         influencerPromise = influencerController.findInfluencer(request);
         influencerPromise.then(function(result) {
             console.log("rendering for influencer: " + JSON.stringify(result))
@@ -30,7 +30,7 @@ router.get('/home', (request, response) => {
 });
 
 router.get('/profile', (request, response) => {
-    if(request.user){
+    if(request.user) {
         influencerPromise = influencerController.findInfluencer(request);
         influencerPromise.then(function(result) {
             console.log("rendering for influencer: " + JSON.stringify(result))
@@ -41,9 +41,22 @@ router.get('/profile', (request, response) => {
     }
 });
 
+router.get('/admin', (request, response) => {
+    //only allow admin access if user has admin field
+    if(request.user && request.user.get("admin")) {
+        response.render('admin', {logged_in: true});
+    } else {
+        response.redirect('/login');
+    }
+});
+
 router.get('/logout', function(request, response){
       request.logout();
       response.redirect('/');
+});
+
+router.get('/error', function(request, response) {
+    response.render('error', {logged_in: false});
 });
 
 router.get('/locateLegislator', (request, response) => {
@@ -62,7 +75,6 @@ require('./campaign.js')(router);
 router.use('/api', apiRoutes);
 
 router.use(function timeLog (request, response, next) {
-  console.log(`Couldn't load any page`);
   response.status(404).render('404', {logged_in: request.user != null});
 });
 

@@ -1,4 +1,3 @@
-
 var mongoose = require("mongoose"),
     Event = mongoose.model('Event'),
     getIP = require('ipware')().get_ip,
