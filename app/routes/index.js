@@ -5,12 +5,15 @@ var router = express.Router();
 var campaignController = require("../middleware/campaign");
 var influencerController = require("../middleware/influencer");
 var apiRoutes = require('./api')
+var secrets = require('../../secrets');
+var squareProxy = require('express-http-proxy');
 
-router.get('/', function(request, response) {
+router.get('/', function(request, response, next) {
     if(request.user){
         response.redirect('/home');
     } else {
-        response.redirect('/login');
+        proxyResponse = squareProxy(secrets.marketing_site_url);
+        proxyResponse(request, response, next);
     }
 });
 
