@@ -3,5 +3,31 @@
 }
 
 .congress-intro {
-  color: white;
+    color: white;
+    h3 {
+        margin: 0 auto;
+    }
+}
+
+.rep-img {
+    width: 130px;
+    border: 4px solid #FCCB30;
+    border-radius: 4px;
+    margin: 25px auto;
+}
+
+.rep-name {
+    font-weight: lighter;
+    font-size: 1.5em;
+}
+
+.script {
+    border: 1px solid #FFF;
+    margin-bottom: 25px;
+    border-radius: 2.5px;
+    padding: 20px 10px;
+}
+
+#call-btn {
+    margin-bottom: 13px;
 }
