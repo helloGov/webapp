@@ -9,7 +9,7 @@ module.exports = {
             'always'
         ],
         'space-before-function-paren': [
-            'error',
+            'off',
             'never'
         ],
         'no-console': [
