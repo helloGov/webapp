@@ -191,9 +191,10 @@ body {
 }
 
 .verticalLine {
-  border-right: thin dotted $yellow;
-  height: 35px;
-  width:1px;
+    border-right: 3px solid #FDCC06;
+    opacity: 0.8;
+    height: 35px;
+    width: 1px;
 }
 
 .reversed-text {
