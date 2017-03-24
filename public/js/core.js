@@ -1,26 +1,28 @@
 // public/js/core.js
-var helloGov = angular.module('helloGov', ['ngMapAutocomplete', 'ngclipboard']).config(function($interpolateProvider){
-        $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+var helloGov = angular.module('helloGov', ['ngMapAutocomplete', 'ngclipboard']).config(function($interpolateProvider) {
+    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
 
 helloGov.constant('constants', {
     API_ROOT: '/api'
 });
 
-helloGov.controller('visitorController', function ($scope, $http, $window, $location, constants) {
+helloGov.controller('visitorController', function($scope, $http, $window, $location, constants) {
     var urlSplit = $location.absUrl().split('/');
     $scope.campaign = urlSplit.pop();
     $scope.locResult = '';
     $scope.locOptions = null;
     $scope.locDetails = '';
 
-    $scope.sendEvent = function(type){
+    $scope.sendEvent = function(type) {
         $http.post(`${constants.API_ROOT}/events`, {type: type, campaign: $scope.campaign});
-    }
+    };
     $scope.sendEvent('visit');
     $scope.update = function() {
-        coordinates = {"latitude": $scope.locDetails.geometry.location.lat(),
-                        "longitude": $scope.locDetails.geometry.location.lng()};
+        var coordinates = {
+            'latitude': $scope.locDetails.geometry.location.lat(),
+            'longitude': $scope.locDetails.geometry.location.lng()
+        };
 
         $http.get('/locateLegislator', {params: coordinates})
         .then(function(result) {
@@ -28,24 +30,23 @@ helloGov.controller('visitorController', function ($scope, $http, $window, $loca
             $scope.repInfo = result.data.representativeInfo;
 
             $scope.addrForm = false;
-            if($scope.repFound) {
+            if ($scope.repFound) {
                 $scope.repForm = true;
             } else {
                 $scope.repNotFoundForm = true;
             }
-
         })
         .catch(function(data) {
             console.log(data);
         });
-    }
+    };
 
     $scope.addrForm = true;
     $scope.repForm = false;
     $scope.repNotFoundForm = false;
 });
 
-helloGov.controller('campaignController', function ($scope, $http, $window, $location, constants) {
+helloGov.controller('campaignController', function($scope, $http, $window, $location, constants) {
     $scope.formData = {};
     $http.get(`${constants.API_ROOT}/campaigns`, $scope.campaigns)
     .then(function(result) {
@@ -60,15 +61,15 @@ helloGov.controller('campaignController', function ($scope, $http, $window, $loc
 
         // if on an edit page, then grab the shortid from URL
         var urlSplit = $location.absUrl().split('/');
-        if(urlSplit.indexOf("edit") != -1) {
+        if (urlSplit.indexOf('edit') !== -1) {
             $scope.formData.shortid = urlSplit[3];
         }
 
         $http.post(`${constants.API_ROOT}/campaigns`, $scope.formData)
             .then(function(result) {
                 console.log(result.data);
-                if(publishFlag) {
-                    $window.location.href = '/campaignSuccess?shortid='+result.data;
+                if (publishFlag) {
+                    $window.location.href = '/campaignSuccess?shortid=' + result.data;
                 } else {
                     $window.location.href = '/campaigns';
                 }
@@ -78,7 +79,6 @@ helloGov.controller('campaignController', function ($scope, $http, $window, $loc
             }
         );
     };
-
 });
 
 helloGov.controller('successController', function($scope, $location) {
@@ -86,8 +86,7 @@ helloGov.controller('successController', function($scope, $location) {
     $scope.shortid = urlSplit[1];
 });
 
-
-helloGov.controller('userController', function ($scope, $http, $location, $window) {
+helloGov.controller('userController', function($scope, $http, $location, $window) {
     $scope.loginDetails = {};
     $scope.signupDetails = {};
 
@@ -99,15 +98,15 @@ helloGov.controller('userController', function ($scope, $http, $location, $windo
             .then(function(data) {
                 $scope.signUpDetails = {};
                 $scope.session = data;
-                console.log(data)
-                if(data.data.includes("Error")) {
+                console.log(data);
+                if (data.data.includes('Error')) {
                     $window.location.href = '/error';
                 } else {
                     $window.location.href = '/';
                 }
             })
             .catch(function(data) {
-                $('#login-message').html("Signup failed! Check your email and try again, or contact us at team@hellogov.org for assistance");
+                angular.element('#login-message').html('Signup failed! Check your email and try again, or contact us at team@hellogov.org for assistance');
             });
     };
 
@@ -118,23 +117,22 @@ helloGov.controller('userController', function ($scope, $http, $location, $windo
                 $scope.session = data;
                 $window.location.href = '/';
             })
-            .catch(function(data) {
-                $('#login-message').html("Login failed");
+            .catch(function() {
+                angular.element('#login-message').html('Login failed');
             });
     };
 
     // For image upload
     $scope.file_changed = function(element) {
-        $scope.$apply(function(scope) {
+        $scope.$apply(function() {
             var photofile = element.files[0];
             var reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function() {
             // handle onload here
             };
             reader.readAsDataURL(photofile);
         });
     };
-
 });
 
 helloGov.controller('adminController', function($scope, $http, $location, constants) {
@@ -145,12 +143,12 @@ helloGov.controller('adminController', function($scope, $http, $location, consta
         $http.get(`${constants.API_ROOT}/createLink?email=${$scope.newUserDetails.email}`)
         .then(function(data) {
             $scope.showSignupLink = true;
-            $scope.signupLink = $location.host() + "/signup/" + data.data;
+            $scope.signupLink = $location.host() + '/signup/' + data.data;
         })
         .catch(function(data) {
             console.log('Error: ' + data);
         });
-    }
+    };
 
     $scope.showSignupLink = false;
 });

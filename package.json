@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "build": "NODE_ENV=production sass public/scss/styles.scss public/build/css/styles.css"
+    "build": "NODE_ENV=production sass public/scss/styles.scss public/build/css/styles.css",
+    "lint": "eslint -c .eslintrc.js --fix ."
   },
   "author": "",
   "license": "ISC",
@@ -39,6 +40,12 @@
     "ua-parser": "^0.3.5"
   },
   "devDependencies": {
+    "eslint": "^3.18.0",
+    "eslint-config-standard": "^7.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^2.1.1",
     "node-sass-middleware": "^0.11.0"
   }
 }

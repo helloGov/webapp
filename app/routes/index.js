@@ -1,27 +1,27 @@
 
-//TODO: How do we reuse the express object we created in app/index.js
+// TODO: How do we reuse the express object we created in app/index.js
 var express = require('express');
 var router = express.Router();
-var campaignController = require("../middleware/campaign");
-var influencerController = require("../middleware/influencer");
-var apiRoutes = require('./api')
+var campaignController = require('../middleware/campaign');
+var influencerController = require('../middleware/influencer');
+var apiRoutes = require('./api');
 var secrets = require('../../secrets');
 var squareProxy = require('express-http-proxy');
 
 router.get('/', function(request, response, next) {
-    if(request.user){
+    if (request.user) {
         response.redirect('/home');
     } else {
-        proxyResponse = squareProxy(secrets.marketing_site_url);
+        var proxyResponse = squareProxy(secrets.marketing_site_url);
         proxyResponse(request, response, next);
     }
 });
 
 router.get('/home', (request, response) => {
-    if(request.user) {
-        influencerPromise = influencerController.findInfluencer(request);
+    if (request.user) {
+        var influencerPromise = influencerController.findInfluencer(request);
         influencerPromise.then(function(result) {
-            console.log("rendering for influencer: " + JSON.stringify(result))
+            console.log('rendering for influencer: ' + JSON.stringify(result));
             response.render('home', {influencer: result, logged_in: true});
         });
     } else {
@@ -30,10 +30,10 @@ router.get('/home', (request, response) => {
 });
 
 router.get('/profile', (request, response) => {
-    if(request.user) {
-        influencerPromise = influencerController.findInfluencer(request);
+    if (request.user) {
+        var influencerPromise = influencerController.findInfluencer(request);
         influencerPromise.then(function(result) {
-            console.log("rendering for influencer: " + JSON.stringify(result))
+            console.log('rendering for influencer: ' + JSON.stringify(result));
             response.render('profile', {influencer: result, logged_in: true});
         });
     } else {
@@ -42,17 +42,17 @@ router.get('/profile', (request, response) => {
 });
 
 router.get('/admin', (request, response) => {
-    //only allow admin access if user has admin field
-    if(request.user && request.user.get("admin")) {
+    // only allow admin access if user has admin field
+    if (request.user && request.user.get('admin')) {
         response.render('admin', {logged_in: true});
     } else {
         response.redirect('/login');
     }
 });
 
-router.get('/logout', function(request, response){
-      request.logout();
-      response.redirect('/');
+router.get('/logout', function(request, response) {
+    request.logout();
+    response.redirect('/');
 });
 
 router.get('/error', function(request, response) {
@@ -60,10 +60,10 @@ router.get('/error', function(request, response) {
 });
 
 router.get('/locateLegislator', (request, response) => {
-    //TODO: construct our request to /locateLegislator such that we can use an expressier
+    // TODO: construct our request to /locateLegislator such that we can use an expressier
     // way of accessing params. request.params['latitude'] is better
-    latitude = request.query.latitude;
-    longitude = request.query.longitude;
+    var latitude = request.query.latitude;
+    var longitude = request.query.longitude;
 
     campaignController.findLegislator(latitude, longitude, response);
 });
@@ -74,8 +74,8 @@ require('./campaign.js')(router);
 
 router.use('/api', apiRoutes);
 
-router.use(function timeLog (request, response, next) {
-  response.status(404).render('404', {logged_in: request.user != null});
+router.use(function timeLog(request, response, next) {
+    response.status(404).render('404', {logged_in: request.user != null});
 });
 
 module.exports = router;
