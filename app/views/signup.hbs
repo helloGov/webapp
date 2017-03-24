@@ -4,12 +4,15 @@
 
           <!-- TODO: Find an image to go here so it doesn't look so bland -->
 
-          <form>
+          <form name="signupForm">
               <div class="form-group">
                   <input type="text" class="form-control input-lg text-center" placeholder="Enter your signup email here (required)" ng-model="signupDetails.email">
                   </br></br>
-                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your username here" ng-model="signupDetails.username">
-                  <input type="password" class="form-control input-lg text-center" placeholder="Enter your password here" ng-model="signupDetails.password">
+                  <input type="text" class="form-control input-lg text-center" placeholder="First name" ng-model="signupDetails.firstName">
+                  <input type="text" class="form-control input-lg text-center" placeholder="Last name" ng-model="signupDetails.lastName">
+                  <input type="text" class="form-control input-lg text-center" placeholder="Username" ng-model="signupDetails.username">
+                  <input type="password" class="form-control input-lg text-center" placeholder="Password" ng-model="signupDetails.password">
+                  <input type="hidden" ng-init="signupDetails.signupLink='{{{signup.signupLink}}}'">
               </div>
               <button type="submit" ng-click="signUp()" class="btn primary-button">Sign Up</button>
             </form>

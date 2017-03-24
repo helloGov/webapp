@@ -26,8 +26,13 @@ var Event = new Schema({
     metadata: {
         campaign: {type: String, trim: false},
         influencer: {type: String, trim: false}
-    },
-    timestamp: {type: Date, default: Date.now}
-});
+    }
+},
+    {
+        timestamps: {
+            createdAt: 'createdAt',
+            updatedAt: 'updatedAt'
+        }
+    });
 
 module.exports = mongoose.model('Event', Event);

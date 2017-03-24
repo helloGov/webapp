@@ -4,28 +4,28 @@ var passport = require('passport');
 
 var influencerController = {};
 
-influencerController.findInfluencer = function(request) {
-    var influencer = Influencer.findOne({_id: request.user.id});
-    return influencer;
-};
-
 influencerController.addInfluencer = function(request, response) {
     var findStr = { email: request.body.email, signupLink: request.body.signupLink };
-    Signup.find(findStr).exec()
-    .then(function(influencer) {
-        if (Object.keys(influencer).length !== 0) {
+    Signup.findOne(findStr).exec()
+    .then(function(signup) {
+        if (signup) {
             Influencer.register(
-                new Influencer({ username: request.body.username, email: request.body.email }),
+                new Influencer({
+                    firstName: request.body.firstName,
+                    lastName: request.body.lastName,
+                    username: request.body.username,
+                    email: request.body.email
+                }),
                 request.body.password,
                 function(err, account) {
                     if (err) {
-                        console.log('error! could not create new influencer, probably username already exists!');
+                        console.log('error! could not create new influencer: ' + err);
                         response.redirect('/login');
                     } else {
                         console.log(`Signup success! User ${request.body.username}`);
                         Signup.remove(findStr, function() {
                             passport.authenticate('local')(request, response, function() {
-                                response.end('Doing nothing');
+                                response.redirect('/home');
                             }, function() {
                                 response.redirect('/login');
                             });

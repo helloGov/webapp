@@ -4,13 +4,17 @@ require('../middleware/authentication.js');
 
 var influencerController = require('../middleware/influencer');
 var passport = require('passport');
+var Signup = require('../models/signup');
 
 module.exports = function(router) {
     router.post('/signup', influencerController.addInfluencer);
 
     router.get('/signup/:signupId', (request, response) => {
         if (!request.user) {
-            response.render('signup', {logged_in: request.user != null});
+            Signup.findOne({signupLink: request.params.signupId})
+                .then((signup) => {
+                    response.render('signup', {logged_in: request.user != null, signup: signup});
+                });
         } else {
             response.redirect('/');
         }

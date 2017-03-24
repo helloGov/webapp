@@ -91,14 +91,10 @@ helloGov.controller('userController', function($scope, $http, $location, $window
     $scope.signupDetails = {};
 
     $scope.signUp = function() {
-        var urlSplit = $location.absUrl().split('/');
-        $scope.signupDetails.signupLink = urlSplit.pop();
-
         $http.post('/signup', $scope.signupDetails)
             .then(function(data) {
                 $scope.signUpDetails = {};
                 $scope.session = data;
-                console.log(data);
                 if (data.data.includes('Error')) {
                     $window.location.href = '/error';
                 } else {
