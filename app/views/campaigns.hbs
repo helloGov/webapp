@@ -5,7 +5,7 @@
     <div ng-controller="campaignController" >
     	<div ng-repeat="campaign in campaigns" class="background-white">
             <div class="campaign-info">
-                <h5 class="campaign-date">{[{campaign.created_at | date: 'longDate'}]}</h5>
+                <h5 class="campaign-date">{[{campaign.createdAt | date: 'longDate'}]}</h5>
                 <h4>{[{campaign.title}]}</h4>
                 <h5 ng-if="!campaign.publish">DRAFT</h5>
                 <div class="text-center">

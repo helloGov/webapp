@@ -3,15 +3,46 @@ var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var Influencer = new Schema({
-    name: { type: String, trim: true },
-    email: { type: String, trim: true },
-    bio: {type: String, trim: true},
-    oauthID: {type: String},
-    password: {type: String, trim: false},
-    image: {type: String, trim: false},
-    admin: {type: Boolean, trim: true},
-    timestamp: {type: Date, default: Date.now}
-});
+    firstName: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    lastName: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    email: {
+        type: String,
+        trim: true,
+        unique: true,
+        required: true
+    },
+    bio: {
+        type: String,
+        trim: true
+    },
+    oauthID: {
+        type: String
+    },
+    image: {
+        type: String,
+        trim: false
+    },
+    admin: {
+        type: Boolean,
+        trim: true,
+        default: false
+    }
+},
+    {
+        timestamps: {
+            createdAt: 'createdAt',
+            updatedAt: 'updatedAt'
+        }
+    }
+);
 
 Influencer.plugin(passportLocalMongoose);
 module.exports = mongoose.model('Influencer', Influencer);

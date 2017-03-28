@@ -3,10 +3,10 @@
 var express = require('express');
 var router = express.Router();
 var campaignController = require('../middleware/campaign');
-var influencerController = require('../middleware/influencer');
 var apiRoutes = require('./api');
 var secrets = require('../../secrets');
 var squareProxy = require('express-http-proxy');
+var Influencer = require('../models/influencer');
 
 router.get('/', function(request, response, next) {
     if (request.user) {
@@ -19,11 +19,11 @@ router.get('/', function(request, response, next) {
 
 router.get('/home', (request, response) => {
     if (request.user) {
-        var influencerPromise = influencerController.findInfluencer(request);
-        influencerPromise.then(function(result) {
-            console.log('rendering for influencer: ' + JSON.stringify(result));
-            response.render('home', {influencer: result, logged_in: true});
-        });
+        Influencer.findOne({_id: request.user.id})
+            .then(function(result) {
+                console.log('rendering for influencer: ' + JSON.stringify(result));
+                response.render('home', {influencer: result, logged_in: true});
+            });
     } else {
         response.redirect('/login');
     }
@@ -31,11 +31,11 @@ router.get('/home', (request, response) => {
 
 router.get('/profile', (request, response) => {
     if (request.user) {
-        var influencerPromise = influencerController.findInfluencer(request);
-        influencerPromise.then(function(result) {
-            console.log('rendering for influencer: ' + JSON.stringify(result));
-            response.render('profile', {influencer: result, logged_in: true});
-        });
+        Influencer.findOne({_id: request.user.id})
+            .then(function(result) {
+                console.log('rendering for influencer: ' + JSON.stringify(result));
+                response.render('profile', {influencer: result, logged_in: true});
+            });
     } else {
         response.redirect('/login');
     }
