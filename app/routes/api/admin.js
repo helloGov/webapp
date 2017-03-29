@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const signupController = require('../../middleware/signup');
+const signupController = require('../../controllers/signup');
 const Signup = require('../../models/signup');
 
 // admin link generation

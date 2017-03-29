@@ -111,7 +111,7 @@ helloGov.controller('userController', function($scope, $http, $location, $window
             .then(function(data) {
                 $scope.loginDetails = {};
                 $scope.session = data;
-                $window.location.href = '/';
+                $window.location.href = '/home';
             })
             .catch(function() {
                 angular.element('#login-message').html('Login failed');

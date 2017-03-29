@@ -1,8 +1,4 @@
-// TODO: remove this from here, but for now it's needed because requiring it
-// causes the auth middleware to be loaded
-require('../middleware/authentication.js');
-
-var influencerController = require('../middleware/influencer');
+var influencerController = require('../controllers/influencer');
 var passport = require('passport');
 var Signup = require('../models/signup');
 
@@ -22,7 +18,7 @@ module.exports = function(router) {
 
     router.post('/login', (request, response) => {
         passport.authenticate('local')(request, response, function() {
-            response.redirect('/');
+            response.redirect('/home');
         });
     });
 

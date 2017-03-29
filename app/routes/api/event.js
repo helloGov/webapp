@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-var eventController = require('../../middleware/event.js');
+var eventController = require('../../controllers/event.js');
 
 router.route('/events')
 
