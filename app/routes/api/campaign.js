@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const campaignController = require('../../middleware/campaign');
+const campaignController = require('../../controllers/campaign');
 const Campaign = require('../../models/campaign');
 
 // Campaign list

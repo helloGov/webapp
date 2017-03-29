@@ -2,7 +2,7 @@
 // TODO: How do we reuse the express object we created in app/index.js
 var express = require('express');
 var router = express.Router();
-var campaignController = require('../middleware/campaign');
+var campaignController = require('../controllers/campaign');
 var apiRoutes = require('./api');
 var secrets = require('../../secrets');
 var squareProxy = require('express-http-proxy');

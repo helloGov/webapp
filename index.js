@@ -16,6 +16,9 @@ var passport = require('passport');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var Influencer = require('./app/models/influencer');
+var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var facebookAuthHandler = require('./app/controllers/authentication').facebookAuthHandler;
 
 var routes = require('./app/routes');
 
@@ -61,8 +64,27 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
+// passport setup
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new LocalStrategy(Influencer.authenticate()));
+passport.use(new FacebookStrategy({
+    clientID: secrets.fb_app_id,
+    clientSecret: secrets.fb_app_secret,
+    callbackURL: secrets.fb_callback_url
+}, facebookAuthHandler));
+
+passport.serializeUser(function(influencer, done) {
+    console.log('serializeUser: ' + influencer._id);
+    done(null, influencer._id);
+});
+passport.deserializeUser(function(id, done) {
+    Influencer.findById(id, function(err, influencer) {
+        console.log('deserializeUser: ' + JSON.stringify(influencer));
+        done(err, influencer);
+    });
+});
 
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
@@ -78,18 +100,6 @@ app.engine('.hbs', exphbs({
         }
     }
 }));
-
-passport.serializeUser(function(influencer, done) {
-    console.log('serializeUser: ' + influencer._id);
-    done(null, influencer._id);
-});
-passport.deserializeUser(function(id, done) {
-    Influencer.findById(id, function(err, influencer) {
-        console.log('deserializeUser: ' + JSON.stringify(influencer));
-        if (!err) done(null, influencer);
-        else done(err, null);
-    });
-});
 
 app.use('/', routes);
 
