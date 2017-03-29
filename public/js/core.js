@@ -86,8 +86,7 @@ helloGov.controller('successController', function($scope, $location) {
     $scope.shortid = urlSplit[1];
 });
 
-helloGov.controller('userController', function($scope, $http, $location, $window) {
-    $scope.loginDetails = {};
+helloGov.controller('signupController', function($scope, $http, $window) {
     $scope.signupDetails = {};
 
     $scope.signUp = function() {
@@ -105,6 +104,28 @@ helloGov.controller('userController', function($scope, $http, $location, $window
                 angular.element('#login-message').html('Signup failed! Check your email and try again, or contact us at team@hellogov.org for assistance');
             });
     };
+});
+
+helloGov.directive('matchInput', function() {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function(scope, elem, attrs, ctrl) {
+            function check() {
+                var el1 = scope.$eval(attrs.ngModel);
+                var el2 = scope.$eval(attrs.matchInput);
+                return el1 === el2;
+            }
+
+            scope.$watch(check, function(n) {
+                ctrl.$setValidity('unique', n);
+            });
+        }
+    };
+});
+
+helloGov.controller('userController', function($scope, $http, $location, $window) {
+    $scope.loginDetails = {};
 
     $scope.login = function() {
         $http.post('/login', $scope.loginDetails)
