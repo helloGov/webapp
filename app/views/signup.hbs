@@ -1,24 +1,40 @@
-<div ng-controller="userController">
-  <div class="container">
-      <div class="row text-center">
+<div ng-controller="signupController">
+    <div class="container">
+        <div class="row text-center">
 
-          <!-- TODO: Find an image to go here so it doesn't look so bland -->
+            <!-- TODO: Find an image to go here so it doesn't look so bland -->
 
-          <form name="signupForm">
-              <div class="form-group">
-                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your signup email here (required)" ng-model="signupDetails.email">
-                  </br></br>
-                  <input type="text" class="form-control input-lg text-center" placeholder="First name" ng-model="signupDetails.firstName">
-                  <input type="text" class="form-control input-lg text-center" placeholder="Last name" ng-model="signupDetails.lastName">
-                  <input type="text" class="form-control input-lg text-center" placeholder="Username" ng-model="signupDetails.username">
-                  <input type="password" class="form-control input-lg text-center" placeholder="Password" ng-model="signupDetails.password">
-                  <input type="hidden" ng-init="signupDetails.signupLink='{{{signup.signupLink}}}'">
-              </div>
-              <button type="submit" ng-click="signUp()" class="btn primary-button">Sign Up</button>
-            </form>
+            <div class="col-sm-7 col-sm-offset-3">
+                <form name="signupForm">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" placeholder="Enter your signup email here (required)" ng-model="signupDetails.email"
+                            ng-required="true">
+                    </div>
+                    </br>
+                    </br>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" placeholder="First name" ng-model="signupDetails.firstName" ng-required="true">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" placeholder="Last name" ng-model="signupDetails.lastName" ng-required="true">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" placeholder="Username" ng-model="signupDetails.username" ng-required="true">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control input-lg" placeholder="Password" ng-model="signupDetails.password" ng-required="true">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control input-lg" placeholder="Retype password" ng-model="signupDetails.passwordConfirm"
+                            ng-required="true" match-input="signupDetails.password">
+                    </div>
+                    <input type="hidden" ng-init="signupDetails.signupLink='{{{signup.signupLink}}}'">
+                    <button type="submit" ng-click="signUp()" class="btn primary-button" ng-disabled="signupForm.$invalid">Sign Up</button>
+                </form>
+            </div>
 
             <!-- <p class="home&#45;pg&#45;text top&#45;section">OR</p> -->
             <!-- <a href="/auth/facebook"><img src="/images/fb_login.png"></a> -->
-      </div>
-  </div>
+        </div>
+    </div>
 </div>

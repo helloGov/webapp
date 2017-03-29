@@ -1,18 +1,20 @@
 <div ng-controller="userController">
-  <div class="container">
-      <div class="row text-center">
+    <div class="container">
+        <div class="row">
 
-          <!-- TODO: Find an image to go here so it doesn't look so bland -->
+            <!-- TODO: Find an image to go here so it doesn't look so bland -->
 
-          <form>
-              <div class="form-group">
-                  <input type="text" class="form-control input-lg text-center" placeholder="Enter your username here" ng-model="loginDetails.username">
-                  <input type="password" class="form-control input-lg text-center" placeholder="Enter your password here" ng-model="loginDetails.password">
-              </div>
-              <button type="submit" ng-click="login()" class="btn primary-button cta-button">Log In</button>
-          </form>
-          <div id="login-message"></div>
+            <div class="col-sm-7 col-sm-offset-3">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" placeholder="Enter your username here" ng-model="loginDetails.username">
+                        <input type="password" class="form-control input-lg" placeholder="Enter your password here" ng-model="loginDetails.password">
+                    </div>
+                    <button type="submit" ng-click="login()" class="btn primary-button cta-button">Log In</button>
+                </form>
+                <div id="login-message"></div>
+            </div>
 
-      </div>
-  </div>
+        </div>
+    </div>
 </div>
