@@ -1,23 +1,17 @@
 import angular from 'angular';
 
 export default angular.module('helloGov')
-.controller('signupController', function($scope, $http, $window) {
+.controller('signupController', function($scope, $http, $window, constants) {
     'ngInject';
     $scope.signupDetails = {};
 
     $scope.signUp = function() {
-        $http.post('/signup', $scope.signupDetails)
+        $http.post(`${constants.API_ROOT}/influencers`, $scope.signupDetails)
             .then(function(data) {
-                $scope.signUpDetails = {};
-                $scope.session = data;
-                if (data.data.includes('Error')) {
-                    $window.location.href = '/error';
-                } else {
-                    $window.location.href = '/';
-                }
+                $window.location.href = '/home';
             })
             .catch(function(data) {
-                angular.element('#login-message').html('Signup failed! Check your email and try again, or contact us at team@hellogov.org for assistance');
+                $scope.error = 'We couldn\'t complete your sign up right now. Check your info and try again, or contact us at team@hellogov.org for assistance.';
             });
     };
 })

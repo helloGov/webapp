@@ -1,4 +1,24 @@
-input[type="text"], textarea[type="text"], input[type="file"], input[type="password"] {
+input[type="text"], input[type="email"], textarea[type="text"], input[type="file"], input[type="password"] {
     margin: 0 auto 20px;
     border-radius: 0;
+}
+
+.errors {
+    color: $dark-red;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.form-field-error, .form-field-error:focus {
+    border-color: $dark-red;
+    &::-webkit-input-placeholder {
+        color: $dark-red;
+    }
+}
+
+.error-help-text {
+    display: block;
+    color: $dark-red;
+    text-align: left;
+    margin: -12px 0 20px;
 }
