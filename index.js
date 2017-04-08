@@ -42,6 +42,13 @@ const port = secrets.app_port;
 
 // static assets
 if (app.get('env') === 'development') {
+    var webpack = require('webpack');
+    var webpackConfig = require('./webpack.config');
+    var compiler = webpack(webpackConfig);
+    app.use(require('webpack-dev-middleware')(compiler, {
+        noInfo: true, publicPath: webpackConfig.output.publicPath
+    }));
+
     app.use(
         sassMiddleware({
             src: path.join(__dirname, '/public/scss'),
