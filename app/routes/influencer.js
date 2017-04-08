@@ -3,8 +3,6 @@ var passport = require('passport');
 var Signup = require('../models/signup');
 
 module.exports = function(router) {
-    router.post('/signup', influencerController.addInfluencer);
-
     router.get('/signup/:signupId', (request, response) => {
         if (!request.user) {
             Signup.findOne({signupLink: request.params.signupId})
