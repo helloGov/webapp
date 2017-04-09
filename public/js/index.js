@@ -6,5 +6,6 @@ require('./campaign.controller');
 require('./matchInput.directive');
 require('./signup.controller');
 require('./success.controller');
-require('./user.controller');
+require('./login.controller');
+require('./editProfile.controller');
 require('./visitor.controller');
