@@ -1,18 +1,23 @@
-<div ng-controller="userController">
+<div ng-controller="loginController">
     <div class="container">
         <div class="row">
 
             <!-- TODO: Find an image to go here so it doesn't look so bland -->
 
             <div class="col-sm-7 col-sm-offset-3">
-                <form>
+                <form name="loginForm">
                     <div class="form-group">
-                        <input type="text" class="form-control input-lg" placeholder="Enter your username here" ng-model="loginDetails.username">
-                        <input type="password" class="form-control input-lg" placeholder="Enter your password here" ng-model="loginDetails.password">
+                        <input name="username" type="text" class="form-control input-lg" placeholder="Username" ng-model="loginDetails.username" ng-required="true"
+                            autocomplete="off" autocorrect="off" autocapitalize="off">
+                        <input name="password" type="password" class="form-control input-lg" placeholder="Password" ng-model="loginDetails.password" ng-required="true">
                     </div>
-                    <button type="submit" ng-click="login()" class="btn primary-button cta-button">Log In</button>
+                    <div class="errors" ng-if="error">
+                        {[{error}]}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" ng-click="login()" class="btn primary-button cta-button" ng-disabled="loginForm.$invalid">Log In</button>
+                    </div>
                 </form>
-                <div id="login-message"></div>
             </div>
 
         </div>

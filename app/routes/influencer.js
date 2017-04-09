@@ -14,12 +14,6 @@ module.exports = function(router) {
         }
     });
 
-    router.post('/login', (request, response) => {
-        passport.authenticate('local')(request, response, function() {
-            response.redirect('/home');
-        });
-    });
-
     router.get('/login', (request, response) => {
         response.render('login', {logged_in: request.user != null});
     });

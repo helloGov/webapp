@@ -69,4 +69,12 @@ router.route('/influencers')
     });
 });
 
+router.route('/influencers/login')
+
+.post(function(request, response) {
+    passport.authenticate('local')(request, response, function() {
+        response.status(200).end();
+    });
+});
+
 module.exports = router;
