@@ -8,17 +8,17 @@
     letter-spacing: 1px;
     padding: 0.9em 0;
     width: 100%;
+
+    &[disabled]:hover {
+        color: $blue-light;
+    }
 }
 
 a:link.btn {
     color: $blue-light;
 }
 
-.btn:hover, .btn:focus {
-    color: rgba(53, 165, 179, 0.6);
-}
-
-a:link.btn:hover {
+.btn:hover, .btn:focus, a:link.btn:hover {
     color: rgba(53, 165, 179, 0.6);
 }
 
