@@ -12,15 +12,18 @@
       <p>Here's your custom URL. Share it with your followers so that they can access your script and the contact info for their representatives.</p>
     </div>
 
-
     <!-- TODO: Hardcoded links should get changed back to hellogov (and use https not http) before general launch -->
     <h3 class="url-yellow">heyaGOV.ORG/{[{shortid}]}</h3>
 
-    <!-- TODO: This should give feedback so user knows link was copied, ideally like in the mockup -->
-    <button class="btn cta-button primary-button" ngclipboard data-clipboard-text="http://www.heyagov.org/{[{shortid}]}" />Copy URL</button>
-    <!-- TODO: When we have actual preview page, use that URL instead -->
-    <a href="/{[{shortid}]}"><div class="btn cta-button blue-button">Preview URL</div></a>
-    <a href="/campaigns"><div class="btn cta-button blue-button">Go to campaigns</div></a>
+    <div class="form-group">
+        <!-- TODO: This should give feedback so user knows link was copied, ideally like in the mockup -->
+        <button class="btn primary-button" ngclipboard data-clipboard-text="http://www.heyagov.org/{[{shortid}]}" />Copy URL</button>
+        <!-- TODO: When we have actual preview page, use that URL instead -->
+        <a href="/{[{shortid}]}" class="btn primary-button">Preview Campaign</a>
+    </div>
+    <div class="form-group">
+        <a href="/campaigns" class="btn blue-button">Go to campaigns</a>
+    </div>
 
   </div>
 </div>

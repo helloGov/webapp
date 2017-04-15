@@ -1,0 +1,28 @@
+// For media queries:
+
+// @media (max-width: $tablet-max) {
+//   .my-class {
+//     // rules for any size up to a large tablet
+//   }
+// }
+
+// or
+
+// @media #{$tablet-only} {
+//   .my-class {
+//     // rules for tablet size only
+//   }
+// }
+
+$phone-min: 0px;
+$phone-max: 669px;
+$tablet-min: 670px;
+$tablet-max: 979px;
+$desktop-min: 980px;
+$desktop-max: 1289px;
+$large-desktop-min: 1290px;
+
+$phone-only: "screen and (min-width: #{$phone-min}) and (max-width: #{$phone-max})";
+$tablet-only: "screen and (min-width: #{$tablet-min}) and (max-width: #{$tablet-max})";
+$desktop-only: "screen and (min-width: #{$desktop-min}) and (max-width: #{$desktop-max})";
+$large-desktop-only: "screen and (min-width: #{$large-desktop-min})";
