@@ -4,7 +4,7 @@ export default angular.module('helloGov')
 .controller('analyticsController', function($scope, $http, $location, constants) {
     'ngInject';
     var urlSplit = $location.absUrl().split('/');
-    $scope.campaignId = urlSplit.pop();
+    $scope.campaignId = urlSplit[1];
 
     $http.get(`${constants.API_ROOT}/campaigns/${$scope.campaignId}`, $scope.campaign)
     .then(function(result) {

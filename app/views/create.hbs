@@ -3,7 +3,7 @@ body {
   background-color: white;
 }
 </style>
-<div ng-controller="campaignController" class="campaign-form container reversed-bg">
+<div ng-controller="createController" class="campaign-form container reversed-bg">
   <div class="text-center col-md-8 col-md-offset-2">
     <div class="main-icon">
       <img
@@ -71,6 +71,9 @@ body {
         <div class="max-text">Max 200 characters</div>
       </div>
 
+      <div class="errors" ng-if="error">
+        {[{error}]}
+      </div>
       <div class="form-group align-right">
         <button type="button" class="btn secondary-button btn-lg" ng-click="createCampaign(false)">
           Save As Draft
