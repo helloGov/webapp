@@ -52,7 +52,6 @@ router.get('/locateLegislator', (request, response) => {
 });
 
 require('./user.js')(router);
-require('./analytics.js')(router);
 require('./campaign.js')(router);
 
 router.use('/api', apiRoutes);

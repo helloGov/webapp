@@ -42,7 +42,12 @@ var Influencer = new Schema({
             createdAt: 'createdAt',
             updatedAt: 'updatedAt'
         },
-        virtuals: true
+        toJSON: {
+            virtuals: true
+        },
+        toObject: {
+            virtuals: true
+        }
     }
 );
 
