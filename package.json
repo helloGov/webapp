@@ -53,6 +53,7 @@
     "eslint-plugin-node": "^4.2.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^2.1.1",
+    "html-loader": "^0.4.5",
     "ng-annotate-webpack-plugin": "^0.2.1-pre",
     "node-sass-middleware": "^0.11.0",
     "uglifyjs-webpack-plugin": "^0.4.1",

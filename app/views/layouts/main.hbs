@@ -34,23 +34,28 @@
             .config(function($interpolateProvider) {
                 $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
             })
+            .config(function($httpProvider) {
+                // disable browser caching of GET requests
+                $httpProvider.defaults.headers.get = $httpProvider.defaults.headers.get || {};
+                $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+                $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+            })
             .constant('constants', {
                 API_ROOT: '/api'
-            });
+            })
+            .value('currentUserId', '{{user.id}}');
 
     </script>
     <script src="/build/js/app.bundle.js"></script>
   </head>
 
   <body class="{{{body_class}}}">
-    <nav id="nav" class='navbar text-center'>
-      <div class="row">
+    <nav id="nav" class="navbar text-center">
         {{#if logged_in}}
         <span><img class="hamburger" style="cursor:pointer" onclick="openNav()" src="/images/Hamburger.svg" /></span>
         {{/if}}
-          <a href="/"><img src="/images/logo.png" class="logo"/></a>
-          <!-- <img src="/images/profile.png" class="pull&#45;right profile"/> -->
-      </div>
+        <a href="/"><img src="/images/logo.png" class="logo"/></a>
+        <!-- <img src="/images/profile.png" class="pull&#45;right profile-photo"/> -->
     </nav>
 
     {{#if logged_in}}
@@ -59,7 +64,7 @@
           <a href="/campaigns">CAMPAIGNS</a><hr>
           {{!-- <a href="/analytics">ANALYTICS</a><hr> --}}
           <a href="mailto:team@hellogov.org">HELP</a><hr>
-          <a href="/">PROFILE</a><hr>
+          <a href="/settings">SETTINGS</a><hr>
           <a href="/logout">LOGOUT</a><hr>
         </div>
     {{/if}}

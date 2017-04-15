@@ -6,7 +6,7 @@ export default angular.module('helloGov')
     $scope.signupDetails = {};
 
     $scope.signUp = function() {
-        $http.post(`${constants.API_ROOT}/influencers`, $scope.signupDetails)
+        $http.post(`${constants.API_ROOT}/users`, $scope.signupDetails)
             .then(function(data) {
                 $window.location.href = '/home';
             })

@@ -1,0 +1,45 @@
+$border-color: #80c7d0;
+
+.settings-container {
+
+    .read-only {
+        margin-bottom: 10px;
+        border-bottom: 1px solid $border-color;
+        padding-bottom: 20px;
+        max-height: 800px;
+        overflow: hidden;
+        opacity: 1;
+        transition: 0.4s;
+
+        &.collapsed {
+            max-height: 0;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+        }
+    }
+
+    .setting-edit {
+        border-bottom: 1px solid $border-color;
+        max-height: 800px;
+        overflow: hidden;
+        opacity: 1;
+        transition: 0.4s;
+
+        &.collapsed {
+            max-height: 0;
+            border: none;
+            opacity: 0;
+        }
+    }
+
+    .edit-setting-link {
+        display: inline-block;
+        margin: 0 12px;
+        text-decoration: underline;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

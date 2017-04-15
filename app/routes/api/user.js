@@ -4,7 +4,8 @@ var passport = require('passport');
 const Influencer = require('../../models/influencer');
 const Signup = require('../../models/signup');
 
-router.route('/influencers')
+// Users list
+router.route('/users')
 
 .post(function(request, response) {
     var findStr = { email: request.body.email, signupLink: request.body.signupLink };
@@ -21,7 +22,7 @@ router.route('/influencers')
                 request.body.password,
                 function(err, account) {
                     if (err) {
-                        console.log('error! could not create new influencer: ' + err);
+                        console.log('error! could not create new user: ' + err);
                         response.status(403).send({
                             error: {
                                 statusCode: 403,
@@ -47,12 +48,12 @@ router.route('/influencers')
                 }
             );
         } else {
-            console.log('Influencer not found in signup database! Influencer: ' + request.body.email + ' link: ' + request.body.signupLink);
+            console.log('User not found in signup database! User: ' + request.body.email + ' link: ' + request.body.signupLink);
             response.status(403).send({
                 error: {
                     statusCode: 403,
                     status: 'Unauthorized',
-                    message: 'Influencer not found in signup database.'
+                    message: 'User not found in signup database.'
                 }
             });
         }
@@ -63,18 +64,36 @@ router.route('/influencers')
             error: {
                 statusCode: 403,
                 status: 'Unauthorized',
-                message: 'Influencer not found in signup database.'
+                message: 'User not found in signup database.'
             }
         });
     });
 });
 
-router.route('/influencers/login')
+// Users detail
+router.route('/users/:userId')
 
-.post(function(request, response) {
-    passport.authenticate('local')(request, response, function() {
-        response.status(200).end();
-    });
+.get((request, response) => {
+    Influencer.findById(request.params.userId)
+        .then(function(user) {
+            response.json({result: user.toJSON({virtuals: true})});
+        })
+        .catch(function(err) {
+            response.json(err);
+        });
+})
+
+.patch((request, response) => {
+    if (request.user.id !== request.params.userId) {
+        return response.status(403).end();
+    }
+    Influencer.findOneAndUpdate({'_id': request.params.userId}, request.body, {new: true})
+        .then(function(user) {
+            response.json({result: user.toJSON({virtuals: true})});
+        })
+        .catch(function(err) {
+            response.json(err);
+        });
 });
 
 module.exports = router;

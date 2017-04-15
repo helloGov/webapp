@@ -7,5 +7,5 @@ require('./matchInput.directive');
 require('./signup.controller');
 require('./success.controller');
 require('./login.controller');
-require('./editProfile.controller');
+require('./settings/settings.component');
 require('./visitor.controller');

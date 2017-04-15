@@ -1,4 +1,4 @@
-var influencerController = require('../controllers/influencer');
+var userController = require('../controllers/user');
 var passport = require('passport');
 var Signup = require('../models/signup');
 
@@ -7,7 +7,7 @@ module.exports = function(router) {
         if (!request.user) {
             Signup.findOne({signupLink: request.params.signupId})
                 .then((signup) => {
-                    response.render('signup', {logged_in: request.user != null, signup: signup});
+                    response.render('signup', {user: null, logged_in: request.user != null, signup: signup});
                 });
         } else {
             response.redirect('/');
@@ -15,13 +15,13 @@ module.exports = function(router) {
     });
 
     router.get('/login', (request, response) => {
-        response.render('login', {logged_in: request.user != null});
+        response.render('login', {user: null, logged_in: request.user != null});
     });
 
     // Redirect the user to Facebook for authentication.  When complete,
     // Facebook will redirect the user back to the application at
     //     /auth/facebook/callback
-    router.get('/auth/facebook', influencerController.addInfluencerWithFacebook);
+    router.get('/auth/facebook', userController.addUserWithFacebook);
 
     // Facebook will redirect the user to this URL after approval.  Finish the
     // authentication process by attempting to obtain an access token.  If
@@ -33,4 +33,12 @@ module.exports = function(router) {
             console.log(`got user_details: ${JSON.stringify(req.body)}`);
             res.redirect('/');
         });
+
+    router.get('/settings', (request, response) => {
+        if (request.user) {
+            response.render('settings', {user: request.user, logged_in: true});
+        } else {
+            response.redirect('/login');
+        }
+    });
 };
