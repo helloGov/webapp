@@ -6,7 +6,6 @@ var campaignController = require('../controllers/campaign');
 var apiRoutes = require('./api');
 var secrets = require('../../secrets');
 var squareProxy = require('express-http-proxy');
-var Influencer = require('../models/influencer');
 
 router.get('/', function(request, response, next) {
     if (request.user) {
@@ -19,23 +18,7 @@ router.get('/', function(request, response, next) {
 
 router.get('/home', (request, response) => {
     if (request.user) {
-        Influencer.findOne({_id: request.user.id})
-            .then(function(result) {
-                console.log('rendering for influencer: ' + JSON.stringify(result));
-                response.render('home', {influencer: result, logged_in: true});
-            });
-    } else {
-        response.redirect('/login');
-    }
-});
-
-router.get('/profile', (request, response) => {
-    if (request.user) {
-        Influencer.findOne({_id: request.user.id})
-            .then(function(result) {
-                console.log('rendering for influencer: ' + JSON.stringify(result));
-                response.render('profile', {influencer: result, logged_in: true});
-            });
+        response.render('home', {user: request.user, logged_in: true});
     } else {
         response.redirect('/login');
     }
@@ -44,7 +27,7 @@ router.get('/profile', (request, response) => {
 router.get('/admin', (request, response) => {
     // only allow admin access if user has admin field
     if (request.user && request.user.get('admin')) {
-        response.render('admin', {logged_in: true});
+        response.render('admin', {user: request.user, logged_in: true});
     } else {
         response.redirect('/login');
     }
@@ -68,14 +51,14 @@ router.get('/locateLegislator', (request, response) => {
     campaignController.findLegislator(latitude, longitude, response);
 });
 
-require('./influencer.js')(router);
+require('./user.js')(router);
 require('./analytics.js')(router);
 require('./campaign.js')(router);
 
 router.use('/api', apiRoutes);
 
-router.use(function timeLog(request, response, next) {
-    response.status(404).render('404', {logged_in: request.user != null});
+router.use(function notFound(request, response, next) {
+    response.status(404).render('404', {user: request.user, logged_in: request.user != null});
 });
 
 module.exports = router;

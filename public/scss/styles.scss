@@ -2,6 +2,7 @@
 @import "ie10-viewport-bug-workaround";
 
 // shared styles
+@import "vars";
 @import "colors";
 @import "main";
 @import "buttons";
@@ -15,3 +16,4 @@
 @import "campaignSuccess";
 @import "analytics";
 @import "thankYou";
+@import "settings.scss";

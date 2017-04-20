@@ -15,6 +15,14 @@ h1, h2, h3, h4, h5, p {
     font-family: 'Monteserrat', sans-serif;
 }
 
+a, a:hover {
+    color: $white;
+}
+
+.reversed-bg a, .reversed-bg a:hover {
+    color: $blue-light;
+}
+
 .section-header {
     font-size: 1.1em;
     text-transform: uppercase;
@@ -39,10 +47,6 @@ h1, h2, h3, h4, h5, p {
 .navbar {
     background-color: $yellow;
     border-radius: 0;
-}
-
-.row {
-    color: $blue-light;
     height: 50px;
 }
 
@@ -53,11 +57,11 @@ h1, h2, h3, h4, h5, p {
 }
 
 .logo {
-    height: 75%;
+    height: 38px;
     margin: 6px;
 }
 
-.profile {
+.profile-photo {
     height: 90%;
     position: absolute;
     right: 11px;

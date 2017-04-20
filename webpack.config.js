@@ -18,14 +18,22 @@ const config = {
         publicPath: '/build/js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js?$/,
+                loader: 'babel-loader',
                 include: path.join(__dirname, '/public/js'),
                 exclude: [
                     path.join(__dirname, '/public/js/vendor')
-                ],
-                loader: 'babel-loader'
+                ]
+            },
+            {
+                test: /\.html$/,
+                loader: 'html-loader',
+                include: path.join(__dirname, '/public/js'),
+                options: {
+                    minimize: false
+                }
             }
         ]
     },

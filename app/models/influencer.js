@@ -21,7 +21,8 @@ var Influencer = new Schema({
     },
     bio: {
         type: String,
-        trim: true
+        trim: true,
+        default: ''
     },
     oauthID: {
         type: String
@@ -40,9 +41,14 @@ var Influencer = new Schema({
         timestamps: {
             createdAt: 'createdAt',
             updatedAt: 'updatedAt'
-        }
+        },
+        virtuals: true
     }
 );
+
+Influencer.virtual('fullName').get(function() {
+    return `${this.firstName} ${this.lastName}`;
+});
 
 Influencer.plugin(passportLocalMongoose);
 module.exports = mongoose.model('Influencer', Influencer);

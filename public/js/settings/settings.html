@@ -1,0 +1,95 @@
+<form novalidate>
+    <h2>Name</h2>
+    <div class="form-group read-only" ng-class="{'collapsed': $ctrl.activeSetting === 'name'}">
+        {[{$ctrl.user.fullName}]} <a class="edit-setting-link" ng-click="$ctrl.editSetting('name')">Edit</a>
+    </div>
+    <div class="setting-edit" ng-class="{'collapsed': $ctrl.activeSetting !== 'name'}" ng-form="nameForm">
+        <div class="form-group">
+            <input name="firstName" type="text" class="form-control input-lg" placeholder="First name"
+                ng-model="$ctrl.profile.firstName" ng-required="true"
+                ng-class="{'form-field-error': nameForm.firstName.$touched && nameForm.firstName.$invalid}">
+        </div>
+        <div class="form-group">
+            <input name="lastName" type="text" class="form-control input-lg" placeholder="Last name"
+                ng-model="$ctrl.profile.lastName" ng-required="true"
+                ng-class="{'form-field-error': nameForm.lastName.$touched && nameForm.lastName.$invalid}">
+        </div>
+        <div class="errors" ng-if="$ctrl.error">
+            {[{$ctrl.error}]}
+        </div>
+        <div class="form-group align-right">
+            <button class="btn secondary-button align-right" ng-click="$ctrl.cancel(nameForm)">Cancel</button>
+            <button type="submit" class="btn primary-button align-right" ng-click="$ctrl.save($ctrl.profile, nameForm)"
+                ng-disabled="nameForm.$invalid">Save</button>
+        </div>
+    </div>
+    <h2>Email</h2>
+    <div class="form-group read-only" ng-class="{'collapsed': $ctrl.activeSetting === 'email'}">
+        {[{$ctrl.user.email}]} <a class="edit-setting-link" ng-click="$ctrl.editSetting('email')">Edit</a>
+    </div>
+    <div class="form-group setting-edit" ng-class="{'collapsed': $ctrl.activeSetting !== 'email'}" ng-form="emailForm">
+        <input name="email" type="email" class="form-control input-lg" placeholder="Email address"
+            ng-model="$ctrl.profile.email" ng-required="true"
+            ng-class="{'form-field-error': emailForm.email.$touched && emailForm.email.$invalid}">
+        <span class="error-help-text" ng-if="emailForm.email.$touched && emailForm.email.$error.email">Please enter a valid email address.</span>
+        <div class="errors" ng-if="$ctrl.error">
+            {[{$ctrl.error}]}
+        </div>
+        <div class="form-group align-right">
+            <button class="btn secondary-button align-right" ng-click="$ctrl.cancel(emailForm)">Cancel</button>
+            <button type="submit" class="btn primary-button align-right" ng-click="$ctrl.save($ctrl.profile, emailForm)"
+                ng-disabled="emailForm.$invalid">Save</button>
+        </div>
+    </div>
+    <h2>Username</h2>
+    <div class="form-group read-only" ng-class="{'collapsed': $ctrl.activeSetting === 'username'}">
+        {[{$ctrl.user.username}]} <a class="edit-setting-link" ng-click="$ctrl.editSetting('username')">Edit</a>
+    </div>
+    <div class="form-group setting-edit" ng-class="{'collapsed': $ctrl.activeSetting !== 'username'}" ng-form="usernameForm">
+        <input name="username" type="text" class="form-control input-lg" placeholder="Username"
+            autocomplete="off" autocorrect="off" autocapitalize="off"
+            ng-model="$ctrl.profile.username" ng-required="true"
+            ng-class="{'form-field-error': usernameForm.username.$touched && usernameForm.username.$invalid}">
+        <div class="errors" ng-if="$ctrl.error">
+            {[{$ctrl.error}]}
+        </div>
+        <div class="form-group align-right">
+            <button class="btn secondary-button align-right" ng-click="$ctrl.cancel(usernameForm)">Cancel</button>
+            <button type="submit" class="btn primary-button align-right" ng-click="$ctrl.save($ctrl.profile, usernameForm)"
+                ng-disabled="usernameForm.$invalid">Save</button>
+        </div>
+    </div>
+    <h2>Password</h2>
+    <div class="form-group read-only" ng-class="{'collapsed': $ctrl.activeSetting === 'password'}">
+        ****** <a class="edit-setting-link" ng-click="$ctrl.editSetting('password')">Edit</a>
+    </div>
+    <div class="setting-edit" ng-class="{'collapsed': $ctrl.activeSetting !== 'password'}" ng-form="passwordForm">
+        <div class="form-group">
+            <input name="password" type="password" class="form-control input-lg" placeholder="Password"
+                ng-model="$ctrl.profile.password" ng-required="true"
+                ng-class="{'form-field-error': passwordForm.password.$touched && passwordForm.password.$invalid}">
+        </div>
+        <div class="form-group">
+            <input name="passwordConfirm" type="password" class="form-control input-lg" placeholder="Retype password"
+                ng-model="$ctrl.profile.passwordConfirm" ng-required="true" match-input="$ctrl.profile.password"
+                ng-class="{'form-field-error': passwordForm.passwordConfirm.$touched && passwordForm.passwordConfirm.$invalid}">
+            <span class="error-help-text" ng-if="passwordForm.passwordConfirm.$touched && passwordForm.passwordConfirm.$error.unique">Passwords must match.</span>
+        </div>
+        <div class="errors" ng-if="$ctrl.error">
+            {[{$ctrl.error}]}
+        </div>
+        <div class="form-group align-right">
+            <button class="btn secondary-button align-right" ng-click="$ctrl.cancel(passwordForm)">Cancel</button>
+            <button type="submit" class="btn primary-button align-right" ng-click="$ctrl.updatePassword($ctrl.profile, passwordForm)"
+                ng-disabled="passwordForm.$invalid">Save</button>
+        </div>
+    </div>
+    <!--
+    <div class="form-group">
+        <textarea type="text" class="form-control" placeholder="Share some info about yourself." ng-model="profile.bio"></textarea>
+    </div>
+    <div class="form-group">
+        <input type="file" class="form-control" placeholder="Upload a photo." ng-model="profile.image" onchange="angular.element(this).scope().file_changed(this)"  accept="image/*" />
+    </div>
+    -->
+</form>

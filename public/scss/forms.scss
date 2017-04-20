@@ -22,3 +22,13 @@ input[type="text"], input[type="email"], textarea[type="text"], input[type="file
     text-align: left;
     margin: -12px 0 20px;
 }
+
+.form-group {
+    &.align-right {
+        text-align: right;
+
+        .btn:last-of-type {
+            margin-right: 0;
+        }
+    }
+}

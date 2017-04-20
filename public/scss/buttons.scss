@@ -6,11 +6,22 @@
     font-size: 1.1em;
     font-weight: bolder;
     letter-spacing: 1px;
-    padding: 0.9em 0;
+    padding: 0.9em 2em;
+    margin: 10px 0;
     width: 100%;
 
     &[disabled]:hover {
         color: $blue-light;
+    }
+
+    &.center-block {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    @media (min-width: $tablet-min) {
+        width: auto;
+        margin: 10px;
     }
 }
 
@@ -25,17 +36,21 @@ a:link.btn {
 /* yellow background, blue text */
 .primary-button {
     background-color: $yellow;
+    border: 2px solid $yellow;
 }
 
 /* solid blue border and text, white background */
 .secondary-button {
-    background-color: white;
+    background-color: $white;
+    border: 2px solid $white;
+}
+.reversed-bg .secondary-button {
     border: 2px solid $blue-light;
 }
 
 /* dotted blue border and text, white background */
 .tertiary-button {
-    background-color: white;
+    background-color: $white;
     border: 2px dotted $blue-light;
 }
 
@@ -53,9 +68,3 @@ a:link.btn {
     }
 }
 
-.button-option {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
