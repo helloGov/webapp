@@ -46,7 +46,7 @@ CampaignSchema.methods.delete = function(userId) {
 };
 
 CampaignSchema.virtual('url').get(function() {
-    return `/c/${this._id}`;
+    return `/${this._id}`;
 });
 
 var Campaign = mongoose.model('Campaign', CampaignSchema);

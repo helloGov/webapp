@@ -12,6 +12,8 @@ export default angular.module('helloGov')
         // if on an edit page, then grab the shortid from URL
         var urlSplit = $location.absUrl().split('/');
         if (urlSplit.indexOf('edit') !== -1) {
+            // FIXME: this is super brittle to get the campaignId like this, but we're not using angular's
+            // routing so it's not possible to get it using angular yet
             $scope.formData.shortid = urlSplit[urlSplit.length - 2];
             isNew = false;
         }

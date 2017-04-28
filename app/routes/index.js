@@ -51,10 +51,13 @@ router.get('/locateLegislator', (request, response) => {
     campaignController.findLegislator(latitude, longitude, response);
 });
 
-require('./user.js')(router);
-require('./campaign.js')(router);
-
 router.use('/api', apiRoutes);
+
+require('./user.js')(router);
+// these routes need to remain at the end because they contain a
+// dynamic route at the root '/:campaignId' which will try to match
+// any other root URL if defined earlier
+require('./campaign.js')(router);
 
 router.use(function notFound(request, response, next) {
     response.status(404).render('404', {user: request.user, logged_in: request.user != null});

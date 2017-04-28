@@ -17,7 +17,7 @@ module.exports = function(router) {
     });
 
     // campaign call page (available to all visitors)
-    router.get('/c/:shortid', (request, response) => {
+    router.get('/:shortid', (request, response) => {
         Campaign.findOne({_id: request.params.shortid, publish: true})
             .then(function(campaign) {
                 if (!campaign) {
@@ -28,7 +28,7 @@ module.exports = function(router) {
     });
 
     // campaign success page (at the end of campaign creation)
-    router.get('/c/:shortid/success', (request, response) => {
+    router.get('/:shortid/success', (request, response) => {
         Campaign.findOne({_id: request.params.shortid, publish: true})
             .then(function(campaign) {
                 let campaignFullUrl = `${request.protocol}://${request.host}${campaign.url}`;
@@ -41,13 +41,13 @@ module.exports = function(router) {
             });
     });
 
-    router.get('/c/:shortid/analytics', function(request, response) {
+    router.get('/:shortid/analytics', function(request, response) {
         response.render('analytics', {user: request.user, logged_in: request.user != null});
     });
 
 
     // campaign thank-you page (available to all visitors after completing call)
-    router.get('/c/:shortid/thank-you', (request, response) => {
+    router.get('/:shortid/thank-you', (request, response) => {
         Campaign.findById(request.params.shortid)
             .then(function(campaign) {
                 if (campaign) {
@@ -60,7 +60,7 @@ module.exports = function(router) {
     });
 
     // edit campaign page
-    router.get('/c/:shortid/edit', (request, response) => {
+    router.get('/:shortid/edit', (request, response) => {
         if (request.user) {
             Campaign.findById(request.params.shortid)
                 .then(function(campaign) {
@@ -76,7 +76,7 @@ module.exports = function(router) {
     });
 
     // delete campaign endpoint
-    router.get('/c/:shortid/delete', (request, response) => {
+    router.get('/:shortid/delete', (request, response) => {
         if (request.user) {
             Campaign.findById(request.params.shortid)
                 .then(function(campaign) {
