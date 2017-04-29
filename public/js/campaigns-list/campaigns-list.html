@@ -1,0 +1,36 @@
+<div ng-repeat="campaign in $ctrl.campaigns" class="background-white">
+    <div class="campaign-info">
+        <h5 class="campaign-date">{[{campaign.createdAt | date: 'longDate'}]}</h5>
+        <h4>{[{campaign.title}]}</h4>
+        <h5 ng-if="!campaign.publish">DRAFT</h5>
+        <div class="text-center">
+            <!-- TODO: Update analytics link when we have individual pages for each campaign -->
+            <a href="{[{campaign.url}]}/analytics"><div class="option-button">
+                <input type="image" src="/images/analytics_icon.svg" />
+                <p>Analytics</p>
+            </div></a>
+            <!-- TODO: This should give feedback, ideally like in the mockup -->
+            <div class="option-button">
+                <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}" />
+                <p>Link</p>
+            </div>
+            <a ng-href="{[{campaign.url}]}/edit"><div class="option-button">
+                <input type="image" src="/images/pencil.jpg" />
+                <p>Edit</p>
+            </div></a>
+            <!-- TODO: Show a warning first like in the mockup -->
+            <a href="{[{campaign.url}]}/delete"><div class="option-button">
+                <input type="image" src="/images/white_delete_icon.jpg" />
+                <p>Delete</p>
+            </div></a>
+        </div>
+    </div>
+</div>
+<div ng-if="$ctrl.campaigns.length === 0">
+    <p>Looks like you haven't created any campaigns yet! <a href="/create">Get started now!</a></p>
+</div>
+
+<div class="errors text-center" ng-if="$ctrl.error">
+    {[{$ctrl.error}]}
+</div>
+
