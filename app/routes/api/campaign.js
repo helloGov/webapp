@@ -14,7 +14,7 @@ router.route('/campaigns')
             thank_you: request.body.thank_you,
             learn_more: request.body.learn_more,
             publish: request.body.publish,
-            influencer: request.user.id
+            user: request.user.id
         });
         campaign.save()
             .then(function(campaign) {
@@ -62,7 +62,7 @@ router.route('/campaigns/:campaignId')
 
 // update campaign
 .patch((request, response) => {
-    Campaign.findOneAndUpdate({'_id': request.params.campaignId, 'influencer': request.user.id}, request.body, {new: true})
+    Campaign.findOneAndUpdate({'_id': request.params.campaignId, 'user': request.user.id}, request.body, {new: true})
         .then(function(campaign) {
             response.json({result: campaign});
         })

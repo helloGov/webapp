@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Influencer = require('./influencer');
 
 var Event = new Schema({
     type: { type: String, trim: true },
     ip: {type: String, trim: true},
-    user: {type: String, trim: false},
+    user: {type: Schema.Types.ObjectId, ref: Influencer},
     user_agent: {
         mobile: {type: Boolean},
         browser: {
@@ -24,8 +25,7 @@ var Event = new Schema({
         longitude: {type: Number}
     },
     metadata: {
-        campaign: {type: String, trim: false},
-        influencer: {type: String, trim: false}
+        campaign: {type: String, trim: false}
     }
 },
     {

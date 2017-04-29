@@ -27,12 +27,15 @@ eventController.logEvent = function(request, response) {
             device: parsedRequest.device.family
         }
     });
-    if (request.user) event.user = request.user.id;
+    if (request.user) {
+        event.user = request.user.id;
+    }
     event.save().then(function() {
+        response.send('OK');
     }).catch(function(error) {
         console.log(error);
+        response.status(500).end();
     });
-    response.send('OK');
 };
 
 eventController.validateAnalytics = function(analyticsObject) {
