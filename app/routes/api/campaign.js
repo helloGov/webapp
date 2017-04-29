@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const campaignController = require('../../controllers/campaign');
 const Campaign = require('../../models/campaign');
 
 // Campaign list
@@ -9,14 +8,21 @@ router.route('/campaigns')
 // create new campaign
 .post((request, response) => {
     if (request.user) {
-        campaignController.saveCampaign(request)
-            .then(function() {
-                return Campaign.findByTitleAndUser(request.body.title, request.user.id);
+        let campaign = new Campaign({
+            title: request.body.title,
+            script: request.body.script,
+            thank_you: request.body.thank_you,
+            learn_more: request.body.learn_more,
+            publish: request.body.publish,
+            influencer: request.user.id
+        });
+        campaign.save()
+            .then(function(campaign) {
+                response.send({result: campaign});
             })
-            .then(function(result) {
-                response.send(result[0]._id);
-            })
-            .catch(function(err) { console.log(err); });
+            .catch(function(err) {
+                console.log(err);
+            });
     } else {
         response.status(301).render('unauthorized', {logged_in: false});
     }
@@ -37,20 +43,29 @@ router.route('/campaigns')
 // Campaign detail
 router.route('/campaigns/:campaignId')
 
-// fetch episode
+// fetch campaign
 .get((request, response) => {
     // API campaign call page (available to all visitors)
-    Campaign.findById(request.params.campaignId)
+    Campaign.findOne({_id: request.params.campaignId, publish: true})
         .then(function(campaign) {
-            if (campaign.publish) {
-                response.json(campaign);
-            } else {
-                console.log(`Couldn't load campaign page for ${request.params.campaignId}`);
+            if (!campaign) {
                 response.status(404).send({});
             }
+            response.json(campaign);
         })
         .catch(function(err) {
             console.log(`Couldn't load campaign page for ${request.params.campaignId}`);
+            response.json(err);
+        });
+})
+
+// update campaign
+.patch((request, response) => {
+    Campaign.findOneAndUpdate({'_id': request.params.campaignId, 'influencer': request.user.id}, request.body, {new: true})
+        .then(function(campaign) {
+            response.json({result: campaign});
+        })
+        .catch(function(err) {
             response.json(err);
         });
 });

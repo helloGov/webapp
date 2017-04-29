@@ -15,35 +15,6 @@ campaignController.findAllCampaigns = function(request, response) {
     }
 };
 
-campaignController.saveCampaign = function(request) {
-    var findStr = {_id: request.body.shortid, influencer: request.user.id};
-    var findCamp = Campaign.find(findStr).exec()
-        .then(function(result) {
-            if (result.length > 0) {
-                console.log('Updating');
-                var promise = Campaign.update(findStr, {title: request.body.title,
-                    script: request.body.script,
-                    thank_you: request.body.thank_you,
-                    learn_more: request.body.learn_more,
-                    publish: request.body.publish,
-                    influencer: request.user.id });
-            } else {
-                console.log('Creating new');
-                var campaign = new Campaign({title: request.body.title,
-                    script: request.body.script,
-                    thank_you: request.body.thank_you,
-                    learn_more: request.body.learn_more,
-                    publish: request.body.publish,
-                    influencer: request.user.id });
-                promise = campaign.save();
-            }
-
-            return promise;
-        });
-
-    return findCamp;
-};
-
 campaignController.findLegislator = function(latitude, longitude, response) {
     var getRepresentative = function(legislators) {
         if (legislators.length === 0) {

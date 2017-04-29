@@ -15,6 +15,12 @@ var CampaignSchema = new Schema({
         timestamps: {
             createdAt: 'createdAt',
             updatedAt: 'updatedAt'
+        },
+        toJSON: {
+            virtuals: true
+        },
+        toObject: {
+            virtuals: true
         }
     });
 
@@ -38,6 +44,10 @@ CampaignSchema.methods.delete = function(userId) {
         }
     });
 };
+
+CampaignSchema.virtual('url').get(function() {
+    return `/${this._id}`;
+});
 
 var Campaign = mongoose.model('Campaign', CampaignSchema);
 

@@ -76,7 +76,7 @@ router.route('/users/:userId')
 .get((request, response) => {
     Influencer.findById(request.params.userId)
         .then(function(user) {
-            response.json({result: user.toJSON({virtuals: true})});
+            response.json({result: user});
         })
         .catch(function(err) {
             response.json(err);
@@ -89,7 +89,7 @@ router.route('/users/:userId')
     }
     Influencer.findOneAndUpdate({'_id': request.params.userId}, request.body, {new: true})
         .then(function(user) {
-            response.json({result: user.toJSON({virtuals: true})});
+            response.json({result: user});
         })
         .catch(function(err) {
             response.json(err);
