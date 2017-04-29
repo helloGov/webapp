@@ -2,7 +2,7 @@
 
 require('./admin.controller');
 require('./analytics.controller');
-require('./campaigns.controller');
+require('./campaigns-list/campaigns-list.component');
 require('./create.controller');
 require('./matchInput.directive');
 require('./signup.controller');

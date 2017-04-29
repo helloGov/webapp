@@ -12,8 +12,7 @@ module.exports = function(router) {
 
     // campaign list page
     router.get('/campaigns', (request, response) => {
-        let hostName = `${request.protocol}://${request.host}`;
-        response.render('campaigns', {user: request.user, logged_in: request.user != null, hostName: hostName});
+        response.render('campaigns', {user: request.user, logged_in: request.user != null});
     });
 
     // campaign call page (available to all visitors)
