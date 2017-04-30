@@ -7,5 +7,5 @@ npm install
 
 sudo gem install sass
 
-npm start
+npm run start-dev
 
