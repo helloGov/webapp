@@ -9,6 +9,10 @@ input[type="text"], input[type="email"], textarea[type="text"], input[type="file
     text-align: left;
 }
 
+.errors.text-center {
+    text-align: center;
+}
+
 .form-field-error, .form-field-error:focus {
     border-color: $dark-red;
     &::-webkit-input-placeholder {
