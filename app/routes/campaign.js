@@ -30,7 +30,7 @@ module.exports = function(router) {
     router.get('/:shortid/success', (request, response) => {
         Campaign.findOne({_id: request.params.shortid, publish: true})
             .then(function(campaign) {
-                let campaignFullUrl = `${request.protocol}://${request.host}${campaign.url}`;
+                let campaignFullUrl = `${request.protocol}://${request.hostname}${campaign.url}`;
                 response.render('campaignSuccess', {
                     user: request.user,
                     logged_in: request.user != null,
@@ -47,7 +47,8 @@ module.exports = function(router) {
 
     // campaign thank-you page (available to all visitors after completing call)
     router.get('/:shortid/thank-you', (request, response) => {
-        Campaign.findById(request.params.shortid)
+        let userId = request.user ? request.user.id : null;
+        Campaign.findForRequestingUser(request.params.shortid, userId)
             .then(function(campaign) {
                 if (campaign) {
                     response.render('thankYou', {user: request.user, campData: campaign, logged_in: request.user != null});
@@ -61,16 +62,9 @@ module.exports = function(router) {
     // edit campaign page
     router.get('/:shortid/edit', (request, response) => {
         if (request.user) {
-            Campaign.findById(request.params.shortid)
-                .then(function(campaign) {
-                    if (request.user.id === campaign.influencer) {
-                        response.render('create', {user: request.user, campData: campaign, logged_in: true});
-                    } else {
-                        response.status(301).render('unauthorized', {logged_in: true});
-                    }
-                });
+            response.render('create', {user: request.user, logged_in: true});
         } else {
-            response.status(301).render('unauthorized', {logged_in: false});
+            response.redirect('/login');
         }
     });
 

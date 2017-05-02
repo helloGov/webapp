@@ -3,7 +3,7 @@
 require('./admin.controller');
 require('./analytics.controller');
 require('./campaigns-list/campaigns-list.component');
-require('./create.controller');
+require('./create/create-form.component');
 require('./matchInput.directive');
 require('./signup.controller');
 require('./login.controller');
