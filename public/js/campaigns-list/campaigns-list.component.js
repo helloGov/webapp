@@ -10,7 +10,7 @@ export default angular.module('helloGov')
         if ($location.port()) {
             this.hostName = `${this.hostName}:${$location.port()}`;
         }
-        $http.get(`${constants.API_ROOT}/campaigns`)
+        $http.get(`${constants.API_ROOT}/campaigns?sort=-createdAt`)
             .then(function(result) {
                 self.campaigns = result.data;
             })
