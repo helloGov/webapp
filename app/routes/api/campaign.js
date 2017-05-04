@@ -31,7 +31,8 @@ router.route('/campaigns')
 // fetch campaign list for a particular user
 .get((request, response) => {
     if (request.user) {
-        Campaign.findByUser(request.user.id)
+        let sort = request.query.sort;
+        Campaign.findByUser(request.user.id, sort)
             .then(function(result) {
                 response.send(result);
             });
@@ -45,13 +46,13 @@ router.route('/campaigns/:campaignId')
 
 // fetch campaign
 .get((request, response) => {
-    // API campaign call page (available to all visitors)
-    Campaign.findOne({_id: request.params.campaignId, publish: true})
+    let userId = request.user ? request.user.id : null;
+    Campaign.findForRequestingUser(request.params.campaignId, userId)
         .then(function(campaign) {
             if (!campaign) {
-                response.status(404).send({});
+                return response.status(404).send({});
             }
-            response.json(campaign);
+            return response.json(campaign);
         })
         .catch(function(err) {
             console.log(`Couldn't load campaign page for ${request.params.campaignId}`);

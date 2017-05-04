@@ -25,12 +25,30 @@ var CampaignSchema = new Schema({
     });
 
 // static methods
+CampaignSchema.statics.findForRequestingUser = function(campaignId, requestUserId) {
+    return this.findOne({_id: campaignId})
+        .then((campaign) => {
+            if (!campaign) {
+                return null;
+            }
+            // if campaign is not published, only return to owner of campaign
+            if (!campaign.publish && campaign.influencer !== requestUserId) {
+                return null;
+            }
+            return campaign;
+        });
+};
+
 CampaignSchema.statics.findByTitleAndUser = function(title, influencerId) {
     return this.find({title: title, influencer: influencerId});
 };
 
-CampaignSchema.statics.findByUser = function(influencerId) {
-    return this.find({influencer: influencerId});
+CampaignSchema.statics.findByUser = function(influencerId, sort) {
+    let allowedSortOptions = ['createdAt', '-createdAt'];
+    if (allowedSortOptions.indexOf(sort) === -1) {
+        sort = '-createdAt';
+    }
+    return this.find({influencer: influencerId}).sort(sort);
 };
 
 // instance methods
