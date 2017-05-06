@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Influencer = require('./influencer');
+var User = require('./user');
 
 var Event = new Schema({
     type: { type: String, trim: true },
     ip: {type: String, trim: true},
-    user: {type: Schema.Types.ObjectId, ref: Influencer},
+    user: {type: Schema.Types.ObjectId, ref: User},
     user_agent: {
         mobile: {type: Boolean},
         browser: {

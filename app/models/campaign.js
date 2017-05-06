@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var shortid = require('shortid');
 var Schema = mongoose.Schema;
-var Influencer = require('./influencer');
+var User = require('./user');
 
 var CampaignSchema = new Schema({
     _id: { type: String, index: { unique: true }, 'default': shortid.generate },
@@ -10,7 +10,7 @@ var CampaignSchema = new Schema({
     thank_you: {type: String, trim: true},
     learn_more: {type: String, trim: true},
     publish: {type: Boolean, trim: true},
-    user: {type: Schema.Types.ObjectId, ref: Influencer}
+    user: {type: Schema.Types.ObjectId, ref: User}
 },
     {
         timestamps: {

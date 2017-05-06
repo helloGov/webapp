@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 var passport = require('passport');
-const Influencer = require('../../models/influencer');
+const User = require('../../models/user');
 const Signup = require('../../models/signup');
 
 // Users list
@@ -12,8 +12,8 @@ router.route('/users')
     Signup.findOne(findStr).exec()
     .then(function(signup) {
         if (signup) {
-            Influencer.register(
-                new Influencer({
+            User.register(
+                new User({
                     firstName: request.body.firstName,
                     lastName: request.body.lastName,
                     username: request.body.username,
@@ -74,7 +74,7 @@ router.route('/users')
 router.route('/users/:userId')
 
 .get((request, response) => {
-    Influencer.findById(request.params.userId)
+    User.findById(request.params.userId)
         .then(function(user) {
             response.json({result: user});
         })
@@ -87,7 +87,7 @@ router.route('/users/:userId')
     if (request.user.id !== request.params.userId) {
         return response.status(403).end();
     }
-    Influencer.findOneAndUpdate({'_id': request.params.userId}, request.body, {new: true})
+    User.findOneAndUpdate({'_id': request.params.userId}, request.body, {new: true})
         .then(function(user) {
             response.json({result: user});
         })
