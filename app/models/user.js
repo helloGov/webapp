@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 
-var Influencer = new Schema({
+var User = new Schema({
     firstName: {
         type: String,
         trim: true,
@@ -51,9 +51,9 @@ var Influencer = new Schema({
     }
 );
 
-Influencer.virtual('fullName').get(function() {
+User.virtual('fullName').get(function() {
     return `${this.firstName} ${this.lastName}`;
 });
 
-Influencer.plugin(passportLocalMongoose);
-module.exports = mongoose.model('Influencer', Influencer);
+User.plugin(passportLocalMongoose);
+module.exports = mongoose.model('User', User);
