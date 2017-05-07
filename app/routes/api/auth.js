@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 var passport = require('passport');
 
-
 router.route('/auth/password')
 .put((request, response) => {
     request.user.setPassword(request.body.password, function(err, model, passwordErr) {

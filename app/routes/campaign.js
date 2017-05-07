@@ -44,7 +44,6 @@ module.exports = function(router) {
         response.render('analytics', {user: request.user, logged_in: request.user != null});
     });
 
-
     // campaign thank-you page (available to all visitors after completing call)
     router.get('/:shortid/thank-you', (request, response) => {
         let userId = request.user ? request.user.id : null;
