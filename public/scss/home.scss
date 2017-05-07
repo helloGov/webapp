@@ -19,16 +19,13 @@
   color: white;
   font-size: 19px;
   text-transform: uppercase;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .top-section .home-pg-text {
   position: relative;
   margin: 0 auto;
-}
-
-.circle .home-pg-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
