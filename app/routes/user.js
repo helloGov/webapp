@@ -14,10 +14,6 @@ module.exports = function(router) {
         }
     });
 
-    router.get('/login', (request, response) => {
-        response.render('login', {user: null, logged_in: request.user != null});
-    });
-
     // Redirect the user to Facebook for authentication.  When complete,
     // Facebook will redirect the user back to the application at
     //     /auth/facebook/callback
@@ -34,6 +30,14 @@ module.exports = function(router) {
             res.redirect('/');
         });
 
+
+    router.get('/login', (request, response) => {
+        response.render('login', {user: null, logged_in: false});
+    });
+
+    // removed line:
+    // response.render('login', {user: null, logged_in: request.user != null});
+    
     router.get('/settings', (request, response) => {
         if (request.user) {
             response.render('settings', {user: request.user, logged_in: true});
@@ -41,4 +45,24 @@ module.exports = function(router) {
             response.redirect('/login');
         }
     });
+
+    // scripttutorial, contact, and help added by kerobinso
+    // by copying the above
+
+    router.get('/scripttutorial', (request, response) => {
+        if (request.user) {
+            response.render('scripttutorial', {user: request.user, logged_in: true});
+        } else {
+            response.redirect('/login');
+        }
+    });
+
+    router.get('/contact', (request, response) => {
+        response.render('contact', {user: request.user, logged_in: request.user != null});
+    });
+
+    router.get('/help', (request, response) => {
+        response.render('help', {user: request.user, logged_in: request.user != null});
+    });
+    
 };

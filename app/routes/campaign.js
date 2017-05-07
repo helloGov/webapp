@@ -2,14 +2,25 @@ const Campaign = require('../models/campaign');
 
 module.exports = function(router) {
     // create campaign page
-    router.get('/create', (request, response) => {
+    router.get('/create1', (request, response) => {
         if (request.user) {
-            response.render('create', {user: request.user, logged_in: true});
+            response.render('create1', {user: request.user, logged_in: true});
         } else {
             response.redirect('/login');
         }
     });
 
+//        router.get('/:shortid/edit', (request, response) => {
+    //second step in campaign creation: preview the landing page
+//    router.get('/:shortid/create2', (request, response) => {
+//        if (request.user) {
+//            response.render('create2', {user: request.user, campData: campaign, logged_in: true});
+//        } else {
+//            response.redirect('/login');
+//        }
+//    });
+
+    
     // campaign list page
     router.get('/campaigns', (request, response) => {
         let hostName = `${request.protocol}://${request.host}`;
@@ -65,7 +76,7 @@ module.exports = function(router) {
             Campaign.findById(request.params.shortid)
                 .then(function(campaign) {
                     if (request.user.id === campaign.influencer) {
-                        response.render('create', {user: request.user, campData: campaign, logged_in: true});
+                        response.render('create1', {user: request.user, campData: campaign, logged_in: true});
                     } else {
                         response.status(301).render('unauthorized', {logged_in: true});
                     }
@@ -75,6 +86,57 @@ module.exports = function(router) {
         }
     });
 
+// copied edit bit into a bit for create2 - kerobinso
+    router.get('/:shortid/create2', (request, response) => {
+        if (request.user) {
+            Campaign.findById(request.params.shortid)
+                .then(function(campaign) {
+                    if (request.user.id === campaign.influencer) {
+                        response.render('create2', {user: request.user, campData: campaign, logged_in: true});
+                    } else {
+                        response.status(301).render('unauthorized', {logged_in: true});
+                    }
+                });
+        } else {
+            response.status(301).render('unauthorized', {logged_in: false});
+        }
+    });
+
+
+ // copied edit bit again, into a bit for create3 - kerobinso   
+
+    router.get('/:shortid/create3', (request, response) => {
+        if (request.user) {
+            Campaign.findById(request.params.shortid)
+                .then(function(campaign) {
+                    if (request.user.id === campaign.influencer) {
+                        response.render('create3', {user: request.user, campData: campaign, logged_in: true});
+                    } else {
+                        response.status(301).render('unauthorized', {logged_in: true});
+                    }
+                });
+        } else {
+            response.status(301).render('unauthorized', {logged_in: false});
+        }
+    });
+
+ // copied edit bit again, into a bit for create4 - kerobinso   
+
+    router.get('/:shortid/create4', (request, response) => {
+        if (request.user) {
+            Campaign.findById(request.params.shortid)
+                .then(function(campaign) {
+                    if (request.user.id === campaign.influencer) {
+                        response.render('create4', {user: request.user, campData: campaign, logged_in: true});
+                    } else {
+                        response.status(301).render('unauthorized', {logged_in: true});
+                    }
+                });
+        } else {
+            response.status(301).render('unauthorized', {logged_in: false});
+        }
+    });
+    
     // delete campaign endpoint
     router.get('/:shortid/delete', (request, response) => {
         if (request.user) {

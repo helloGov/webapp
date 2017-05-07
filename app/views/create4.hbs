@@ -1,0 +1,31 @@
+
+<!-- This page is pretty much copied from create2.hbs.  
+     The goal is to make it look like the campaign.hbs landing page-->
+
+<style>
+body {
+
+}
+</style>
+<div ng-controller="createController" class="container">
+  <div class="text-center col-md-8 col-md-offset-2">
+    <form>
+      <div class="form-group">
+	<br><br>
+
+	<textarea
+          class="form-control input-lg campaign-input"
+          ng-model="formData.thank_you"
+	  ng-init="formData.thank_you='{{campData.thank_you}}'"
+          rows=2
+          maxlength=140
+        >
+        </textarea>
+	
+	<!-- This button needs to send people to a "create3" page ... I can use code from create1 that sent us here.-->
+	<!-- I have to find where ng-click stuff like update() and createCampaign() are, and prolly make a new one-->
+        <button id="address-submit" type="button" ng-click="createCampaign(true,false,false,false)" class="btn primary-button">SUBMIT CAMPAIGN</button>
+
+    </form>
+  </div>
+</div>

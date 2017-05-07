@@ -1,0 +1,42 @@
+
+<!-- This page is pretty much copied from create1.hbs.  
+     The goal is to make it look like the campaign.hbs landing page-->
+
+<style>
+body {
+
+}
+</style>
+<div ng-controller="createController" class="container">
+  <div class="text-center col-md-8 col-md-offset-2">
+    <form>
+      <div class="form-group">
+	<br><br>
+
+	<!-- would be better to check if formData.landingtext1 is defined, and use a default if not! -->
+	
+        <textarea
+          class="form-control input-lg campaign-input"
+          ng-model="formData.landingtext1"
+          ng-init="formData.landingtext1='Great! Let\'s get moving and call congress about {{campData.title}}'"
+          rows=2
+          maxlength=140
+        >
+        </textarea>
+	
+        <textarea
+          class="form-control input-lg campaign-input"
+          ng-model="formData.landingtext2"
+          ng-init="formData.landingtext2='Enter the address where you vote to find the correct representative.'"
+          rows=2
+          maxlength=140
+        >
+        </textarea>
+
+	<input id="searchTextField" type="text"/>
+	
+	<button type="submit" class="btn primary-button btn-lg" ng-click="createCampaign(false,false,true,false)">NEXT</button>
+
+    </form>
+  </div>
+</div>

@@ -58,17 +58,33 @@
         <!-- <img src="/images/profile.png" class="pull&#45;right profile-photo"/> -->
     </nav>
 
+
+    <!-- I'm not sure how to make some menu settings only show if a
+    user is logged in.  As is, it never shows analytics for any users.-->
+    
     {{#if logged_in}}
         <div id="sideMenu" class="sidenav">
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
           <a href="/campaigns">CAMPAIGNS</a><hr>
-          {{!-- <a href="/analytics">ANALYTICS</a><hr> --}}
-          <a href="mailto:team@hellogov.org">HELP</a><hr>
           <a href="/settings">SETTINGS</a><hr>
+          {{!-- <a href="/analytics">ANALYTICS</a><hr> --}}
+	  {{!-- <a href="/scripttutorial">SCRIPT TUTORIAL</a><hr> --}}
           <a href="/logout">LOGOUT</a><hr>
         </div>
     {{/if}}
 
+<!-- would be cool to have an else branch, with LOG IN in the hamburger menu! -->
+	
+	<!-- the below line was removed by kerobinso,
+	// and replaced with the if branch above
+	//
+
+<!--		  if (req.user){ <hr>
+	      <a href="/analytics">ANALYTICS</a><hr>
+	      <a href="/scripttutorial">SCRIPT TUTORIAL</a><hr>\ }
+-->
+	
+	
     <div class="content-wrapper" onclick="closeNav()">
       {{{body}}}
     </div>

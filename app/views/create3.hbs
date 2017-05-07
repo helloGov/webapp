@@ -1,0 +1,76 @@
+
+<!-- This page is pretty much copied from create2.hbs.  
+     The goal is to make it look like the campaign.hbs landing page-->
+
+<style>
+body {
+
+}
+</style>
+<div ng-controller="createController" class="container">
+        <div class="congress-intro">
+            <h5 class="section-header">Your Congressperson is</h5>
+            <h3 class="rep-name">Rep Anna Eshoo (D)</h3>
+            <img
+              ng-src="https://theunitedstates.io/images/congress/450x550/E000215.jpg"
+              class="rep-img center-block"
+              alt="Your Rep"
+            />
+        </div>
+	<form>
+
+	  <!-- Goal is to remove this table 
+	    and replace with a text area capable of emojis.
+	    We'll start by using OneSignal / emoji-picker (maybe)
+	    -->
+	  
+	  <table>
+	  <tr>
+	    <td>
+	      <textarea
+		class="form-control input-lg campaign-input"
+		ng-model="formData.script"
+		ng-init="formData.script='{{campData.script}}'"
+		rows=6
+		maxlength=1000
+		>
+              </textarea>
+	    </td>
+	    <td>
+	      &nbsp;&nbsp;<select name="line2" style="color:black">
+		<option value="happy">:)&nbsp;&nbsp;  :( &nbsp;&nbsp; :o</option>
+		<option value="happy">happy</option>
+		<option value="sad">sad</option>
+		<option value="angry">angry</option>
+		<option value="clap">clap</option>
+	      </select><br>
+
+	      &nbsp;&nbsp;<select name="line2" style="color:black">
+		<option value="happy">:)&nbsp;&nbsp;  :( &nbsp;&nbsp; :o</option>
+		<option value="happy">happy</option>
+		<option value="sad">sad</option>
+		<option value="angry">angry</option>
+		<option value="clap">clap</option>
+	      </select><br>
+
+
+	      	      &nbsp;&nbsp;<select name="line2" style="color:black">
+		<option value="happy">:)&nbsp;&nbsp;  :( &nbsp;&nbsp; :o</option>
+		<option value="happy">happy</option>
+		<option value="sad">sad</option>
+		<option value="angry">angry</option>
+		<option value="clap">clap</option>
+	      </select><br>
+
+	      
+	    </td>
+	  </tr>
+	</table>
+      
+          <button id="address-submit" type="button" ng-click="createCampaign(false,false,false,true)" class="btn primary-button">
+	    NEXT [Make the call]
+	  </button>
+
+    </form>
+  </div>
+</div>
