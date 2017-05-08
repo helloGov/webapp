@@ -58,6 +58,30 @@ a:link.btn {
     margin: 20px auto 30px;
 }
 
+.round-button {
+    background-color: $yellow;
+    border: 2px solid $yellow;
+    padding: 0.9em 2em;
+    margin: 10px 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: absolute;
+    top: 183px;
+    right: 153px;
+    p {
+      color: $blue-light;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 19px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 90;
+    }
+}
+
 .blue-button {
     background: $blue-light;
     color: $yellow;
@@ -67,4 +91,3 @@ a:link.btn {
         color: $yellow;
     }
 }
-
