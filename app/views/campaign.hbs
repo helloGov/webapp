@@ -21,6 +21,7 @@
               class="rep-img center-block"
               alt="Your Rep"
             />
+            <h3 class="rep-name">Call {[{repInfo.phone}]}</h3>
         </div>
 
         <p class="script body-copy">
@@ -30,14 +31,15 @@
         <a id="call-btn"
             class="btn btn-lg call-button center-block primary-button"
             role="button"
-            href="tel:{[{repInfo.phone}]}"
-            ng-click="sendEvent('call')">
+            href="tel:{[{repInfo.phone}]}">
             Make the call now!
         </a>
 
-        <a class="btn btn-lg call-button center-block primary-button"  role="button"
-          href="{{campData.url}}/thank-you">
-          I'm done
+        <a class="btn btn-lg call-button center-block primary-button"
+            role="button"
+            href="{{campData.url}}/thank-you"
+            ng-click="sendEvent('call')">
+            I'm done
         </a>
 
         <div style="margin-bottom:25px;">
