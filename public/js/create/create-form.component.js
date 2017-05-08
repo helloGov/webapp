@@ -21,7 +21,7 @@ export default angular.module('helloGov')
                     self.campaign = resp.data;
                 })
                 .catch(() => {
-                    $window.location.href = '/campaigns';
+                    $window.location.href = '/home';
                 });
         }
 
@@ -33,7 +33,7 @@ export default angular.module('helloGov')
                         if (publishFlag) {
                             $window.location.href = `${resp.data.result.url}/success`;
                         } else {
-                            $window.location.href = '/campaigns';
+                            $window.location.href = '/home';
                         }
                     })
                     .catch(function() {
@@ -45,7 +45,7 @@ export default angular.module('helloGov')
                         if (publishFlag) {
                             $window.location.href = `${resp.data.result.url}/success`;
                         } else {
-                            $window.location.href = '/campaigns';
+                            $window.location.href = '/home';
                         }
                     })
                     .catch(function() {
