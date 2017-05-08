@@ -10,11 +10,6 @@ module.exports = function(router) {
         }
     });
 
-    // campaign list page
-    router.get('/campaigns', (request, response) => {
-        response.render('campaigns', {user: request.user, logged_in: request.user != null});
-    });
-
     // campaign call page (available to all visitors)
     router.get('/:shortid', (request, response) => {
         Campaign.findOne({_id: request.params.shortid, publish: true})
@@ -78,7 +73,7 @@ module.exports = function(router) {
                     }
                     campaign.delete(request.user.id)
                         .then(function() {
-                            response.redirect('/campaigns');
+                            response.redirect('/home');
                         })
                         .catch(function() {
                             response.status(301).render('unauthorized', {logged_in: true});
