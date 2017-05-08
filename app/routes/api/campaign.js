@@ -3,7 +3,7 @@ const router = express.Router();
 const Campaign = require('../../models/campaign');
 
 // Campaign list
-router.route('/home')
+router.route('/campaigns')
 
 // create new campaign
 .post((request, response) => {
