@@ -17,9 +17,8 @@ let transporter = nodemailer.createTransport({
 var options = {
     extName: '.hbs',
     viewPath: 'app/views/emails'
-}
+};
 transporter.use('compile', hbs(options));
-
 
 var userController = {};
 
@@ -40,35 +39,39 @@ userController.addUserWithFacebook = function(request, response) {
 
 userController.sendPasswordResetEmail = function(userEmail) {
     crypto.randomBytes(20, function(err, buffer) {
-        var token = buffer.toString('hex');
-        var today = new Date().getTime();
-        var expiration = new Date(today + 86400000);
-        var passwordReset = new PasswordReset({
-            email: userEmail,
-            resetToken: token,
-            expiration: expiration
-        });
-        passwordReset.save()
-        .then(function(resetObject){
-            var mail = {
-                from: `"helloGov" <${secrets.noreply_email}>`,
-                to: userEmail,
-                subject: 'Reset Your Password',
-                template: 'passwordResetEmail',
-                context: {
-                    resetToken: token,
-                    helloGovDomain: secrets.hellogov_domain,
-                    supportEmail: secrets.support_email
-                }
-            };
-            transporter.sendMail(mail, (error, info) => {
-                if (error) {
-                    console.log('Message failed to send with error: %s', error);
-                }
-                console.log('Message sent: %s with response: %s', info.messageId, info.response);
+        if (err) {
+            console.log('Failed to generate reset token');
+        } else {
+            var token = buffer.toString('hex');
+            var today = new Date().getTime();
+            var expiration = new Date(today + 86400000);
+            var passwordReset = new PasswordReset({
+                email: userEmail,
+                resetToken: token,
+                expiration: expiration
             });
-        });
+            passwordReset.save()
+            .then(function(resetObject) {
+                var mail = {
+                    from: `"helloGov" <${secrets.noreply_email}>`,
+                    to: userEmail,
+                    subject: 'Reset Your Password',
+                    template: 'passwordResetEmail',
+                    context: {
+                        resetToken: token,
+                        helloGovDomain: secrets.hellogov_domain,
+                        supportEmail: secrets.support_email
+                    }
+                };
+                transporter.sendMail(mail, (error, info) => {
+                    if (error) {
+                        console.log('Message failed to send with error: %s', error);
+                    }
+                    console.log('Message sent: %s with response: %s', info.messageId, info.response);
+                });
+            });
+        }
     });
-}
+};
 
 module.exports = userController;

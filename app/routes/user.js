@@ -50,11 +50,11 @@ module.exports = function(router) {
     router.get('/resetPassword/:resetToken', (request, response) => {
         PasswordReset.findOne({resetToken: request.params.resetToken})
             .then((passwordReset) => {
-                if(passwordReset){
+                if (passwordReset) {
                     response.render('resetPassword', {passwordReset: passwordReset});
                 } else {
                     response.status(404).render('404', {user: request.user, logged_in: request.user != null});
                 }
-            })
+            });
     });
 };
