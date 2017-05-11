@@ -5,7 +5,6 @@ const User = require('../../models/user');
 const Signup = require('../../models/signup');
 var userController = require('../../controllers/user.js');
 var PasswordReset = require('../../models/passwordReset');
-var User = require('../../models/user')
 
 // Users list
 router.route('/users')
@@ -99,7 +98,7 @@ router.route('/users/:userId')
         });
 });
 
-router.route('/user/resetPassword')
+router.route('/users/resetPassword')
 .put((request, response) => {
     PasswordReset.findOne({resetToken: request.body.resetToken}).exec()
     .then(function(passwordReset){
@@ -118,7 +117,7 @@ router.route('/user/resetPassword')
     });
 });
 
-router.route('/user/requestReset')
+router.route('/users/requestReset')
 .post(function(request, response) {
     User.findOne({email:request.body.email}).exec()
     .then(function(user){
