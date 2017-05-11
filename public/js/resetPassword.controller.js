@@ -6,12 +6,12 @@ export default angular.module('helloGov')
     $scope.resetDetails = {};
 
     $scope.resetPassword = function() {
-        $http.put(`${constants.API_ROOT}/auth/resetPassword`, $scope.resetDetails)
+        $http.put(`${constants.API_ROOT}/user/resetPassword`, $scope.resetDetails)
             .then(function(data) {
                 $window.location.href = '/home';
             })
             .catch(function(data) {
-                $scope.error = 'We couldn\'t complete your password reset right now. Check your info and try again, or contact us at team@hellogov.org for assistance.';
+                $scope.error = 'We couldn\'t complete your password reset right now. Please try again later.';
             });
     };
 })
