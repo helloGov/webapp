@@ -1,6 +1,7 @@
 var userController = require('../controllers/user');
 var passport = require('passport');
 var Signup = require('../models/signup');
+var PasswordReset = require('../models/passwordReset');
 
 module.exports = function(router) {
     router.get('/signup/:signupId', (request, response) => {
@@ -40,5 +41,16 @@ module.exports = function(router) {
         } else {
             response.redirect('/login');
         }
+    });
+
+    router.get('/forgotMyPassword', (request, response) => {
+        response.render('forgotMyPassword', {user: null, logged_in: request.user != null});
+    });
+
+    router.get('/resetPassword/:resetToken', (request, response) => {
+        PasswordReset.findOne({resetToken: request.params.resetToken})
+            .then((passwordReset) => {
+                response.render('resetPassword', {passwordReset: passwordReset});
+            })
     });
 };

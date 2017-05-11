@@ -9,3 +9,5 @@ require('./success.controller');
 require('./login.controller');
 require('./settings/settings.component');
 require('./visitor.controller');
+require('./requestPasswordEmail.controller');
+require('./resetPassword.controller');
