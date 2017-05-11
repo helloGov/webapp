@@ -9,11 +9,19 @@ input[type="text"], input[type="email"], textarea[type="text"], input[type="file
     text-align: left;
 }
 
+.errors.text-center {
+    text-align: center;
+}
+
 .form-field-error, .form-field-error:focus {
-    border-color: $dark-red;
+    border-color: $dark-red !important;
     &::-webkit-input-placeholder {
         color: $dark-red;
     }
+}
+
+.form-field-error:focus {
+    box-shadow: inset 0 1px 1px rgba(162, 39, 39, 0.3), 0 0 8px rgba(162, 39, 39, 0.3);
 }
 
 .error-help-text {

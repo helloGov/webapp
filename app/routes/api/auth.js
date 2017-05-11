@@ -5,7 +5,6 @@ var userController = require('../../controllers/user.js');
 var PasswordReset = require('../../models/passwordReset');
 var Influencer = require('../../models/influencer')
 
-
 router.route('/auth/password')
 .put((request, response) => {
     request.user.setPassword(request.body.password, function(err, model, passwordErr) {

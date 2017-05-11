@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "NODE_ENV=production node index.js",
+    "start-dev": "nodemon index.js",
     "build": "npm run build-css && npm run build-js",
     "build-css": "NODE_ENV=production sass public/scss/styles.scss public/build/css/styles.css",
     "build-js": "NODE_ENV=production webpack",
@@ -58,7 +59,9 @@
     "eslint-plugin-standard": "^2.1.1",
     "html-loader": "^0.4.5",
     "ng-annotate-webpack-plugin": "^0.2.1-pre",
+    "node-sass": "^4.5.2",
     "node-sass-middleware": "^0.11.0",
+    "nodemon": "^1.11.0",
     "uglifyjs-webpack-plugin": "^0.4.1",
     "webpack": "^2.3.2",
     "webpack-dev-middleware": "^1.10.1"

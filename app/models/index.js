@@ -1,4 +1,4 @@
-require('./influencer');
+require('./user');
 require('./signup');
 require('./campaign');
 require('./event');

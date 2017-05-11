@@ -15,7 +15,7 @@ var secrets = require('./secrets');
 var passport = require('passport');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
-var Influencer = require('./app/models/influencer');
+var User = require('./app/models/user');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var facebookAuthHandler = require('./app/controllers/authentication').facebookAuthHandler;
@@ -75,21 +75,21 @@ app.use(session({
 // passport setup
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(Influencer.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 passport.use(new FacebookStrategy({
     clientID: secrets.fb_app_id,
     clientSecret: secrets.fb_app_secret,
     callbackURL: secrets.fb_callback_url
 }, facebookAuthHandler));
 
-passport.serializeUser(function(influencer, done) {
-    console.log('serializeUser: ' + influencer._id);
-    done(null, influencer._id);
+passport.serializeUser(function(user, done) {
+    console.log('serializeUser: ' + user._id);
+    done(null, user._id);
 });
 passport.deserializeUser(function(id, done) {
-    Influencer.findById(id, function(err, influencer) {
-        console.log('deserializeUser: ' + JSON.stringify(influencer));
-        done(err, influencer);
+    User.findById(id, function(err, user) {
+        console.log('deserializeUser: ' + JSON.stringify(user));
+        done(err, user);
     });
 });
 

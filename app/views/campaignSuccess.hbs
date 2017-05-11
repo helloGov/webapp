@@ -1,4 +1,4 @@
-<div ng-controller="successController" class="container">
+<div class="container">
   <div class="text-center col-md-8 col-md-offset-2">
 
     <img
@@ -12,17 +12,16 @@
       <p>Here's your custom URL. Share it with your followers so that they can access your script and the contact info for their representatives.</p>
     </div>
 
-    <!-- TODO: Hardcoded links should get changed back to hellogov (and use https not http) before general launch -->
-    <h3 class="url-yellow">heyaGOV.ORG/{[{shortid}]}</h3>
+    <h3 class="url-yellow">{{campaignFullUrl}}</h3>
 
     <div class="form-group">
         <!-- TODO: This should give feedback so user knows link was copied, ideally like in the mockup -->
-        <button class="btn primary-button" ngclipboard data-clipboard-text="http://www.heyagov.org/{[{shortid}]}" />Copy URL</button>
+        <button class="btn primary-button" ngclipboard data-clipboard-text="{{campaignFullUrl}}" />Copy URL</button>
         <!-- TODO: When we have actual preview page, use that URL instead -->
-        <a href="/{[{shortid}]}" class="btn primary-button">Preview Campaign</a>
+        <a href="{{campaign.url}}" class="btn primary-button">Preview Campaign</a>
     </div>
     <div class="form-group">
-        <a href="/campaigns" class="btn blue-button">Go to campaigns</a>
+        <a href="/home" class="btn blue-button">Go to campaigns</a>
     </div>
 
   </div>
