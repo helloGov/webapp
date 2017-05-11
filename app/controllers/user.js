@@ -1,10 +1,10 @@
 var Signup = require('../models/signup');
-var passport = require('passport');
+const passport = require('passport');
 const nodemailer = require('nodemailer');
-var hbs = require('nodemailer-express-handlebars');
+const hbs = require('nodemailer-express-handlebars');
 var secrets = require('../../secrets');
 var crypto = require('crypto');
-const PasswordReset = require('../models/passwordReset');
+var PasswordReset = require('../models/passwordReset');
 
 let transporter = nodemailer.createTransport({
     service: 'Sparkpost',
@@ -16,10 +16,7 @@ let transporter = nodemailer.createTransport({
 
 var options = {
     extName: '.hbs',
-    layoutsDir: 'app/views/layouts',
-    defaultLayout: 'template',
-    partialsDir: '../views/partials/', 
-    viewPath: 'app/views'
+    viewPath: 'app/views/emails'
 }
 transporter.use('compile', hbs(options));
 
@@ -41,40 +38,34 @@ userController.addUserWithFacebook = function(request, response) {
     });
 };
 
-userController.sendPasswordResetEmail = function(request, response) {
+userController.sendPasswordResetEmail = function(userEmail) {
     crypto.randomBytes(20, function(err, buffer) {
         var token = buffer.toString('hex');
-        console.log("we have token: " + token);
         var today = new Date().getTime();
         var expiration = new Date(today + 86400000);
         var passwordReset = new PasswordReset({
-            email: request.body.email, 
-            resetToken: token, 
+            email: userEmail,
+            resetToken: token,
             expiration: expiration
         });
-        console.log("passwordReset.email: " + passwordReset.email);
         passwordReset.save()
         .then(function(resetObject){
-            console.log("passwordObject saved");
             var mail = {
-                from: `"helloGov" <${secrets.noreply_email}>`, 
-                to: request.body.email, 
+                from: `"helloGov" <${secrets.noreply_email}>`,
+                to: userEmail,
                 subject: 'Reset Your Password',
-                template: 'passwordResetEmail', 
+                template: 'passwordResetEmail',
                 context: {
                     resetToken: token,
-                    resetExpiration: expiration,
-                    helloGovDomain: secrets.hellogov_domain, 
+                    helloGovDomain: secrets.hellogov_domain,
                     supportEmail: secrets.support_email
                 }
             };
             transporter.sendMail(mail, (error, info) => {
                 if (error) {
-                    response.send("ERROR");
-                    return console.log(error);
+                    console.log('Message failed to send with error: %s', error);
                 }
-                console.log('Message %s sent: %s', info.messageId, info.response);
-                response.send("SUCCESS");
+                console.log('Message sent: %s with response: %s', info.messageId, info.response);
             });
         });
     });

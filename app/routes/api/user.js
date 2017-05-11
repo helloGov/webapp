@@ -3,6 +3,9 @@ const router = express.Router();
 var passport = require('passport');
 const User = require('../../models/user');
 const Signup = require('../../models/signup');
+var userController = require('../../controllers/user.js');
+var PasswordReset = require('../../models/passwordReset');
+var User = require('../../models/user')
 
 // Users list
 router.route('/users')
@@ -94,6 +97,36 @@ router.route('/users/:userId')
         .catch(function(err) {
             response.json(err);
         });
+});
+
+router.route('/user/resetPassword')
+.put((request, response) => {
+    PasswordReset.findOne({resetToken: request.body.resetToken}).exec()
+    .then(function(passwordReset){
+        User.findOne({email:passwordReset.email}).exec()
+        .then(function(user){
+            user.setPassword(request.body.password, function(err, model, passwordErr) {
+                if (err || passwordErr) {
+                    response.status(400).end();
+                } else {
+                    model.update();
+                    passwordReset.remove();
+                    response.status(200).end();
+                }
+            });
+        });
+    });
+});
+
+router.route('/user/requestReset')
+.post(function(request, response) {
+    User.findOne({email:request.body.email}).exec()
+    .then(function(user){
+        if(user){
+            userController.sendPasswordResetEmail(user.email);
+        }
+    });
+    response.status(200).end();
 });
 
 module.exports = router;
