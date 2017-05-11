@@ -101,9 +101,9 @@ router.route('/users/:userId')
 router.route('/users/resetPassword')
 .put((request, response) => {
     PasswordReset.findOne({resetToken: request.body.resetToken}).exec()
-    .then(function(passwordReset){
-        User.findOne({email:passwordReset.email}).exec()
-        .then(function(user){
+    .then(function(passwordReset) {
+        User.findOne({email: passwordReset.email}).exec()
+        .then(function(user) {
             user.setPassword(request.body.password, function(err, model, passwordErr) {
                 if (err || passwordErr) {
                     response.status(400).end();
@@ -119,9 +119,9 @@ router.route('/users/resetPassword')
 
 router.route('/users/requestReset')
 .post(function(request, response) {
-    User.findOne({email:request.body.email}).exec()
-    .then(function(user){
-        if(user){
+    User.findOne({email: request.body.email}).exec()
+    .then(function(user) {
+        if (user) {
             userController.sendPasswordResetEmail(user.email);
         }
     });

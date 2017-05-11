@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var shortid = require('shortid');
 var Schema = mongoose.Schema;
 
 var PasswordReset = new Schema({
