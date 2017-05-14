@@ -108,7 +108,7 @@ router.route('/users/resetPassword')
                 if (err || passwordErr) {
                     response.status(400).end();
                 } else {
-                    model.update();
+                    model.save();
                     passwordReset.remove();
                     response.status(200).end();
                 }
