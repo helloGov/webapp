@@ -17,6 +17,7 @@ h1, h2, h3, h4, h5, p {
 
 a, a:hover {
     color: $white;
+    text-decoration: underline;
 }
 
 .reversed-bg a, .reversed-bg a:hover {
@@ -82,12 +83,17 @@ a, a:hover {
 }
 
 .sidenav a {
-    padding: 2px 2px 2px 32px;
+    padding: 15px 2px 15px 32px;
     font-size: 18px;
     font-weight: bold;
     color: $blue-light;
     display: block;
     transition: 0.3s;
+    text-decoration: none;
+}
+
+.sidenav a:hover {
+    text-decoration: none;
 }
 
 .sidenav hr {
