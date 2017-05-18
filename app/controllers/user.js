@@ -1,5 +1,5 @@
 var Signup = require('../models/signup');
-var passport = require('passport');
+const passport = require('passport');
 
 var userController = {};
 
