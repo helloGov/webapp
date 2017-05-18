@@ -19,10 +19,24 @@ var User = require('./app/models/user');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var facebookAuthHandler = require('./app/controllers/authentication').facebookAuthHandler;
-
+var fs = require('fs');
 var routes = require('./app/routes');
 
-mongoose.connect(`mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.db_IP}:${secrets.db_port}/${secrets.db}`);
+var app = express();
+
+var mongoUri = `mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.db_IP}:${secrets.db_port}/${secrets.db}`;
+var mongoSslOpt = {
+    "server": {
+        "sslValidate": false,
+        "sslKey": fs.readFileSync('/etc/ssl/mongodb.pem'),
+        "sslCert": fs.readFileSync('/etc/ssl/mongodb.pem'),
+        }
+    }
+if (app.get('env') === 'production') {
+    mongoose.connect(`${mongoUri}?ssl=true`, mongoSslOpt);
+} else {
+    mongoose.connect(mongoUri);
+}
 mongoose.connection.on('error', function(err) {
     console.log('Mongo connection error', err.message);
 });
@@ -30,11 +44,21 @@ mongoose.connection.once('open', function callback() {
     console.log('Connected to MongoDB');
 });
 
-var app = express();
-var sessionStore = new MongoStore({
-    url: `mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.db_IP}:${secrets.db_port}/${secrets.db}`,
-    touchAfter: 0
-});
+if (app.get('env') === 'production') {
+    var sessionStore = new MongoStore({
+        url: `${mongoUri}?ssl=true`,
+        touchAfter: 0,
+        sslValidate: false,
+        sslKey: fs.readFileSync('/etc/ssl/mongodb.pem'),
+        sslCert: fs.readFileSync('/etc/ssl/mongodb.pem')
+    });
+} else {
+    var sessionStore = new MongoStore({
+        url: mongoUri,
+        touchAfter: 0
+    });
+}
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
