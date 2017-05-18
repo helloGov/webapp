@@ -6,7 +6,7 @@ export default angular.module('helloGov')
     $scope.resetDetails = {};
 
     $scope.resetPassword = function() {
-        $http.put(`${constants.API_ROOT}/users/resetPassword`, $scope.resetDetails)
+        $http.put(`${constants.API_ROOT}/auth/password`, $scope.resetDetails)
             .then(function(data) {
                 $window.location.href = '/home';
             })

@@ -7,12 +7,12 @@ export default angular.module('helloGov')
 
     $scope.requestReset = function() {
         $scope.error = '';
-        $http.post(`${constants.API_ROOT}/users/requestReset`, $scope.emailRequestDetails)
+        $http.post(`${constants.API_ROOT}/auth/password/requestReset`, $scope.emailRequestDetails)
             .then(function(data) {
-                $window.location.href = '/home';
+                $scope.message = 'An email has been sent to you. Please check your inbox for instructions to reset your password. If you do not receive this email, please check your spam folder.';
             })
             .catch(function() {
-                $scope.error = 'Please try again later.';
+                $scope.message = 'Please try again later.';
             });
     };
 })

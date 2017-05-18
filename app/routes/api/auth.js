@@ -1,17 +1,70 @@
 const express = require('express');
 const router = express.Router();
-var passport = require('passport');
+const passport = require('passport');
+const User = require('../../models/user');
+const PasswordReset = require('../../models/passwordReset');
 
 router.route('/auth/password')
 .put((request, response) => {
-    request.user.setPassword(request.body.password, function(err, model, passwordErr) {
-        if (err || passwordErr) {
-            response.status(400).end();
+    let reset;
+    let userPromise = new Promise(function(resolve, reject) {
+        if (request.user) {
+            // for cases when user is authenticated
+            resolve(request.user);
+        } else if (request.body.resetToken) {
+            // for cases when resetToken is passed in
+            PasswordReset.findOne({resetToken: request.body.resetToken})
+                .then(function(passwordReset) {
+                    // save it for removal after new password is set
+                    reset = passwordReset;
+                    return User.findOne({email: passwordReset.email});
+                })
+                .then(function(user) {
+                    resolve(user);
+                });
         } else {
-            model.save();
-            response.status(200).end();
+            // bad request
+            reject(new Error('User not found.'));
         }
     });
+
+    userPromise.then((user) => {
+        user.setPassword(request.body.password, function(err, model, passwordErr) {
+            if (err || passwordErr) {
+                response.status(400).end();
+            } else {
+                model.save()
+                    .then(function() {
+                        if (reset) {
+                            reset.remove();
+                        }
+                        response.status(200).end();
+                    });
+            }
+        });
+    });
+});
+
+router.route('/auth/password/requestReset')
+.post(function(request, response) {
+    User.findOne({email: request.body.email})
+        .then(function(user) {
+            if (user) {
+                PasswordReset.createReset(user.email)
+                    .then(function(reset) {
+                        var passwordReset = new PasswordReset(reset);
+                        return passwordReset.save();
+                    })
+                    .then(function(reset) {
+                        return reset.sendResetEmail();
+                    })
+                    .then(function() {
+                        return response.status(200).end();
+                    });
+            } else {
+                return response.status(404).end();
+            }
+        });
 });
 
 router.route('/auth/login')
