@@ -3,7 +3,6 @@ const router = express.Router();
 var passport = require('passport');
 const User = require('../../models/user');
 const Signup = require('../../models/signup');
-var userController = require('../../controllers/user.js');
 var PasswordReset = require('../../models/passwordReset');
 
 // Users list
@@ -115,17 +114,6 @@ router.route('/users/resetPassword')
             });
         });
     });
-});
-
-router.route('/users/requestReset')
-.post(function(request, response) {
-    User.findOne({email: request.body.email}).exec()
-    .then(function(user) {
-        if (user) {
-            userController.sendPasswordResetEmail(user.email);
-        }
-    });
-    response.status(200).end();
 });
 
 module.exports = router;

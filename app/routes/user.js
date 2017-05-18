@@ -43,11 +43,11 @@ module.exports = function(router) {
         }
     });
 
-    router.get('/forgotMyPassword', (request, response) => {
+    router.get('/auth/forgot-password', (request, response) => {
         response.render('forgotMyPassword', {user: null, logged_in: request.user != null});
     });
 
-    router.get('/resetPassword/:resetToken', (request, response) => {
+    router.get('/auth/reset-password/:resetToken', (request, response) => {
         PasswordReset.findOne({resetToken: request.params.resetToken})
             .then((passwordReset) => {
                 if (passwordReset) {
