@@ -10,7 +10,7 @@
                         <input name="username" type="text" class="form-control input-lg" placeholder="Username" ng-model="loginDetails.username" ng-required="true"
                             autocomplete="off" autocorrect="off" autocapitalize="off">
                         <input name="password" type="password" class="form-control input-lg" placeholder="Password" ng-model="loginDetails.password" ng-required="true">
-                        <p><a href="/auth/forgot-password">Forgot password?</a></p>
+                        <a class="forgot-password" href="/auth/forgot-password">Forgot password?</a>
                     </div>
                     <div class="errors" ng-if="error">
                         {[{error}]}
