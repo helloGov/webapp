@@ -1,4 +1,5 @@
 const Campaign = require('../models/campaign');
+const config = require('../../conf/config');
 
 module.exports = function(router) {
     // create campaign page
@@ -25,7 +26,7 @@ module.exports = function(router) {
     router.get('/:shortid/success', (request, response) => {
         Campaign.findOne({_id: request.params.shortid, publish: true})
             .then(function(campaign) {
-                let campaignFullUrl = `${request.protocol}://${request.hostname}${campaign.url}`;
+                let campaignFullUrl = `${config.protocol}://${config.hostname}${campaign.url}`;
                 response.render('campaignSuccess', {
                     user: request.user,
                     logged_in: request.user != null,
