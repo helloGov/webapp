@@ -11,7 +11,7 @@ var favicon = require('serve-favicon');
 var sassMiddleware = require('node-sass-middleware');
 var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
-var secrets = require('./secrets');
+var config = require('./conf/config');
 var passport = require('passport');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -24,15 +24,15 @@ var routes = require('./app/routes');
 
 var app = express();
 
-var mongoUri = `mongodb://${secrets.db_user}:${secrets.db_password}@${secrets.db_IP}:${secrets.db_port}/${secrets.db}`;
-var mongoSslOpt = {
-    "server": {
-        "sslValidate": false,
-        "sslKey": fs.readFileSync('/etc/ssl/mongodb.pem'),
-        "sslCert": fs.readFileSync('/etc/ssl/mongodb.pem'),
-        }
-    }
+var mongoUri = `mongodb://${config.db_user}:${config.db_password}@${config.db_IP}:${config.db_port}/${config.db}`;
 if (app.get('env') === 'production') {
+    var mongoSslOpt = {
+        'server': {
+            'sslValidate': false,
+            'sslKey': fs.readFileSync('/etc/ssl/mongodb.pem'),
+            'sslCert': fs.readFileSync('/etc/ssl/mongodb.pem')
+        }
+    };
     mongoose.connect(`${mongoUri}?ssl=true`, mongoSslOpt);
 } else {
     mongoose.connect(mongoUri);
@@ -62,7 +62,7 @@ if (app.get('env') === 'production') {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const port = secrets.app_port;
+const port = config.app_port;
 
 // static assets
 if (app.get('env') === 'development') {
@@ -88,9 +88,9 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.set('views', path.join(__dirname, '/app/views'));
 app.set('view engine', '.hbs');
-app.use(cookieParser(secrets.session_secret));
+app.use(cookieParser(config.session_secret));
 app.use(session({
-    secret: secrets.session_secret,
+    secret: config.session_secret,
     store: sessionStore,
     resave: true,
     saveUninitialized: true
@@ -101,9 +101,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.use(new FacebookStrategy({
-    clientID: secrets.fb_app_id,
-    clientSecret: secrets.fb_app_secret,
-    callbackURL: secrets.fb_callback_url
+    clientID: config.fb_app_id,
+    clientSecret: config.fb_app_secret,
+    callbackURL: config.fb_callback_url
 }, facebookAuthHandler));
 
 passport.serializeUser(function(user, done) {
