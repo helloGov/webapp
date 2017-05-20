@@ -1,6 +1,7 @@
 node_modules
 npm-debug.log
 secrets*.js
+conf/env.js
 .github-todos
 .vscode
 .sass-cache
