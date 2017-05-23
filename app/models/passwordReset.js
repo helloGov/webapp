@@ -3,14 +3,14 @@ const Schema = mongoose.Schema;
 const Promise = require('bluebird');
 const crypto = require('crypto');
 const randomBytes = Promise.promisify(crypto.randomBytes);
-const secrets = require('../../secrets');
+const config = require('../../conf/config');
 const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 const transporter = nodemailer.createTransport({
     service: 'Sparkpost',
     auth: {
-        user: secrets.email_service_user,
-        pass: secrets.email_service_password
+        user: config.email_service_user,
+        pass: config.email_service_password
     }
 });
 
@@ -44,14 +44,14 @@ PasswordReset.statics.createReset = function(email) {
 // instance methods
 PasswordReset.methods.sendResetEmail = function() {
     var mail = {
-        from: `"helloGov" <${secrets.noreply_email}>`,
+        from: `"helloGov" <${config.noreply_email}>`,
         to: this.email,
         subject: 'Reset Your Password',
         template: 'passwordResetEmail',
         context: {
             resetToken: this.resetToken,
-            helloGovDomain: secrets.hellogov_domain,
-            supportEmail: secrets.support_email
+            helloGovDomain: `${config.protocol}://${config.hostname}`,
+            supportEmail: config.support_email
         }
     };
     return transporter.sendMail(mail)
