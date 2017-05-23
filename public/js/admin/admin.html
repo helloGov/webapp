@@ -1,0 +1,39 @@
+<div class="container" id="admin-page">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <form name="generateSignupForm">
+                <div class="form-group">
+                    <input type="text" class="form-control input-lg" placeholder="New influencer email" ng-model="$ctrl.newUserDetails.email" required="true">
+                </div>
+
+                <button
+                    type="submit"
+                    ng-click="$ctrl.createLink()"
+                    class="btn primary-button cta-button"
+                    ng-disabled="generateSignupForm.$invalid">Generate Signup Link</button>
+
+                <h3 id="signupLink-container" class="url-yellow" ng-if="$ctrl.signupLink.length">Signup link: {[{$ctrl.signupLink}]}</h3>
+                <div class="errors" ng-if="$ctrl.error">
+                    {[{$ctrl.error}]}
+                </div>
+            </form>
+
+            <ng-if="$ctrl.signups">
+
+                <h2>Pending signups</h2>
+                <table>
+                    <tr>
+                        <th>Email</th>
+                        <th>Signup link</th>
+                        <th>Date created</th>
+                    </tr>
+                    <tr ng-repeat="signup in $ctrl.signups">
+                        <td>{[{signup.email}]}</td>
+                        <td>{[{$ctrl.protocol}]}://{[{$ctrl.host}]}/signup/{[{signup.signupLink}]}</td>
+                        <td>{[{signup.createdAt | date: 'medium'}]}</td>
+                    </tr>
+                </table>
+            </ng-if>
+        </div>
+    </div>
+</div>

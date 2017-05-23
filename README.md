@@ -1,11 +1,14 @@
-# singleAction
-### ask wcrest for secrets.js file
+# helloGov
 
-brew install node
+## Config
+- ask wcrest for secrets.js file, and put into conf folder
+- add a file named env.js in conf folder, with contents of `module.exports = 'dev';`
 
-npm install
+## Install dependencies
+- `brew install node`
+- `npm install`
+- `sudo gem install sass`
 
-sudo gem install sass
-
-npm run start-dev
+## Start app
+- `npm run start-dev`
 
