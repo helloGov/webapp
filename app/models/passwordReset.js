@@ -26,7 +26,7 @@ var PasswordReset = new Schema({
 });
 
 // static methods
-PasswordReset.statics.createReset = function(email) {
+PasswordReset.statics.createResetObject = function(email) {
     return randomBytes(20)
         .then(function(buffer) {
             var today = new Date().getTime();

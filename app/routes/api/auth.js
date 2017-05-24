@@ -50,10 +50,12 @@ router.route('/auth/password/requestReset')
     User.findOne({email: request.body.email})
         .then(function(user) {
             if (user) {
-                PasswordReset.createReset(user.email)
-                    .then(function(reset) {
-                        var passwordReset = new PasswordReset(reset);
-                        return passwordReset.save();
+                PasswordReset.createResetObject(user.email)
+                    .then(function(newReset) {
+                        // update an existing reset, or add a new one
+                        return PasswordReset.findOneAndUpdate({
+                            email: user.email
+                        }, newReset, {upsert: true, new: true});
                     })
                     .then(function(reset) {
                         return reset.sendResetEmail();
