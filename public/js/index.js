@@ -1,6 +1,6 @@
 // TODO: Remove this file if/when we are truly using JS modules properly
 
-require('./admin.controller');
+require('./admin/admin.component');
 require('./analytics.controller');
 require('./campaigns-list/campaigns-list.component');
 require('./create/create-form.component');
