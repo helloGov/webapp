@@ -8,6 +8,9 @@ module.exports = function(router) {
         if (!request.user) {
             Signup.findOne({signupLink: request.params.signupId})
                 .then((signup) => {
+                    if (!signup) {
+                        return response.status(404).render('404', {user: request.user, logged_in: request.user != null});
+                    }
                     response.render('signup', {user: null, logged_in: request.user != null, signup: signup});
                 });
         } else {
