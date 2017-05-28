@@ -1,8 +1,8 @@
 import angular from 'angular';
 
 export default angular.module('helloGov')
-.component('settingsForm', {
-    template: require('./settings.html'),
+.component('settingsPage', {
+    template: require('./settingsPage.html'),
     controller: function($http, constants, currentUserId, $scope) {
         'ngInject';
         var self = this;

@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+
+        <!-- TODO: Find an image to go here so it doesn't look so bland -->
+
+        <div class="col-sm-7 col-sm-offset-3">
+            <form name="loginForm">
+                <div class="form-group">
+                    <input name="username" type="text" class="form-control input-lg" placeholder="Username" ng-model="loginDetails.username" ng-required="true"
+                        autocomplete="off" autocorrect="off" autocapitalize="off">
+                    <input name="password" type="password" class="form-control input-lg" placeholder="Password" ng-model="loginDetails.password" ng-required="true">
+                    <a class="forgot-password" href="/auth/forgot-password">Forgot password?</a>
+                </div>
+                <div class="errors" ng-if="error">
+                    {[{error}]}
+                </div>
+                <div class="form-group">
+                    <button type="submit" ng-click="login()" class="btn primary-button cta-button" ng-disabled="loginForm.$invalid">Log In</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

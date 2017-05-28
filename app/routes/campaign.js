@@ -1,5 +1,4 @@
 const Campaign = require('../models/campaign');
-const config = require('../../conf/config');
 
 module.exports = function(router) {
     // create campaign page
@@ -24,16 +23,10 @@ module.exports = function(router) {
 
     // campaign success page (at the end of campaign creation)
     router.get('/:shortid/success', (request, response) => {
-        Campaign.findOne({_id: request.params.shortid, publish: true})
-            .then(function(campaign) {
-                let campaignFullUrl = `${config.protocol}://${config.hostname}${campaign.url}`;
-                response.render('campaignSuccess', {
-                    user: request.user,
-                    logged_in: request.user != null,
-                    campaign: campaign,
-                    campaignFullUrl: campaignFullUrl
-                });
-            });
+        response.render('campaignSuccess', {
+            user: request.user,
+            logged_in: request.user != null
+        });
     });
 
     router.get('/:shortid/analytics', function(request, response) {
@@ -60,28 +53,6 @@ module.exports = function(router) {
             response.render('create', {user: request.user, logged_in: true});
         } else {
             response.redirect('/login');
-        }
-    });
-
-    // delete campaign endpoint
-    router.get('/:shortid/delete', (request, response) => {
-        if (request.user) {
-            Campaign.findById(request.params.shortid)
-                .then(function(campaign) {
-                    if (!campaign) {
-                        response.status(404).render('404', {logged_in: true});
-                        return;
-                    }
-                    campaign.delete(request.user.id)
-                        .then(function() {
-                            response.redirect('/home');
-                        })
-                        .catch(function() {
-                            response.status(301).render('unauthorized', {logged_in: true});
-                        });
-                });
-        } else {
-            response.status(301).render('unauthorized', {logged_in: false});
         }
     });
 };

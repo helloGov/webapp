@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row text-center">
+
+        <!-- TODO: Find an image to go here so it doesn't look so bland -->
+
+        <div class="col-sm-7 col-sm-offset-3">
+            <form name="signupForm">
+                <div class="form-group">
+                    <input name="firstName" type="text" class="form-control input-lg" placeholder="First name"
+                        ng-model="$ctrl.signupDetails.firstName" ng-required="true"
+                        ng-class="{'form-field-error': signupForm.firstName.$touched && signupForm.firstName.$invalid}">
+                </div>
+                <div class="form-group">
+                    <input name="lastName" type="text" class="form-control input-lg" placeholder="Last name"
+                        ng-model="$ctrl.signupDetails.lastName" ng-required="true"
+                        ng-class="{'form-field-error': signupForm.lastName.$touched && signupForm.lastName.$invalid}">
+                </div>
+                <div class="form-group">
+                    <input name="email" type="email" class="form-control input-lg" placeholder="Email address"
+                        ng-model="$ctrl.signupDetails.email" ng-required="true"
+                        ng-class="{'form-field-error': signupForm.email.$touched && signupForm.email.$invalid}">
+                    <span class="error-help-text" ng-if="signupForm.email.$touched && signupForm.email.$error.email">Please enter a valid email address.</span>
+                </div>
+                <div class="form-group">
+                    <input name="username" type="text" class="form-control input-lg" placeholder="Username"
+                        autocomplete="off" autocorrect="off" autocapitalize="off"
+                        ng-model="$ctrl.signupDetails.username" ng-required="true"
+                        ng-class="{'form-field-error': signupForm.username.$touched && signupForm.username.$invalid}">
+                </div>
+                <div class="form-group">
+                    <input name="password" type="password" class="form-control input-lg" placeholder="Password"
+                        ng-model="$ctrl.signupDetails.password" ng-required="true"
+                        ng-class="{'form-field-error': signupForm.password.$touched && signupForm.password.$invalid}">
+                </div>
+                <div class="form-group">
+                    <input name="passwordConfirm" type="password" class="form-control input-lg" placeholder="Retype password"
+                        ng-model="$ctrl.signupDetails.passwordConfirm" ng-required="true" match-input="$ctrl.signupDetails.password"
+                        ng-class="{'form-field-error': signupForm.passwordConfirm.$touched && signupForm.passwordConfirm.$invalid}">
+                    <span class="error-help-text" ng-if="signupForm.passwordConfirm.$touched && signupForm.passwordConfirm.$error.unique">Passwords must match.</span>
+                </div>
+                <div class="errors" ng-if="$ctrl.error">
+                    {[{$ctrl.error}]}
+                </div>
+                <div class="form-group">
+                    <button type="submit" ng-click="$ctrl.signUp()" class="btn primary-button" ng-disabled="signupForm.$invalid">Sign Up</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- <p class="home&#45;pg&#45;text top&#45;section">OR</p> -->
+        <!-- <a href="/auth/facebook"><img src="/images/fb_login.png"></a> -->
+    </div>
+</div>

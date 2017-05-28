@@ -11,7 +11,7 @@ module.exports = function(router) {
                     if (!signup) {
                         return response.status(404).render('404', {user: request.user, logged_in: request.user != null});
                     }
-                    response.render('signup', {user: null, logged_in: request.user != null, signup: signup});
+                    response.render('signup', {user: null, logged_in: request.user != null});
                 });
         } else {
             response.redirect('/');
