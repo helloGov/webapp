@@ -58,7 +58,7 @@ eventController.createJsonObject = function(dbResult) {
 eventController.getAnalytics = function(request, response) {
     Event.aggregate([
         {$match:
-            {'metadata.campaign': request.params.campaignId}
+            {'metadata.campaign': request.query.campaignId}
         },
         {$group:
             {_id: '$type', count: {$sum: 1}}
