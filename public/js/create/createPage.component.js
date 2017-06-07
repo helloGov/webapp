@@ -1,8 +1,8 @@
 import angular from 'angular';
 
 export default angular.module('helloGov')
-.component('createForm', {
-    template: require('./create-form.html'),
+.component('createPage', {
+    template: require('./createPage.html'),
     controller: function($http, constants, $location, $window) {
         'ngInject';
         let self = this;

@@ -24,7 +24,7 @@ router.route('/campaigns')
                 console.log(err);
             });
     } else {
-        response.status(301).render('unauthorized', {logged_in: false});
+        response.status(401).end();
     }
 })
 
@@ -37,7 +37,7 @@ router.route('/campaigns')
                 response.send(result);
             });
     } else {
-        response.status(301).render('unauthorized', {logged_in: false});
+        response.status(401).end();
     }
 });
 
@@ -69,6 +69,26 @@ router.route('/campaigns/:campaignId')
         .catch(function(err) {
             response.json(err);
         });
+})
+
+.delete((request, response) => {
+    if (request.user) {
+        Campaign.findById(request.params.campaignId)
+            .then(function(campaign) {
+                if (!campaign) {
+                    return response.status(404).end();
+                }
+                campaign.delete(request.user.id)
+                    .then(function() {
+                        return response.status(200).end();
+                    })
+                    .catch(function() {
+                        response.status(401).end();
+                    });
+            });
+    } else {
+        response.status(401).end();
+    }
 });
 
 module.exports = router;

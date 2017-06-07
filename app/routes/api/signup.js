@@ -58,4 +58,17 @@ router.route('/signups')
     }
 });
 
+// Signup detail
+router.route('/signups/:signupLink')
+
+.get((request, response) => {
+    Signup.findOne({signupLink: request.params.signupLink})
+        .then(function(signup) {
+            if (!signup) {
+                return response.status(404).end();
+            }
+            return response.send({result: signup});
+        });
+});
+
 module.exports = router;

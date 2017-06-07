@@ -22,7 +22,7 @@
                     <p>Edit</p>
                 </div></a>
                 <!-- TODO: Show a warning first like in the mockup -->
-                <a href="{[{campaign.url}]}/delete"><div class="option-button">
+                <a ng-click="$ctrl.delete(campaign.id)"><div class="option-button">
                     <input type="image" src="/images/white_delete_icon.jpg" />
                     <p>Delete</p>
                 </div></a>

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="text-center col-md-8 col-md-offset-2">
+
+    <img
+      src="/images/yellow_link_icon.png"
+      class="link-icon"
+      alt="link"
+      width="60"
+    />
+
+    <div class="instructions">
+      <p>Here's your custom URL. Share it with your followers so that they can access your script and the contact info for their representatives.</p>
+    </div>
+
+    <h3 class="url-yellow">{[{$ctrl.campaignFullUrl}]}</h3>
+
+    <div class="form-group">
+        <!-- TODO: This should give feedback so user knows link was copied, ideally like in the mockup -->
+        <button class="btn primary-button" ngclipboard data-clipboard-text="{[{$ctrl.campaignFullUrl}]}">Copy URL</button>
+        <!-- TODO: When we have actual preview page, use that URL instead -->
+        <a href="{[{$ctrl.campaign.url}]}" class="btn primary-button">Preview Campaign</a>
+    </div>
+    <div class="form-group">
+        <a href="/home" class="btn blue-button">Go to campaigns</a>
+    </div>
+
+  </div>
+</div>
