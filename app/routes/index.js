@@ -6,6 +6,7 @@ var campaignController = require('../controllers/campaign');
 var apiRoutes = require('./api');
 var config = require('../../conf/config');
 var squareProxy = require('express-http-proxy');
+var url = require('url');
 
 router.get('/', function(request, response, next) {
     if (request.user) {
@@ -14,6 +15,11 @@ router.get('/', function(request, response, next) {
         var proxyResponse = squareProxy(config.marketing_site_url);
         proxyResponse(request, response, next);
     }
+});
+
+router.get(config.marketing_pages, function(request, response, next) {
+	var proxyResponse = squareProxy(url.resolve(config.marketing_site_url, request.url));
+	proxyResponse(request, response, next);
 });
 
 router.get('/home', (request, response) => {
