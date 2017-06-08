@@ -8,3 +8,5 @@ conf/env.js
 
 public/build/**
 !.gitkeep
+.tern-project
+

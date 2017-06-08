@@ -2,7 +2,8 @@ const secrets = require('./secrets');
 const currentEnv = require('./env');
 
 let config = {
-    marketing_site_url: 'http://hellogov.squarespace.com'
+    marketing_site_url: 'http://hellogov.squarespace.com',
+	marketing_pages: ['/request-beta-access', '/faq']
 };
 
 const getEnvConfig = function() {
