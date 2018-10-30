@@ -4,6 +4,7 @@ secrets*.js
 conf/env.js
 .github-todos
 .vscode
+.idea
 .sass-cache
 
 public/build/**
