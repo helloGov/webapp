@@ -17,7 +17,7 @@
 **Make yourself an App Admin**
 (There are currently only Admin and Influencer accounts)
 - get mongo shell working: 'mongo'
-- switch to the right db: 'use hellogv'
+- switch to the right db: 'use hellogov'
 - give yourself admin rights by directly editing your record in the 'users' collection: 
 ```db.users.updateOne({ firstName: "[name to find]" }, { $set: {admin: true } })```
 **Create Influencer**
