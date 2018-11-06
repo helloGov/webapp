@@ -25,4 +25,4 @@
 - enter Influencer email (can't exist in db already)
 - copy Signup link provided in UI
 - open Incognito window (logged-in user will be redirected to '/' route)
-- open `localhost:8080/singup/<specialCode>`
+- open `localhost:8080/signup/<specialCode>`
