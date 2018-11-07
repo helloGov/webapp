@@ -4,45 +4,37 @@
     <ng-map center="[40.74, -74.18]"></ng-map>
 
     <div class="campaign-circles" ng-show="addrForm" class="ng-hide">
-        <h3 class="reversed-text">Enter the address where you vote to find the correct representative.</h3>
-        <br>
-        <input id="searchTextField" type="text" ng-map-autocomplete ng-model="locResult" options="locOptions" details="locDetails" class="form-control input-lg address-search" />
-        <button id="address-submit" type="button" ng-click="update()" class="btn primary-button">Submit</button>
-        <input id="latitude" type="hidden" />
-        <input id="longitude" type="hidden" />
+      <h3 class="reversed-text">Enter the address where you vote to find the correct representative.</h3>
+      <br>
+      <input id="searchTextField" type="text" ng-map-autocomplete ng-model="locResult" options="locOptions" details="locDetails"
+        class="form-control input-lg address-search" />
+      <button id="address-submit" type="button" ng-click="update()" class="btn primary-button">Submit</button>
+      <input id="latitude" type="hidden" />
+      <input id="longitude" type="hidden" />
     </div><!-- end campaign-circles -->
 
     <div id="rep-container" ng-show="repForm" class="ng-hide">
-        <div class="congress-intro">
-            <h5 class="section-header">Your Congressperson is</h5>
-            <h3 class="rep-name">{[{repInfo.title}]} {[{repInfo.first_name}]} {[{repInfo.last_name}]} ({[{repInfo.party}]})</h3>
-            <img
-              ng-src="https://theunitedstates.io/images/congress/450x550/{[{repInfo.bioguide_id}]}.jpg"
-              class="rep-img center-block"
-              alt="Your Rep"
-            />
-            <h3 class="rep-name">Call {[{repInfo.phone}]}</h3>
-        </div>
+      <div class="congress-intro">
+        <h5 class="section-header">Your Congressperson is</h5>
+        <h3 class="rep-name">{[{repInfo.title}]} {[{repInfo.first_name}]} {[{repInfo.last_name}]} ({[{repInfo.party}]})</h3>
+        <img ng-src={[{repInfo.photo_url}]} class="rep-img center-block" alt="Your Rep" />
+        <h3 class="rep-name">Call {[{repInfo.phone}]}</h3>
+      </div>
 
-        <p class="script body-copy">
-            {{campData.script}}
-        </p>
+      <p class="script body-copy">
+        {{campData.script}}
+      </p>
 
-        <a id="call-btn"
-            class="btn btn-lg call-button center-block primary-button"
-            role="button"
-            href="tel:{[{repInfo.phone}]}">
-            Make the call now!
-        </a>
+      <a id="call-btn" class="btn btn-lg call-button center-block primary-button" role="button" href="tel:{[{repInfo.phone}]}">
+        Make the call now!
+      </a>
 
-        <a class="btn btn-lg call-button center-block primary-button"
-            role="button"
-            href="{{campData.url}}/thank-you"
-            ng-click="sendEvent('call')">
-            I'm done
-        </a>
+      <a class="btn btn-lg call-button center-block primary-button" role="button" href="{{campData.url}}/thank-you"
+        ng-click="sendEvent('call')">
+        I'm done
+      </a>
 
-        <div style="margin-bottom:25px;">
+      <div style="margin-bottom:25px;">
         {{!-- <a onclick="shareLinkClicked()" id="shareLink">
           <img src="/images/HelloGOV_link_share.png" style="width: 100px;" />
         </a> --}}
@@ -51,13 +43,13 @@
             <p id="link" data-clipboard-text="test-link"></p>
           </h4>
         </div>
-        </div>
+      </div>
     </div> <!-- /rep-container -->
 
     <div id="rep-container" ng-show="repNotFoundForm" class="ng-hide">
       <div class="text-center">
         <p class="lead reversed-text">
-          We weren't able to find any elected officials who represent that address.  Please try again!
+          We weren't able to find any elected officials who represent that address. Please try again!
         </p>
       </div>
     </div>
