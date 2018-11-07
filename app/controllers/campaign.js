@@ -22,14 +22,8 @@ campaignController.findLegislator = function (latitude, longitude, response) {
             return null;
         }
 
-        // for (var legislatorIndex = 0; legislatorIndex < legislators.length; legislatorIndex++) {
-        //     var legislator = legislators[legislatorIndex];
-        //     if (legislator.title === 'Rep') {
-        //         return legislator;
-        //     }
-        // }
-        var firstLegislator = legislators[0];
-        return firstLegislator;
+        var legislator = legislators.find(legislator => legislator.offices.find(office => office.name === "Senate Office"));
+        return legislator;
     };
 
     var success = function (data) {
