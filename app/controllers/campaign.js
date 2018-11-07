@@ -23,7 +23,13 @@ campaignController.findLegislator = function (latitude, longitude, response) {
         }
 
         var legislator = legislators.find(legislator => legislator.offices.find(office => office.name === "Senate Office"));
-        return legislator;
+        return {
+            first_name: legislator.first_name,
+            last_name: legislator.last_name,
+            party: legislator.party,
+            photo_url: legislator.photo_url,
+            phone: legislator.offices.find(office => office.name === "Senate Office").phone
+        };
     };
 
     var success = function (data) {
