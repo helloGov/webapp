@@ -1,5 +1,5 @@
 const secrets = require('./secrets');
-const currentEnv = require('./env');
+const currentEnv = process.env.NODE_ENV;
 
 let config = {
     marketing_site_url: 'http://hellogov.squarespace.com',
