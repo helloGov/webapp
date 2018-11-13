@@ -1,7 +1,11 @@
 # helloGov
 
 ## Config
-- ask wcrest for secrets.js file, and put into conf folder
+- add `conf/secrets.js` file
+  ```
+  $ touch conf/secrets.js
+  ```
+- ask in slack channel for `secrets.js` file
 
 ## Install dependencies
 - install node
