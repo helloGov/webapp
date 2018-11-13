@@ -5,6 +5,7 @@ secrets*.js
 .vscode
 .idea
 .sass-cache
+.env
 
 public/build/**
 !.gitkeep
