@@ -24,19 +24,19 @@ var routes = require('./app/routes');
 
 var app = express();
 
-var mongoUri = `mongodb://${config.db_user}:${config.db_password}@${config.db_IP}:${config.db_port}/${config.db}`;
-if (app.get('env') === 'production') {
-    var mongoSslOpt = {
-        'server': {
-            'sslValidate': false,
-            'sslKey': fs.readFileSync('/etc/ssl/mongodb.pem'),
-            'sslCert': fs.readFileSync('/etc/ssl/mongodb.pem')
-        }
-    };
-    mongoose.connect(`${mongoUri}?ssl=true`, mongoSslOpt);
-} else {
-    mongoose.connect(mongoUri);
-}
+var mongoUri = `mongodb+srv://${config.db_user}:${config.db_password}@${config.db}-5sypa.mongodb.net/hellogov?retryWrites=true`;
+// if (app.get('env') === 'production') {
+//     var mongoSslOpt = {
+//         'server': {
+//             'sslValidate': false,
+//             'sslKey': fs.readFileSync('/etc/ssl/mongodb.pem'),
+//             'sslCert': fs.readFileSync('/etc/ssl/mongodb.pem')
+//         }
+//     };
+//     mongoose.connect(`${mongoUri}?ssl=true`, mongoSslOpt);
+// } else {
+    mongoose.connect(mongoUri, {dbName: 'hellogov'});
+// }
 mongoose.connection.on('error', function(err) {
     console.log('Mongo connection error', err.message);
 });
@@ -44,13 +44,10 @@ mongoose.connection.once('open', function callback() {
     console.log('Connected to MongoDB');
 });
 
-if (app.get('env') === 'production') {
+if (app.get('env') === 'prod') {
     var sessionStore = new MongoStore({
         url: `${mongoUri}?ssl=true`,
-        touchAfter: 0,
-        sslValidate: false,
-        sslKey: fs.readFileSync('/etc/ssl/mongodb.pem'),
-        sslCert: fs.readFileSync('/etc/ssl/mongodb.pem')
+        touchAfter: 0
     });
 } else {
     var sessionStore = new MongoStore({
