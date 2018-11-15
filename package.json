@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production node index.js",
+    "start": "NODE_ENV=prod node index.js",
     "start-dev": "NODE_ENV=dev nodemon index.js",
     "build": "npm run build-css && npm run build-js",
     "build-css": "NODE_ENV=production sass public/scss/styles.scss public/build/css/styles.css",
