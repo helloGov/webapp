@@ -24,19 +24,15 @@ var routes = require('./app/routes');
 
 var app = express();
 
-var mongoUri = `mongodb+srv://${config.db_user}:${config.db_password}@${config.db}-5sypa.mongodb.net/hellogov?retryWrites=true`;
-// if (app.get('env') === 'production') {
-//     var mongoSslOpt = {
-//         'server': {
-//             'sslValidate': false,
-//             'sslKey': fs.readFileSync('/etc/ssl/mongodb.pem'),
-//             'sslCert': fs.readFileSync('/etc/ssl/mongodb.pem')
-//         }
-//     };
-//     mongoose.connect(`${mongoUri}?ssl=true`, mongoSslOpt);
-// } else {
-    mongoose.connect(mongoUri, {dbName: 'hellogov'});
-// }
+const currentEnv = app.get('env');
+const localMongoUri = `mongodb://${config.db_local_user}:${config.db_local_password}@${config.db_IP}:${config.db_port}/${config.db}`;
+const mongoUri = `mongodb://${config.db_user}:${config.db_password}@${config.db}-shard-00-00-5sypa.mongodb.net:27017,${config.db}-shard-00-01-5sypa.mongodb.net:27017,${config.db}-shard-00-02-5sypa.mongodb.net:27017/${config.db}-${currentEnv}?ssl=true&replicaSet=helloGov-shard-0&authSource=admin&retryWrites=true`;
+
+if(currentEnv === 'development') {
+  mongoose.connect(localMongoUri, {dbName: 'hellogov', useNewUrlParser: true});
+} else {
+  mongoose.connect(mongoUri, {dbName: 'hellogov', useNewUrlParser: true});
+}
 mongoose.connection.on('error', function(err) {
     console.log('Mongo connection error', err.message);
 });
@@ -44,18 +40,17 @@ mongoose.connection.once('open', function callback() {
     console.log('Connected to MongoDB');
 });
 
-if (app.get('env') === 'prod') {
+if (currentEnv === 'production') {
     var sessionStore = new MongoStore({
         url: `${mongoUri}?ssl=true`,
         touchAfter: 0
     });
 } else {
     var sessionStore = new MongoStore({
-        url: mongoUri,
+        url: localMongoUri,
         touchAfter: 0
     });
 }
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
