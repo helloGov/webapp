@@ -27,17 +27,37 @@
       <div class="form-group">
         <div class="prompt-title">
           <h4>LEGISLATURE LEVEL</h4>
-        </div>
-        <div>
-          <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.federal_senate" ng-change="updateLegislatureSelection()"
-            ng-value="true" ng-disabled="stateLegislatureSelected()" name="federal-senate">Federal: Senate<br>
-          <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.federal_house" ng-change="updateLegislatureSelection()"
-            ng-value="true" ng-disabled="stateLegislatureSelected()" name="federal-house"> Federal: House<br>
-          <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.state_senate" ng-change="updateLegislatureSelection()"
-            ng-value="true" ng-disabled="federalLegislatureSelected()" name="state-senate">State: Senate<br>
-          <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.state_assembly" ng-change="updateLegislatureSelection()"
-            ng-value="true" ng-disabled="federalLegislatureSelected()" name="state-assembly">State: Assembly<br>
-        </div>
+        </div><br>
+        <table class="legislature-level-checkboxes">
+          <tr>
+            <td>
+              <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.federal_senate" ng-change="updateLegislatureSelection()"
+                ng-value="true" ng-disabled="stateLegislatureSelected()" name="federal-senate">
+            </td>
+            <td class="legislature-level-title">Federal: Senate</td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.federal_house" ng-change="updateLegislatureSelection()"
+                ng-value="true" ng-disabled="stateLegislatureSelected()" name="federal-house">
+            </td>
+            <td class="legislature-level-title">Federal: House</td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.state_senate" ng-change="updateLegislatureSelection()"
+                ng-value="true" ng-disabled="federalLegislatureSelected()" name="state-senate">
+            </td>
+            <td class="legislature-level-title">State: Senate</td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.state_assembly" ng-change="updateLegislatureSelection()"
+                ng-value="true" ng-disabled="federalLegislatureSelected()" name="state-assembly">
+            </td>
+            <td class="legislature-level-title">State: Assembly</td>
+          </tr>
+        </table>
       </div>
 
       <div class="form-group">
