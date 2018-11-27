@@ -27,7 +27,6 @@ You only have to do this once.
 - add the `secrets.js` file to the `conf/` directory
 - ask in the slack channel for the `.env` file
 - add the `.env` file to the project root directory
-  ```
 - provision hellogov database and db users
   ```
   $ sh ./scripts/provision_mongo.sh
