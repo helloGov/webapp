@@ -24,7 +24,7 @@
 You only have to do this once.
 
 - ask in slack channel for `secrets.js` file
-- add `conf/secrets.js` file
+- add the `secrets.js` file to the `conf/` directory
 - ask in the slack channel for the `.env` file
 - add the `.env` file to the project root directory
   ```
