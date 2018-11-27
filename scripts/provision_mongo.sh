@@ -7,6 +7,7 @@ sudo chmod -R 757 /data/db
 
 # Stop an existing mongo instance
 pgrep mongod | xargs kill -2
+sleep 1
 
 # Create admin user
 mongod --port 27017 --dbpath /data/db --fork --logpath /usr/local/var/log/mongodb/mongod.log
