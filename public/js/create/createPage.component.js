@@ -41,13 +41,16 @@ export default angular.module('helloGov')
                 const checked = event.target.checked;
                 switch (event.target.name) {
                 case 'federal-senate':
-                    return $scope.federalSenateSelected = checked;
+                    $scope.federalSenateSelected = checked;
+                    return;
                 case 'federal-house':
-                    return $scope.federalHouseSelected = checked;
+                    $scope.federalHouseSelected = checked;
+                    return;
                 case 'state-senate':
-                    return $scope.stateSenateSelected = checked;
+                    $scope.stateSenateSelected = checked;
+                    return;
                 case 'state-assembly':
-                    return $scope.stateAssemblySelected = checked;
+                    $scope.stateAssemblySelected = checked;
                 }
             };
 
