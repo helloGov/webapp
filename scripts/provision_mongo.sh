@@ -9,7 +9,7 @@ sudo chmod -R 757 /data/db
 pgrep mongod | xargs kill -2
 sleep 1
 
-# Create admin user
+# Create admin db user
 mongod --port 27017 --dbpath /data/db --fork --logpath /usr/local/var/log/mongodb/mongod.log
 mongo localhost:27017/admin --eval "db.createUser({user:'$DB_ADMIN_USER',pwd:'$DB_ADMIN_PASSWORD',roles:[{role:'userAdminAnyDatabase',db:'admin'}, 'readWriteAnyDatabase']})"
 
