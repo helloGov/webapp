@@ -29,7 +29,6 @@ You only have to do this once.
 - add the `.env` file to the project root directory
   ```
   $ touch conf/secrets.js
-  ```
 - provision hellogov database and db users
   ```
   $ sh ./scripts/provision_mongo.sh
