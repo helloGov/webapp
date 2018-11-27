@@ -1,6 +1,6 @@
-const axios = require("axios");
+const axios = require('axios');
 var Campaign = require('../models/campaign');
-var openstatesApiKey = require("../../conf/secrets.js").openstates_api_key;
+var openstatesApiKey = require('../../conf/secrets.js').openstates_api_key;
 
 var campaignController = {};
 
@@ -28,7 +28,7 @@ campaignController.findLegislator = function (latitude, longitude, response) {
             last_name: legislator.last_name,
             party: legislator.party,
             photo_url: legislator.photo_url,
-            phone: legislator.offices.find(office => office.phone).phone,
+            phone: legislator.offices.find(office => office.phone).phone
         };
 
         if (!legislator.phone) {
@@ -50,7 +50,7 @@ campaignController.findLegislator = function (latitude, longitude, response) {
 
     axios.get(`https://openstates.org/api/v1/legislators/geo/?lat=${latitude}&long=${longitude}&apikey=${openstatesApiKey}`)
         .then(res => success(res))
-        .catch(error => { console.log(error) });
+        .catch(error => { console.log(error); });
 };
 
 module.exports = campaignController;
