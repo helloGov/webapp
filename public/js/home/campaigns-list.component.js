@@ -30,7 +30,7 @@ export default angular.module('helloGov')
                 })
                 .catch(() => {
                     self.error = 'There was an error deleting your campaign. Please try again later.';
-                })
+                });
         };
     }
 })
