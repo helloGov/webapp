@@ -21,6 +21,6 @@ sudo scp mongodb.pem /tmp/mongodb.pem
 sudo cp -r "$LOCAL_DIR/conf/mongod.conf" /etc
 
 # Test secure connections by creating application user
-pgrep mongod | xargs kill -2
+# Test secure connection and create standard db user
 mongod --config /etc/mongod.conf --auth --port 27017 --dbpath /data/db --fork --logpath /usr/local/var/log/mongodb/mongod.log
 mongo localhost:27017/hellogov -u $DB_ADMIN_USER -p $DB_ADMIN_PASSWORD --authenticationDatabase "admin" --ssl --sslAllowInvalidHostnames --sslCAFile /etc/ssl/mongodb.pem --eval "db.createUser({user:'$DB_USER',pwd:'$DB_PASSWORD',roles:[{role:'readWrite',db:'hellogov'}]});"
