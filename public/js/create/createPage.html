@@ -65,7 +65,7 @@
         <br />
         <select name="state-select" class="state-select form-control input-lg campaign-input" ng-class="{'form-field-error': createForm.state-select.$touched && createForm.state-select.$invalid}"
           ng-show="stateLegislatureSelected()" ng-model="$ctrl.campaign.state" ng-options="state as state for state in stateNames track by state"
-          ng-required="stateLegislatureSelected()">
+          ng-required="stateLegislatureSelected()" ng-disabled="federalLegislatureSelected()">
           <option value="" selected disabled>Select State</option>
         </select>
       </div>
