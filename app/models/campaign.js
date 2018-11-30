@@ -11,11 +11,12 @@ var CampaignSchema = new Schema({
     learn_more: { type: String, trim: true },
     publish: { type: Boolean, trim: true },
     legislature_level: {
-        federal_senate: { type: Boolean },
-        federal_house: { type: Boolean },
-        state_senate: { type: Boolean },
-        state_assembly: { type: Boolean }
+        federal_senate: { type: Boolean, required: () => !this.legislature_level.federal_house && !this.legislature_level.state_senate && !this.legislature_level.state_assembly },
+        federal_house: { type: Boolean, required: () => !this.legislature_level.federal_senate && !this.legislature_level.state_senate && !this.legislature_level.state_assembly },
+        state_senate: { type: Boolean, required: () => !this.legislature_level.federal_house && !this.legislature_level.federal_senate && !this.legislature_level.state_assembly },
+        state_assembly: { type: Boolean, required: () => !this.legislature_level.federal_house && !this.legislature_level.state_senate && !this.legislature_level.federal_senate }
     },
+    state: { type: String, required: () => this.legislature_level === 'state-assembly' || this.legislature_level === 'state-senate' },
     user: { type: Schema.Types.ObjectId, ref: User }
 },
     {
