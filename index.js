@@ -36,6 +36,7 @@ if (app.get('env') === 'production') {
     };
     mongoose.connect(`${mongoUri}?ssl=true`, mongoSslOpt);
 } else {
+    mongoUri = `mongodb://localhost:27017/hellogov`;
     mongoose.connect(mongoUri);
 }
 mongoose.connection.on('error', function (err) {

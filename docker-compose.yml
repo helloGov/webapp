@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=hellogov
+    volumes:
+      - ./data/db:/data/db
