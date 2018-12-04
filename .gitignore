@@ -5,8 +5,11 @@ npm-debug.log
 .vscode
 .idea
 .sass-cache
+.env
 
 public/build/**
 !.gitkeep
 .tern-project
 
+# Mounted MongoDB data
+data

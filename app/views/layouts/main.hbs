@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="helloGov">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,12 +14,13 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
 
     <link href="/build/css/styles.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM2H_5tEaB4OM1Dr2iR893KmwczVNXExs&libraries=places" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{google-maps-api-key}}&libraries=places" type="text/javascript"></script>
     <script src="/build/js/vendor.bundle.js"></script>
 
     <script>
@@ -31,10 +33,10 @@
         }
 
         angular.module('helloGov', ['ngMapAutocomplete', 'ngclipboard'])
-            .config(function($interpolateProvider) {
+            .config(function ($interpolateProvider) {
                 $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
             })
-            .config(function($httpProvider) {
+            .config(function ($httpProvider) {
                 // disable browser caching of GET requests
                 $httpProvider.defaults.headers.get = $httpProvider.defaults.headers.get || {};
                 $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
@@ -47,33 +49,39 @@
 
     </script>
     <script src="/build/js/app.bundle.js"></script>
-  </head>
+</head>
 
-  <body class="{{{body_class}}}">
+<body class="{{{body_class}}}">
     <nav id="nav" class="navbar text-center">
         {{#if logged_in}}
         <span><img class="hamburger" style="cursor:pointer" onclick="openNav()" src="/images/Hamburger.svg" /></span>
         {{/if}}
-        <a href="/"><img src="/images/logo.png" class="logo"/></a>
+        <a href="/"><img src="/images/logo.png" class="logo" /></a>
         <!-- <img src="/images/profile.png" class="pull&#45;right profile-photo"/> -->
     </nav>
 
     {{#if logged_in}}
-        <div id="sideMenu" class="sidenav">
-          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-          <a href="/home">CAMPAIGNS</a><hr>
-          {{!-- <a href="/analytics">ANALYTICS</a><hr> --}}
-          <a href="mailto:team@hellogov.org">HELP</a><hr>
-          <a href="/settings">SETTINGS</a><hr>
-          <a href="/logout">LOGOUT</a><hr>
-        </div>
+    <div id="sideMenu" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/home">CAMPAIGNS</a>
+        <hr>
+        {{!-- <a href="/analytics">ANALYTICS</a>
+        <hr> --}}
+        <a href="mailto:team@hellogov.org">HELP</a>
+        <hr>
+        <a href="/settings">SETTINGS</a>
+        <hr>
+        <a href="/logout">LOGOUT</a>
+        <hr>
+    </div>
     {{/if}}
 
     <div class="content-wrapper" onclick="closeNav()">
-      {{{body}}}
+        {{{body}}}
     </div>
-  </body>
+</body>
 
-  <footer>
-  </footer>
+<footer>
+</footer>
+
 </html>

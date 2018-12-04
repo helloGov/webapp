@@ -3,7 +3,7 @@ const currentEnv = process.env.NODE_ENV;
 
 let config = {
     marketing_site_url: 'http://hellogov.squarespace.com',
-	marketing_pages: ['/request-beta-access', '/faq']
+    marketing_pages: ['/request-beta-access', '/faq']
 };
 
 const getEnvConfig = function() {

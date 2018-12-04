@@ -21,19 +21,20 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var facebookAuthHandler = require('./app/controllers/authentication').facebookAuthHandler;
 var fs = require('fs');
 var routes = require('./app/routes');
+var googleMapsApiKey = require('./conf/secrets.js').google_maps_api_key;
 
 var app = express();
 
 const currentEnv = app.get('env');
-const localMongoUri = `mongodb://${config.db_local_user}:${config.db_local_password}@${config.db_IP}:${config.db_port}/${config.db}`;
+const localMongoUri = `mongodb://localhost:27017/hellogov`;
 const mongoUri = `mongodb://${config.db_user}:${config.db_password}@${config.db}-shard-00-00-5sypa.mongodb.net:27017,${config.db}-shard-00-01-5sypa.mongodb.net:27017,${config.db}-shard-00-02-5sypa.mongodb.net:27017/${config.db}-${currentEnv}?ssl=true&replicaSet=helloGov-shard-0&authSource=admin&retryWrites=true`;
 
-if(currentEnv === 'development') {
-  mongoose.connect(localMongoUri, {dbName: 'hellogov', useNewUrlParser: true});
+if(currentEnv === 'development') {;
+  mongoose.connect(localMongoUri);
 } else {
   mongoose.connect(mongoUri, {dbName: 'hellogov', useNewUrlParser: true});
 }
-mongoose.connection.on('error', function(err) {
+mongoose.connection.on('error', function (err) {
     console.log('Mongo connection error', err.message);
 });
 mongoose.connection.once('open', function callback() {
@@ -98,12 +99,12 @@ passport.use(new FacebookStrategy({
     callbackURL: config.fb_callback_url
 }, facebookAuthHandler));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
     console.log('serializeUser: ' + user._id);
     done(null, user._id);
 });
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+passport.deserializeUser(function (id, done) {
+    User.findById(id, function (err, user) {
         console.log('deserializeUser: ' + JSON.stringify(user));
         done(err, user);
     });
@@ -118,8 +119,11 @@ app.engine('.hbs', exphbs({
         path.join(__dirname, '/app/views/shared')
     ],
     helpers: {
-        'angular-js': function(options) {
+        'angular-js': function (options) {
             return options.fn();
+        },
+        'google-maps-api-key': function () {
+            return googleMapsApiKey;
         }
     }
 }));
