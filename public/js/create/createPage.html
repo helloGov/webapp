@@ -56,7 +56,7 @@
           <tr>
             <td>
               <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.state_assembly" ng-change="updateLegislatureSelection()"
-                ng-value="true" ng-disabled="federalLegislatureSelected()" name="state-assembly" ng-required="!federalLegislatureSelected() && !stateHouseSelected"
+                ng-value="true" ng-disabled="federalLegislatureSelected()" name="state-assembly" ng-required="!federalLegislatureSelected() && !stateSenateSelected"
                 ng-class="{'form-field-error': createForm.script.$touched && createForm.script.$invalid}">
             </td>
             <td class="legislature-level-title">State: Assembly</td>
