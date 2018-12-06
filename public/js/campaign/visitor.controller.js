@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 export default angular.module('helloGov')
-    .controller('visitorController', function ($scope, $http, $window, $location, constants) {
+    .controller('visitorController', function ($scope, $http, $location, constants) {
         'ngInject';
         // FIXME: this is super brittle to get the campaignId like this, but we're not using angular's
         // routing so it's not possible to get it using angular yet
@@ -20,7 +20,7 @@ export default angular.module('helloGov')
                 'latitude': $scope.locDetails.geometry.location.lat(),
                 'longitude': $scope.locDetails.geometry.location.lng()
             };
-            $http.get('/locateLegislator', { params: coordinates })
+            $http.get('/locateLegislator', { params: { latitude: coordinates.latitude, longitude: coordinates.longitude, campaignId: $scope.campaign } })
                 .then(function (result) {
                     $scope.repFound = result.data.representativeFound;
                     $scope.repInfo = result.data.representativeInfo;
