@@ -42,17 +42,17 @@ campaignController.findLegislator = async function (latitude, longitude, campaig
     const getStateReps = async function () {
         return axios.get(`https://openstates.org/api/v1/legislators/geo/?lat=${latitude}&long=${longitude}&apikey=${openstatesApiKey}`)
             .catch(error => { console.log(error); });
-    }
+    };
 
     let currentCampaign = await Campaign.findById(campaignId, 'legislature_level');
     let legislatureLevels = Object.keys(currentCampaign.legislature_level).filter(lev => currentCampaign.legislature_level[lev]);
     let legislators = [];
 
-    if (legislatureLevels.includes("state_senate")) {
+    if (legislatureLevels.includes('state_senate')) {
         let res = await getStateReps();
         let legislator = res.data[0];
         legislators.push({
-            title: "State Senator",
+            title: 'State Senator',
             first_name: legislator.first_name,
             last_name: legislator.last_name,
             party: legislator.party,
@@ -60,11 +60,11 @@ campaignController.findLegislator = async function (latitude, longitude, campaig
             phone: legislator.offices.find(office => office.phone).phone
         });
     }
-    if (legislatureLevels.includes("state_assembly")) {
+    if (legislatureLevels.includes('state_assembly')) {
         let res = await getStateReps();
         let legislator = res.data[1];
         legislators.push({
-            title: "State Assembly Member",
+            title: 'State Assembly Member',
             first_name: legislator.first_name,
             last_name: legislator.last_name,
             party: legislator.party,
@@ -72,7 +72,6 @@ campaignController.findLegislator = async function (latitude, longitude, campaig
             phone: legislator.offices.find(office => office.phone).phone
         });
     }
-
 
     success(legislators);
 };
