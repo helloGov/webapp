@@ -16,11 +16,8 @@ export default angular.module('helloGov')
         };
         $scope.sendEvent('visit');
         $scope.update = function () {
-            var coordinates = {
-                'latitude': $scope.locDetails.geometry.location.lat(),
-                'longitude': $scope.locDetails.geometry.location.lng()
-            };
-            $http.get('/locateLegislator', { params: { latitude: coordinates.latitude, longitude: coordinates.longitude, campaignId: $scope.campaign } })
+            let address = $scope.locDetails.formatted_address.replace(/ /g, '%20');
+            $http.get('/locateLegislator', { params: { address: address, campaignId: $scope.campaign } })
                 .then(function (result) {
                     $scope.repFound = result.data.representativeFound;
                     $scope.repInfo = result.data.representativeInfo;
