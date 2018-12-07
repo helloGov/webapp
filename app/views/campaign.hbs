@@ -15,10 +15,10 @@
 
     <div id="rep-container" ng-show="repForm" class="ng-hide">
       <div class="congress-intro">
-        <h5 class="section-header">Your {[{repInfo.title}]} is</h5>
-        <h3 class="rep-name">{[{repInfo.name}]} ({[{repInfo.party}]})</h3>
-        <img ng-src={[{repInfo.photo_url}]} class="rep-img center-block" alt="Your Rep" />
-        <h3 class="rep-name">Call {[{repInfo.phone}]}</h3>
+        <h5 class="section-header">Your {[{repInfo[0].title}]} is</h5>
+        <h3 class="rep-name">{[{repInfo[0].name}]} ({[{repInfo[0].party}]})</h3>
+        <img ng-src={[{repInfo[0].photo_url}]} class="rep-img center-block" alt="Your Rep" />
+        <h3 class="rep-name">Call {[{repInfo[0].phone}]}</h3>
       </div>
 
       <p class="script body-copy">
