@@ -14,18 +14,18 @@
     </div><!-- end campaign-circles -->
 
     <div id="rep-container" ng-show="repForm" class="ng-hide">
-      <div class="congress-intro">
-        <h5 class="section-header">Your {[{repInfo[0].title}]} is</h5>
-        <h3 class="rep-name">{[{repInfo[0].name}]} ({[{repInfo[0].party}]})</h3>
-        <img ng-src={[{repInfo[0].photo_url}]} class="rep-img center-block" alt="Your Rep" />
-        <h3 class="rep-name">Call {[{repInfo[0].phone}]}</h3>
+      <div ng-repeat-start="rep in repInfo" class="congress-intro">
+        <h5 class="section-header">Your {[{rep.title}]} is</h5>
+        <h3 class="rep-name">{[{rep.name}]} ({[{rep.party}]})</h3>
+        <img ng-src={[{rep.photo_url}]} class="rep-img center-block" alt="Your Rep" />
+        <h3 class="rep-name">Call {[{rep.phone}]}</h3>
       </div>
 
       <p class="script body-copy">
         {{campData.script}}
       </p>
 
-      <a id="call-btn" class="btn btn-lg call-button center-block primary-button" role="button" href="tel:{[{repInfo.phone}]}">
+      <a ng-repeat-end id="call-btn" class="btn btn-lg call-button center-block primary-button" role="button" href="tel:{[{rep.phone}]}">
         Make the call now!
       </a>
 
