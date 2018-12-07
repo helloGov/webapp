@@ -51,10 +51,9 @@ router.get('/error', function (request, response) {
 router.get('/locateLegislator', (request, response) => {
     // TODO: construct our request to /locateLegislator such that we can use an expressier
     // way of accessing params. request.params['latitude'] is better
-    var latitude = request.query.latitude;
-    var longitude = request.query.longitude;
     var campaignId = request.query.campaignId;
-    campaignController.findLegislator(latitude, longitude, campaignId, response);
+    var address = request.query.address;
+    campaignController.findLegislator(address, campaignId, response);
 });
 
 router.use('/api', apiRoutes);
