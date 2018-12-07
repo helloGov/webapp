@@ -49,6 +49,16 @@ campaignController.findLegislator = async function (address, campaignId, respons
             .catch(error => { console.log(error); });
     };
 
+    const getLegislatorForCampaign = function (data, title) {
+        return {
+            title: title,
+            name: data.name,
+            party: data.party,
+            photo_url: data.photoUrl,
+            phone: data.phones[0]
+        }
+    }
+
     let currentCampaign = await Campaign.findById(campaignId, 'legislature_level');
     let legislatureLevels = Object.keys(currentCampaign.legislature_level).filter(lev => currentCampaign.legislature_level[lev]);
     let legislators = [];
@@ -56,24 +66,12 @@ campaignController.findLegislator = async function (address, campaignId, respons
     if (legislatureLevels.includes('state_senate')) {
         let res = await getUpperBodyReps();
         let legislator = res.data.officials[2];
-        legislators.push({
-            title: 'State Senator',
-            name: legislator.name,
-            party: legislator.party,
-            photo_url: legislator.photoUrl,
-            phone: legislator.phones[0]
-        });
+        legislators.push(getLegislatorForCampaign(legislator, 'State Senator'));
     }
     if (legislatureLevels.includes('state_assembly')) {
         let res = await getLowerBodyReps();
         let legislator = res.data.officials[1];
-        legislators.push({
-            title: 'State Assembly Member',
-            name: legislator.name,
-            party: legislator.party,
-            photo_url: legislator.photoUrl,
-            phone: legislator.phones[0]
-        });
+        legislators.push(getLegislatorForCampaign(legislator, 'State Assembly Member'));
     }
 
     success(legislators);
