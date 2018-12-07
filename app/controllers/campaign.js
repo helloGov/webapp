@@ -16,7 +16,7 @@ campaignController.findAllCampaigns = function (request, response) {
     }
 };
 
-campaignController.findLegislator = function (latitude, longitude, response) {
+campaignController.findLegislator = async function (latitude, longitude, campaignId, response) {
     var getRepresentative = function (legislators) {
         if (legislators.length === 0) {
             return null;
@@ -37,8 +37,7 @@ campaignController.findLegislator = function (latitude, longitude, response) {
         return legislator;
     };
 
-    var success = function (data) {
-        var legislators = data.data;
+    var success = function (legislators) {
         var representative = getRepresentative(legislators);
         var representativeFound = (representative != null);
         var responseObject = {
@@ -48,9 +47,17 @@ campaignController.findLegislator = function (latitude, longitude, response) {
         response.send(JSON.stringify(responseObject));
     };
 
-    axios.get(`https://openstates.org/api/v1/legislators/geo/?lat=${latitude}&long=${longitude}&apikey=${openstatesApiKey}`)
-        .then(res => success(res))
-        .catch(error => { console.log(error); });
+    let currentCampaign = await Campaign.findById(campaignId, 'legislature_level');
+    let legislatureLevels = Object.keys(currentCampaign.legislature_level).filter(lev => currentCampaign.legislature_level[lev]);
+    let legislators = [];
+
+    if (legislatureLevels.includes("state_senate")) {
+        let res = await axios.get(`https://openstates.org/api/v1/legislators/geo/?lat=${latitude}&long=${longitude}&apikey=${openstatesApiKey}`)
+            .catch(error => { console.log(error); });
+        legislators.push(res.data[0]);
+    }
+
+    success(legislators);
 };
 
 module.exports = campaignController;
