@@ -17,24 +17,20 @@ campaignController.findAllCampaigns = function (request, response) {
 };
 
 campaignController.findLegislator = async function (address, campaignId, response) {
-    var getRepresentative = function (legislators) {
+    var getRepresentatives = function (legislators) {
         if (legislators.length === 0) {
             return null;
         }
 
-        let legislator = legislators[0];
-        if (!legislator.phone) {
-            return null;
-        }
-        return legislator;
+        return legislators;
     };
 
     var success = function (legislators) {
-        var representative = getRepresentative(legislators);
-        var representativeFound = (representative != null);
+        var representatives = getRepresentatives(legislators);
+        var representativeFound = (representatives.length > 0);
         var responseObject = {
             representativeFound: representativeFound,
-            representativeInfo: representative
+            representativeInfo: representatives
         };
         response.send(JSON.stringify(responseObject));
     };
@@ -50,14 +46,15 @@ campaignController.findLegislator = async function (address, campaignId, respons
     };
 
     const getLegislatorForCampaign = function (data, title) {
-        return {
+        return data ? {
             title: title,
             name: data.name,
             party: data.party,
             photo_url: data.photoUrl,
             phone: data.phones[0]
         }
-    }
+            : null;
+    };
 
     let currentCampaign = await Campaign.findById(campaignId, 'legislature_level');
     let legislatureLevels = Object.keys(currentCampaign.legislature_level).filter(lev => currentCampaign.legislature_level[lev]);
