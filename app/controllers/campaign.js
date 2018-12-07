@@ -1,6 +1,6 @@
 const axios = require('axios');
 var Campaign = require('../models/campaign');
-var openstatesApiKey = require('../../conf/secrets.js').openstates_api_key;
+let googleCivicInfoApiKey = require('../../conf/secrets.js').google_civic_info_api_key;
 
 var campaignController = {};
 
@@ -16,7 +16,7 @@ campaignController.findAllCampaigns = function (request, response) {
     }
 };
 
-campaignController.findLegislator = async function (latitude, longitude, campaignId, response) {
+campaignController.findLegislator = async function (address, campaignId, response) {
     var getRepresentative = function (legislators) {
         if (legislators.length === 0) {
             return null;
@@ -39,8 +39,13 @@ campaignController.findLegislator = async function (latitude, longitude, campaig
         response.send(JSON.stringify(responseObject));
     };
 
-    const getStateReps = async function () {
-        return axios.get(`https://openstates.org/api/v1/legislators/geo/?lat=${latitude}&long=${longitude}&apikey=${openstatesApiKey}`)
+    const getUpperBodyReps = async function () {
+        return axios.get(`https://www.googleapis.com/civicinfo/v2/representatives?address=${address}&roles=legislatorUpperBody&key=${googleCivicInfoApiKey}`)
+            .catch(error => { console.log(error); });
+    };
+
+    const getLowerBodyReps = async function () {
+        return axios.get(`https://www.googleapis.com/civicinfo/v2/representatives?address=${address}&roles=legislatorLowerBody&key=${googleCivicInfoApiKey}`)
             .catch(error => { console.log(error); });
     };
 
@@ -49,27 +54,25 @@ campaignController.findLegislator = async function (latitude, longitude, campaig
     let legislators = [];
 
     if (legislatureLevels.includes('state_senate')) {
-        let res = await getStateReps();
-        let legislator = res.data[0];
+        let res = await getUpperBodyReps();
+        let legislator = res.data.officials[2];
         legislators.push({
             title: 'State Senator',
-            first_name: legislator.first_name,
-            last_name: legislator.last_name,
+            name: legislator.name,
             party: legislator.party,
-            photo_url: legislator.photo_url,
-            phone: legislator.offices.find(office => office.phone).phone
+            photo_url: legislator.photoUrl,
+            phone: legislator.phones[0]
         });
     }
     if (legislatureLevels.includes('state_assembly')) {
-        let res = await getStateReps();
-        let legislator = res.data[1];
+        let res = await getLowerBodyReps();
+        let legislator = res.data.officials[1];
         legislators.push({
             title: 'State Assembly Member',
-            first_name: legislator.first_name,
-            last_name: legislator.last_name,
+            name: legislator.name,
             party: legislator.party,
-            photo_url: legislator.photo_url,
-            phone: legislator.offices.find(office => office.phone).phone
+            photo_url: legislator.photoUrl,
+            phone: legislator.phones[0]
         });
     }
 
