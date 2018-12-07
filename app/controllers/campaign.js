@@ -22,15 +22,7 @@ campaignController.findLegislator = async function (latitude, longitude, campaig
             return null;
         }
 
-        var legislator = legislators[0];
-        legislator = {
-            first_name: legislator.first_name,
-            last_name: legislator.last_name,
-            party: legislator.party,
-            photo_url: legislator.photo_url,
-            phone: legislator.offices.find(office => office.phone).phone
-        };
-
+        let legislator = legislators[0];
         if (!legislator.phone) {
             return null;
         }
@@ -47,15 +39,40 @@ campaignController.findLegislator = async function (latitude, longitude, campaig
         response.send(JSON.stringify(responseObject));
     };
 
+    const getStateReps = async function () {
+        return axios.get(`https://openstates.org/api/v1/legislators/geo/?lat=${latitude}&long=${longitude}&apikey=${openstatesApiKey}`)
+            .catch(error => { console.log(error); });
+    }
+
     let currentCampaign = await Campaign.findById(campaignId, 'legislature_level');
     let legislatureLevels = Object.keys(currentCampaign.legislature_level).filter(lev => currentCampaign.legislature_level[lev]);
     let legislators = [];
 
     if (legislatureLevels.includes("state_senate")) {
-        let res = await axios.get(`https://openstates.org/api/v1/legislators/geo/?lat=${latitude}&long=${longitude}&apikey=${openstatesApiKey}`)
-            .catch(error => { console.log(error); });
-        legislators.push(res.data[0]);
+        let res = await getStateReps();
+        let legislator = res.data[0];
+        legislators.push({
+            title: "State Senator",
+            first_name: legislator.first_name,
+            last_name: legislator.last_name,
+            party: legislator.party,
+            photo_url: legislator.photo_url,
+            phone: legislator.offices.find(office => office.phone).phone
+        });
     }
+    if (legislatureLevels.includes("state_assembly")) {
+        let res = await getStateReps();
+        let legislator = res.data[1];
+        legislators.push({
+            title: "State Assembly Member",
+            first_name: legislator.first_name,
+            last_name: legislator.last_name,
+            party: legislator.party,
+            photo_url: legislator.photo_url,
+            phone: legislator.offices.find(office => office.phone).phone
+        });
+    }
+
 
     success(legislators);
 };
