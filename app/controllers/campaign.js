@@ -62,8 +62,10 @@ campaignController.findLegislator = async function (address, campaignId, respons
 
     if (legislatureLevels.includes('federal_senate')) {
         let res = await getUpperBodyReps();
-        let legislator = res.data.officials[0];
-        legislators.push(getLegislatorForCampaign(legislator, 'U.S. Senator'));
+        let legislatorResults = res.data.officials.slice(0, 2);
+        for (let legislator of legislatorResults) {
+            legislators.push(getLegislatorForCampaign(legislator, 'U.S. Senator'));
+        }
     }
     if (legislatureLevels.includes('federal_house')) {
         let res = await getLowerBodyReps();
