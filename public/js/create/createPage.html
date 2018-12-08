@@ -32,39 +32,40 @@
           <tr>
             <td>
               <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.federal_senate" ng-change="updateLegislatureSelection()"
-                ng-value="true" ng-disabled="stateLegislatureSelected()" name="federal-senate" ng-required="!stateLegislatureSelected() && !federalHouseSelected"
-                ng-class="{'form-field-error': createForm.script.$touched && createForm.script.$invalid}">
+                ng-value="true" ng-disabled="stateLegislatureSelected() || $ctrl.campaign.legislature_level.state_senate || $ctrl.campaign.legislature_level.state_assembly"
+                name="federal-senate" ng-required="!stateLegislatureSelected() && !federalHouseSelected" ng-class="{'form-field-error': createForm.script.$touched && createForm.script.$invalid}">
             </td>
             <td class="legislature-level-title">Federal: Senate</td>
           </tr>
           <tr>
             <td>
               <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.federal_house" ng-change="updateLegislatureSelection()"
-                ng-value="true" ng-disabled="stateLegislatureSelected()" name="federal-house" ng-required="!stateLegislatureSelected() && !federalSenateSelected"
-                ng-class="{'form-field-error': createForm.script.$touched && createForm.script.$invalid}">
+                ng-value="true" ng-disabled="stateLegislatureSelected() || $ctrl.campaign.legislature_level.state_senate || $ctrl.campaign.legislature_level.state_assembly"
+                name="federal-house" ng-required="!stateLegislatureSelected() && !federalSenateSelected" ng-class="{'form-field-error': createForm.script.$touched && createForm.script.$invalid}">
             </td>
             <td class="legislature-level-title">Federal: House</td>
           </tr>
           <tr>
             <td>
               <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.state_senate" ng-change="updateLegislatureSelection()"
-                ng-value="true" ng-disabled="federalLegislatureSelected()" name="state-senate" ng-required="!federalLegislatureSelected() && !stateAssemblySelected"
-                ng-class="{'form-field-error': createForm.script.$touched && createForm.script.$invalid}">
+                ng-value="true" ng-disabled="federalLegislatureSelected() || $ctrl.campaign.legislature_level.federal_senate || $ctrl.campaign.legislature_level.federal_house"
+                name="state-senate" ng-required="!federalLegislatureSelected() && !stateAssemblySelected" ng-class="{'form-field-error': createForm.script.$touched && createForm.script.$invalid}">
             </td>
             <td class="legislature-level-title">State: Senate</td>
           </tr>
           <tr>
             <td>
               <input type="checkbox" ng-model="$ctrl.campaign.legislature_level.state_assembly" ng-change="updateLegislatureSelection()"
-                ng-value="true" ng-disabled="federalLegislatureSelected()" name="state-assembly" ng-required="!federalLegislatureSelected() && !stateSenateSelected"
-                ng-class="{'form-field-error': createForm.script.$touched && createForm.script.$invalid}">
+                ng-value="true" ng-disabled="federalLegislatureSelected() || $ctrl.campaign.legislature_level.federal_senate || $ctrl.campaign.legislature_level.federal_house"
+                name="state-assembly" ng-required="!federalLegislatureSelected() && !stateSenateSelected" ng-class="{'form-field-error': createForm.script.$touched && createForm.script.$invalid}">
             </td>
             <td class="legislature-level-title">State: Assembly</td>
           </tr>
         </table>
         <br />
         <select name="state-select" class="state-select form-control input-lg campaign-input" ng-class="{'form-field-error': createForm.state-select.$touched && createForm.state-select.$invalid}"
-          ng-show="stateLegislatureSelected()" ng-model="$ctrl.campaign.state" ng-options="state as state for state in stateNames track by state"
+          ng-show="stateLegislatureSelected() || $ctrl.campaign.legislature_level.state_senate || $ctrl.campaign.legislature_level.state_assembly"
+          ng-model="$ctrl.campaign.state" ng-options="state as state for state in stateNames track by state"
           ng-required="stateLegislatureSelected()" ng-disabled="federalLegislatureSelected()">
           <option value="" selected disabled>Select State</option>
         </select>
