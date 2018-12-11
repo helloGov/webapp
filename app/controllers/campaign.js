@@ -73,30 +73,62 @@ campaignController.findLegislator = async function (address, latitude, longitude
             : null;
     };
 
+    const validateApiResults = function (results, legislatureLevel) {
+        switch (legislatureLevel) {
+            case ('federal_senate'):
+                if (!results || !results.data || !results.data.officials) {
+                    return [null];
+                } else {
+                    let reps = results.data.officials.slice(0, 2);
+                    return reps.length > 0 ? reps : [null];
+                }
+            case ('federal_house'):
+                if (!results || !results.data || !results.data.officials) {
+                    return null;
+                } else {
+                    return results.data.officials[0] || null;
+                }
+            case ('state_senate'):
+                if (!results || !results.data) {
+                    return null;
+                } else {
+                    return results.data[0] || null;
+                }
+            case ('state_assembly'):
+                if (!results || !results.data) {
+                    return null;
+                } else {
+                    return results.data[1] || null;
+                }
+            default:
+                return null;
+        }
+    }
+
     let currentCampaign = await Campaign.findById(campaignId, 'legislature_level').catch(error => console.log(error));
     let legislatureLevels = Object.keys(currentCampaign.legislature_level).filter(lev => currentCampaign.legislature_level[lev]);
     let legislators = [];
 
     if (legislatureLevels.includes('federal_senate')) {
         let res = await getUpperBodyRepsFromGoogle();
-        let legislatorResults = res.data.officials.slice(0, 2);
+        let legislatorResults = validateApiResults(res, 'federal_senate')
         for (let legislator of legislatorResults) {
             legislators.push(getLegislatorForCampaignFromGoogle(legislator, 'U.S. Senator'));
         }
     }
     if (legislatureLevels.includes('federal_house')) {
         let res = await getLowerBodyRepsFromGoogle();
-        let legislator = res.data.officials[0];
+        let legislator = validateApiResults(res, 'federal_house');
         legislators.push(getLegislatorForCampaignFromGoogle(legislator, 'Congressperson'));
     }
     if (legislatureLevels.includes('state_senate')) {
         let res = await getStateRepsFromOpenStates(latitude, longitude, openStatesApiKey);
-        let legislator = res.data[0];
+        let legislator = validateApiResults(res, 'state_senate')
         legislators.push(getLegislatorForCampaignFromOpenStates(legislator, 'State Senator'));
     }
     if (legislatureLevels.includes('state_assembly')) {
         let res = await getStateRepsFromOpenStates(latitude, longitude, openStatesApiKey);
-        let legislator = res.data[1];
+        let legislator = validateApiResults(res, 'state_assembly')
         legislators.push(getLegislatorForCampaignFromOpenStates(legislator, 'State Assembly Member'));
     }
 
