@@ -36,13 +36,13 @@ campaignController.findLegislator = async function (address, latitude, longitude
         response.send(JSON.stringify(responseObject));
     };
 
-    const getUpperBodyRepsFromGoogle = async function () {
-        return axios.get(`https://www.googleapis.com/civicinfo/v2/representatives?address=${address}&roles=legislatorUpperBody&key=${googleCivicInfoApiKey}`)
+    const getUpperBodyRepsFromGoogle = async function (address, apiKey) {
+        return axios.get(`https://www.googleapis.com/civicinfo/v2/representatives?address=${address}&roles=legislatorUpperBody&key=${apiKey}`)
             .catch(error => { console.log(error); });
     };
 
-    const getLowerBodyRepsFromGoogle = async function () {
-        return axios.get(`https://www.googleapis.com/civicinfo/v2/representatives?address=${address}&roles=legislatorLowerBody&key=${googleCivicInfoApiKey}`)
+    const getLowerBodyRepsFromGoogle = async function (address, apiKey) {
+        return axios.get(`https://www.googleapis.com/civicinfo/v2/representatives?address=${address}&roles=legislatorLowerBody&key=${apiKey}`)
             .catch(error => { console.log(error); });
     };
 
@@ -118,14 +118,14 @@ campaignController.findLegislator = async function (address, latitude, longitude
     let legislators = [];
 
     if (legislatureLevels.includes('federal_senate')) {
-        let res = await getUpperBodyRepsFromGoogle();
+        let res = await getUpperBodyRepsFromGoogle(address, googleCivicInfoApiKey);
         let legislatorResults = validateApiResults(res, 'federal_senate')
         for (let legislator of legislatorResults) {
             legislators.push(getLegislatorForCampaignFromGoogle(legislator, 'U.S. Senator'));
         }
     }
     if (legislatureLevels.includes('federal_house')) {
-        let res = await getLowerBodyRepsFromGoogle();
+        let res = await getLowerBodyRepsFromGoogle(address, googleCivicInfoApiKey);
         let legislator = validateApiResults(res, 'federal_house');
         legislators.push(getLegislatorForCampaignFromGoogle(legislator, 'Congressperson'));
     }
