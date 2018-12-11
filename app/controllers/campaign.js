@@ -30,39 +30,39 @@ const getLowerBodyRepsFromGoogle = async function (address, apiKey) {
 const getStateRepsFromOpenStates = async function (lat, lon, apiKey) {
     return axios.get(`https://openstates.org/api/v1/legislators/geo/?lat=${lat}&long=${lon}&apikey=${apiKey}`)
         .catch(error => { console.log(error); });
-}
+};
 
 const validateApiResults = function (results, legislatureLevel) {
     switch (legislatureLevel) {
-        case ('federal_senate'):
-            if (!results || !results.data || !results.data.officials) {
-                return [null];
-            } else {
-                let reps = results.data.officials.slice(0, 2);
-                return reps.length > 0 ? reps : [null];
-            }
-        case ('federal_house'):
-            if (!results || !results.data || !results.data.officials) {
-                return null;
-            } else {
-                return results.data.officials[0] || null;
-            }
-        case ('state_senate'):
-            if (!results || !results.data) {
-                return null;
-            } else {
-                return results.data[0] || null;
-            }
-        case ('state_assembly'):
-            if (!results || !results.data) {
-                return null;
-            } else {
-                return results.data[1] || null;
-            }
-        default:
+    case ('federal_senate'):
+        if (!results || !results.data || !results.data.officials) {
+            return [null];
+        } else {
+            let reps = results.data.officials.slice(0, 2);
+            return reps.length > 0 ? reps : [null];
+        }
+    case ('federal_house'):
+        if (!results || !results.data || !results.data.officials) {
             return null;
+        } else {
+            return results.data.officials[0] || null;
+        }
+    case ('state_senate'):
+        if (!results || !results.data) {
+            return null;
+        } else {
+            return results.data[0] || null;
+        }
+    case ('state_assembly'):
+        if (!results || !results.data) {
+            return null;
+        } else {
+            return results.data[1] || null;
+        }
+    default:
+        return null;
     }
-}
+};
 
 const getLegislatorForCampaignFromGoogle = function (data, title) {
     return data ? {
@@ -71,11 +71,11 @@ const getLegislatorForCampaignFromGoogle = function (data, title) {
         party: data.party,
         photo_url: data.photoUrl,
         phone: data.phones[0],
-        legislatorFound: true,
+        legislatorFound: true
     }
         : {
             title: title,
-            legislatorFound: false,
+            legislatorFound: false
         };
 };
 
@@ -86,25 +86,16 @@ const getLegislatorForCampaignFromOpenStates = function (data, title) {
         party: data.party,
         photo_url: data.photo_url,
         phone: data.offices.find(office => office.phone).phone,
-        legislatorFound: true,
+        legislatorFound: true
     }
         : {
             title: title,
-            legislatorFound: false,
-        }
+            legislatorFound: false
+        };
 };
 
 campaignController.findLegislator = async function (address, latitude, longitude, campaignId, response) {
-    var getRepresentatives = function (legislators) {
-        if (legislators.length === 0) {
-            return null;
-        }
-
-        return legislators;
-    };
-
-    var success = function (legislators) {
-        var representatives = getRepresentatives(legislators);
+    var success = function (representatives) {
         var representativeFound = (representatives.length > 0);
         var responseObject = {
             representativeFound: representativeFound,
@@ -113,16 +104,13 @@ campaignController.findLegislator = async function (address, latitude, longitude
         response.send(JSON.stringify(responseObject));
     };
 
-
-
-
     let currentCampaign = await Campaign.findById(campaignId, 'legislature_level').catch(error => console.log(error));
     let legislatureLevels = Object.keys(currentCampaign.legislature_level).filter(lev => currentCampaign.legislature_level[lev]);
     let legislators = [];
 
     if (legislatureLevels.includes('federal_senate')) {
         let res = await getUpperBodyRepsFromGoogle(address, googleCivicInfoApiKey);
-        let legislatorResults = validateApiResults(res, 'federal_senate')
+        let legislatorResults = validateApiResults(res, 'federal_senate');
         for (let legislator of legislatorResults) {
             legislators.push(getLegislatorForCampaignFromGoogle(legislator, 'U.S. Senator'));
         }
@@ -134,12 +122,12 @@ campaignController.findLegislator = async function (address, latitude, longitude
     }
     if (legislatureLevels.includes('state_senate')) {
         let res = await getStateRepsFromOpenStates(latitude, longitude, openStatesApiKey);
-        let legislator = validateApiResults(res, 'state_senate')
+        let legislator = validateApiResults(res, 'state_senate');
         legislators.push(getLegislatorForCampaignFromOpenStates(legislator, 'State Senator'));
     }
     if (legislatureLevels.includes('state_assembly')) {
         let res = await getStateRepsFromOpenStates(latitude, longitude, openStatesApiKey);
-        let legislator = validateApiResults(res, 'state_assembly')
+        let legislator = validateApiResults(res, 'state_assembly');
         legislators.push(getLegislatorForCampaignFromOpenStates(legislator, 'State Assembly Member'));
     }
 
