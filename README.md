@@ -39,7 +39,7 @@ You only have to do this once.
 
 - start the database service
   ```
-  $ docker-compose up -d
+  $ docker-compose up -d mongo
   ```
 - start the application
   ```
