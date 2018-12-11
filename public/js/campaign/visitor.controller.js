@@ -17,7 +17,10 @@ export default angular.module('helloGov')
         $scope.sendEvent('visit');
         $scope.update = function () {
             let address = $scope.locDetails.formatted_address.replace(/ /g, '%20');
-            $http.get('/locateLegislator', { params: { address: address, campaignId: $scope.campaign } })
+            let latitude = $scope.locDetails.geometry.location.lat();
+            let longitude = $scope.locDetails.geometry.location.lng();
+
+            $http.get('/locateLegislator', { params: { address: address, latitude: latitude, longitude: longitude, campaignId: $scope.campaign } })
                 .then(function (result) {
                     $scope.repFound = result.data.representativeFound;
                     $scope.repInfo = result.data.representativeInfo;
