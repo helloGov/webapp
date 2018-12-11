@@ -57,9 +57,13 @@ campaignController.findLegislator = async function (address, latitude, longitude
             name: data.name,
             party: data.party,
             photo_url: data.photoUrl,
-            phone: data.phones[0]
+            phone: data.phones[0],
+            legislatorFound: true,
         }
-            : null;
+            : {
+                title: title,
+                legislatorFound: false,
+            };
     };
 
     const getLegislatorForCampaignFromOpenStates = function (data, title) {
@@ -68,9 +72,13 @@ campaignController.findLegislator = async function (address, latitude, longitude
             name: data.full_name,
             party: data.party,
             photo_url: data.photo_url,
-            phone: data.offices.find(office => office.phone).phone
+            phone: data.offices.find(office => office.phone).phone,
+            legislatorFound: true,
         }
-            : null;
+            : {
+                title: title,
+                legislatorFound: false,
+            }
     };
 
     const validateApiResults = function (results, legislatureLevel) {
