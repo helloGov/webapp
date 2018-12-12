@@ -42,17 +42,17 @@ mongoose.connection.once('open', function callback() {
     console.log('Connected to MongoDB');
 });
 
-const sessionStore = (app.get('env') === 'production')
-    ? new MongoStore({
+if (currentEnv === 'production') {
+    var sessionStore = new MongoStore({
         url: `${mongoUri}?ssl=true`,
-        touchAfter: 0,
-        sslValidate: false,
-        sslKey: fs.readFileSync('/etc/ssl/mongodb.pem'),
-        sslCert: fs.readFileSync('/etc/ssl/mongodb.pem')
-    }) : new MongoStore({
-        url: mongoUri,
         touchAfter: 0
     });
+} else {
+    var sessionStore = new MongoStore({
+        url: localMongoUri,
+        touchAfter: 0
+    });
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
