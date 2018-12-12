@@ -52,12 +52,14 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
     "request": "^2.79.0",
+    "sass": "^1.15.2",
     "serve-favicon": "^2.3.2",
     "shortid": "^2.2.6",
     "start": "^4.0.2",
     "sunlight-congress-api": "^0.3.1",
     "ua-parser": "^0.3.5",
     "uglifyjs-webpack-plugin": "^0.4.1",
+    "node-sass-middleware": "^0.11.0",
     "webpack": "^2.3.2"
   },
   "devDependencies": {
@@ -68,7 +70,6 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^2.1.1",
     "nodemon": "^1.18.7",
-    "node-sass-middleware": "^0.11.0",
     "webpack-dev-middleware": "^1.10.1"
   }
 }

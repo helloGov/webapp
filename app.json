@@ -1,0 +1,13 @@
+{
+  "name": "HelloGOV",
+  "description": "HelloGOV",
+  "scripts": {
+    "postdeploy": "npm install && npm build"
+  },
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    }
+  ]
+}
