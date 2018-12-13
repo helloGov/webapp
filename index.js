@@ -2,7 +2,7 @@
  * load the core server and app modules
  *
  */
-
+require('dotenv').config()
 var path = require('path');
 var express = require('express');
 var exphbs = require('express-handlebars');
@@ -76,7 +76,10 @@ if (app.get('env') === 'development') {
         })
     );
 }
+console.log(path.join(__dirname, 'public'));
+console.log(process.env.PWD);
 app.use(express.static(path.join(__dirname, 'public')));
+console.log(path.join(__dirname, 'public', 'favicon.ico'))
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.set('views', path.join(__dirname, '/app/views'));
