@@ -1,9 +1,6 @@
 {
   "name": "HelloGOV",
   "description": "HelloGOV",
-  "scripts": {
-    "postdeploy": "npm install && npm run build"
-  },
   "addons": [],
   "buildpacks": [
     {
