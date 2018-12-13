@@ -1,2 +1,2 @@
-release: npm install && npm run build
+release: npm run build
 web: npm run start
