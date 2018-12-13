@@ -13,7 +13,8 @@
     "build": "npm run build-css && npm run build-js",
     "build-css": "sass public/scss/styles.scss public/build/css/styles.css",
     "build-js": "webpack",
-    "lint": "eslint -c .eslintrc.js --fix ."
+    "lint": "eslint -c .eslintrc.js --fix .",
+    "postinstall": "npm run build"
   },
   "author": "",
   "license": "ISC",
