@@ -17,7 +17,7 @@
     "EMAIL_SERVICE_USER": { "required": true },
     "EMAIL_SERVICE_PASSWORD": { "required": true },
     "OPENSTATES_API_KEY": { "required": true },
-    "GOOGLE_MAPS_API_KEY=AI": { "required": true },
+    "GOOGLE_MAPS_API_KEY": { "required": true },
     "GOOGLE_CIVIC_INFO_API_KEY": { "required": true }
   }
 }
