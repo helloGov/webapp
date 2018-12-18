@@ -12,13 +12,13 @@ router.get('/', function (request, response, next) {
     if (request.user) {
         response.redirect('/home');
     } else {
-        var proxyResponse = squareProxy(config.marketing_site_url);
+        var proxyResponse = squareProxy(config.marketingSiteUrl);
         proxyResponse(request, response, next);
     }
 });
 
-router.get(config.marketing_pages, function (request, response, next) {
-    var proxyResponse = squareProxy(url.resolve(config.marketing_site_url, request.url));
+router.get(config.marketingPages, function (request, response, next) {
+    var proxyResponse = squareProxy(url.resolve(config.marketingSiteUrl, request.url));
     proxyResponse(request, response, next);
 });
 

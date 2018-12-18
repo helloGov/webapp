@@ -1,0 +1,10 @@
+{
+  "name": "HelloGOV",
+  "description": "HelloGOV",
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    }
+  ]
+}
