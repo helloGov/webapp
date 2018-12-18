@@ -55,3 +55,10 @@ After running the seed task you should be able to log in to the app with usernam
 
 ## View app
 - `localhost:8080/login`
+
+## Running the mongo shell
+- run `docker ps` and copy the `CONTAINER ID` associated with the docker container running mongo
+- run the shell in the docker container
+  ```
+  docker exec -it CONTAINER mongo
+  ```
