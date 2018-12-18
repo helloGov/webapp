@@ -10,8 +10,8 @@ let config = {
     appPort: '8080',
     marketingSiteUrl: 'http://hellogov.squarespace.com',
     hellogovDomain: `http://localhost:8080`,
-    supportEmail: 'support@heyagov.org',
-    noreplyEmail: 'noreply@heyagov.org',
+    supportEmail: 'hellogovapp@gmail.com',
+    noreplyEmail: 'hellogovapp@gmail.com',
 };
 
 let secrets = {
