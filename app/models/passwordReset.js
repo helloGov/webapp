@@ -9,8 +9,8 @@ const hbs = require('nodemailer-express-handlebars');
 const transporter = nodemailer.createTransport({
     service: 'Sparkpost',
     auth: {
-        user: config.email_service_user,
-        pass: config.email_service_password
+        user: config.emailServiceUser,
+        pass: config.emailServicePassword
     }
 });
 
@@ -44,14 +44,14 @@ PasswordReset.statics.createResetObject = function(email) {
 // instance methods
 PasswordReset.methods.sendResetEmail = function() {
     var mail = {
-        from: `"helloGov" <${config.noreply_email}>`,
+        from: `"helloGov" <${config.noReplyEmail}>`,
         to: this.email,
         subject: 'Reset Your Password',
         template: 'passwordResetEmail',
         context: {
             resetToken: this.resetToken,
             helloGovDomain: `${config.protocol}://${config.hostname}`,
-            supportEmail: config.support_email
+            supportEmail: config.supportEmail
         }
     };
     return transporter.sendMail(mail)

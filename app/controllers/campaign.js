@@ -1,6 +1,6 @@
 const axios = require('axios');
 var Campaign = require('../models/campaign');
-var openstatesApiKey = require('../../conf/secrets.js').openstates_api_key;
+var openstatesApiKey = require('../../conf/config.js').openStatesApiKey;
 
 var campaignController = {};
 
