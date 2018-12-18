@@ -41,7 +41,7 @@ mongoose.connection.once('open', function callback() {
 
 if (currentEnv === 'production') {
     var sessionStore = new MongoStore({
-        url: `${mongoUri}?ssl=true`,
+        url: `${mongoUri}`,
         touchAfter: 0
     });
 } else {
