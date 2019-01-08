@@ -14,18 +14,32 @@
     </div><!-- end campaign-circles -->
 
     <div id="rep-container" ng-show="repForm" class="ng-hide">
-      <div class="congress-intro">
-        <h5 class="section-header">Your State Senator is</h5>
-        <h3 class="rep-name">{[{repInfo.first_name}]} {[{repInfo.last_name}]} ({[{repInfo.party}]})</h3>
-        <img ng-src={[{repInfo.photo_url}]} class="rep-img center-block" alt="Your Rep" />
-        <h3 class="rep-name">Call {[{repInfo.phone}]}</h3>
+      <div ng-repeat-start="rep in repInfo" class="congress-intro">
+        <br>
+        <br>
       </div>
 
-      <p class="script body-copy">
+      <div id="rep-not-found-container" ng-show="!rep.legislatorFound" class="ng-hide">
+        <div class="text-center">
+          <p class="lead reversed-text">
+            We weren't able to find a {[{rep.title}]} who represents thats address. Please try again!
+          </p>
+        </div>
+      </div>
+
+      <div id="rep-info" ng-show="rep.legislatorFound" class="ng-hide">
+        <h5 class="section-header">Your {[{rep.title}]} is</h5>
+        <h3 class="rep-name">{[{rep.name}]} ({[{rep.party}]})</h3>
+        <img ng-src={[{rep.photo_url}]} class="rep-img center-block" alt="Your Rep" />
+        <h3 class="rep-name">Call {[{rep.phone}]}</h3>
+      </div>
+
+      <p class="script body-copy" ng-show="rep.legislatorFound" class="ng-hide">
         {{campData.script}}
       </p>
 
-      <a id="call-btn" class="btn btn-lg call-button center-block primary-button" role="button" href="tel:{[{repInfo.phone}]}">
+      <a ng-repeat-end ng-show="rep.legislatorFound" id="call-btn" class="btn btn-lg call-button center-block primary-button"
+        role="button" href="tel:{[{rep.phone}]}">
         Make the call now!
       </a>
 
