@@ -2,9 +2,9 @@
 
 ## Install dependencies
 
-- install node
+- install node and mongo
   ```
-  $ brew install node
+  $ brew install node mongo
   ```
 - install packages
   ```
@@ -45,6 +45,13 @@ You only have to do this once.
   ```
   $ npm run start-dev
   ```
+
+## Populate the seed data
+```
+$ npm run seed
+```
+
+After running the seed task you should be able to log in to the app with username `admin` and password `password`.
 
 ## View app
 - `localhost:8080/login`
