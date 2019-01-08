@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "mongoimport -c users --uri mongodb://localhost:27017/hellogov --drop --file conf/seeds.json",
     "start": "NODE_ENV=production node index.js",
     "start-dev": "NODE_ENV=development nodemon index.js",
     "stop-db": "pgrep mongod | xargs kill -2",
