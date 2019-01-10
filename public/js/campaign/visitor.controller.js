@@ -19,8 +19,12 @@ export default angular.module('helloGov')
             let address = $scope.locDetails.formatted_address.replace(/ /g, '%20');
             let latitude = $scope.locDetails.geometry.location.lat();
             let longitude = $scope.locDetails.geometry.location.lng();
-            let userState = $scope.locDetails.adr_address.split("region")[1].split("").splice(2, 2).join("");
-
+            let userState = null;
+            for (let addressComponent of $scope.locDetails.address_components) {
+                if ((addressComponent.types[0] === "country" && addressComponent.short_name === "PR") || addressComponent.types[0] === "administrative_area_level_1") {
+                    userState = addressComponent.short_name;
+                }
+            }
             $http.get('/locateLegislator', { params: { address: address, latitude: latitude, longitude: longitude, campaignId: $scope.campaign } })
                 .then(function (result) {
                     $scope.repFound = result.data.representativeFound;
@@ -28,7 +32,14 @@ export default angular.module('helloGov')
                     $scope.addrForm = false;
                     let legislatureLevel = result.data.campaign.legislature_level;
 
-                    if ((legislatureLevel.state_senate || legislatureLevel.state_assembly) && (userState !== result.data.campaign.state)) {
+                    if (!["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC",
+                        "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA",
+                        "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE",
+                        "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC",
+                        "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"].includes(userState)) {
+                        $scope.stateOutOfRange = true;
+                        $scope.addrForm = true;
+                    } else if ((legislatureLevel.state_senate || legislatureLevel.state_assembly) && (userState !== result.data.campaign.state)) {
                         $scope.stateMismatch = true;
                     }
                     else if ($scope.repFound) {
@@ -46,5 +57,6 @@ export default angular.module('helloGov')
         $scope.repForm = false;
         $scope.repNotFoundForm = false;
         $scope.stateMismatch = false;
+        $scope.stateOutOfRange = false;
     })
     .name;
