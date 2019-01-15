@@ -29,13 +29,14 @@ body {
           rows="2"
           maxlength="140"
           required
+          placeholder="Ex: 'Vote YES on SB280.'"
         >
         </textarea>
         <div class="max-text">Max 140 characters</div>
       </div>
 
       <div class="form-group">
-        <div class="prompt-title"><h4>SCRIPT</h4></div>
+        <div class="prompt-title"><h4> CALL SCRIPT</h4></div>
         <textarea
           name="script"
           class="form-control input-lg campaign-input"
@@ -44,6 +45,7 @@ body {
           rows="6"
           maxlength="1000"
           required
+          placeholder=""
         >
         </textarea>
         <div class="max-text">Max 1000 characters</div>
@@ -59,6 +61,7 @@ body {
           rows="4"
           maxlength="250"
           required
+          placeholder="Appears after a call is made."
         >
         </textarea>
         <div class="max-text">Max 250 characters</div>
@@ -72,6 +75,7 @@ body {
           ng-model="$ctrl.campaign.learn_more"
           rows="2"
           maxlength="200"
+          placeholder="Link to a page on your org's website about the issue."
         >
         </textarea>
         <div class="max-text">Max 200 characters</div>
