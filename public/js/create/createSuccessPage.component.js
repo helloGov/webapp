@@ -11,11 +11,13 @@ export default angular.module('helloGov')
         let urlSplit = url.split('/');
         let campaignId = urlSplit[urlSplit.length - 2];
 
+
         this.campaignFullUrl = url.replace('/success', '');
         $http.get(`${constants.API_ROOT}/campaigns/${campaignId}`)
             .then((resp) => {
                 this.campaign = resp.data;
             });
+
     }
 })
 .name;

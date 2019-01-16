@@ -1,6 +1,7 @@
 <div ng-if="$ctrl.campaigns.length > 0">
     <a href="/create" class="btn cta-button primary-button">Create Campaign</a>
-    <br><br>
+    <br>
+    <br>
     <div ng-repeat="campaign in $ctrl.campaigns" class="background-white">
         <div class="campaign-info">
             <h5 class="campaign-date">{[{campaign.createdAt | date: 'longDate'}]}</h5>
@@ -8,25 +9,61 @@
             <h5 ng-if="!campaign.publish">DRAFT</h5>
             <div class="text-center">
                 <!-- TODO: Update analytics link when we have individual pages for each campaign -->
-                <a href="{[{campaign.url}]}/analytics"><div class="option-button">
-                    <input type="image" src="/images/analytics_icon.svg" />
-                    <p>Analytics</p>
-                </div></a>
+                <a href="{[{campaign.url}]}/analytics">
+                    <div class="option-button">
+                        <input type="image" src="/images/analytics_icon.svg" />
+                        <p>Analytics</p>
+                    </div>
+                </a>
                 <!-- TODO: This should give feedback, ideally like in the mockup -->
                 <div class="option-button">
-                    <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}" />
+                    <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}"
+                    />
                     <p>Link</p>
                 </div>
-                <a ng-href="{[{campaign.url}]}/edit"><div class="option-button">
-                    <input type="image" src="/images/pencil.jpg" />
-                    <p>Edit</p>
-                </div></a>
+                <a ng-href="{[{campaign.url}]}/edit">
+                    <div class="option-button">
+                        <input type="image" src="/images/pencil.jpg" />
+                        <p>Edit</p>
+                    </div>
+                </a>
                 <!-- TODO: Show a warning first like in the mockup -->
-                <a ng-click="$ctrl.delete(campaign.id)"><div class="option-button">
-                    <input type="image" src="/images/white_delete_icon.jpg" />
-                    <p>Delete</p>
-                </div></a>
+                <a>
+                    <div class="option-button" data-toggle="modal" data-target="#myModal">
+                        <input type="image" src="/images/white_delete_icon.jpg" />
+                        <p>Delete</p>
+                    </div>
+
+
+
+                </a>
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title" id="myModalLabel">Delete Campaign?</h4>
+                            </div>
+                            <div class="modal-body">
+                                    This action cannot be undone. This will <b><i>permanently </i></b>delete your Campaign.
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-danger"  onclick="closeModal()" ng-click="$ctrl.delete(campaign.id)" >Yes, Delete Campaign</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+     
+
+
+
+
             </div>
+
         </div>
     </div>
 </div>
@@ -37,9 +74,23 @@
             Looks like you haven't created any campaigns yet!
         </p>
     </div>
-    <a href="/create"><div class="round-button"><p>Create a Campaign</p></div></a>
+    <a href="/create">
+        <div class="round-button">
+            <p>Create a Campaign</p>
+        </div>
+    </a>
 </div>
 
 <div class="errors text-center" ng-if="$ctrl.error">
     {[{$ctrl.error}]}
 </div>
+
+
+<!-- Not sure how where to declare function in ANGULAR JS yet
+    Also, page reload because it doesn't let you click after confirm  delete Modal  -->
+<script>
+    function closeModal() {
+    $('#myModal').modal('hide');
+    location.reload();
+}
+</script>
