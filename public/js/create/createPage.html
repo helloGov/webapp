@@ -16,7 +16,7 @@
     <form name="createForm">
       <div class="form-group">
         <div class="prompt-title">
-          <h4>CAMPAIGN TITLE</h4><sup><button type="button" class="btn btn-secondary" data-toggle="tooltip"
+          <h4>CAMPAIGN TITLE</h4><sup><button type="button" class="btn btn-secondary hovertip" data-toggle="tooltip"
               data-placement="top" title="The title of the campaign should describe the bill the follower will call about and how you want their legislator to vote, ex: 'Vote YES on SB280.">?</button></sup>
         </div>
         <textarea name="title" class="form-control input-lg campaign-input" ng-class="{'form-field-error': createForm.title.$touched && createForm.title.$invalid}"
@@ -27,7 +27,7 @@
 
       <div class="form-group">
         <div class="prompt-title">
-          <h4>SCRIPT</h4><sup><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
+          <h4>SCRIPT</h4><sup><button type="button" class="btn btn-secondary hovertip" data-toggle="tooltip" data-placement="top"
               title="Write some points your follower should be sure to say when they call their legislator. Best written in first person as if you are the speaker.">?</button></sup>
         </div>
         <textarea name="script" class="form-control input-lg campaign-input" ng-class="{'form-field-error': createForm.script.$touched && createForm.script.$invalid}"
@@ -38,7 +38,7 @@
 
       <div class="form-group">
         <div class="prompt-title">
-          <h4>THANK YOU MESSAGE</h4><sup><button type="button" class="btn btn-secondary" data-toggle="tooltip"
+          <h4>THANK YOU MESSAGE</h4><sup><button type="button" class="btn btn-secondary hovertip" data-toggle="tooltip"
               data-placement="top" title="This custom thank you note will appear on the page after your follower has placed the call. You can also invite them to follow up with another call to action, like signing up for the email list at your website.">?</button></sup>
         </div>
         <textarea name="thank_you" class="form-control input-lg campaign-input" ng-class="{'form-field-error': createForm.thank_you.$touched && createForm.thank_you.$invalid}"
@@ -49,7 +49,7 @@
 
       <div class="form-group">
         <div class="prompt-title">
-          <h4>LEARN MORE URL</h4><sup><button type="button" class="btn btn-secondary" data-toggle="tooltip"
+          <h4>LEARN MORE URL</h4><sup><button type="button" class="btn btn-secondary hovertip" data-toggle="tooltip"
               data-placement="top" title="Paste the URL of a page on your organization's website where followers can learn more about this issue">?</button></sup>
         </div>
         <textarea name="learn_more" class="form-control input-lg campaign-input" ng-model="$ctrl.campaign.learn_more"
