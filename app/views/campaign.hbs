@@ -3,6 +3,15 @@
 
     <ng-map center="[40.74, -74.18]"></ng-map>
 
+    <div id="rep-container" ng-show="stateOutOfRange" class="ng-hide">
+      <div class="text-center">
+        <p class="lead reversed-text">
+          We're sorry, the address you entered is in a state not covered by our database. Please try entering an
+          address in the 50 US States or Puerto Rico.
+        </p>
+      </div>
+    </div>
+
     <div class="campaign-circles" ng-show="addrForm" class="ng-hide">
       <h3 class="reversed-text">Enter the address where you vote to find the correct representative.</h3>
       <br>
@@ -64,6 +73,15 @@
       <div class="text-center">
         <p class="lead reversed-text">
           We weren't able to find any elected officials who represent that address. Please try again!
+        </p>
+      </div>
+    </div>
+
+    <div id="rep-container" ng-show="stateMismatch" class="ng-hide">
+      <div class="text-center">
+        <p class="lead reversed-text">
+          We're sorry, the address you entered is in a state that is not included in this campaign.<br>
+          Thank you for your interest!
         </p>
       </div>
     </div>
