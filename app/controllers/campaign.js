@@ -95,16 +95,17 @@ const getLegislatorForCampaignFromOpenStates = function (data, title) {
 };
 
 campaignController.findLegislator = async function (address, latitude, longitude, campaignId, response) {
-    var success = function (representatives) {
+    var success = function (representatives, campaign) {
         var representativeFound = (representatives.length > 0);
         var responseObject = {
             representativeFound: representativeFound,
-            representativeInfo: representatives
+            representativeInfo: representatives,
+            campaign: campaign,
         };
         response.send(JSON.stringify(responseObject));
     };
 
-    let currentCampaign = await Campaign.findById(campaignId, 'legislature_level').catch(error => console.log(error));
+    let currentCampaign = await Campaign.findById(campaignId).catch(error => console.log(error));
     let legislatureLevels = Object.keys(currentCampaign.legislature_level).filter(lev => currentCampaign.legislature_level[lev]);
     let legislators = [];
 
@@ -131,7 +132,7 @@ campaignController.findLegislator = async function (address, latitude, longitude
         legislators.push(getLegislatorForCampaignFromOpenStates(legislator, 'State Assembly Member'));
     }
 
-    success(legislators);
+    success(legislators, currentCampaign);
 };
 
 module.exports = campaignController;
