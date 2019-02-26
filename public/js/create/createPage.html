@@ -19,7 +19,7 @@
           <h4>CAMPAIGN TITLE</h4>
         </div>
         <textarea name="title" class="form-control input-lg campaign-input" ng-class="{'form-field-error': createForm.title.$touched && createForm.title.$invalid}"
-          ng-model="$ctrl.campaign.title" rows="2" maxlength="140" required>
+          ng-model="$ctrl.campaign.title" rows="2" maxlength="140"   placeholder="Ex: 'Vote YES on SB280.'"required>
         </textarea>
         <div class="max-text">Max 140 characters</div>
       </div>
@@ -86,7 +86,7 @@
           <h4>THANK YOU MESSAGE</h4>
         </div>
         <textarea name="thank_you" class="form-control input-lg campaign-input" ng-class="{'form-field-error': createForm.thank_you.$touched && createForm.thank_you.$invalid}"
-          ng-model="$ctrl.campaign.thank_you" rows="4" maxlength="250" required>
+          ng-model="$ctrl.campaign.thank_you" rows="4" maxlength="250"  placeholder="Appears after a call is made." required>
         </textarea>
         <div class="max-text">Max 250 characters</div>
       </div>
@@ -96,7 +96,7 @@
           <h4>LEARN MORE URL</h4>
         </div>
         <textarea name="learn_more" class="form-control input-lg campaign-input" ng-model="$ctrl.campaign.learn_more"
-          rows="2" maxlength="200">
+          rows="2" maxlength="200" placeholder="Link to a page on your org's website about the issue.">
         </textarea>
         <div class="max-text">Max 200 characters</div>
       </div>
