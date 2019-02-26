@@ -13,6 +13,7 @@
     <div class="form-group">
       <!-- TODO: This should give feedback so user knows link was copied, ideally like in the mockup -->
       <button class="btn primary-button" ng-click="showDetails = true"  ngclipboard data-clipboard-text="{[{$ctrl.campaignFullUrl}]}">Copy URL
+              <span ng-show="showDetails" style="font-size: 8px;">(Copied to clipboard)</span>
       </button>
       <!-- TODO: When we have actual preview page, use that URL instead -->
       <a href="{[{$ctrl.campaign.url}]}" class="btn primary-button">Preview Campaign</a>
