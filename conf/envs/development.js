@@ -2,7 +2,7 @@ const secrets = require('../secrets');
 
 let config = {
     protocol: 'http',
-    hostname: `localhost:${secrets.app_port}`
+    hostname: `localhost:8080`
 };
 
 module.exports = config;
