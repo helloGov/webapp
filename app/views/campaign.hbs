@@ -16,7 +16,7 @@
       <h3 class="reversed-text">Enter the address where you vote to find the correct representative.</h3>
       <br>
       <input id="searchTextField" type="text" ng-map-autocomplete ng-model="locResult" options="locOptions"
-        details="locDetails" class="form-control input-lg address-search" />
+        ng-value="locDetails.formatted_address" details="locDetails" class="form-control input-lg address-search" />
       <button id="address-submit" type="button" ng-click="update()" class="btn primary-button">Submit</button>
       <input id="latitude" type="hidden" />
       <input id="longitude" type="hidden" />
