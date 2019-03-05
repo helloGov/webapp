@@ -1,7 +1,9 @@
+
+const appConfig = require('../../conf/config')
 const axios = require('axios');
 var Campaign = require('../models/campaign');
-let googleCivicInfoApiKey = require('../../conf/secrets.js').google_civic_info_api_key;
-let openStatesApiKey = require('../../conf/secrets.js').openstates_api_key;
+let googleCivicInfoApiKey = appConfig.googleCivicInfoApiKey;
+let openStatesApiKey = appConfig.openStatesApiKey;
 
 var campaignController = {};
 
