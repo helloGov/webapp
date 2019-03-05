@@ -7,6 +7,17 @@
     text-transform: uppercase;
     font-weight: bold;
 
+    // .analytics {
+    //     font-size: 10px;
+    //     display: inline-block;
+    //     .analytics-title {
+    //         padding-right: 4px;
+    //     }
+    // }
+
+    .analytics-display {
+        font-size: 1.2em;
+    }
     .campaign-date {
         display: inline-block;
         border-bottom: 1px solid $blue-light;
@@ -30,6 +41,7 @@
         display: block;
         margin: 5px auto;
     }
+
 }
 
 
