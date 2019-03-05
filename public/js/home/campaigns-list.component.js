@@ -3,7 +3,7 @@ import angular from 'angular';
 export default angular.module('helloGov')
     .component('campaignsList', {
         template: require('./campaigns-list.html'),
-        controller: function ($location, $http, constants) {
+        controller: function ($scope, $location, $http, constants) {
             'ngInject';
             let self = this;
 
@@ -15,6 +15,13 @@ export default angular.module('helloGov')
                 $http.get(`${constants.API_ROOT}/campaigns?sort=-createdAt`)
                     .then(function (result) {
                         self.campaigns = result.data;
+                        $http.get(`${constants.API_ROOT}/events?campaignId=${$scope.campaignId}`, $scope.analytics)
+                        .then(function(result) {
+                            $scope.analytics = result.data;
+                        })
+                        .catch(function(data) {
+                            console.log(`Error:  ${JSON.stringify(data)}`);
+                        });
                     })
                     .catch(function (data) {
                         self.error = 'There was an error getting your campaigns. Please try agan later.';

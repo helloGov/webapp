@@ -7,6 +7,10 @@
     text-transform: uppercase;
     font-weight: bold;
 
+    .analytics-display {
+        font-size: 1.2em;
+    }
+
     .campaign-date {
         display: inline-block;
         border-bottom: 1px solid $blue-light;

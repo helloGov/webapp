@@ -7,25 +7,38 @@
             <h4>{[{campaign.title}]}</h4>
             <h5 ng-if="!campaign.publish">DRAFT</h5>
             <div class="text-center">
-                <!-- TODO: Update analytics link when we have individual pages for each campaign -->
-                <a href="{[{campaign.url}]}/analytics"><div class="option-button">
-                    <input type="image" src="/images/analytics_icon.svg" />
-                    <p>Analytics</p>
-                </div></a>
-                <!-- TODO: This should give feedback, ideally like in the mockup -->
-                <div class="option-button">
-                    <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}" />
-                    <p>Link</p>
+                <div>
+                    <!-- TODO: Update analytics link when we have individual pages for each campaign -->
+                    <!-- Removed because not enough analytics to dedicate to entire page -->
+                    <!-- <a href="{[{campaign.url}]}/analytics"><div class="option-button">
+                        <input type="image" src="/images/analytics_icon.svg" />
+                        <p>Analytics</p>
+                    </div></a> -->
+                    <!-- TODO: This should give feedback, ideally like in the mockup -->
+                    <div class="option-button">
+                        <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}" />
+                        <p>Link</p>
+                    </div>
+                    <a ng-href="{[{campaign.url}]}/edit"><div class="option-button">
+                        <input type="image" src="/images/pencil.jpg" />
+                        <p>Edit</p>
+                    </div></a>
+                    <!-- TODO: Show a warning first like in the mockup -->
+                    <a ng-click="$ctrl.delete(campaign.id)"><div class="option-button">
+                        <input type="image" src="/images/white_delete_icon.jpg" />
+                        <p>Delete</p>
+                    </div></a>
+                    <div>
+                        <div class="option-button">
+                            <p class="analytics-display">{[{analytics.call}]}</p>
+                            <p>Calls</p>
+                        </div>
+                        <div class="option-button">
+                            <p class="analytics-display">{[{analytics.visit}]}</p>
+                            <p>Visits</p>
+                        </div>
+                    </div>
                 </div>
-                <a ng-href="{[{campaign.url}]}/edit"><div class="option-button">
-                    <input type="image" src="/images/pencil.jpg" />
-                    <p>Edit</p>
-                </div></a>
-                <!-- TODO: Show a warning first like in the mockup -->
-                <a ng-click="$ctrl.delete(campaign.id)"><div class="option-button">
-                    <input type="image" src="/images/white_delete_icon.jpg" />
-                    <p>Delete</p>
-                </div></a>
             </div>
         </div>
     </div>
