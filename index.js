@@ -30,7 +30,7 @@ const mongoUri = `mongodb://${config.dbUser}:${config.dbPassword}@${config.db}-s
 if (currentEnv === 'development') {
     mongoose.connect(localMongoUri);
 } else {
-    mongoose.connect(mongoUri, { dbName: 'hellogov', useNewUrlParser: true });
+    mongoose.connect(mongoUri, { useNewUrlParser: true });
 }
 mongoose.connection.on('error', function (err) {
     console.log('Mongo connection error', err.message);
