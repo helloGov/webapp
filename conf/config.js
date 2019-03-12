@@ -20,6 +20,7 @@ let secrets = {
     dbUser: `${process.env.DB_USER}`,
     dbPassword: `${process.env.DB_PASSWORD}`,
     db: `${process.env.DB_NAME}`,
+    dbStage: `${process.env.DB_STAGE}`,
     sessionSecret: `${process.env.SESSION_SECRET}`,
     fbAppId: `${process.env.FB_APP_ID}`,
     fbAppSecret: `${process.env.FB_APP_ID}`,
