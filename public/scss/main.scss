@@ -114,11 +114,12 @@ a, a:hover {
     display: flex;
     height: 100%;
     align-items: center;
-    color: #35A5B3;
 
     .username {
       position: absolute;
       right: 12px;
+      font-size: 14px;
+      color: #35A5B3;
     }
 }
 

@@ -57,9 +57,11 @@
         <span><img class="hamburger" style="cursor:pointer" onclick="openNav()" src="/images/Hamburger.svg" /></span>
         {{/if}}
         <a href="/"><img src="/images/logo.png" class="logo" /></a>
+        {{#if logged_in}}
         <div class="pull-right username-display">
             <span class="username">{{user.username}}</span>
         </div>
+        {{/if}}
     </nav>
 
     {{#if logged_in}}
