@@ -110,6 +110,18 @@ a, a:hover {
     margin-left: 50px;
 }
 
+.username-display {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    color: #35A5B3;
+
+    .username {
+      position: absolute;
+      right: 12px;
+    }
+}
+
 .content-wrapper {
     height: 100%;
     position: relative;
