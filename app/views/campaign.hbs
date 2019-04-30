@@ -13,6 +13,10 @@
     </div>
 
     <div class="campaign-circles" ng-show="addrForm" class="ng-hide">
+    <div class="campaign-info">
+      <h3>Campaign:</h3>
+      <h1>{{campData.title}}</h1>
+    </div>
       <h3 class="reversed-text">Enter the address where you vote to find the correct representative.</h3>
       <br>
       <input id="searchTextField" type="text" ng-map-autocomplete ng-model="locResult" options="locOptions"
