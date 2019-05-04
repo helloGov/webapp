@@ -4,6 +4,7 @@ html {
 
 body {
     padding-bottom: 20px;
+    font-size: 24px;
     background-color: $white;
     position: relative;
     min-height: 100%;
@@ -16,7 +17,7 @@ h1, h2, h3, h4, h5, p {
 }
 
 a, a:hover {
-    color: $white;
+    color: $blue-light;
     text-decoration: underline;
 }
 
@@ -33,7 +34,7 @@ a, a:hover {
 
 .body-copy {
     font-weight: normal;
-    font-size: 1em;
+    font-size: 1.3em;
     line-height: 1.5em;
 }
 
@@ -118,7 +119,7 @@ a, a:hover {
     .username {
       position: absolute;
       right: 12px;
-      font-size: 14px;
+      font-size: .8em;
       color: $blue-light;
     }
 }
@@ -264,6 +265,8 @@ a, a:hover {
     color: $white;
 }
 
+
+/* ========== RESPONSIVE STYLES =========================== */
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
@@ -282,3 +285,26 @@ a, a:hover {
     border-bottom: 0;
   }
 }
+
+@media screen and (max-width: $phone-max) {
+  #form-container {
+    padding: 0px;
+  } 
+}
+
+@media screen and (max-width: $tablet-max) {
+  .body {
+    font-size: 9px;
+  }
+  .campaign-circles {
+    margin-top: 0px;
+  }
+  h1 {
+    font-size: 1.2em;
+    margin: 0px;
+  }
+  .campaign-info h1 {
+    padding: 20px 0px;
+  }
+}
+

@@ -6,7 +6,7 @@
     font-size: 1.1em;
     font-weight: bolder;
     letter-spacing: 1px;
-    padding: 0.9em 2em;
+    padding: 0.3em 2em;
     margin: 10px 0;
     width: 100%;
     text-decoration: none;
@@ -45,7 +45,12 @@ a:link.btn {
 /* solid blue border and text, white background */
 .secondary-button {
     background-color: $white;
+    color: $blue-light;
     border: 2px solid $white;
+    border: 2px solid $blue-light;
+}
+.secondary-button:hover {
+    color: $blue-light;
 }
 .reversed-bg .secondary-button {
     border: 2px solid $blue-light;

@@ -5,7 +5,7 @@
 
     <div id="rep-container" ng-show="stateOutOfRange" class="ng-hide">
       <div class="text-center">
-        <p class="lead reversed-text">
+        <p class="lead">
           We're sorry, the address you entered is in a state not covered by our database. Please try entering an
           address in the 50 US States or Puerto Rico.
         </p>
@@ -14,11 +14,10 @@
 
     <div class="campaign-circles" ng-show="addrForm" class="ng-hide">
     <div class="campaign-info">
-      <h3>Campaign:</h3>
+      <!-- <h3>Campaign:</h3> -->
       <h1>{{campData.title}}</h1>
     </div>
-      <h3 class="reversed-text">Enter the address where you vote to find the correct representative.</h3>
-      <br>
+      <h4>Enter the address where you vote to find the correct representative:</h4>
       <input id="searchTextField" type="text" ng-map-autocomplete ng-model="locResult" options="locOptions"
         ng-value="locDetails.formatted_address" details="locDetails" class="form-control input-lg address-search" />
       <button id="address-submit" type="button" ng-click="update()" class="btn primary-button">Submit</button>
@@ -26,37 +25,43 @@
       <input id="longitude" type="hidden" />
     </div><!-- end campaign-circles -->
 
-    <div id="rep-container" ng-show="repForm" class="ng-hide">
+    <div id="rep-container" ng-show="repInfo" class="ng-hide">
       <div ng-repeat-start="rep in repInfo" class="congress-intro">
-        <br>
         <br>
       </div>
 
       <div id="rep-not-found-container" ng-show="!rep.legislatorFound" class="ng-hide">
         <div class="text-center">
-          <p class="lead reversed-text">
+          <p class="lead">
             We weren't able to find a {[{rep.title}]} who represents thats address. Please try again!
           </p>
         </div>
       </div>
 
-      <div id="rep-info" ng-show="rep.legislatorFound" class="ng-hide">
-        <h5 class="section-header">Your {[{rep.title}]} is</h5>
-        <h3 class="rep-name">{[{rep.name}]} ({[{rep.party}]})</h3>
-        <img ng-src={[{rep.photo_url}]} class="rep-img center-block" alt="Your Rep" />
-        <h3 class="rep-name">Call {[{rep.phone}]}</h3>
-      </div>
+      <div ng-show="rep.legislatorFound" class="ng-hide">
+        <div id="rep-info">
+          <h5 class="section-header">Your {[{rep.title}]} is</h5>
+          <h3 class="rep-name">{[{rep.name}]} ({[{rep.party}]})</h3>
+          <img ng-src={[{rep.photo_url}]} class="rep-img center-block" alt="Your Rep" />
+          <h3 class="rep-name">Phone: {[{rep.phone}]}</h3>
+        </div>
 
-      <p class="script body-copy" ng-show="rep.legislatorFound" class="ng-hide">
-        {{campData.script}}
-      </p>
+        <div class="grouping">
+          <p class="body-copy">
+            You can use this sample script for your call:
+          </p>
+          <p class="script body-copy">
+          "{{campData.script}}"
+          </p>
+        </div>
+      </div>
 
       <a ng-repeat-end ng-show="rep.legislatorFound" id="call-btn"
         class="btn btn-lg call-button center-block primary-button" role="button" href="tel:{[{rep.phone}]}">
         Make the call now!
       </a>
 
-      <a class="btn btn-lg call-button center-block primary-button" role="button" href="{{campData.url}}/thank-you"
+      <a class="btn btn-lg call-button center-block secondary-button" role="button" href="{{campData.url}}/thank-you"
         ng-click="sendEvent('call')">
         I'm done
       </a>
@@ -75,7 +80,7 @@
 
     <div id="rep-container" ng-show="repNotFoundForm" class="ng-hide">
       <div class="text-center">
-        <p class="lead reversed-text">
+        <p class="lead">
           We weren't able to find any elected officials who represent that address. Please try again!
         </p>
       </div>
@@ -83,7 +88,7 @@
 
     <div id="rep-container" ng-show="stateMismatch" class="ng-hide">
       <div class="text-center">
-        <p class="lead reversed-text">
+        <p class="lead">
           We're sorry, the address you entered is in a state that is not included in this campaign.<br>
           Thank you for your interest!
         </p>
