@@ -21,6 +21,10 @@ export default angular.module('helloGov')
                     });
             };
 
+            this.confirm = function () {
+                console.log("confirm");
+            }
+
             this.delete = function (campaignId) {
                 $http.delete(`${constants.API_ROOT}/campaigns/${campaignId}`)
                     .then(() => {
