@@ -4,11 +4,11 @@ html {
 
 body {
     padding-bottom: 20px;
-    background-color: $blue-light;
+    background-color: $white;
     position: relative;
     min-height: 100%;
     font-family: 'Monteserrat', sans-serif;
-    color: $white;
+    color: $blue-light;
 }
 
 h1, h2, h3, h4, h5, p {
@@ -46,7 +46,7 @@ a, a:hover {
 }
 
 .navbar {
-    background-color: $yellow;
+    background-color: $white;
     border-radius: 0;
     height: 50px;
 }
@@ -119,7 +119,7 @@ a, a:hover {
       position: absolute;
       right: 12px;
       font-size: 14px;
-      color: #35A5B3;
+      color: $blue-light;
     }
 }
 
@@ -180,7 +180,7 @@ a, a:hover {
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid $gray-light;
-  background-color: white;
+  background-color: $white;
   color: rgb(60,165,178);
 }
 .jumbotron .btn {
@@ -204,6 +204,7 @@ a, a:hover {
 /* Circles */
 .circle {
   border: 3px solid $yellow;
+  background-color: $blue-light;
   border-radius: 50%;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
   filter: alpha(opacity=60);

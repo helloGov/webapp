@@ -1,5 +1,5 @@
 .btn {
-    color: $blue-light;
+    color: $white;
     font-weight: 600;
     border-radius: 3px;
     text-transform: uppercase;
@@ -12,7 +12,7 @@
     text-decoration: none;
 
     &[disabled]:hover {
-        color: $blue-light;
+        color: $white;
     }
 
     &.center-block {
@@ -27,17 +27,19 @@
 }
 
 a:link.btn {
-    color: $blue-light;
+    color: $white;
 }
 
 .btn:hover, .btn:focus, a:link.btn:hover {
-    color: #3096A3;
+    color: $white;
+    border: 2px solid #000099;
+
 }
 
 /* yellow background, blue text */
 .primary-button {
-    background-color: $yellow;
-    border: 2px solid $yellow;
+    background-color: $blue-light;
+    border: 2px solid $blue-light;
 }
 
 /* solid blue border and text, white background */
