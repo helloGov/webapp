@@ -9,20 +9,31 @@ export default angular.module('helloGov')
 
             this.$onInit = function () {
                 this.hostName = `${$location.protocol()}://${$location.host()}`;
+                self.showComfirm = {};// to track which campaign is being asked for delete confirmation
                 if ($location.port()) {
                     this.hostName = `${this.hostName}:${$location.port()}`;
                 }
                 $http.get(`${constants.API_ROOT}/campaigns?sort=-createdAt`)
                     .then(function (result) {
                         self.campaigns = result.data;
+                        self.campaigns.forEach(element => {
+                            self.showComfirm[element.id] = false; // initialize not showing delete-confirm
+                        });
+                        console.log(self.showComfirm);
                     })
                     .catch(function (data) {
                         self.error = 'There was an error getting your campaigns. Please try agan later.';
                     });
+
             };
 
-            this.confirm = function () {
-                console.log("confirm");
+            this.confirm = function (id) {
+                self.showComfirm[id] = true;
+                console.log(self.showComfirm);
+            }
+            this.cancel = function (id) {
+                self.showComfirm[id] = false;
+                console.log(self.showComfirm);
             }
 
             this.delete = function (campaignId) {
