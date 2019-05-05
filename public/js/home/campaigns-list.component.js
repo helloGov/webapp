@@ -3,13 +3,13 @@ import angular from 'angular';
 export default angular.module('helloGov')
     .component('campaignsList', {
         template: require('./campaigns-list.html'),
-        controller: function ($location, $http, constants) {
+        controller: function ($location, $http, constants, $scope) {
             'ngInject';
             let self = this;
 
             this.$onInit = function () {
                 this.hostName = `${$location.protocol()}://${$location.host()}`;
-                self.showComfirm = {};// to track which campaign is being asked for delete confirmation
+                $scope.showComfirmFlags = {};// to track which campaign is being asked for delete confirmation
                 if ($location.port()) {
                     this.hostName = `${this.hostName}:${$location.port()}`;
                 }
@@ -17,9 +17,9 @@ export default angular.module('helloGov')
                     .then(function (result) {
                         self.campaigns = result.data;
                         self.campaigns.forEach(element => {
-                            self.showComfirm[element.id] = false; // initialize not showing delete-confirm
+                            $scope.showComfirmFlags[element.id] = false; // initialize not showing delete-confirm
                         });
-                        console.log(self.showComfirm);
+                        console.log($scope.showComfirmFlags);
                     })
                     .catch(function (data) {
                         self.error = 'There was an error getting your campaigns. Please try agan later.';
@@ -27,13 +27,17 @@ export default angular.module('helloGov')
 
             };
 
+            this.checkShowConfirm = function (id) {
+                return $scope.showComfirmFlags[id] === true;
+            }
+
             this.confirm = function (id) {
-                self.showComfirm[id] = true;
-                console.log(self.showComfirm);
+                $scope.showComfirmFlags[id] = true;
+                console.log($scope.showComfirmFlags);
             }
             this.cancel = function (id) {
-                self.showComfirm[id] = false;
-                console.log(self.showComfirm);
+                $scope.showComfirmFlags[id] = false;
+                console.log($scope.showComfirmFlags);
             }
 
             this.delete = function (campaignId) {

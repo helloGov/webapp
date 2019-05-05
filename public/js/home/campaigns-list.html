@@ -25,9 +25,9 @@
                     <input type="image" src="/images/white_delete_icon.jpg" />
                     <p>Delete</p>
                 </div></a>
-                <div id="confirm-delete" ng-hide="showComfirm[campaign.id]">
-                    <a ng-click="$ctrl.delete(campaign.id)" class="btn secondary-button">Really, Delete</a>
-                    <a ng-click="$ctrl.cancel(campaign.id)" class="btn primary-button">Cancel</a>
+                <div id="confirm-delete" ng-show="showComfirmFlags[campaign.id]">
+                    <a ng-click="$ctrl.delete(campaign.id)" class="btn delete-button">Really, Delete</a>
+                    <a ng-click="$ctrl.cancel(campaign.id)" class="btn secondary-button">Cancel</a>
                 </div>
             </div>
         </div>
