@@ -24,12 +24,7 @@ export default angular.module('helloGov')
                     .catch(function (data) {
                         self.error = 'There was an error getting your campaigns. Please try agan later.';
                     });
-
             };
-
-            this.checkShowConfirm = function (id) {
-                return $scope.showComfirmFlags[id] === true;
-            }
 
             this.confirm = function (id) {
                 $scope.showComfirmFlags[id] = true;
