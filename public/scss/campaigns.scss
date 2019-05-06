@@ -1,9 +1,10 @@
 .campaign-info {
     background-color: $white;
     padding: 8px 0;
-    margin: 0 auto;
+    margin: 10px auto;
     color: $blue-light;
     font-weight: bold;
+    border: 2px solid $blue-light;
 
     .campaign-date {
         display: inline-block;
