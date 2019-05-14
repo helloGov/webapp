@@ -20,6 +20,10 @@ a, a:hover {
     text-decoration: underline;
 }
 
+.blue-text {
+  color:$blue-light;
+}
+
 .reversed-bg a, .reversed-bg a:hover {
     color: $blue-light;
 }

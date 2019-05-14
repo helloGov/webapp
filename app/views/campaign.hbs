@@ -1,3 +1,8 @@
+<style>
+  body {
+  background-color: white;
+}
+</style>
 <div ng-controller="visitorController" id="form-container" class="container">
   <div class="text-center col-md-8 col-md-offset-2">
 
@@ -13,11 +18,15 @@
     </div>
 
     <div class="campaign-circles" ng-show="addrForm" class="ng-hide">
+
+    <!-- campaign-form prompt-title  -->
+
     <div class="campaign-info">
-      <h3>Campaign:</h3>
-      <h1>{{campData.title}}</h1>
+      <h4 class="prompt-title">CAMPAIGN TITLE</h4>
+      <h1 class="campaign-form">{{campData.title}}</h1>
     </div>
-      <h3 class="reversed-text">Enter the address where you vote to find the correct representative.</h3>
+ 
+      <h3 class="campaign-form">Enter the address where you vote to find the correct representative.</h3>
       <br>
       <input id="searchTextField" type="text" ng-map-autocomplete ng-model="locResult" options="locOptions"
         ng-value="locDetails.formatted_address" details="locDetails" class="form-control input-lg address-search" />
@@ -40,14 +49,14 @@
         </div>
       </div>
 
-      <div id="rep-info" ng-show="rep.legislatorFound" class="ng-hide">
-        <h5 class="section-header">Your {[{rep.title}]} is</h5>
-        <h3 class="rep-name">{[{rep.name}]} ({[{rep.party}]})</h3>
+      <div id="rep-info" ng-show="rep.legislatorFound" class="ng-hide campaign-info">
+        <h5 class="section-header blue-text">Your {[{rep.title}]} is</h5>
+        <h3 class="rep-name blue-text">{[{rep.name}]} ({[{rep.party}]})</h3>
         <img ng-src={[{rep.photo_url}]} class="rep-img center-block" alt="Your Rep" />
-        <h3 class="rep-name">Call {[{rep.phone}]}</h3>
+        <h3 class="rep-name blue-text">Call {[{rep.phone}]}</h3>
       </div>
-
-      <p class="script body-copy" ng-show="rep.legislatorFound" class="ng-hide">
+      <h3 class="blue-text">Script for: {{campData.title}}</h3>
+      <p class="script body-copy blue-text" ng-show="rep.legislatorFound" class="ng-hide">
         {{campData.script}}
       </p>
 
