@@ -16,8 +16,9 @@
     <form name="createForm">
       <div class="form-group">
         <div class="prompt-title">
-          <h4>CAMPAIGN TITLE</h4>
+          <h4>CAMPAIGN TITLE (Call to Action)</h4>
         </div>
+        <p>Displays to supporter, so it should read as a call-to-action</p>
         <textarea name="title" class="form-control input-lg campaign-input" ng-class="{'form-field-error': createForm.title.$touched && createForm.title.$invalid}"
           ng-model="$ctrl.campaign.title" rows="2" maxlength="140"   placeholder="Ex: 'Vote YES on SB280.'"required>
         </textarea>
@@ -126,6 +127,7 @@
         <div class="prompt-title">
           <h4>SCRIPT</h4>
         </div>
+        <p>Suggest wording to your supporter</p>
         <textarea name="script" class="form-control input-lg campaign-input" ng-class="{'form-field-error': createForm.script.$touched && createForm.script.$invalid}"
           ng-model="$ctrl.campaign.script" rows="6" maxlength="1000" required>
         </textarea>
@@ -136,6 +138,7 @@
         <div class="prompt-title">
           <h4>THANK YOU MESSAGE</h4>
         </div>
+        <p>Displays when your supporter finishes their call</p>
         <textarea name="thank_you" class="form-control input-lg campaign-input" ng-class="{'form-field-error': createForm.thank_you.$touched && createForm.thank_you.$invalid}"
           ng-model="$ctrl.campaign.thank_you" rows="4" maxlength="250"  placeholder="Appears after a call is made." required>
         </textarea>
