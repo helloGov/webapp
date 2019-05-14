@@ -24,6 +24,10 @@ export default angular.module('helloGov')
                 $http.get(`${constants.API_ROOT}/campaigns/${campaignId}`)
                     .then((resp) => {
                         self.campaign = resp.data;
+                        $scope.federalSenateSelected = self.campaign.legislature_level.federal_senate;
+                        $scope.federalHouseSelected = self.campaign.legislature_level.federal_house;
+                        $scope.stateSenateSelected = self.campaign.legislature_level.state_senate;
+                        $scope.stateAssemblySelected = self.campaign.legislature_level.state_assembly;
                     })
                     .catch(() => {
                         $window.location.href = '/home';
