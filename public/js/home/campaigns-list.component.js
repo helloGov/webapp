@@ -19,7 +19,6 @@ export default angular.module('helloGov')
                         self.campaigns.forEach(element => {
                             $scope.showComfirmFlags[element.id] = false; // initialize not showing delete-confirm
                         });
-                        console.log($scope.showComfirmFlags);
                     })
                     .catch(function (data) {
                         self.error = 'There was an error getting your campaigns. Please try agan later.';
@@ -28,11 +27,9 @@ export default angular.module('helloGov')
 
             this.confirm = function (id) {
                 $scope.showComfirmFlags[id] = true;
-                console.log($scope.showComfirmFlags);
             }
             this.cancel = function (id) {
                 $scope.showComfirmFlags[id] = false;
-                console.log($scope.showComfirmFlags);
             }
 
             this.delete = function (campaignId) {
