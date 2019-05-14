@@ -21,11 +21,14 @@
                     <input type="image" src="/images/pencil.jpg" />
                     <p>Edit</p>
                 </div></a>
-                <!-- TODO: Show a warning first like in the mockup -->
-                <a ng-click="$ctrl.delete(campaign.id)"><div class="option-button">
+                <a><div ng-click="$ctrl.confirm(campaign.id)" class="option-button">
                     <input type="image" src="/images/white_delete_icon.jpg" />
                     <p>Delete</p>
                 </div></a>
+                <div id="confirm-delete" ng-show="showComfirmFlags[campaign.id]">
+                    <a ng-click="$ctrl.delete(campaign.id)" class="btn delete-button">Really, Delete</a>
+                    <a ng-click="$ctrl.cancel(campaign.id)" class="btn secondary-button">Cancel</a>
+                </div>
             </div>
         </div>
     </div>
