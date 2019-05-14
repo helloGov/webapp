@@ -26,15 +26,14 @@
 }
 
 .script {
-    border: 1px solid #FFF;
-    margin: 5px 0;
+    border: 2px solid $blue-light;
     border-radius: 2.5px;
-    padding: 5px 10px;
     font-style: italic;
+    text-align: left;
 }
 p.script{
-    margin: 0;
-    padding: 0;
+    margin: 5px 0;
+    padding: 10px 20px;
 }
 
 #call-btn {
