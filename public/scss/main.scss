@@ -4,11 +4,12 @@ html {
 
 body {
     padding-bottom: 20px;
-    background-color: $blue-light;
+    font-size: 24px;
+    background-color: $white;
     position: relative;
     min-height: 100%;
     font-family: 'Monteserrat', sans-serif;
-    color: $white;
+    color: $blue-light;
 }
 
 h1, h2, h3, h4, h5, p {
@@ -16,7 +17,7 @@ h1, h2, h3, h4, h5, p {
 }
 
 a, a:hover {
-    color: $white;
+    color: $blue-light;
     text-decoration: underline;
 }
 
@@ -33,7 +34,7 @@ a, a:hover {
 
 .body-copy {
     font-weight: normal;
-    font-size: 1em;
+    font-size: 1.3em;
     line-height: 1.5em;
 }
 
@@ -46,7 +47,7 @@ a, a:hover {
 }
 
 .navbar {
-    background-color: $yellow;
+    background-color: $white;
     border-radius: 0;
     height: 50px;
 }
@@ -119,8 +120,8 @@ a, a:hover {
     .username {
       position: absolute;
       right: 12px;
-      font-size: 14px;
-      color: #35A5B3;
+      font-size: .8em;
+      color: $blue-light;
     }
 }
 
@@ -181,7 +182,7 @@ a, a:hover {
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid $gray-light;
-  background-color: white;
+  background-color: $white;
   color: rgb(60,165,178);
 }
 .jumbotron .btn {
@@ -205,6 +206,7 @@ a, a:hover {
 /* Circles */
 .circle {
   border: 3px solid $yellow;
+  background-color: $blue-light;
   border-radius: 50%;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
   filter: alpha(opacity=60);
@@ -264,6 +266,8 @@ a, a:hover {
     color: $white;
 }
 
+
+/* ========== RESPONSIVE STYLES =========================== */
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
@@ -282,3 +286,26 @@ a, a:hover {
     border-bottom: 0;
   }
 }
+
+@media screen and (max-width: $phone-max) {
+  #form-container {
+    padding: 0px;
+  } 
+}
+
+@media screen and (max-width: $tablet-max) {
+  .body {
+    font-size: 9px;
+  }
+  .campaign-circles {
+    margin-top: 0px;
+  }
+  h1 {
+    font-size: 1.2em;
+    margin: 0px;
+  }
+  .campaign-info h1 {
+    padding: 20px 0px;
+  }
+}
+

@@ -1,15 +1,23 @@
-.link-icon {
-  margin-top: 4em;
-  margin-bottom: 2em;
-}
+.create-success-page {
+	.link-icon {
+	  margin-top: 1em;
+	  margin-bottom: 1em;
+	}
 
-.instructions {
-  color: $white;
-  width: 60%;
-  margin: auto;
-}
+	.url-display {
+	  margin: 1.5em auto;
+	  padding: 1em;
+	  color: $blue-light;
+	  width: 80%;
+	  border: 2px solid $blue-light;
 
-.url-yellow {
-  color: $yellow;
-  margin: 3em auto;
+	  h3 {
+	 	 font-weight: bold;
+	  }
+	}
+
+
+	.instructions {
+		margin: 0;
+	}
 }
