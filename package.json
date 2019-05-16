@@ -12,7 +12,7 @@
     "start-db": "mongod --port 27017 --dbpath /data/db --fork --logpath /usr/local/var/log/mongodb/mongod.log",
     "restart-db": "npm run stop-db && npm run start-db",
     "build": "npm run build-css && npm run build-js",
-    "build-css": "sass public/scss/styles.scss public/build/css/styles.css ; npm run start-dev",
+    "build-css": "sass public/scss/styles.scss public/build/css/styles.css",
     "build-js": "webpack",
     "lint": "eslint -c .eslintrc.js --fix .",
     "postinstall": "npm run build"
