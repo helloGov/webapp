@@ -45,12 +45,11 @@ a:link.btn {
 /* solid blue border and text, white background */
 .secondary-button {
     background-color: $white;
-    color: $blue-light;
-    border: 2px solid $white;
+    color: $blue-light !important;
     border: 2px solid $blue-light;
 }
 .secondary-button:hover {
-    color: $blue-light;
+    color: $blue-light !important;
 }
 .reversed-bg .secondary-button {
     border: 2px solid $blue-light;
