@@ -3,10 +3,8 @@ import angular from 'angular';
 export default angular.module('helloGov')
     .controller('visitorController', function ($scope, $http, $location, constants) {
         'ngInject';
-        // FIXME: this is super brittle to get the campaignId like this, but we're not using angular's
-        // routing so it's not possible to get it using angular yet
-        var urlSplit = $location.absUrl().split('/');
-        $scope.campaign = urlSplit.pop();
+        // FIXME: less brittle way to get campaignId, but still not using Angular's router
+        $scope.campaign = new URL($location.absUrl()).pathname.replace(/[/]/g, '');
         $scope.locResult = '';
         $scope.locOptions = null;
         $scope.locDetails = '';
