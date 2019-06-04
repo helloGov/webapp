@@ -25,6 +25,7 @@
     <script src="/build/js/vendor.bundle.js"></script>
 
     <script>
+        {{#if logged_in}}
         function openNav() {
             document.getElementById("sideMenu").style.width = "320px";
         }
@@ -32,6 +33,7 @@
         function closeNav() {
             document.getElementById("sideMenu").style.width = "0";
         }
+        {{/if}}
 
         angular.module('helloGov', ['ngMapAutocomplete', 'ngclipboard'])
             .config(function ($interpolateProvider) {
@@ -81,7 +83,10 @@
     </div>
     {{/if}}
 
-    <div class="content-wrapper" onclick="closeNav()">
+    <div class="content-wrapper" ng-if="{{logged_in}}" onclick="closeNav()">
+        {{{body}}}
+    </div>
+    <div class="content-wrapper" ng-if="!{{logged_in}}">
         {{{body}}}
     </div>
 </body>
