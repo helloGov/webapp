@@ -18,6 +18,9 @@
         .date {
             padding: 20px 0px;
             display: inline-block;
+            @media (max-width: $tablet-min) {
+                padding: 5px 0px;
+            }
             .date-label {
                 font-weight: 100;
                 font-size: 0.5em;
@@ -26,6 +29,13 @@
                 display: inline-block;
             }
             .date-container {
+                @media (max-width: $tablet-min) {
+                    display: flex;
+                    .date-top::after {
+                        content: ", ";
+                        padding-right: 1rem;
+                    }
+                }
                 .date-top {
                     font-size: 1.0em;
                     font-weight: 100;
@@ -33,6 +43,9 @@
                 .date-bottom {
                     font-size: 1.1em;
                     font-weight: normal;
+                    @media (max-width: $tablet-min) {
+                        font-size: 1.0em;
+                    }
                 }
             }
         }
@@ -81,6 +94,10 @@
             display: inline-block;
             border-bottom: 1px solid $blue-light;
             padding-bottom: 6px;
+        }
+
+        .option-button-container {
+            display: flex;
         }
 
         .option-button {
