@@ -3,46 +3,56 @@
     <br><br>
     <div ng-repeat="campaign in $ctrl.campaigns" class="background-white">
         <div class="campaign-info">
-            <h5 class="campaign-date">{[{campaign.createdAt | date: 'longDate'}]}</h5>
-            <h4>{[{campaign.title}]}</h4>
-            <h5 ng-if="!campaign.publish">DRAFT</h5>
-            <div class="text-center">
-                <div>
-                    <!-- TODO: Update analytics link when we have individual pages for each campaign -->
-                    <!-- Removed because not enough analytics to dedicate to entire page -->
-                    <!-- <a href="{[{campaign.url}]}/analytics"><div class="option-button">
-                        <input type="image" src="/images/analytics_icon.svg" />
-                        <p>Analytics</p>
-                    </div></a> -->
-                    <!-- TODO: This should give feedback, ideally like in the mockup -->
-                    <div class="option-button">
-                        <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}" />
-                        <p>Link</p>
-                    </div>
-                    <a ng-href="{[{campaign.url}]}/edit"><div class="option-button">
-                        <input type="image" src="/images/pencil.jpg" />
-                        <p>Edit</p>
-                    </div></a>
-                    <!-- TODO: Show a warning first like in the mockup -->
-                    <a ng-click="$ctrl.delete(campaign.id)"><div class="option-button">
-                        <input type="image" src="/images/white_delete_icon.jpg" />
-                        <p>Delete</p>
-                    </div></a>
-                    <div>
-                        <div class="option-button">
-                            <p class="analytics-display">{[{campaign.analytics.call}]}</p>
-                            <p>Calls</p>
-                        </div>
-                        <div class="option-button">
-                            <p class="analytics-display">{[{campaign.analytics.visit}]}</p>
-                            <p>Visits</p>
-                        </div>
+            <div class="sidebar">
+                <div class="date">
+                    <div class="date-label">created:</div>
+                    <div class="date-container">
+                        <div class="date-top">{[{campaign.createdAt | date: 'MMM dd'}]}</div>
+                        <div class="date-bottom">{[{campaign.createdAt | date: 'yyyy'}]}</div>
                     </div>
                 </div>
+            </div>
+            <div class="analytics">
+                <div class="analytics-container">
+                    <p class="analytics-number">{[{campaign.analytics.call}]}</p>
+                    <p>Calls</p>
+                </div>
+                <div class="analytics-container">
+                    <p class="analytics-number">{[{campaign.analytics.visit}]}</p>
+                    <p>Visits</p>
+                </div>
+            </div>
+            <div class="content">
+                <h4 class="campaign-title">{[{campaign.title}]}</h4>
+                <h5 ng-if="!campaign.publish">DRAFT</h5>
+                <div class="text-center">
+                    <div>
+                        <!-- TODO: Update analytics link when we have individual pages for each campaign -->
+                        <!-- Removed because not enough analytics to dedicate to entire page -->
+                        <!-- <a href="{[{campaign.url}]}/analytics"><div class="option-button">
+                            <input type="image" src="/images/analytics_icon.svg" />
+                            <p>Analytics</p>
+                        </div></a> -->
+                        <!-- TODO: This should give feedback, ideally like in the mockup -->
+                        <div class="option-button">
+                            <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}" />
+                            <p>Link</p>
+                        </div>
+                        <a ng-href="{[{campaign.url}]}/edit"><div class="option-button">
+                            <input type="image" src="/images/pencil.jpg" />
+                            <p>Edit</p>
+                        </div></a>
+                        <!-- TODO: Show a warning first like in the mockup -->
+                        <a ng-click="$ctrl.delete(campaign.id)"><div class="option-button">
+                            <input type="image" src="/images/white_delete_icon.jpg" />
+                            <p>Delete</p>
+                        </div></a>
+                    </div>
 
-                <div id="confirm-delete" ng-show="showComfirmFlags[campaign.id]">
-                    <a ng-click="$ctrl.delete(campaign.id)" class="btn delete-button">Really, Delete</a>
-                    <a ng-click="$ctrl.cancel(campaign.id)" class="btn secondary-button">Cancel</a>
+                    <div id="confirm-delete" ng-show="showComfirmFlags[campaign.id]">
+                        <a ng-click="$ctrl.delete(campaign.id)" class="btn delete-button">Really, Delete</a>
+                        <a ng-click="$ctrl.cancel(campaign.id)" class="btn secondary-button">Cancel</a>
+                    </div>
                 </div>
             </div>
         </div>
