@@ -30,23 +30,16 @@
                     </div></a>
                     <div>
                         <div class="option-button">
-                            <p class="analytics-display">{[{analytics.call}]}</p>
+                            <p class="analytics-display">{[{campaign.analytics.call}]}</p>
                             <p>Calls</p>
                         </div>
                         <div class="option-button">
-                            <p class="analytics-display">{[{analytics.visit}]}</p>
+                            <p class="analytics-display">{[{campaign.analytics.visit}]}</p>
                             <p>Visits</p>
                         </div>
                     </div>
                 </div>
-                <a ng-href="{[{campaign.url}]}/edit"><div class="option-button">
-                    <input type="image" src="/images/pencil.jpg" />
-                    <p>Edit</p>
-                </div></a>
-                <a><div ng-click="$ctrl.confirm(campaign.id)" class="option-button">
-                    <input type="image" src="/images/white_delete_icon.jpg" />
-                    <p>Delete</p>
-                </div></a>
+
                 <div id="confirm-delete" ng-show="showComfirmFlags[campaign.id]">
                     <a ng-click="$ctrl.delete(campaign.id)" class="btn delete-button">Really, Delete</a>
                     <a ng-click="$ctrl.cancel(campaign.id)" class="btn secondary-button">Cancel</a>
