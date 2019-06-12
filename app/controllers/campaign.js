@@ -106,7 +106,6 @@ campaignController.findLegislator = async function (address, latitude, longitude
         };
         response.send(JSON.stringify(responseObject));
     };
-
     let currentCampaign = await Campaign.findById(campaignId).catch(error => console.log(error));
     let legislatureLevels = Object.keys(currentCampaign.legislature_level).filter(lev => currentCampaign.legislature_level[lev]);
     let legislators = [];

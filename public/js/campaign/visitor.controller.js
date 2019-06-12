@@ -6,7 +6,13 @@ export default angular.module('helloGov')
         // FIXME: this is super brittle to get the campaignId like this, but we're not using angular's
         // routing so it's not possible to get it using angular yet
         var urlSplit = $location.absUrl().split('/');
-        $scope.campaign = urlSplit.pop();
+        var campFromUrl = urlSplit.pop();
+        // query params from e.g. Facebook sholdn't be included in campaignId
+        if ( campFromUrl.includes('?') ) { 
+            campFromUrl = campFromUrl.split('?')[0];
+            console.log('campFromUrl = ' + campFromUrl);
+        }
+        $scope.campaign = campFromUrl;
         $scope.locResult = '';
         $scope.locOptions = null;
         $scope.locDetails = '';
