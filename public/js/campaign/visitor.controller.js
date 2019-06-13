@@ -6,14 +6,25 @@ export default angular.module('helloGov')
         // FIXME: less brittle way to get campaignId, but still not using Angular's router
         $scope.campaign = new URL($location.absUrl()).pathname.replace(/[/]/g, '');
         $scope.locResult = '';
-        $scope.locOptions = null;
+        $scope.locOptions = {
+            types: 'establishment', // this will filter most (but not) all incomplete addresses
+            watchEnter: true        // pressing enter will autofill the most relevant autocomplete result
+        };
         $scope.locDetails = '';
+        $scope.invalidAddress = false;
 
         $scope.sendEvent = function (type) {
             $http.post(`${constants.API_ROOT}/events`, { type: type, campaign: $scope.campaign });
         };
         $scope.sendEvent('visit');
         $scope.update = function () {
+            // checking for valid address
+            if (!$scope.locDetails || $scope.locDetails.adr_address.indexOf('<span class="street-address">') === -1){
+                $scope.invalidAddress = true;
+                return;
+            }
+            $scope.invalidAddress = false;
+
             let address = $scope.locDetails.formatted_address.replace(/ /g, '%20');
             let latitude = $scope.locDetails.geometry.location.lat();
             let longitude = $scope.locDetails.geometry.location.lng();

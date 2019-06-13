@@ -13,16 +13,19 @@
     </div>
 
     <div class="campaign-circles" ng-show="addrForm" class="ng-hide">
-    <div class="campaign-info">
-      <!-- <h3>Campaign:</h3> -->
-      <h1>{{campData.title}}</h1>
-    </div>
-      <h4>Enter the address where you vote to find the correct representative:</h4>
-      <input id="searchTextField" type="text" ng-map-autocomplete ng-model="locResult" options="locOptions"
-        ng-value="locDetails.formatted_address" details="locDetails" class="form-control input-lg address-search" />
-      <button id="address-submit" type="button" ng-click="update()" class="btn primary-button">Submit</button>
-      <input id="latitude" type="hidden" />
-      <input id="longitude" type="hidden" />
+        <div class="campaign-info">
+            <!-- <h3>Campaign:</h3> -->
+            <h1>{{campData.title}}</h1>
+        </div>
+        <h4>Enter the address where you vote to find the correct representative:</h4>
+        <input id="searchTextField" type="text" ng-map-autocomplete ng-model="locResult" options="locOptions"
+            ng-value="locDetails.formatted_address" details="locDetails" class="form-control input-lg address-search" />
+        <button id="address-submit" type="button" ng-click="update()" class="btn primary-button">Submit</button>
+        <h4 class="text-danger ng-hide" ng-show="invalidAddress">
+            Please enter a complete street address including the house number and street name.
+        </h4>
+        <input id="latitude" type="hidden" />
+        <input id="longitude" type="hidden" />
     </div><!-- end campaign-circles -->
 
     <div id="rep-container" ng-show="repForm" class="ng-hide">
