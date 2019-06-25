@@ -3,33 +3,53 @@
     <br><br>
     <div ng-repeat="campaign in $ctrl.campaigns" class="background-white">
         <div class="campaign-info">
-            <h5 class="campaign-date">{[{campaign.createdAt | date: 'longDate'}]}</h5>
-            <h4>{[{campaign.title}]}</h4>
-            <h5 ng-if="!campaign.publish">DRAFT</h5>
-            <div class="text-center">
-                <!-- TODO: Update analytics link when we have individual pages for each campaign -->
-                <a href="{[{campaign.url}]}/analytics"><div class="option-button">
-                    <input type="image" src="/images/analytics_icon.svg" />
-                    <p>Analytics</p>
-                </div></a>
-                <!-- TODO: This should give feedback, ideally like in the mockup -->
-                <div class="option-button">
-                    <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}" />
-                    <p>Link</p>
-                </div>
-                <a ng-href="{[{campaign.url}]}/edit"><div class="option-button">
-                    <input type="image" src="/images/pencil.jpg" />
-                    <p>Edit</p>
-                </div></a>
-                <a><div ng-click="$ctrl.confirm(campaign.id)" class="option-button">
-                    <input type="image" src="/images/white_delete_icon.jpg" />
-                    <p>Delete</p>
-                </div></a>
-                <div id="confirm-delete" ng-show="showComfirmFlags[campaign.id]">
-                    <a ng-click="$ctrl.delete(campaign.id)" class="btn delete-button">Really, Delete</a>
-                    <a ng-click="$ctrl.cancel(campaign.id)" class="btn secondary-button">Cancel</a>
+            <div class="title">
+                <h4 class="campaign-title">{[{campaign.title}]}</h4>
+                <h5 ng-if="!campaign.publish">DRAFT</h5>
+            </div>
+            <div class="content">
+                <div class="text-center">
+                    <div class="option-button-container">
+                        <!-- TODO: This should give feedback, ideally like in the mockup -->
+                        <div class="option-button">
+                            <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}" />
+                            <p>Link</p>
+                        </div>
+                        <a ng-href="{[{campaign.url}]}/edit"><div class="option-button">
+                            <input type="image" src="/images/pencil.jpg" />
+                            <p>Edit</p>
+                        </div></a>
+                        <a ng-click="$ctrl.confirm(campaign.id)"><div class="option-button">
+                            <input type="image" src="/images/white_delete_icon.jpg" />
+                            <p>Delete</p>
+                        </div></a>
+                    </div>
+
+                    <div id="confirm-delete-container" ng-show="showComfirmFlags[campaign.id]">
+                        <div id="confirm-delete">
+                            <p>Are you sure you want to delete?</p>
+                            <a ng-click="$ctrl.delete(campaign.id)" class="btn delete-button">Delete</a>
+                            <a ng-click="$ctrl.cancel(campaign.id)" class="btn secondary-button">Cancel</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="date">
+                <small class="date">Created: {[{campaign.createdAt | date: 'MMM d, yyyy'}]}</small>
+            </div>
+            <label>
+                <input type="checkbox" class="toggleAnalytics"/>
+                <div class="analytics">
+                    <div class="analytics-container">
+                        <p class="analytics-number">{[{campaign.analytics.call}]}</p>
+                        <p>Calls</p>
+                    </div>
+                    <div class="analytics-container">
+                        <p class="analytics-number">{[{campaign.analytics.visit}]}</p>
+                        <p>Visits</p>
+                    </div>
+                </div>
+            </label>
         </div>
     </div>
 </div>

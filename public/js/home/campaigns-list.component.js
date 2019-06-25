@@ -18,6 +18,13 @@ export default angular.module('helloGov')
                         self.campaigns = result.data;
                         self.campaigns.forEach(element => {
                             $scope.showComfirmFlags[element.id] = false; // initialize not showing delete-confirm
+                            $http.get(`${constants.API_ROOT}/events?campaignId=${element.id}`)
+                            .then(function(result) {
+                                element.analytics = result.data;
+                            })
+                            .catch(function(data) {
+                                console.log(`Error:  ${JSON.stringify(data)}`);
+                            });
                         });
                     })
                     .catch(function (data) {
