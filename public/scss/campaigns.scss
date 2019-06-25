@@ -34,7 +34,6 @@
         background: $blue-light;
         color: white;
         flex-basis: 100%;
-        // border-left: 1px solid $blue-light;
         padding: 20px 0px;
         display: flex;
         flex-flow: column nowrap;
@@ -120,9 +119,6 @@
         .toggleAnalytics:checked + .analytics {
             height: calc(100% - 75px);
         }
-        // .analytics:hover {
-        //     height: calc(100% - 75px);
-        // }
         .analytics::after {
             content: "analytics";
             font-size: 0.5em;
