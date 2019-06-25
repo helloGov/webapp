@@ -9,10 +9,8 @@ export default angular.module('helloGov')
         this.signupDetails = {};
 
         this.$onInit = function() {
-            // FIXME: this is super brittle to get the signupId like this, but we're not using angular's
-            // routing so it's not possible to get it using angular yet
-            let urlSplit = $location.absUrl().split('/');
-            let signupId = urlSplit[urlSplit.length - 1];
+            // FIXME: less brittle way to get signupId, but still not using Angular's router
+            let signupId = new URL($location.absUrl()).pathname.replace('/signup/', '');
             $http.get(`${constants.API_ROOT}/signups/${signupId}`)
                 .then((resp) => {
                     self.signupDetails.signupLink = resp.data.result.signupLink;
