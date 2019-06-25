@@ -3,7 +3,7 @@
     <br><br>
     <div ng-repeat="campaign in $ctrl.campaigns" class="background-white">
         <div class="campaign-info">
-            <div class="sidebar">
+            <!-- <div class="sidebar">
                 <div class="date">
                     <div class="date-label">created:</div>
                     <div class="date-container">
@@ -11,20 +11,12 @@
                         <div class="date-bottom">{[{campaign.createdAt | date: 'yyyy'}]}</div>
                     </div>
                 </div>
-            </div>
-            <div class="analytics">
-                <div class="analytics-container">
-                    <p class="analytics-number">{[{campaign.analytics.call}]}</p>
-                    <p>Calls</p>
-                </div>
-                <div class="analytics-container">
-                    <p class="analytics-number">{[{campaign.analytics.visit}]}</p>
-                    <p>Visits</p>
-                </div>
-            </div>
-            <div class="content">
+            </div> -->
+            <div class="title">
                 <h4 class="campaign-title">{[{campaign.title}]}</h4>
                 <h5 ng-if="!campaign.publish">DRAFT</h5>
+            </div>
+            <div class="content">
                 <div class="text-center">
                     <div class="option-button-container">
                         <!-- TODO: Update analytics link when we have individual pages for each campaign -->
@@ -58,6 +50,22 @@
                     </div>
                 </div>
             </div>
+            <div class="date">
+                <small class="date">Created: {[{campaign.createdAt | date: 'MMM d, yyyy'}]}</small>
+            </div>
+            <label>
+                <input type="checkbox" class="toggleAnalytics"/>
+                <div class="analytics">
+                    <div class="analytics-container">
+                        <p class="analytics-number">{[{campaign.analytics.call}]}</p>
+                        <p>Calls</p>
+                    </div>
+                    <div class="analytics-container">
+                        <p class="analytics-number">{[{campaign.analytics.visit}]}</p>
+                        <p>Visits</p>
+                    </div>
+                </div>
+            </label>
         </div>
     </div>
 </div>
