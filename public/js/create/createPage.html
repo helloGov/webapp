@@ -26,6 +26,9 @@
         <div class="max-text">
             <span> {{$ctrl.campaign.title.length}} / 140 characters
             </span>
+            <br>
+            <span ng-show="createForm.title.$invalid && createForm.title.$touched"class="errors">Please enter a campaign title. 
+            </span>
         </div>
       </div>
 
@@ -143,6 +146,9 @@
         <div class="max-text">
             <span> {{$ctrl.campaign.script.length}} / 800 characters
             </span>
+            <br>
+            <span ng-show="createForm.script.$invalid && createForm.script.$touched"class="errors">Please enter a suggested script.
+            </span>
         </div>
 
       </div>
@@ -159,11 +165,14 @@
         <div class="max-text">
             <span> {{$ctrl.campaign.thank_you.length}} / 250 characters
             </span>
+            <br>
+            <span ng-show="createForm.thank_you.$invalid && createForm.thank_you.$touched"class="errors">Please enter a thank you message to your supporters.
+            </span>
         </div>
 
       <div class="form-group">
         <div class="prompt-title">
-          <h4>LEARN MORE URL</h4>
+          <h4>LEARN MORE URL (Optional)</h4>
         </div>
         <p>Link to a page on your org's website about the issue.</p>
         <textarea name="learn_more" class="form-control input-lg campaign-input" ng-model="$ctrl.campaign.learn_more"
@@ -171,6 +180,9 @@
         </textarea>
         <div class="max-text">
             <span> {{$ctrl.campaign.learn_more.length}} / 200 characters
+            </span>
+            <br>
+            <span ng-show="createForm.learn_more.$invalid && createForm.learn_more.$touched"class="errors">Please enter a valid URL.
             </span>
         </div>
 
