@@ -167,14 +167,14 @@
         opacity: 0;
     }
 
-    @keyframes show {
+    @keyframes showClipboardTextAnimation {
         0% { opacity: 0; }
         50% { opacity: 1; }
         100% { opacity: 0; }
     }
 
     .clipboardTextAnimation {
-        animation-name: show;
+        animation-name: showClipboardTextAnimation;
         animation-duration: 2s;
     }
 }
