@@ -1,4 +1,4 @@
-.campaign-info {
+.campaign-list .campaign-info {
     background-color: $white;
     padding: 0;
     margin: 10px auto;
@@ -79,6 +79,7 @@
             width: 4em;
             margin: 0 .5em;
             color: $blue-light;
+            position: relative;
         }
 
         p {
@@ -155,6 +156,27 @@
             width: auto;
         }
     }
+
+    .clipboardText {
+        font-size: 0.5em;
+        font-weight: 100;
+        text-transform: uppercase;
+        position: absolute;
+        bottom: 0;
+        background: white;
+        opacity: 0;
+    }
+
+    @keyframes show {
+        0% { opacity: 0; }
+        50% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    .clipboardTextAnimation {
+        animation-name: show;
+        animation-duration: 2s;
+    }
 }
 
 #confirm-delete-container {
@@ -175,4 +197,3 @@
     padding: 20px;
     font-size: 1em;
 }
-

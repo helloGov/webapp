@@ -1,4 +1,4 @@
-<div ng-if="$ctrl.campaigns.length > 0">
+<div ng-if="$ctrl.campaigns.length > 0" class="campaign-list">
     <a href="/create" class="btn cta-button primary-button">Create Campaign</a>
     <br><br>
     <div ng-repeat="campaign in $ctrl.campaigns" class="background-white">
@@ -12,8 +12,9 @@
                     <div class="option-button-container">
                         <!-- TODO: This should give feedback, ideally like in the mockup -->
                         <div class="option-button">
-                            <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}" />
+                            <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}" ng-click="$ctrl.toggleClipboardText(campaign.id)" />
                             <p>Link</p>
+                            <p ng-class="showClipboardText[campaign.id] ? 'clipboardTextAnimation clipboardText' : 'clipboardText'">Copied to clipboard!</p>
                         </div>
                         <a ng-href="{[{campaign.url}]}/edit"><div class="option-button">
                             <input type="image" src="/images/pencil.jpg" />
