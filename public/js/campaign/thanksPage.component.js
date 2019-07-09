@@ -5,11 +5,8 @@ export default angular.module('helloGov')
     template: require('./thanksPage.html'),
     controller: function($http, $location, constants) {
         'ngInject';
-        // FIXME: this is super brittle to get the campaignId like this, but we're not using angular's
-        // routing so it's not possible to get it using angular yet
-        let url = $location.absUrl();
-        let urlSplit = url.split('/');
-        let campaignId = urlSplit[urlSplit.length - 2];
+        // FIXME: less brittle way to get campaignId, but still not using Angular's router
+        let campaignId = new URL($location.absUrl()).pathname.replace('/thank-you', '').replace(/[/]/g, '');
 
         $http.get(`${constants.API_ROOT}/campaigns/${campaignId}`)
             .then((resp) => {

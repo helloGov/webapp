@@ -1,33 +1,178 @@
 .campaign-info {
     background-color: $white;
-    padding: 8px 0;
+    padding: 0;
     margin: 10px auto;
     color: $blue-light;
     font-weight: bold;
+    border: 1px solid $blue-light;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    height: 252px;
+    position: relative;
 
-    .campaign-date {
-        display: inline-block;
-        border-bottom: 1px solid $blue-light;
-        padding-bottom: 6px;
+    .title {
+        height: 75px;
+
+        h4 {
+            font-size: 1.6em;
+            font-weight: bold;
+        }
     }
 
-    .option-button {
-        display: inline-block;
-        width: 4em;
-        margin: 0 .5em;
-        color: $blue-light;
+    .date {
+        color: lightgray;
+        font-size: 0.65em;
+        font-weight: 100;
+        height: 30px;
     }
 
-    p {
-        margin: 12px auto 0;
-        font-size: 10px;
+    .toggleAnalytics {
+        display: none;
+    }
+    .analytics {
+        background: $blue-light;
+        color: white;
+        flex-basis: 100%;
+        padding: 20px 0px;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
+        align-items: center;
+        height: 250px;
+        width: 150px;
+        order: 100;
+
+        .analytics-container {
+            padding: 10px 0px;
+            font-size: 0.75em;
+            .analytics-number {
+                font-size: 1.2em;
+            }
+        }
+    }
+    .content {
+        flex-grow: 3;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 125px;
+        width: calc(100% - 150px);
+
+        .analytics-display {
+            font-size: 1.2em;
+        }
+
+        .campaign-date {
+            display: inline-block;
+            border-bottom: 1px solid $blue-light;
+            padding-bottom: 6px;
+        }
+
+        .option-button-container {
+            display: flex;
+        }
+
+        .option-button {
+            display: inline-block;
+            width: 4em;
+            margin: 0 .5em;
+            color: $blue-light;
+        }
+
+        p {
+            font-weight: normal;
+        }
+
+        .option-button input {
+            height: 40px;
+            display: block;
+            margin: 5px auto;
+        }
     }
 
-    .option-button input {
-        height: 40px;
-        display: block;
-        margin: 5px auto;
+    @media (max-width: $tablet-min) {
+        flex-flow: column nowrap;
+        height: auto;
+        .date {
+            height: auto;
+            order: 3;
+            margin-bottom: 2em;
+        }
+        .analytics {
+            flex-flow: row nowrap;
+            border-left: 0;
+            padding: 10px 20px;
+            order: 4;
+            width: auto;
+            height: 10px;
+            overflow: hidden;
+            flex-basis: unset;
+            align-items: flex-end;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transition: height 0.5s;
+        }
+        .toggleAnalytics:checked + .analytics {
+            height: calc(100% - 75px);
+        }
+        .analytics::after {
+            content: "analytics";
+            font-size: 0.5em;
+            font-weight: 100;
+            text-transform: uppercase;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            margin: 0.2em;
+            transition: 0.25s;
+        }
+        .toggleAnalytics:checked + .analytics::after {
+            opacity: 0;
+        }
+        .analytics::before {
+            content: "";
+            position: absolute;
+            top: 0.3em;
+            right: 0.3em;
+            bottom: 0;
+            height: 10px;
+            width: 10px;
+            border: 2px solid white;
+            border-width: 2px 2px 0 0;
+            transform: rotate(-45deg);
+            transition: 0.25s;
+        }
+        .toggleAnalytics:checked + .analytics::before {
+            transform: rotate(135deg);
+        }
+        .content {
+            height: auto;
+            width: auto;
+        }
     }
 }
 
+#confirm-delete-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#confirm-delete {
+    background: $white;
+    padding: 20px;
+    font-size: 1em;
+}
 

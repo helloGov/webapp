@@ -16,6 +16,7 @@
         <div class="campaign-info">
             <!-- <h3>Campaign:</h3> -->
             <h1>{{campData.title}}</h1>
+            <h5><a href={{campData.learn_more}} target="_blank" rel=”noopener noreferrer”>Learn more</a></h5>
         </div>
         <h4>Enter the address where you vote to find the correct representative:</h4>
         <input id="searchTextField" type="text" ng-map-autocomplete ng-model="locResult" options="locOptions"
@@ -60,12 +61,12 @@
       </div>
 
       <a ng-repeat-end ng-show="rep.legislatorFound" id="call-btn"
-        class="btn btn-lg call-button center-block primary-button" role="button" href="tel:{[{rep.phone}]}">
+        class="btn btn-lg call-button center-block primary-button" role="button" href="tel:{[{rep.phone}]}"
+        ng-click="sendEvent('call')">
         Make the call now!
       </a>
 
-      <a class="btn btn-lg call-button center-block secondary-button" role="button" href="{{campData.url}}/thank-you"
-        ng-click="sendEvent('call')">
+      <a class="btn btn-lg call-button center-block secondary-button" role="button" href="{{campData.url}}/thank-you">
         I'm done
       </a>
 

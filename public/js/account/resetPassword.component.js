@@ -5,11 +5,9 @@ export default angular.module('helloGov')
     template: require('./resetPassword.html'),
     controller: function($scope, $http, $window, constants, $location) {
         'ngInject';
-        // FIXME: this is super brittle to get the resetToken like this, but we're not using angular's
-        // routing so it's not possible to get it using angular yet
         const self = this;
-        let urlSplit = $location.absUrl().split('/');
-        let resetToken = urlSplit[urlSplit.length - 1];
+        // FIXME: less brittle way to get resetToken, but still not using Angular's router
+        let resetToken = new URL($location.absUrl()).pathname.replace('/auth/reset-password/').replace(/[/]/g, '');
 
         this.resetDetails = {
             resetToken: resetToken
