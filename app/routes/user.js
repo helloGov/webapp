@@ -19,7 +19,11 @@ module.exports = function(router) {
     });
 
     router.get('/login', (request, response) => {
-        response.render('login', {user: null, logged_in: request.user != null});
+        if (request.user) {
+            response.redirect('/home');
+        } else {
+            response.render('login', {user: null, logged_in: request.user != null});
+        }
     });
 
     // Redirect the user to Facebook for authentication.  When complete,
@@ -47,7 +51,11 @@ module.exports = function(router) {
     });
 
     router.get('/auth/forgot-password', (request, response) => {
-        response.render('forgotMyPassword', {user: null, logged_in: request.user != null});
+        if (request.user) {
+            response.redirect('/home');
+        } else {
+            response.render('forgotMyPassword', {user: null, logged_in: request.user != null});
+        }
     });
 
     router.get('/auth/reset-password/:resetToken', (request, response) => {
