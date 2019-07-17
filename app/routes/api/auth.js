@@ -30,7 +30,9 @@ router.route('/auth/password')
 
         userPromise.then((user) => {
             user.setPassword(request.body.password, function (err, model, passwordErr) {
-                if (err || passwordErr || request.body.password.length < 7) {
+                let lengthError = request.body.password.length < 7 || request.body.password.length > 32;
+
+                if (err || passwordErr || lengthError) {
                     response.status(400).end();
                 } else {
                     model.save()
