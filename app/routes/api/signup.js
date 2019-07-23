@@ -58,6 +58,36 @@ router.route('/signups')
     }
 });
 
+
+// Completed signups 
+/*
+router.route('/signups/completed')
+
+.get(request, response) => 
+    if (request.user && request.user.admin) {
+        User.find().sort('-createdAt')
+            .then((users) => {
+                return response.send({result: users});
+            });
+    } else {
+        return response.status(403).end();
+    }
+});
+*/
+router.route('/signups/completed')
+
+.get((request, response) => {
+    if (request.user && request.user.admin) {
+        User.find().sort('-createdAt')
+            .then((users) => {
+                return response.send({result: users});
+            });
+    } else {
+        return response.status(403).end();
+    }
+});
+
+
 // Signup detail
 router.route('/signups/:signupLink')
 
