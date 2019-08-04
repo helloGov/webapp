@@ -33,6 +33,24 @@
                         <td>{[{signup.createdAt | date: 'medium'}]}</td>
                     </tr>
                 </table>
+
+            <ng-if="$ctrl.completed_signups">
+
+                <h2>Completed signups</h2>
+                <table>
+                    <tr>
+                        <th>Email</th>
+                        <th>User Name</th>
+                        <th>Full Name</th>
+                        <th>Date created</th>
+                   </tr>
+                   <tr ng-repeat="cs in $ctrl.completed_signups">
+                        <td>{[{cs.email}]}</td>
+                        <td>{[{cs.username}]}</td>
+                        <td>{[{cs.fullName}]}</td>
+                        <td>{[{cs.createdAt | date: 'medium'}]}</td>
+                    </tr>
+                </table>
             </ng-if>
         </div>
     </div>
