@@ -7,7 +7,6 @@ export default angular.module('helloGov')
         $scope.campaign = new URL($location.absUrl()).pathname.replace(/[/]/g, '');
         $scope.locResult = '';
         $scope.locOptions = {
-            types: 'establishment', // this will filter most (but not) all incomplete addresses
             watchEnter: true        // pressing enter will autofill the most relevant autocomplete result
         };
         $scope.locDetails = '';
