@@ -3,19 +3,19 @@
     <br><br>
     <div ng-repeat="campaign in $ctrl.campaigns" class="background-white">
         <div class="campaign-info">
-            <div class="title">
-                <h4 class="campaign-title">{[{campaign.title}]}</h4>
-                <h5 ng-if="!campaign.publish">DRAFT</h5>
-            </div>
             <div class="content">
+                <div class="title">
+                    <h4 class="campaign-title">{[{campaign.title}]}</h4>
+                    <h5 ng-if="!campaign.publish">DRAFT</h5>
+                </div>
                 <div class="text-center">
                     <div class="option-button-container">
                         <!-- TODO: This should give feedback, ideally like in the mockup -->
-                        <div class="option-button">
+                        <a><div class="option-button">
                             <input type="image" src="/images/white_link_icon.jpg" ngclipboard data-clipboard-text="{[{$ctrl.hostName}]}{[{campaign.url}]}" ng-click="$ctrl.toggleClipboardText(campaign.id)" />
                             <p>Link</p>
                             <p ng-class="showClipboardText[campaign.id] ? 'clipboardTextAnimation clipboardText' : 'clipboardText'">Copied to clipboard!</p>
-                        </div>
+                        </div></a>
                         <a ng-href="{[{campaign.url}]}/edit"><div class="option-button">
                             <input type="image" src="/images/pencil.jpg" />
                             <p>Edit</p>
@@ -34,13 +34,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="date">
+                    <small class="date">Created: {[{campaign.createdAt | date: 'MMM d, yyyy'}]}</small>
+                </div>
             </div>
-            <div class="date">
-                <small class="date">Created: {[{campaign.createdAt | date: 'MMM d, yyyy'}]}</small>
-            </div>
-            <label>
-                <input type="checkbox" class="toggleAnalytics"/>
-                <div class="analytics">
+                <input type="checkbox" class="toggleAnalytics" id="toggleAnalytics{[{campaign.id}]}" name="toggleAnalytics{[{campaign.id}]}"/>
+                <label class="analytics" for="toggleAnalytics{[{campaign.id}]}">
                     <div class="analytics-container">
                         <p class="analytics-number">{[{campaign.analytics.call}]}</p>
                         <p>Calls</p>
@@ -49,8 +48,7 @@
                         <p class="analytics-number">{[{campaign.analytics.visit}]}</p>
                         <p>Visits</p>
                     </div>
-                </div>
-            </label>
+                </label>
         </div>
     </div>
 </div>

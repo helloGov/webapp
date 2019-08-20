@@ -1,23 +1,17 @@
 .campaign-list .campaign-info {
     background-color: $white;
-    padding: 0;
     margin: 10px auto;
     color: $blue-light;
     font-weight: bold;
     border: 1px solid $blue-light;
     display: flex;
-    flex-flow: column wrap;
     justify-content: space-between;
-    height: 252px;
+    align-items: stretch;
     position: relative;
 
-    .title {
-        height: 75px;
-
-        h4 {
-            font-size: 1.6em;
-            font-weight: bold;
-        }
+    .title h4 {
+        font-size: 1.6em;
+        font-weight: bold;
     }
 
     .date {
@@ -30,21 +24,18 @@
     .toggleAnalytics {
         display: none;
     }
+
     .analytics {
         background: $blue-light;
         color: white;
-        flex-basis: 100%;
-        padding: 20px 0px;
+        margin: 0px;
         display: flex;
         flex-flow: column nowrap;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
-        height: 250px;
-        width: 150px;
-        order: 100;
 
         .analytics-container {
-            padding: 10px 0px;
+            padding: 10px;
             font-size: 0.75em;
             .analytics-number {
                 font-size: 1.2em;
@@ -52,28 +43,22 @@
         }
     }
     .content {
-        flex-grow: 3;
-        display: flex;
-        flex-flow: column nowrap;
-        align-items: center;
-        justify-content: space-evenly;
-        height: 125px;
-        width: calc(100% - 150px);
+        padding: 0 10px;
+        flex-grow: 1;
 
         .analytics-display {
             font-size: 1.2em;
         }
 
         .campaign-date {
-            display: inline-block;
             border-bottom: 1px solid $blue-light;
-            padding-bottom: 6px;
         }
 
         .option-button-container {
             display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
         .option-button {
             display: inline-block;
             width: 4em;
@@ -95,31 +80,30 @@
 
     @media (max-width: $tablet-min) {
         flex-flow: column nowrap;
-        height: auto;
+
         .date {
-            height: auto;
-            order: 3;
-            margin-bottom: 2em;
+            margin-bottom: 1em;
         }
+
         .analytics {
-            flex-flow: row nowrap;
             border-left: 0;
             padding: 10px 20px;
-            order: 4;
-            width: auto;
             height: 10px;
             overflow: hidden;
-            flex-basis: unset;
-            align-items: flex-end;
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             transition: height 0.5s;
+            flex-flow: row nowrap;
+            justify-content: space-evenly;
+
+            .analytics-container {
+                opacity: 0;
+                transition: opacity 0.5s;
+            }
         }
-        .toggleAnalytics:checked + .analytics {
-            height: calc(100% - 75px);
-        }
+
         .analytics::after {
             content: "analytics";
             font-size: 0.5em;
@@ -132,9 +116,7 @@
             margin: 0.2em;
             transition: 0.25s;
         }
-        .toggleAnalytics:checked + .analytics::after {
-            opacity: 0;
-        }
+
         .analytics::before {
             content: "";
             position: absolute;
@@ -148,12 +130,23 @@
             transform: rotate(-45deg);
             transition: 0.25s;
         }
-        .toggleAnalytics:checked + .analytics::before {
-            transform: rotate(135deg);
-        }
-        .content {
-            height: auto;
-            width: auto;
+        
+        .toggleAnalytics:checked {
+            + .analytics {
+                height: 140px;
+
+                .analytics-container {
+                    opacity: 1;
+                }
+            }
+
+            + .analytics::after {
+                opacity: 0;
+            }
+
+            + .analytics::before {
+                transform: rotate(135deg);
+            }
         }
     }
 
