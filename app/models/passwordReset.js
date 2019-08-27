@@ -4,20 +4,7 @@ const Promise = require('bluebird');
 const crypto = require('crypto');
 const randomBytes = Promise.promisify(crypto.randomBytes);
 const config = require('../../conf/config');
-const nodemailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars');
-const transporter = nodemailer.createTransport({
-    service: 'Sparkpost',
-    auth: {
-        user: config.emailServiceUser,
-        pass: config.emailServicePassword
-    }
-});
-
-transporter.use('compile', hbs({
-    extName: '.hbs',
-    viewPath: 'app/views/emails'
-}));
+const sgMail = require('@sendgrid/mail');
 
 var PasswordReset = new Schema({
     email: { type: String, trim: true, required: true },
@@ -42,25 +29,19 @@ PasswordReset.statics.createResetObject = function(email) {
 };
 
 // instance methods
-PasswordReset.methods.sendResetEmail = function() {
-    var mail = {
-        from: `"helloGov" <${config.noReplyEmail}>`,
+PasswordReset.methods.sendResetEmail = function(firstName) {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+    const msg = {
         to: this.email,
-        subject: 'Reset Your Password',
-        template: 'passwordResetEmail',
-        context: {
-            resetToken: this.resetToken,
-            helloGovDomain: `${config.protocol}://${config.hostname}`,
-            supportEmail: config.supportEmail
+        from: config.noReplyEmail,
+        templateId: 'd-bf5409ddeeeb418eaea1d66ddf0870ba',
+        dynamic_template_data: {
+            first_name: firstName,
+            reset_pw_url: `${config.protocol}://${config.hostname}/auth/reset-password/${this.resetToken}`
         }
     };
-    return transporter.sendMail(mail)
-        .then((info) => {
-            console.log('Message sent: %s with response: %s', info.messageId, info.response);
-        })
-        .catch((error) => {
-            console.log('Message failed to send with error: %s', error);
-        });
+    return sgMail.send(msg);
 };
 
 module.exports = mongoose.model('PasswordReset', PasswordReset);
