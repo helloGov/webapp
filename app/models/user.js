@@ -60,5 +60,11 @@ User.virtual('fullName').get(function() {
     return `${this.firstName} ${this.lastName}`;
 });
 
-User.plugin(passportLocalMongoose);
+var validatePasswordLength = function(password, cb) {
+    if (password.length < 7) {
+        cb('Password must be at least 8 characters long.');
+    }
+};
+
+User.plugin(passportLocalMongoose, { passwordValidator: validatePasswordLength });
 module.exports = mongoose.model('User', User);
