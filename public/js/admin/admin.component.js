@@ -15,6 +15,11 @@ export default angular.module('helloGov')
                 .then((resp) => {
                     self.signups = resp.data.result;
                 });
+            $http.get(`${constants.API_ROOT}/signups/completed`)
+                .then(resp => {
+                    self.completed_signups = resp.data.result;
+                });
+            //TODO: catch any errors for each API endpoint
         };
 
         this.createLink = function() {

@@ -58,6 +58,27 @@ router.route('/signups')
     }
 });
 
+router.route('/signups/completed')
+
+.get((request, response) => {
+    if (request.user && request.user.admin) {
+        User.find({}, {
+            firstName: 1,
+            lastName: 1,
+            username: 1,
+            email: 1,
+            createdAt: 1
+            })
+            .sort('-createdAt')
+            .then((users) => {
+                return response.send({result: users});
+            });
+    } else {
+        return response.status(403).end();
+    }
+});
+
+
 // Signup detail
 router.route('/signups/:signupLink')
 
