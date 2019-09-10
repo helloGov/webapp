@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 const currentEnv = process.env.NODE_ENV;
 
 let config = {
@@ -8,10 +8,9 @@ let config = {
     dbPort: '27017',
     fbCallbackUrl: 'http://localhost:8080/auth/facebook/callback',
     appPort: '8080',
-    marketingSiteUrl: 'http://hellogov.squarespace.com',
     hellogovDomain: `http://localhost:8080`,
     supportEmail: 'hellogovapp@gmail.com',
-    noreplyEmail: 'hellogovapp@gmail.com',
+    noReplyEmail: 'no-reply@hellogov.app'
 };
 
 let secrets = {

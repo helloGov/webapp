@@ -58,10 +58,13 @@ router.route('/auth/password/requestReset')
                             }, newReset, { upsert: true, new: true });
                         })
                         .then(function (reset) {
-                            return reset.sendResetEmail();
+                            return reset.sendResetEmail(user.firstName);
                         })
                         .then(function () {
                             return response.status(200).end();
+                        })
+                        .catch(function (err) {
+                            return response.status(500).send(err).end();
                         });
                 } else {
                     return response.status(404).end();

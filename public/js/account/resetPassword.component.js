@@ -7,7 +7,7 @@ export default angular.module('helloGov')
         'ngInject';
         const self = this;
         // FIXME: less brittle way to get resetToken, but still not using Angular's router
-        let resetToken = new URL($location.absUrl()).pathname.replace('/auth/reset-password/').replace(/[/]/g, '');
+        let resetToken = new URL($location.absUrl()).pathname.replace('/auth/reset-password/', '').replace(/[/]/g, '');
 
         this.resetDetails = {
             resetToken: resetToken
