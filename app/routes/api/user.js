@@ -17,7 +17,8 @@ router.route('/users')
                     firstName: request.body.firstName,
                     lastName: request.body.lastName,
                     username: request.body.username,
-                    email: request.body.email
+                    email: request.body.email,
+                    organizationName: request.body.organizationName
                 }),
                 request.body.password,
                 function(err, account) {
