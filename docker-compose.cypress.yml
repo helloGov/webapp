@@ -8,10 +8,10 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mongo
+      - mongo_service
     command: sh -c "curl --connect-timeout 5 --max-time 10 --retry 5 --retry-delay 0 --retry-max-time 40 --retry-connrefuse 'mongo:27017' && npm run start-dev"
 
-  mongo:
+  mongo_service:
     image: mongo
     ports:
       - "27017:27017"
