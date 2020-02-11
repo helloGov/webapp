@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    image: hello-gov/cypress:1.0
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo_service
+    command: sh -c "curl --connect-timeout 5 --max-time 10 --retry 5 --retry-delay 0 --retry-max-time 40 --retry-connrefuse 'mongo:27017' && npm run start-dev"
+
+  mongo_service:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=hellogov
+    volumes:
+      - ./data/db:/data/db

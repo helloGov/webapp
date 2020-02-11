@@ -15,7 +15,8 @@
     "build-css": "sass public/scss/styles.scss public/build/css/styles.css",
     "build-js": "webpack",
     "lint": "eslint -c .eslintrc.js --fix .",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "cy:run": "cypress run"
   },
   "author": "",
   "license": "ISC",
@@ -67,6 +68,7 @@
     "webpack": "^2.3.2"
   },
   "devDependencies": {
+    "cypress": "^3.6.1",
     "eslint": "^3.18.0",
     "eslint-config-standard": "^7.1.0",
     "eslint-plugin-import": "^2.2.0",
