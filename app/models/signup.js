@@ -3,7 +3,7 @@ var shortid = require('shortid');
 var Schema = mongoose.Schema;
 
 var Signup = new Schema({
-    email: { type: String, trim: true },
+    email: { type: String, lowercase: true, trim: true },
     signupLink: { type: String, trim: true, 'default': shortid.generate }
 }, {
     timestamps: {
