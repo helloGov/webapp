@@ -66,7 +66,7 @@ require('./user.js')(router);
 // any other root URL if defined earlier
 require('./campaign.js')(router);
 
-router.use(function notFound(request, response, next) {
+router.use(function notFound(request, response) {
     response.status(404).render('404', { user: request.user, logged_in: request.user != null });
 });
 

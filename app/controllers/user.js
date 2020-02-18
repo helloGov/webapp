@@ -3,7 +3,7 @@ const passport = require('passport');
 
 var userController = {};
 
-userController.addUserWithFacebook = function(request, response) {
+userController.addUserWithFacebook = function(request) {
     var findStr = { email: request.body.email, signupLink: request.body.signupLink };
     Signup.findOne(findStr).exec()
     .then(function(signup) {

@@ -18,7 +18,6 @@ var User = require('./app/models/user');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var facebookAuthHandler = require('./app/controllers/authentication').facebookAuthHandler;
-var fs = require('fs');
 var routes = require('./app/routes');
 
 var app = express();
@@ -39,13 +38,14 @@ mongoose.connection.once('open', function callback() {
     console.log('Connected to MongoDB');
 });
 
+let sessionStore;
 if (currentEnv === 'production') {
-    var sessionStore = new MongoStore({
+    sessionStore = new MongoStore({
         url: `${mongoUri}`,
         touchAfter: 0
     });
 } else {
-    var sessionStore = new MongoStore({
+    sessionStore = new MongoStore({
         url: localMongoUri,
         touchAfter: 0
     });
