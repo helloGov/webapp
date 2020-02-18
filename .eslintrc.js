@@ -1,33 +1,15 @@
 module.exports = {
-    'rules': {
-        'indent': [
-            'error',
-            4
-        ],
-        'semi': [
-            'error',
-            'always'
-        ],
-        'space-before-function-paren': [
-            'off',
-            'never'
-        ],
-        'no-console': [
-            'warn'
-        ]
-    },
-    'env': {
-        'es6': true,
-        'browser': true,
-        'node': true
-    },
-    'extends': ['standard'],
-    'parserOptions': {
-        'ecmaFeatures': {
-            'experimentalObjectRestSpread': true
-        }
-    },
-    'globals': {
-        'angular': false
-    }
-};
+  env: {
+    node: true,
+    browser: true,
+  },
+  extends: 'eslint:recommended',
+  parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 10,
+  },
+  rules: {
+    // NOTE(beekley) Let's leave this in til we get a proper logging library
+    'no-console': 'warn',
+  },
+}
