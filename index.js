@@ -24,7 +24,7 @@ var routes = require('./app/routes');
 var app = express();
 
 const currentEnv = app.get('env');
-const localMongoUri = `mongodb://localhost:27017/hellogov`;
+const localMongoUri = `mongodb://mongo:27017/hellogov`;
 const mongoUri = `mongodb://${config.dbUser}:${config.dbPassword}@${config.db}-shard-00-00-5sypa.mongodb.net:27017,${config.db}-shard-00-01-5sypa.mongodb.net:27017,${config.db}-shard-00-02-5sypa.mongodb.net:27017/${config.db}-${config.dbStage}?ssl=true&replicaSet=helloGov-shard-0&authSource=admin&retryWrites=true`;
 
 if (currentEnv === 'development') {
