@@ -8,6 +8,7 @@
     "seed": "mongoimport -c users --uri mongodb://localhost:27017/hellogov --drop --file conf/seeds.json",
     "start": "NODE_ENV=production node index.js",
     "start-dev": "NODE_ENV=development nodemon index.js",
+    "start-docker": "NODE_ENV=dev-docker nodemon index.js",
     "stop-db": "pgrep mongod | xargs kill -2",
     "start-db": "mongod --port 27017 --dbpath /data/db --fork --logpath /usr/local/var/log/mongodb/mongod.log",
     "restart-db": "npm run stop-db && npm run start-db",
