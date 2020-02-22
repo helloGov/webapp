@@ -1,6 +1,6 @@
 # HelloGOV
 
-[HelloGOV](https://www.hellogov.app/) is a project of [Hack for LA](http://hackforla.org/), a Code for America brigade. This project seeks to make it easy to add a call-to-rep tool to social posts, including state senates and assemblies, and federal legislators. 
+[HelloGOV](https://www.hellogov.app/) is a project of [Hack for LA](http://hackforla.org/), a Code for America brigade. This project seeks to make it easy to add a call-to-rep tool to social posts, including state senates and assemblies, and federal legislators.
 
 Our primary users are small grassroots organizations who run their own state legislature-level campaigns to advocate on issues most important to their work. Know an org that might be interested in testing? Get in touch with us on the Hack For LA Slack.
 
@@ -64,7 +64,7 @@ You only have to do this once.
   ```
 - start the application
   ```
-  $ npm run start-dev
+  $ docker-compose up webapp-dev
   ```
 
 ### Populate the seed data
