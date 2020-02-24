@@ -64,7 +64,7 @@ You only have to do this once.
   ```
 - start the application
   ```
-  $ docker-compose up webapp-dev
+  $ docker-compose up app-dev
   ```
 
 ### Populate the seed data

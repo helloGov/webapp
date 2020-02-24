@@ -1,21 +1,8 @@
-# version: '2'
 # Define Docker Compose version.
 version: "3"
 
 # Define all the containers.
 services:
-  # Webapp-dev Container.
-  webapp-dev:
-    build: ./
-    volumes:
-      - ./:/usr/src/app
-    ports:
-     - 8080:8080
-    environment:
-      NODE_ENV: development
-    command: /usr/src/app/entrypoint.sh
-
-# services:
   mongo:
     image: mongo
     ports:
@@ -24,12 +11,16 @@ services:
       - MONGO_INITDB_DATABASE=hellogov
     volumes:
       - ./data/db:/data/db
-  # webapp-dev:
-  #   build: .
-  #   ports:
-  #     - "8080:8081"
-  #   # working_dir: /src/webapp
-  #   volumes:
-  #     - .:/src/webapp
-  #     # - ./node_modules:/src/webapp/node_modules
-  #   command: npm run start-dev
+
+  # Webapp-dev Container.
+  app-dev:
+    depends_on:
+      - mongo
+    build: ./
+    volumes:
+      - ./:/usr/src/app
+    ports:
+     - 8080:8080
+    environment:
+      NODE_ENV: development
+    command: /usr/src/app/entrypoint.sh
