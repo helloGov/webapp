@@ -18,3 +18,7 @@ data
 
 # for OSX
 .DS_Store
+
+# testing assets
+*.mp4
+screenshots/**/*.png
