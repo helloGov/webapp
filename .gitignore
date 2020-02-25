@@ -6,6 +6,7 @@ npm-debug.log
 .idea
 .sass-cache
 .env
+*.env
 **/secrets.js
 
 public/build/**
@@ -14,3 +15,6 @@ public/build/**
 
 # Mounted MongoDB data
 data
+
+# for OSX
+.DS_Store
