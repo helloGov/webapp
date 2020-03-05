@@ -25,7 +25,9 @@ Weekly Monday meetups at the Santa Monica Hack for LA hack night will be the pri
 
 - install node and mongo
   ```
-  $ brew install node mongo
+  $ brew install node
+  $ brew tap mongodb/brew
+  $ brew install mongodb-community
   ```
 - install packages
   ```
