@@ -15,10 +15,10 @@ export default angular.module('helloGov')
 
         this.resetPassword = function() {
             $http.put(`${constants.API_ROOT}/auth/password`, self.resetDetails)
-                .then(function(data) {
+                .then(function() {
                     self.passwordResetSuccess = true;
                 })
-                .catch(function(data) {
+                .catch(function() {
                     self.error = 'We couldn\'t complete your password reset right now. Please try again later.';
                 });
         };

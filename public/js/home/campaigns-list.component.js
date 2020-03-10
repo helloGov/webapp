@@ -29,7 +29,7 @@ export default angular.module('helloGov')
                             });
                         });
                     })
-                    .catch(function (data) {
+                    .catch(function () {
                         self.error = 'There was an error getting your campaigns. Please try agan later.';
                     });
             };

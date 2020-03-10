@@ -23,10 +23,10 @@ export default angular.module('helloGov')
 
         this.signUp = function() {
             $http.post(`${constants.API_ROOT}/users`, self.signupDetails)
-                .then(function(data) {
+                .then(function() {
                     $window.location.href = '/home';
                 })
-                .catch(function(data) {
+                .catch(function() {
                     self.error = 'We couldn\'t complete your sign up right now. Check your info and try again, or contact us at team@hellogov.org for assistance.';
                 });
         };

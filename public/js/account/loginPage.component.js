@@ -10,7 +10,7 @@ export default angular.module('helloGov')
         $scope.login = function() {
             $scope.error = '';
             $http.post(`${constants.API_ROOT}/auth/login`, $scope.loginDetails)
-                .then(function(data) {
+                .then(function() {
                     $window.location.href = '/home';
                 })
                 .catch(function() {

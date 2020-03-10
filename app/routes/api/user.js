@@ -21,7 +21,7 @@ router.route('/users')
                     organizationName: request.body.organizationName
                 }),
                 request.body.password,
-                function(err, account) {
+                function(err) {
                     if (err) {
                         console.log('error! could not create new user: ' + err);
                         response.status(403).send({
