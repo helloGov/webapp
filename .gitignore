@@ -13,6 +13,9 @@ public/build/**
 !.gitkeep
 .tern-project
 
+# Logs
+logs
+
 # Mounted MongoDB data
 data
 
