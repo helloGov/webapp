@@ -1,12 +1,19 @@
-version: '2'
+# Define Docker Compose version.
+version: "3"
 
+# Define all the containers.
 services:
   webapp:
     build: .
+    depends_on:
+      - mongo
+    volumes:
+      - ./:/usr/src/app
     ports:
-      - "8080:8080"
-    env_file:
-      - webapp.env
+     - 8080:8080
+    environment:
+      NODE_ENV: development
+    command: /usr/src/app/entrypoint.sh
 
   mongo:
     image: mongo
@@ -25,8 +32,8 @@ services:
       - webapp
     # note: inside e2e container, the network allows accessing
     # "web" host under name "web"
-    # so "curl http://web" would return whatever the webserver
-    # in the "web" container is cooking
+    # so "curl http://webapp" would return whatever the webserver
+    # in the "webapp" container is cooking
     # see https://docs.docker.com/compose/networking/
     environment:
       - CYPRESS_baseUrl=http://webapp:8080

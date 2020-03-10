@@ -1,8 +1,8 @@
 FROM cypress/base:10
 
-# Optionally pass proxy information to get internet connectivity within npm ci 
+# Optionally pass proxy information to get internet connectivity within npm ci
 # postinstall hooks when running behind corparate proxies.
-ARG http_proxy 
+ARG http_proxy
 ARG https_proxy
 ARG no_proxy
 

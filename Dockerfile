@@ -1,19 +1,15 @@
-FROM node:10
+FROM node:10-slim
 
-# Create app directory
-WORKDIR /usr/src/app
+# From: https://stackoverflow.com/a/52092711
+# Create and define the node_modules's cache directory.
+RUN mkdir /usr/src/cache
+WORKDIR /usr/src/cache
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
+# Install the application's dependencies into the node_modules's cache directory.
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
 
-# Bundle app source
-COPY . .
-
-EXPOSE 8080
-CMD [ "npm", "start" ]
+# Create and define the application's working directory.
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
