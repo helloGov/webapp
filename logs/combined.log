@@ -1,0 +1,4 @@
+{"message":"test info log!","level":"info","service":"user-service"}
+{"message":"test info log!","level":"error","service":"user-service"}
+{"message":"test info log!","level":"info","service":"user-service"}
+{"message":"test info log!","level":"error","service":"user-service"}
