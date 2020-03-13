@@ -6,7 +6,7 @@
     <div class="url-display">
       <p class="instructions">Here's your custom URL. Share it with your followers so that they can access your script and the contact info for their
         representatives.</p>
-      <h3>{[{$ctrl.campaignFullUrl}]}</h3>
+      <h3 style="word-break: break-all;">{[{$ctrl.campaignFullUrl}]}</h3>
        <button class="btn primary-button" ng-click="showDetails = true"  ngclipboard data-clipboard-text="{[{$ctrl.campaignFullUrl}]}">Copy URL
               <span ng-show="showDetails" style="font-size: 8px;">(Copied to clipboard)</span>
       </button>
