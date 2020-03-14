@@ -86,9 +86,9 @@ After running the seed task you should be able to log in to the app with usernam
   ```
 
 ### Start writing tests
-To open Cypress, run `$(npm bin)/cypress open`. Let's write our first test. 
-
 First, ensure that the server is running by typing `npm run start-dev` in your console.
+
+To open Cypress, run `$(npm bin)/cypress open`. Let's write our first test. 
 
 Let’s create a new file in our cypress/integration folder:
 ```
@@ -107,4 +107,4 @@ describe('My First Test', function() {
 })
 ```
 
-Going back to that Cypress window, we should see our first test is passing. Now let's write some more!
+Go back to that Cypress window, and click on the 'sample_spec.js' file. We should see our first test is passing. Now let's write some more!
