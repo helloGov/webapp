@@ -97,19 +97,7 @@ touch ./cypress/integration/sample_spec.js
 
 Now open Cypress. You should see the file we just created. Cypress monitors your spec files for any changes and automatically displays any changes.
 
-Okay now let's write the test. In 'sample_spec.js', write:
-```
-describe('My First Test', function() {
-  it('Does not do much!', function() {
-    cy.visit('http://localhost:8080/login')
-    expect(true).to.equal(true)
-  })
-})
-```
-
-Now go back to Cypress. Click on 'sample_spec.js'. Your computer should open a browser window. You should see that our first test is passing. Moving right along. 
-
-Now let's write a real test. Let's change our 'sample_spec.js' file to:
+Now let's write the test. In our 'sample_spec.js' file, let's write:
 ```
 describe('My First Test', function() {
   it('goes to /login and finds the navbar', function() {
