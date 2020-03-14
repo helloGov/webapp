@@ -84,3 +84,27 @@ After running the seed task you should be able to log in to the app with usernam
   ```
   docker exec -it CONTAINER mongo
   ```
+
+### Start writing tests
+First, ensure that the server is running by typing `npm run start-dev` in your console.
+
+To open Cypress, run `$(npm bin)/cypress open`. Let's write our first test. 
+
+Let’s create a new file in our cypress/integration folder:
+```
+touch ./cypress/integration/sample_spec.js
+```
+
+Now open Cypress. You should see the file we just created. Cypress monitors your spec files for any changes and automatically displays any changes.
+
+Now let's write the test. In our 'sample_spec.js' file, let's write:
+```
+describe('My First Test', function() {
+  it('goes to /login and finds the navbar', function() {
+    cy.visit('http://localhost:8080/login')
+    cy.get('#nav')
+  })
+})
+```
+
+Go back to that Cypress window, and click on the 'sample_spec.js' file. We should see our first test is passing. Now let's write some more!
